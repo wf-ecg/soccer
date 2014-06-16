@@ -1,0 +1,31 @@
+.accuracy {
+/*    cursor: help;*/
+
+    div {
+        margin: auto;
+        @include ani(3s);
+    }
+    h3 {
+        top: 36%;
+        position: relative;
+    }
+    .limit {
+        border: 1px;
+        height: 7rem;
+        width: 11rem;
+        border-bottom: 2px solid white;
+    }
+    .minor, .major {
+        width: 7rem;
+        overflow: hidden;
+    }
+    .minor {
+        background-color: $red;
+        height: 95%;
+    }
+    .major {
+        /* @todo: default for now  */
+        background-color: $green;
+        height: 5%;
+    }
+}

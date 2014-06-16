@@ -1,0 +1,75 @@
+%w1     { width:  240px; }
+%w2     { width:  400px; }
+%w3     { width:  100%;}
+%h1     { height: 10em;}
+%h2     { height: 13em;}
+%h3     { height: 16em;}
+%h4     { height: 26em;}
+%red    { background-color: $red; color: white; }
+%cyan   { background-color: $cyan; color: white; }
+%black  { background-color: black; color: white; }
+%yellow { background-color: $yellow; }
+%gray   { background-color: $gray; }
+
+.cells {
+    > div {
+        @extend %h3;
+        float: left;
+        padding: 1.333rem 1rem;
+        position: relative;
+    }
+    .bottom {
+        bottom: 0;
+        left: 0;
+        padding: 0.8rem;
+        position: absolute;
+        right: 0;
+    }
+    .top {
+        @extend %black;
+        @extend %h4;
+        @extend %w3;
+        padding: 2rem 4rem;
+    }
+    .ranking {
+        @extend %h1;
+        @extend %w3;
+    }
+    .possession {
+        @extend %black;
+        @extend %w1;
+    }
+    .faced {
+        @extend %red;
+        @extend %w2;
+    }
+    .player {
+        @extend %cyan;
+        @extend %w1;
+    }
+    .shot {
+        @extend %w2;
+    }
+    .accuracy {
+        @extend %black;
+        @extend %h2;
+        @extend %w1;
+    }
+    .tweet {
+        @extend %h2;
+        @extend %w2;
+        @extend %yellow;
+    }
+    .timeline {
+        @extend %cyan;
+        @extend %h1;
+        @extend %w3;
+    }
+    .facts {
+        @extend %w2;
+        @extend %yellow;
+    }
+    .pic {
+        @extend %w1;
+    }
+}

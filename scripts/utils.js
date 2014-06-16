@@ -26,6 +26,9 @@ var Utils = {
     arrg: function (x) {
         return Array.prototype.slice.apply(x);
     },
+    def: function (arg) {
+        return (typeof arg !== 'undefined');
+    },
     pre: function (s) {
         C.debug.apply(C, arguments);
         s = this.arrg(arguments).join(', \n');
@@ -48,3 +51,28 @@ var Utils = {
 
 
 */
+if (typeof Object.create !== 'function') {
+    (function () {
+        var F = function () {};
+        Object.create = function (o) {
+            if (arguments.length > 1) {
+                throw Error('Second argument not supported');
+            }
+            if (o === null) {
+                o = {}; //throw Error('Cannot set a null [[Prototype]]');
+            }
+            if (typeof o !== 'object') {
+                throw TypeError('Argument must be an object');
+            }
+            F.prototype = o;
+            return new F();
+        };
+    }());
+}
+
+function Img(arr) {
+    this.path = 'images/' + arr[0];
+    this.text = arr[1];
+    this.lift = 'sm,md'; // for data
+    this.size = []; // xy
+}

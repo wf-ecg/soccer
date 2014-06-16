@@ -1,0 +1,89 @@
+form {
+    cursor: help;
+    font-family: monospace;
+    text-align: center;
+    position: fixed;
+    top: 1em;
+    right: 1em;
+}
+[title] {
+    cursor: help;
+}
+.author {
+    background-image: url(images/icons/tweet.png);
+    background-position: 90% 50%;
+    background-repeat: no-repeat;
+    font-weight: 900;
+    margin-left: 40%;
+}
+.clear {
+    min-height: 0;
+    padding: 0 !important;
+    max-height: 0;
+}
+.facts p {
+    text-align: center;
+}
+.fill {
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    z-index: -1;
+}
+.flag {
+    &.small {
+        height: 16px;
+        margin: 1px;
+        width: 31px;
+    }
+    &.mid {
+        height: 33px;
+        width: 63px;
+    }
+}
+.pic h3 {
+    @extend %reddish;
+}
+.shot h3 {
+    @extend %reddish;
+    height: 100%;
+    text-align: left;
+    width: 25%;
+
+    img {
+        margin: 0.5rem 0;
+    }
+}
+.top {
+    background-image: url(images/shots/bkgr1.jpg);
+    background-position: center bottom;
+
+    .logos {
+        position: absolute;
+    }
+    span {
+        padding: 0.25rem;
+    }
+}
+.score {
+    color: white;
+    font-size: 166px;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 0 0 22px rgba(33, 66, 33, 0.6);
+
+    span {
+        color: white;
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+%reddish {
+    background-color: rgba(133, 0, 0, 0.6);
+    color: white;
+    font-weight: 900;
+    padding: 0.7rem;
+    text-transform: uppercase;
+}

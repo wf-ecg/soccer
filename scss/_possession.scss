@@ -1,0 +1,18 @@
+.possession {
+/*    cursor: progress;*/
+
+    div {
+        display: block;
+        margin: auto;
+    }
+    .p2 path {
+        fill: $green;
+    }
+    .p2 path:first-child {
+        fill: $red;
+    }
+    .p2 rect {
+        opacity: 0.1;
+    }
+
+}
