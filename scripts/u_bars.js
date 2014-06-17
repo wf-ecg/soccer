@@ -8,7 +8,7 @@ var Bars = (function (U) {
         self = Object.create(null),
         I;
 
-    U.bar = {
+    U.bars = {
         div: '.accuracy .limit',
         maj: '.major',
         min: '.minor',
@@ -80,7 +80,7 @@ var Bars = (function (U) {
         },
     };
 
-    return (I = U.bar = $.extend(self, U.bar));
+    return (I = U.bars = $.extend(self, U.bars));
 
 }(Utils));
 

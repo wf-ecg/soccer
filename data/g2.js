@@ -1,10 +1,10 @@
 Data.addGame(2, {
     match: {
         accuracy: 0,
+        possession: 1,
         events: [
         /* time, side, type */
         ],
-        possession: 1,
         teams: ['Mexico', 'Brazil'],
         ticket: ['2:00 PM', 'Estádio Castelão', 'Fortaleza'],
         score: ['?', '?'],
