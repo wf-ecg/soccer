@@ -19,14 +19,14 @@ U.tabler = (function () {
         getCxy: function (c, r) {
             var tmp = rows.eq(r);
             tmp = tmp.children().eq(c);
-            return tmp
+            return tmp;
         },
         get: function () {
             return dat;
         },
         fillup: function () {
             var y = 0;
-            $.each(dat, function(i, row){
+            $.each(dat, function (i, row) {
 
                 self.getCxy(0, y).find('img').attr({
                     src: './images/flags/' + i.toLowerCase() + '.png',
@@ -34,7 +34,7 @@ U.tabler = (function () {
                 });
                 self.getCxy(1, y).text(i);
 
-                $.each(row, function(j, cell){
+                $.each(row, function (j, cell) {
                     self.getCxy(j + 2, y).text(cell);
                 });
 

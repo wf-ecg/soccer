@@ -3,11 +3,11 @@
     Data, Knob, Ui, Utils */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-var Circ = (function (U) {
-    var name = 'Circ',
-    self = Object.create(null);
+var Ball = (function (U) {
+    var name = 'Ball',
+        self = Object.create(null);
 
-    U.circ = {
+    U.ball = {
         defs: {
             girth: 7,
             // 2 = full ... 200 = hairline
@@ -71,7 +71,7 @@ var Circ = (function (U) {
         },
     };
 
-    return (U.circ = $.extend(self, U.circ));
+    return (U.ball = $.extend(self, U.ball));
 
 }(Utils));
 

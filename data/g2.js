@@ -15,9 +15,9 @@ Data.addGame(2, {
     },
     pics: {
         /* path, text, lift, size? */
-        shot: ['shots/zeta1-sm.jpg', 'Shot of the Match'],
-        fact: ['shots/czj1-sm.jpg', 'Catherine Z Jones'],
-        player: ['jersey/ez_thanatos.png', 'Z. Jones Jersey'],
+        shot:   ['#', '?'],
+        fact:   ['#', '?'],
+        player: ['#', '?'],
     },
     tweet: {
         text: [

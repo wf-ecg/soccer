@@ -33,10 +33,10 @@ function kicker(num) {
 
         U.face.init(datm.shots);
         U.line.init(datm.events);
-        U.bars.init(datm.accuracy);
-        U.circ.init('.preset2');
-        U.circ.svg.changed(-100 / 5);
-        U.circ.svg.changed(datm.possession / 5);
+        U.pass.init(datm.accuracy);
+        U.ball.init('.preset2');
+        U.ball.svg.changed(-100 / 5);
+        U.ball.svg.changed(datm.possession / 5);
         U.tabler.set(datg.grouping).fillup();
 
         /// TOP

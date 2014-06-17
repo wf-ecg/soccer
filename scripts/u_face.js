@@ -11,7 +11,7 @@ function Triball(goal, horz, vert) {
 
 var Face = (function (U) {
     var name = 'Face',
-    self = Object.create(null);
+        self = Object.create(null);
 
     function Pc(n) {
         return (n | 0) + '%';

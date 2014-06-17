@@ -3,12 +3,12 @@
     Data, Utils */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-var Bars = (function (U) {
-    var name = 'Bars',
+var Pass = (function (U) {
+    var name = 'Pass',
         self = Object.create(null),
         I;
 
-    U.bars = {
+    U.pass = {
         div: '.accuracy .limit',
         maj: '.major',
         min: '.minor',
@@ -80,7 +80,7 @@ var Bars = (function (U) {
         },
     };
 
-    return (I = U.bars = $.extend(self, U.bars));
+    return (I = U.pass = $.extend(self, U.pass));
 
 }(Utils));
 

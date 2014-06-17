@@ -11,7 +11,7 @@ function Trivent(time, side, icon) {
 
 var Line = (function (U) {
     var name = 'Line',
-    self = Object.create(null);
+        self = Object.create(null);
 
     function Px(n) {
         return (n | 0) + 'px';

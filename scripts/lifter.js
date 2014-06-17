@@ -57,7 +57,9 @@ U.picker = (function () {
     return {
         menu: function (menu, games) {
             $.each(games, function (i, e) {
-                if (!e) return;
+                if (!e) {
+                    return;
+                }
                 var opt = $('<option>').text('Game ' + i).val(i);
                 menu.append(opt);
             });
