@@ -21,7 +21,7 @@ form {
     padding: 0 !important;
     max-height: 0;
 }
-.facts p {
+.thefact p {
     text-align: center;
 }
 .fill {
@@ -44,7 +44,7 @@ form {
 .pic h3 {
     @extend %reddish;
 }
-.shot h3 {
+.theshot h3 {
     @extend %reddish;
     height: 100%;
     text-align: left;

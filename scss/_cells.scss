@@ -11,7 +11,7 @@
 %yellow { background-color: $yellow; }
 %gray   { background-color: $gray; }
 
-.cells {
+section.cells {
     > div {
         @extend %h3;
         float: left;
@@ -31,7 +31,7 @@
         @extend %w3;
         padding: 2rem 4rem;
     }
-    .ranking {
+    .rankings {
         @extend %h1;
         @extend %w3;
     }
@@ -39,15 +39,15 @@
         @extend %black;
         @extend %w1;
     }
-    .faced {
+    .shotsfaced {
         @extend %red;
         @extend %w2;
     }
-    .player {
+    .theplayer {
         @extend %cyan;
         @extend %w1;
     }
-    .shot {
+    .theshot {
         @extend %w2;
     }
     .accuracy {
@@ -55,7 +55,7 @@
         @extend %h2;
         @extend %w1;
     }
-    .tweet {
+    .thetweet {
         @extend %h2;
         @extend %w2;
         @extend %yellow;
@@ -65,7 +65,7 @@
         @extend %h1;
         @extend %w3;
     }
-    .facts {
+    .thefact {
         @extend %w2;
         @extend %yellow;
     }

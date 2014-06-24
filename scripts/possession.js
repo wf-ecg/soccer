@@ -2,12 +2,11 @@
 /*globals C, D, W, $,
     Data, Knob, Ui, Utils */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+(function (U) {
+    var name = 'possession',
+        I = Object.create(null);
 
-var Ball = (function (U) {
-    var name = 'Ball',
-        self = Object.create(null);
-
-    U.ball = {
+    U[name] = $.extend(I, {
         defs: {
             girth: 7,
             // 2 = full ... 200 = hairline
@@ -19,24 +18,24 @@ var Ball = (function (U) {
             var obj;
 
             sel = $(sel);
-            obj = new Knob(sel[0], new Ui['P2']());
+            obj = new Knob(sel[0], new Ui['Donut']());
             sel.data('Knob', obj);
 
             return (this.svg = obj);
         },
         proto: function () {
-            Ui.P2 = function () {};
-            Ui.P2.prototype = Object.create(Ui.prototype);
-            Ui.P2.prototype.createElement = function () {
+            Ui.Donut = function () {};
+            Ui.Donut.prototype = Object.create(Ui.prototype);
+            Ui.Donut.prototype.createElement = function () {
                 var arc;
 
                 Ui.prototype.createElement.apply(this, arguments);
 
                 this.addComponent(new Ui.Arc({
-                    arcWidth: this.width / self.defs.girth,
+                    arcWidth: this.width / I.defs.girth,
                 }));
                 this.merge(this.options, {
-                    arcWidth: this.width / self.defs.girth,
+                    arcWidth: this.width / I.defs.girth,
                 });
 
                 arc = new Ui.El.Arc(this.options);
@@ -66,12 +65,10 @@ var Ball = (function (U) {
                 this.add(sel);
                 this.load();
 
-                C.debug(name, self);
+                C.debug([name, I]);
             }
         },
-    };
-
-    return (U.ball = $.extend(self, U.ball));
+    });
 
 }(Utils));
 

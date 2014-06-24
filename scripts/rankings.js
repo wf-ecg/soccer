@@ -2,19 +2,17 @@
 /*globals C, D, W, $,
     Data, Utils */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-var U = Utils;
+(function (U) {
+    var dat, div, rows, name = 'rankings',
+        I = Object.create(null);
 
-U.tabler = (function () {
-    var dat, div, rows, self;
-
-    div = $('.ranking table');
+    div = $('.rankings table');
     rows = div.find('tr').not(':first-child');
 
-    self = {
+    U[name] = $.extend(I, {
         set: function (data) {
             dat = data;
-            C.info('Tabler', dat);
-            return self;
+            return I;
         },
         getCxy: function (c, r) {
             var tmp = rows.eq(r);
@@ -28,23 +26,27 @@ U.tabler = (function () {
             var y = 0;
             $.each(dat, function (i, row) {
 
-                self.getCxy(0, y).find('img').attr({
+                I.getCxy(0, y).find('img').attr({
                     src: './images/flags/' + i.toLowerCase() + '.png',
                     alt: i,
                 });
-                self.getCxy(1, y).text(i);
+                I.getCxy(1, y).text(i);
 
                 $.each(row, function (j, cell) {
-                    self.getCxy(j + 2, y).text(cell);
+                    I.getCxy(j + 2, y).text(cell);
                 });
 
                 y++;
             });
         },
-    };
+        init: function (dat) {
+            this.set(dat).fillup();
 
-    return self;
-}());
+            C.debug([name, I]);
+        },
+    });
+
+}(Utils));
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

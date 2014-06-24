@@ -31,13 +31,13 @@ function kicker(num) {
         flag1 = Data.team(datm.teams[0]).flag;
         flag2 = Data.team(datm.teams[1]).flag;
 
-        U.face.init(datm.shots);
-        U.line.init(datm.events);
-        U.pass.init(datm.accuracy);
-        U.ball.init('.preset2');
-        U.ball.svg.changed(-100 / 5);
-        U.ball.svg.changed(datm.possession / 5);
-        U.tabler.set(datg.grouping).fillup();
+        U.shotsfaced.init(datm.shots);
+        U.timeline.init(datm.events);
+        U.accuracy.init(datm.accuracy);
+        U.rankings.init(datg.grouping);
+        U.possession.init('.donut');
+        U.possession.svg.changed(-100 / 5);
+        U.possession.svg.changed(datm.possession / 5);
 
         /// TOP
         div.find('.score .center').text(datm.score.join('-'));
@@ -56,16 +56,16 @@ function kicker(num) {
         div.find('.ticket .city').text(datm.ticket[2]);
 
         // TWEET
-        div = $('.tweet');
+        div = $('.thetweet');
         div.find('p').text(datg.tweet.text.join(' '));
         div.find('.author').text(datg.tweet.author);
 
         // Did you know
-        div = $('.facts');
+        div = $('.thefact');
         div.find('p').text(datg.fact.text.join(' '));
 
         // Jersey
-        div = $('.player');
+        div = $('.theplayer');
         tmp = datg.pics.player;
         div.find('img').first().attr({
             src: './images/' + tmp[0],
@@ -73,7 +73,7 @@ function kicker(num) {
         });
 
         // SHOT of the match
-        div = $('.shot');
+        div = $('.theshot');
         tmp = datg.pics.shot;
         div.find('img.fill').first().attr({
             src: './images/' + tmp[0],
@@ -108,6 +108,8 @@ function kicker(num) {
             w.document.write('<pre>' + src + '</pre>');
             w.document.title = 'Raw data for games';
         }).attr('title', 'Double-click for more info.');
+
+        Utils.initFinish();
     } catch (err) {
         C.error(err);
     }

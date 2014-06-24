@@ -2,22 +2,21 @@
 /*globals C, D, W, $,
     Data, Utils */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-function Triball(goal, horz, vert) {
-    this.goal = (Utils.def(goal) ? goal : Math.random() > 0.5);
-    this.horz = (Utils.def(horz) ? horz : Math.random() * 100) % 101;
-    this.vert = (Utils.def(vert) ? vert : Math.random() * 100) % 101;
-}
-
-var Face = (function (U) {
-    var name = 'Face',
-        self = Object.create(null);
+(function (U) {
+    var name = 'shotsfaced',
+        I = Object.create(null);
 
     function Pc(n) {
         return (n | 0) + '%';
     }
 
-    U.face = {
+    function Triball(goal, horz, vert) {
+        this.goal = (Utils.def(goal) ? goal : Math.random() > 0.5);
+        this.horz = (Utils.def(horz) ? horz : Math.random() * 100) % 101;
+        this.vert = (Utils.def(vert) ? vert : Math.random() * 100) % 101;
+    }
+
+    U[name] = $.extend(I, {
         defs: {
             target: 0,
             saves: 0,
@@ -25,7 +24,7 @@ var Face = (function (U) {
             cache: $(),
         },
         data: null,
-        div: '.faced',
+        div: '.shotsfaced',
         net: '.net',
         nums: '.nums span',
         addBall: function (tb) {
@@ -88,7 +87,7 @@ var Face = (function (U) {
 
             $.extend(this, this.defs);
             $.each(arr, function () {
-                self.addBall(this);
+                I.addBall(this);
             });
         },
         init: function (data) {
@@ -99,18 +98,16 @@ var Face = (function (U) {
                 data = data || this.data;
 
                 this.div = $(this.div).click(function () {
-                    self.reset();
+                    I.reset();
                 });
                 this.net = this.div.find(this.net);
                 this.nums = this.div.find(this.nums);
                 this.load(data);
 
-                C.debug(name, self);
+                C.debug([name, I]);
             }
         },
-    };
-
-    return (U.face = $.extend(self, U.face));
+    });
 
 }(Utils));
 

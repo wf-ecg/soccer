@@ -2,13 +2,11 @@
 /*globals C, D, W, $,
     Data, Utils */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+(function (U) {
+    var name = 'accuracy',
+        I = Object.create(null);
 
-var Pass = (function (U) {
-    var name = 'Pass',
-        self = Object.create(null),
-        I;
-
-    U.pass = {
+    U[name] = $.extend(I, {
         div: '.accuracy .limit',
         maj: '.major',
         min: '.minor',
@@ -75,12 +73,10 @@ var Pass = (function (U) {
                 I.min = I.div.find(I.min);
                 I.load(num);
 
-                C.debug(name, self);
+                C.debug([name, I]);
             }
         },
-    };
-
-    return (I = U.pass = $.extend(self, U.pass));
+    });
 
 }(Utils));
 

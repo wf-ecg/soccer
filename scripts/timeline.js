@@ -2,16 +2,15 @@
 /*globals C, D, W, $,
     Data, Utils */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+(function (U) {
+    var name = 'timeline',
+        I = Object.create(null);
 
-function Trivent(time, side, icon) {
-    this.time = (time || 55) % 91;
-    this.side = side || 'top';
-    this.icon = icon || 'goal';
-}
-
-var Line = (function (U) {
-    var name = 'Line',
-        self = Object.create(null);
+    function Trivent(time, side, icon) {
+        this.time = (time || 55) % 91;
+        this.side = side || 'top';
+        this.icon = icon || 'goal';
+    }
 
     function Px(n) {
         return (n | 0) + 'px';
@@ -21,7 +20,7 @@ var Line = (function (U) {
         return (n | 0) + '%';
     }
 
-    U.line = {
+    U[name] = $.extend(I, {
         defs: {
             cache: $(),
             h: 0,
@@ -58,7 +57,7 @@ var Line = (function (U) {
 
             // new call stack
             U.delay(0, function () {
-                self.moveEvent(tv.time, set.centerize());
+                I.moveEvent(tv.time, set.centerize());
             });
             this.cache = this.cache.add(set);
         },
@@ -107,7 +106,7 @@ var Line = (function (U) {
             this.measureBar();
 
             $.each(arr, function () {
-                self.addEvent(this);
+                I.addEvent(this);
             });
         },
         init: function (data) {
@@ -118,18 +117,16 @@ var Line = (function (U) {
                 data = data || this.data;
 
                 this.div = $(this.div).click(function () {
-                    self.reset();
+                    I.reset();
                 });
                 this.bar = this.div.find(this.bar);
                 this.wrap = this.div.parent();
                 this.load(data);
 
-                C.debug(name, self);
+                C.debug([name, I]);
             }
         },
-    };
-
-    return (U.line = $.extend(self, U.line));
+    });
 
 }(Utils));
 
