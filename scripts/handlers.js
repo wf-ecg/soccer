@@ -42,13 +42,13 @@
 
         pic1.parent() //
         .attr('title', 'ENLARGE') //
-        .addClass('float') //
+        .addClass('raise') //
         .click(function () {
             pic2.toggle(333);
         });
 
         pic2 = $('<img>') //
-        .addClass('fill float') //
+        .addClass('fill raise') //
         .attr('src', path) //
         .insertAfter(pic1) //
         .load(_shifter);

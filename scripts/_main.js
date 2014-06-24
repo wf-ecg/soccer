@@ -81,7 +81,7 @@ function kicker(num) {
         });
 
         // FACT pic
-        div = $('.pic');
+        div = $('.factpic');
         tmp = datg.pics.fact;
         div.find('img.fill').attr({
             src: './images/' + tmp[0],
@@ -90,7 +90,7 @@ function kicker(num) {
         div.find('h3').text(tmp[1].split(' ').slice(0, 2).join(' '));
 
         // cleanup
-        $('img.fill.float').remove();
+        $('img.fill.raise').remove();
         $('.fill').lifter();
 
         $('img').each(function () {
@@ -107,7 +107,7 @@ function kicker(num) {
             var w = W.open('?');
             w.document.write('<pre>' + src + '</pre>');
             w.document.title = 'Raw data for games';
-        }).attr('title', 'Double-click for more info.');
+        }).attr('title', 'Double-click for more info.').hide().fadeIn(3333);
 
         Utils.initFinish();
     } catch (err) {
