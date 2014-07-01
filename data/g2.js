@@ -1,16 +1,37 @@
 Data.addGame(2, {
     match: {
-        accuracy: 0,
-        possession: 1,
+        accuracy: 74,
+        possession: 47,
         events: [
         /* time, side, type */
+        [45, 'not', 'warning'],
+        [57, 'top', 'warning'],
+        [62, 'top', 'warning'],
+        [81, 'top', 'warning'],
         ],
         teams: ['Mexico', 'Brazil'],
-        ticket: ['2:00 PM', 'Estádio Castelão', 'Fortaleza'],
+        ticket: ['June 17', 'Estádio Castelão', 'Fortaleza'],
         score: ['0', '0'],
         shots: [
+        13,
         /* goal, x, y */
-        [],
+        [false, 15, 25],
+        [false, 10, 85],
+
+        [false, 35, 10],
+        [false, 28, 60],
+        [false, 28, 90],
+
+        [false, 50, 30],
+        [false, 50, 70],
+
+        [false, 75, 5],
+        [false, 75, 40],
+        [false, 70, 80],
+
+        [false, 90, 40],
+        [false, 85, 70],
+        [false, 90, 95],
         ],
     },
     pics: {
