@@ -102,7 +102,7 @@ Data.teams = {
     Ivory_Coast   : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'ivory_coast.png'   },
     Japan         : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'japan.png'         },
     Korea_Republic: { colors: ['#999999', '#999999'], grouping: 'H', flag: 'korea_republic.png'},
-    Mexico        : { colors: ['#c91721', '#176844'], grouping: 'A', flag: 'mexico.png'        },
+    Mexico        : { colors: ['#176844', Data.dict.yellow], grouping: 'A', flag: 'mexico.png'        },
     Netherlands   : { colors: ['#999999', '#999999'], grouping: 'B', flag: 'netherlands.png'   },
     Nigeria       : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'nigeria.png'       },
     Portugal      : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'portugal.png'      },

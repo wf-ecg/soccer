@@ -1,25 +1,25 @@
 Data.addGame(1, {
     match: {
-        accuracy: 70,
+        accuracy: 80,
         events: [
         /* time, side, type */
-        [10, 'top', 'error'],
-        [35, 'top', 'error'],
-        [40, 'not', 'goal'],
-        [55, 'not', 'warning'],
-        [70, 'top', 'goal'],
-        [80, 'top', 'warning'],
+        [13, 'top', 'error'],
+        [30, 'not', 'error'],
+        [57, 'top', 'warning'],
+        [62, 'top', 'goal'],
+        [80, 'not', 'warning'],
         ],
-        possession: 66,
+        possession: 58,
         teams: ['Mexico', 'Cameroon'],
         ticket: ['June 13', 'Arena da Dunas', 'Natal'],
-        score: [2, 0],
+        score: [1, 0],
         shots: [
+        9,
         /* goal, x, y */
         [false, 100, 30],
         [false, 10, 90],
         [false, 80, 0],
-        [true, 10, 20],
+        [false, 10, 20],
         [true, 80, 70],
         ],
     },

@@ -10,6 +10,7 @@
 %black  { background-color: black; color: white; }
 %yellow { background-color: $yellow; }
 %gray   { background-color: $gray; }
+%shiv   { margin-right: -1em; } // prevent wrap due to chrome/ff px-rounding
 
 section.cells {
     > div {
@@ -42,6 +43,7 @@ section.cells {
     .shotsfaced {
         @extend %red;
         @extend %w2;
+        @extend %shiv;
     }
     .theplayer {
         @extend %cyan;
@@ -49,6 +51,7 @@ section.cells {
     }
     .theshot {
         @extend %w2;
+        @extend %shiv;
     }
     .accuracy {
         @extend %black;
@@ -59,6 +62,7 @@ section.cells {
         @extend %h2;
         @extend %w2;
         @extend %yellow;
+        @extend %shiv;
     }
     .timeline {
         @extend %cyan;
@@ -71,5 +75,6 @@ section.cells {
     }
     .factpic {
         @extend %w1;
+        @extend %shiv;
     }
 }

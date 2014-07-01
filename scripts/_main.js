@@ -35,9 +35,7 @@ function kicker(num) {
         U.timeline.init(datm.events);
         U.accuracy.init(datm.accuracy);
         U.rankings.init(datg.grouping);
-        U.possession.init('.donut');
-        U.possession.svg.changed(-100 / 5);
-        U.possession.svg.changed(datm.possession / 5);
+        U.possession.init('.donut', datm.possession);
 
         /// TOP
         div.find('.score .center').text(datm.score.join('-'));
@@ -49,8 +47,8 @@ function kicker(num) {
             src: './images/flags/' + flag2,
             alt: datm.teams[1],
         });
-        div.find('.teams .team_left').text(datm.teams[0]);
-        div.find('.teams .team_right').text(datm.teams[1]);
+        $('.team_left').text(datm.teams[0]);
+        $('.team_right').text(datm.teams[1]);
         div.find('.ticket .date').text(datm.ticket[0]);
         div.find('.ticket .stadium').text(datm.ticket[1]);
         div.find('.ticket .city').text(datm.ticket[2]);

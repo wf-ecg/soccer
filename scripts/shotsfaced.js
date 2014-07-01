@@ -11,47 +11,46 @@
     }
 
     function Triball(goal, horz, vert) {
-        this.goal = (Utils.def(goal) ? goal : Math.random() > 0.5);
-        this.horz = (Utils.def(horz) ? horz : Math.random() * 100) % 101;
-        this.vert = (Utils.def(vert) ? vert : Math.random() * 100) % 101;
+        var tobj = this;
+        tobj.goal = goal;
+        tobj.horz = horz;
+        tobj.vert = vert;
     }
 
     U[name] = $.extend(I, {
-        defs: {
-            target: 0,
-            saves: 0,
-            goals: 0,
-            cache: $(),
-        },
+        total: 0,
+        saves: 0,
+        goals: 0,
+        cache: $(),
         data: null,
         div: '.shotsfaced',
         net: '.net',
         nums: '.nums span',
         addBall: function (tb) {
-            var ball;
+            var bdiv, bobj;
 
-            tb = tb || [];
+            if (typeof tb === 'number') {
+                this.cache = $();
+                this.total = tb;
+                this.saves = 0;
+                this.goals = 0;
+            } else {
+                if (tb.constructor !== Triball) {
+                    bobj = new Triball(tb[0], tb[1], tb[2]);
+                }
+                bdiv = this.makeBall(bobj.goal);
+                this.net.append(bdiv);
+                U.dim.prox(bdiv);
 
-            if (tb.constructor !== Triball) {
-                tb = new Triball(tb[0], tb[1], tb[2]);
+                U.delay(function () {
+                    bdiv.posxy(bobj.horz, bobj.vert);
+                });
+                this.cache = this.cache.add(bdiv);
             }
-
-            ball = this.makeBall(tb.goal);
-            this.updateNums();
-            this.net.append(ball);
-            U.dim.prox(ball);
-
-            U.delay(function () {
-                ball.posxy();
-                ball.posxy(tb.horz, tb.vert);
-            }, 0);
-
-            this.cache = this.cache.add(ball);
         },
         makeBall: function (goal) {
             var ball = $('<div>').addClass('target');
 
-            this.target++;
             ball.posxy = this.positionXY;
 
             if (goal) {
@@ -74,8 +73,8 @@
             });
         },
         updateNums: function () {
-            this.nums.eq(0).text(this.target);
-            this.nums.eq(1).text(this.saves);
+            this.nums.eq(0).text(this.total);
+            this.nums.eq(1).text(this.saves + this.goals);
             this.nums.eq(2).text(this.goals);
         },
         reset: function (data) {
@@ -85,10 +84,10 @@
         load: function (arr) {
             this.data = arr;
 
-            $.extend(this, this.defs);
-            $.each(arr, function () {
-                I.addBall(this);
+            $.each(arr, function (i, e) {
+                I.addBall(e);
             });
+            this.updateNums();
         },
         init: function (data) {
             if (this.inited) {

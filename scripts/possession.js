@@ -14,6 +14,7 @@
         },
         div: '.possession',
         bar: null,
+        svg: null,
         add: function (sel) {
             var obj;
 
@@ -21,7 +22,12 @@
             obj = new Knob(sel[0], new Ui['Donut']());
             sel.data('Knob', obj);
 
-            return (this.svg = obj);
+            this.svg = obj;
+        },
+        set: function (num) {
+            this.svg.changed(-100 / 5);
+            this.svg.changed(num / 5);
+            this.div.find('.major h3').text(num + '%');
         },
         proto: function () {
             Ui.Donut = function () {};
@@ -52,10 +58,10 @@
             this.div = $(this.div);
             paths = this.div.find('path');
 
-            paths.eq(0).css('fill', cs[0]);
-            paths.eq(1).css('fill', cs[1]);
+            paths.eq(0).css('fill', cs[1]);
+            paths.eq(1).css('fill', cs[0]);
         },
-        init: function (sel) {
+        init: function (sel, num) {
             if (this.inited) {
                 this.load();
             } else {
@@ -64,6 +70,7 @@
                 this.proto();
                 this.add(sel);
                 this.load();
+                this.set(num);
 
                 C.debug([name, I]);
             }

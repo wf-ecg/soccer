@@ -6,13 +6,16 @@
         margin: auto;
     }
     .p2 path {
-        fill: $green;
+        fill: white;
     }
     .p2 path:first-child {
-        fill: $red;
+        fill: black;
     }
     .p2 rect {
         opacity: 0.1;
     }
-
+    .major {
+        position: relative;
+        top: -40%;
+    }
 }

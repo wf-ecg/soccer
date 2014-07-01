@@ -55,7 +55,7 @@
         },
         colors: function (c1, c2) {
             var cs = Data.colors();
-
+            c2 = '#999';
             I.setColor(I.maj, c1 || cs[0]);
             I.setColor(I.min, c2 || cs[1]);
         },

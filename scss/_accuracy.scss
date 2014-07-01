@@ -20,12 +20,11 @@
         overflow: hidden;
     }
     .minor {
-        background-color: $red;
+        background-color: black;
         height: 95%;
     }
     .major {
-        /* @todo: default for now  */
-        background-color: $green;
+        background-color: gray;
         height: 5%;
     }
 }
