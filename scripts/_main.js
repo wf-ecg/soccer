@@ -55,12 +55,12 @@ function kicker(num) {
 
         // TWEET
         div = $('.thetweet');
-        div.find('p').text(datg.tweet.text.join(' '));
-        div.find('.author').text(datg.tweet.author);
+        div.find('p').html(datg.tweet.text.join(' '));
+        div.find('.author').html(datg.tweet.author);
 
         // Did you know
         div = $('.thefact');
-        div.find('p').text(datg.fact.text.join(' '));
+        div.find('p').html(datg.fact.text.join(' '));
 
         // Jersey
         div = $('.theplayer');

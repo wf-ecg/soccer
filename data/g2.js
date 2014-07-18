@@ -42,9 +42,10 @@ Data.addGame(2, {
     },
     tweet: {
         text: [
-        '...',
+        'Ochoa is playing out of his mind. Hugely impressive.',
+        '<a href="https://twitter.com/hashtag/BRAvsMEX" target="twitter">#BRAvsMEX</a>',
         ],
-        author: '@???',
+        author: '<a href="https://twitter.com/ESPNMag" target="twitter">@ESPNMag</a>',
     },
     fact: {
         text: [

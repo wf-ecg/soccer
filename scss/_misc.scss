@@ -26,6 +26,16 @@ form {
     padding: 0 !important;
     max-height: 0;
 }
+.thetweet {
+    a {
+        color: black;
+        text-decoration: none;
+
+        &:hover {
+            color: #500;
+        }
+    }
+}
 .flag {
     &.small {
         height: 16px;

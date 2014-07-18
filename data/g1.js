@@ -34,7 +34,7 @@ Data.addGame(1, {
         'Mexico is up 2-0, but I think the team is going to see this game as a loss.',
         'One guy indefinitely out and Rafa Marquez is questionable.',
         ],
-        author: '@_CarneEstrada',
+        author: '<a href="https://twitter.com/_CarneEstrada" target="twitter">@_CarneEstrada</a>',
     },
     fact: {
         text: [
