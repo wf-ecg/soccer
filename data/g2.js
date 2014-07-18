@@ -38,7 +38,7 @@ Data.addGame(2, {
         /* path, text, lift, size? */
         shot:   ['#', '?'],
         fact:   ['#', '?'],
-        player: ['#', '?'],
+        player: ['jersey/ochoa.png', 'Ochoa Jersey'],
     },
     tweet: {
         text: [
