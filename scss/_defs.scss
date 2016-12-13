@@ -10,47 +10,47 @@ $team3:  #00698c;
 $team4:  #702f8a;
 
 @mixin ani($time: 2s) {
-    -webkit-transition-property: all;
-    -moz-transition-property: all;
-    -o-transition-property: all;
-    transition-property: all;
-    -webkit-transition-duration: $time;
-    -moz-transition-duration: $time;
-    -o-transition-duration: $time;
-    transition-duration: $time;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: $time;
+  -moz-transition-duration: $time;
+  -o-transition-duration: $time;
+  transition-duration: $time;
 }
 h1, h4, h6 {
-    font-weight: 800;
-    text-transform: uppercase;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 h4 {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 section {
-    border: 1px solid gray;
-    display: table;
-    font-family: 'Archer SSm A', 'Archer SSm B', Archer, Georgia, serif;
-    font-weight: 400;
-    margin: auto;
-    max-width: 642px;
-    width: 642px;
+  border: 1px solid gray;
+  display: table;
+  font-family: 'Archer SSm A', 'Archer SSm B', Archer, Georgia, serif;
+  font-weight: 400;
+  margin: auto;
+  max-width: 642px;
+  width: 642px;
 
-    img {
-        display: block;
-        margin: auto;
-    }
-    h1 {
-        font-size: 40px;
-        color: black;
-        position: absolute;
-        right: 3.3rem;
-        top: 3.6rem;
-    }
-    p {
-        font-weight: 600;
-        line-height: 1.8;
-        margin: 1em;
-        text-align: left;
-    }
+  img {
+    display: block;
+    margin: auto;
+  }
+  h1 {
+    font-size: 40px;
+    color: black;
+    position: absolute;
+    right: 3.3rem;
+    top: 3.6rem;
+  }
+  p {
+    font-weight: 600;
+    line-height: 1.8;
+    margin: 1em;
+    text-align: left;
+  }
 }
 

@@ -1,60 +1,60 @@
 form {
-    background-color: rgba(204, 204, 204, 0.8);
-    border: 1px inset white;
-    border-radius: 3pt;
-    cursor: help;
-    left: -1pt;
-    font-family: sans-serif;
-    font-size: 9pt;
-    padding: 3pt 9pt;
-    position: fixed;
-    text-align: center;
-    top: -1pt;
+  background-color: rgba(204, 204, 204, 0.8);
+  border: 1px inset white;
+  border-radius: 3pt;
+  cursor: help;
+  left: -1pt;
+  font-family: sans-serif;
+  font-size: 9pt;
+  padding: 3pt 9pt;
+  position: fixed;
+  text-align: center;
+  top: -1pt;
 }
 [title] {
-    cursor: help;
+  cursor: help;
 }
 .author {
-    background-image: url(images/icons/tweet.png);
-    background-position: 90% 50%;
-    background-repeat: no-repeat;
-    font-weight: 900;
-    margin-left: 40%;
+  background-image: url(images/icons/tweet.png);
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+  font-weight: 900;
+  margin-left: 40%;
 }
 .clear {
-    min-height: 0;
-    padding: 0 !important;
-    max-height: 0;
+  min-height: 0;
+  padding: 0 !important;
+  max-height: 0;
 }
 .thetweet {
-    a {
-        color: black;
-        text-decoration: none;
+  a {
+    color: black;
+    text-decoration: none;
 
-        &:hover {
-            color: #500;
-        }
+    &:hover {
+      color: #500;
     }
+  }
 }
 .flag {
-    &.small {
-        height: 16px;
-        margin: 1px;
-        width: 31px;
-    }
-    &.mid {
-        height: 33px;
-        width: 63px;
-    }
+  &.small {
+    height: 16px;
+    margin: 1px;
+    width: 31px;
+  }
+  &.mid {
+    height: 33px;
+    width: 63px;
+  }
 }
 .major h3 {
-    font-weight: 900;
+  font-weight: 900;
 }
 
 %reddish {
-    background-color: rgba(133, 0, 0, 0.6);
-    color: white;
-    font-weight: 900;
-    padding: 0.7rem;
-    text-transform: uppercase;
+  background-color: rgba(133, 0, 0, 0.6);
+  color: white;
+  font-weight: 900;
+  padding: 0.7rem;
+  text-transform: uppercase;
 }

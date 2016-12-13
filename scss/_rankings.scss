@@ -1,17 +1,17 @@
 .rankings {
-    table {
-        line-height: 1.4;
-        margin: auto;
-        width: 65%;
-    }
-    td {
-        min-width: 1.5rem;
-        text-align: center;
-    }
-    tr:first-child th {
-        color: $red;
-    }
-    th:first-child + th {
-        text-align: left;
-    }
+  table {
+    line-height: 1.4;
+    margin: auto;
+    width: 65%;
+  }
+  td {
+    min-width: 1.5rem;
+    text-align: center;
+  }
+  tr:first-child th {
+    color: $red;
+  }
+  th:first-child + th {
+    text-align: left;
+  }
 }
