@@ -1,0 +1,48 @@
+doctype html
+html(lang='en')
+  head
+    title Small Business Q1
+    //
+    meta(charset='utf-8')
+    meta(http-equiv='x-ua-compatible' content='ie=edge')
+    meta(name='viewport' content='width=device-width')
+    meta(name = 'author' content = 'WF-ECG INTERACTIVE')
+    // static
+    link(rel='canonical'
+      href='http://ecg.hosting.wellsfargo.com/mfal/sb-readiness/index.html')
+    meta(property='og:title'
+      content='Wells Fargo / Small Business, 1st Quarter')
+    meta(property='og:description'
+      content='Quarterly Small Business Portal / Internal use only.')
+    meta(property='og:url'
+      content='http://ecg.hosting.wellsfargo.com/mfal/sb-readiness/q1/index.html')
+    meta(property='og:image'
+      content='http://ecg.hosting.wellsfargo.com/mfal/sb-readiness/q1/images/icons/wfw-4sb-blk.svg')
+    meta(property='og:type'
+      content='website')
+    // css
+    link(href='./fonts/archer.ssm.css' rel='stylesheet' media='all')
+    link(href='./fonts/myriad.css' rel='stylesheet' media='all')
+    link(href='./fonts/myriad.con.css' rel='stylesheet' media='all')
+    link(href='./styles/main.css' rel='stylesheet' media='all')
+    //
+    script(src='./vendors/require.js/require.js' data-main='./config')
+  body.loading
+    div(data-role='page' tabindex='0')
+      include ./_tileTable.pug
+      p
+
+      #Popovers
+        include ./_pops-01.pug
+        include ./_pops-02.pug
+        include ./_pops-03.pug
+        include ./_pops-04.pug
+        include ./_pops-05.pug
+        include ./_pops-06.pug
+        include ./_pops-08.pug
+        include ./_pops-07.pug
+        include ./_pops-09.pug
+
+        // end Popovers
+
+      // end ui-page
