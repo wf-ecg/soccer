@@ -1,0 +1,49 @@
+{
+  "name": "soccer",
+  "title": "MATCH RECAP",
+  "description": "TempKit",
+  "version": "0.0.1",
+  "homepage": "http://ecg.hosting.wellsfargo.com/mfal/soccer/index.html",
+  "devpage": "http://devbox/wf-ecg/soccer/0/",
+  "author": {
+    "name": "turgd01",
+    "email": "david.turgeon@wellsfargo.com"
+  },
+  "contributors": [
+    {
+      "name": "dvdrtrgn",
+      "url": "https://github.com/dvdrtrgn"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wf-ecg/soccer.git"
+  },
+  "devDependencies": {
+    "browser-sync": "*",
+    "del": "*",
+    "gulp": "*",
+    "gulp-changed": "*",
+    "gulp-compass": "*",
+    "gulp-header": "*",
+    "gulp-include": "*",
+    "gulp-jscs": "*",
+    "gulp-jshint": "*",
+    "gulp-plumber": "*",
+    "gulp-pug": "*",
+    "gulp-sass": "*",
+    "gulp-scss-lint": "*",
+    "gulp-util": "*",
+    "gulp-watch": "*",
+    "jshint": "*",
+    "jshint-stylish": "*",
+    "minimist": "*",
+    "pug": "*",
+    "require-dir": "*",
+    "run-sequence": "*"
+  },
+  "scripts": {
+    "build": "gulp build && gulp serve",
+    "clean": "gulp clean && gulp build && gulp serve"
+  }
+}
