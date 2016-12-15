@@ -15,6 +15,9 @@
             <library name="modernizr" version="2.6.2">
                 <file localPath="vendors/modernizr/modernizr.js" path="modernizr.js"/>
             </library>
+            <library name="require.js" version="2.1.22">
+                <file localPath="vendors/require.js/require.js" path="require.js"/>
+            </library>
         </libraries>
     </configuration>
 </project>
