@@ -1,30 +1,6 @@
 doctype html
 html(lang='en')
-  head
-    title World Cup
-    //
-    meta(charset='utf-8')
-    meta(http-equiv='x-ua-compatible' content='ie=edge')
-    meta(name='viewport' content='width=device-width')
-    meta(name = 'author' content = 'WF-ECG INTERACTIVE')
-    // static
-    link(rel='canonical'
-      href='http://ecg.hosting.wellsfargo.com/x/index.html')
-    meta(property='og:title'
-      content='Wells Fargo / Soccer')
-    meta(property='og:description'
-      content='x.')
-    meta(property='og:url'
-      content='http://ecg.hosting.wellsfargo.com/x/index.html')
-    meta(property='og:image'
-      content='http://ecg.hosting.wellsfargo.com/x/images/icons/x.svg')
-    meta(property='og:type'
-      content='website')
-    // css
-    link(href='./fonts/archer.ssm.css' rel='stylesheet' media='all')
-    link(href='./styles/main.css' rel='stylesheet' media='all')
-    //
-    script(src='./vendors/require.js/require.js' data-main='./config')
+  include ./_head
 
   body.loading
     div(data-role='page' tabindex='0')
@@ -32,157 +8,27 @@ html(lang='en')
     form
       | Select match:
       select#GameNum(size='1')
+
     section.cells
-      .top
-        img.logos(
-          src='./images/icons/logos.png'
-          alt='logos...Wells Fargo and Orgulloso Patrocinador'
-          width='161', height='106')
-        h1 Match Recap
-        .bottom
-          .score
-            span.left
-              img.flag.mid(src='#', alt='#')
-            span.center #-#
-            span.right
-              img.flag.mid(src='#', alt='#')
-          h2.teams
-            span.team_left #
-            span vs
-            span.team_right #
-          h3.ticket
-            span.date #
-            span
-            span.stadium #
-            span
-            span.city #
-      .rankings
-        div
-          table
-            tr
-              th(title='Flag')
-              th Group-A
-              th(title='Matches played') P
-              th(title='Wins') W
-              th(title='Draws') D
-              th(title='Losses') L
-              th(title='Goals difference') gD
-              th(title='Team points') Pts
-              //
-                <th title="Rank"></th>
-                <th class="grouping">Group-A</th>
-                <th title="Goals for">gF</th>
-                <th title="Goals against">gA</th>
-            tr
-              th
-                img.flag.small(src='./images/flags/brazil.png', alt='#')
-              th
-              td
-              td
-              td
-              td
-              td
-              td
-            tr
-              th
-                img.flag.small(src='./images/flags/mexico.png', alt='#')
-              th
-              td
-              td
-              td
-              td
-              td
-              td
-            tr
-              th
-                img.flag.small(src='./images/flags/cameroon.png', alt='#')
-              th
-              td
-              td
-              td
-              td
-              td
-              td
-            tr
-              th
-                img.flag.small(src='./images/flags/croatia.png', alt='#')
-              th
-              td
-              td
-              td
-              td
-              td
-              td
-      .possession
-        h4 Ball Possession
-        input.donut(
-          type='range'
-          min='0', max='100', step='5'
-          data-width='150', data-height='150'
-          data-angleoffset='30', data-anglerange='359.9')
-        .major
-          h3 %
-      .shotsfaced
-        h4
-          span.team_left #
-          |  Shots
-        .wrap.bottom
-          .net
-            img(src='./images/icons/net-fpo.png', alt='net-fpo')
-          h4.nums
-            | Shots
-            span.a #
-            |             On Goal
-            span.b #
-            |             Goals
-            span.c #
+
+      include ./_top
+      include ./_rankings
+      include ./_stats
+
       .theplayer
         h4 Player of the Match
         img(src='#', alt='#')
         h3.bottom #GettingItDone
+
       .theshot
         img.fill(src='#', alt='#')
         h3.bottom
-          | Photo
-          br
-          | of the
-          br
-          | Day
-          br
+          | Photo <br>
+          | of the <br>
+          | Day <br>
           img(src='./images/icons/camera.png')
-      .accuracy
-        h4 Pass Accuracy
-        .limit
-          .minor
-            h3 %
-          .major
-            h3 %
-      .thetweet
-        h4 Tweet of the Match
-        p #
-        h5.author.bottom #
-      .timeline
-        h4 Match Timeline
-        .linewrap
-          .events
-            table
-              tr
-                td 0
-                td 15
-                td 30
-                td 45
-                td 60
-                td 75
-                td.gap
-                td 90
-      .thefact
-        h4 Did you know?
-        p #
-        .bottom
-          small © 2014 Wells Fargo Bank, N.A. ECG
-      .factpic
-        img.fill(src='#', alt='#')
-        h3.bottom #
 
+      include ./_match
+      include ./_trivia
 
       // end ui-page
