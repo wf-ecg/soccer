@@ -39,13 +39,13 @@ small {
   font-size: 9px;
 }
 
-@import "_defs";
-@import "_accuracy";
-@import "_cells";
-@import "_raise";
-@import "_misc";
-@import "_possession";
-@import "_rankings";
-@import "_shotsfaced";
-@import "_timeline";
-@import "_top";
+@import 'defs';
+@import 'accuracy';
+@import 'cells';
+@import 'raise';
+@import 'misc';
+@import 'possession';
+@import 'rankings';
+@import 'shotsfaced';
+@import 'timeline';
+@import 'top';
