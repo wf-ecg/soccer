@@ -1,7 +1,7 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['util', 'data'], function (U, Data) {
+define(['data'], function (Data) {
   'use strict';
 
   var W = (W && W.window || window);
@@ -9,8 +9,6 @@ define(['util', 'data'], function (U, Data) {
 
   var name = 'accuracy';
   var I = Object.create(null);
-
-  U[name] = I;
 
   $.extend(I, {
     div: '.accuracy .limit',
@@ -86,7 +84,6 @@ define(['util', 'data'], function (U, Data) {
 
   return I;
 });
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*

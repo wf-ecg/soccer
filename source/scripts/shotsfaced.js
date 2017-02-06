@@ -1,7 +1,7 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['util', 'libs/util_dim'], function (U) {
+define(['jquery', 'util', 'libs/util-dim'], function ($, U) {
   'use strict';
 
   var W = (W && W.window || window);
@@ -20,8 +20,6 @@ define(['util', 'libs/util_dim'], function (U) {
     tobj.horz = horz;
     tobj.vert = vert;
   }
-
-  U[name] = I;
 
   $.extend(I, {
     total: 0,
@@ -114,8 +112,8 @@ define(['util', 'libs/util_dim'], function (U) {
     },
   });
 
+  return I;
 });
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*

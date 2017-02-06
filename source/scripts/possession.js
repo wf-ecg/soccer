@@ -1,16 +1,16 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['util', 'data', 'libs/knob', 'libs/ui'], function (U, Data, Knob, Ui) {
+define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
   'use strict';
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
 
-  var name = 'possession',
-    I = Object.create(null);
+  var name = 'possession';
+  var I = Object.create(null);
 
-  U[name] = $.extend(I, {
+  $.extend(I, {
     defs: {
       girth: 7,
       // 2 = full ... 200 = hairline
@@ -81,8 +81,8 @@ define(['util', 'data', 'libs/knob', 'libs/ui'], function (U, Data, Knob, Ui) {
     },
   });
 
+  return I;
 });
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*

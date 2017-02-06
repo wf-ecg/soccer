@@ -21,8 +21,8 @@ require.config({
     stats: 'libs/ecg-stats',
     //
     main: '_main',
-    data: 'libs/_data',
-    util: 'libs/_util',
+    data: 'libs/data',
+    util: 'libs/util',
     ui: 'libs/ui',
     //
   },
@@ -58,7 +58,7 @@ require(['jqxtn', 'data'], function ($) {
 
   /// CUSTOMIZED INIT
 
-  require(['main', '../data/g1'], function (Main, Data) {
+  require(['main', '../data/g2', '../data/g1'], function (Main, Data) {
 
     $(Main.init);
 

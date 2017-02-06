@@ -15,16 +15,11 @@ form {
   cursor: help;
 }
 .author {
-  background-image: url(images/icons/tweet.png);
+  background-image: url('../images/icons/tweet.png');
   background-position: 90% 50%;
   background-repeat: no-repeat;
   font-weight: 900;
   margin-left: 40%;
-}
-.clear {
-  min-height: 0;
-  padding: 0 !important;
-  max-height: 0;
 }
 .thetweet {
   a {

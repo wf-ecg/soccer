@@ -7,8 +7,8 @@ define(['util', 'data'], function (U, Data) {
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
 
-  var name = 'timeline',
-    I = Object.create(null);
+  var name = 'timeline';
+  var I = Object.create(null);
 
   function Trivent(time, side, icon) {
     this.time = (time || 55) % 91;
@@ -24,7 +24,7 @@ define(['util', 'data'], function (U, Data) {
     return (n | 0) + '%';
   }
 
-  U[name] = $.extend(I, {
+  $.extend(I, {
     defs: {
       cache: $(),
       h: 0,
@@ -132,8 +132,8 @@ define(['util', 'data'], function (U, Data) {
     },
   });
 
+  return I;
 });
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*

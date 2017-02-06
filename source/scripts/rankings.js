@@ -1,19 +1,19 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['util'], function (U) {
+define(['jquery'], function ($) {
   'use strict';
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
 
-  var dat, div, rows, name = 'rankings',
-    I = Object.create(null);
+  var dat, div, rows, name = 'rankings';
+  var I = Object.create(null);
 
   div = $('.rankings table');
   rows = div.find('tr').not(':first-child');
 
-  U[name] = $.extend(I, {
+  $.extend(I, {
     set: function (data) {
       dat = data;
       return I;
@@ -50,8 +50,8 @@ define(['util'], function (U) {
     },
   });
 
+  return I;
 });
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*

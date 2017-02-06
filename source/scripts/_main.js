@@ -1,14 +1,15 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['util', 'data'], function (U, Data) {
+define(['util', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline'], function (
+  U, Data, accuracy, possession, rankings, shotsfaced, timeline) {
   'use strict';
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
 
-  console.warn(U, Data);
   // var Test = $.Callbacks();
+  var init;
 
   function kicker(num) {
     var div, datg, datm, flag1, flag2, tmp, menu;
@@ -19,9 +20,9 @@ define(['util', 'data'], function (U, Data) {
       datg = Data.game(num);
       menu = $('#GameNum');
 
-      if (!kicker.inited) {
+      if (!init.inited) {
         U.picker.menu(menu, Data.games);
-        kicker.inited = true;
+        init.inited = true;
       }
 
       menu.val(Data.current);
@@ -32,11 +33,11 @@ define(['util', 'data'], function (U, Data) {
       flag1 = Data.team(datm.teams[0]).flag;
       flag2 = Data.team(datm.teams[1]).flag;
 
-      U.shotsfaced.init(datm.shots);
-      U.timeline.init(datm.events);
-      U.accuracy.init(datm.accuracy);
-      U.rankings.init(datg.grouping);
-      U.possession.init('.donut', datm.possession);
+      shotsfaced.init(datm.shots);
+      timeline.init(datm.events);
+      accuracy.init(datm.accuracy);
+      rankings.init(datg.grouping);
+      possession.init('.donut', datm.possession);
 
       /// TOP
       div.find('.score .center').text(datm.score.join('-'));
@@ -114,18 +115,19 @@ define(['util', 'data'], function (U, Data) {
     }
   }
 
-  function init() {
+  init = function () {
     kicker();
     $('#GameNum').change(function () {
       kicker($(this).val());
     });
-  }
+  };
 
   return {
+    Data: Data,
+    U: U,
     init: init,
   };
 });
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*

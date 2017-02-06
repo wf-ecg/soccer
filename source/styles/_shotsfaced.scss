@@ -16,7 +16,7 @@
       top: -5px;
     }
     .target {
-      background-color: rgba(0,0,0,0.8);
+      background-color: rgba(0, 0, 0, 0.8);
       border-radius: 20px;
       height: 28px;
       left: 50%;
@@ -26,7 +26,7 @@
 
       &.score {
         background: none;
-        background-image: url(images/icons/ball-md.png);
+        background-image: url('../images/icons/ball-md.png');
       }
     }
   }
