@@ -1,10 +1,14 @@
 /*jslint es5:true, white:false */
-/*globals C, D, W, $,
- Data, Utils */
+/*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-(function (U) {
+define(['util'], function (U) {
+  'use strict';
+
+  var W = (W && W.window || window);
+  var C = (W.C || W.console || {});
+
   var dat, div, rows, name = 'rankings',
-      I = Object.create(null);
+    I = Object.create(null);
 
   div = $('.rankings table');
   rows = div.find('tr').not(':first-child');
@@ -46,7 +50,7 @@
     },
   });
 
-}(Utils));
+});
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

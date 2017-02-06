@@ -1,10 +1,14 @@
 /*jslint es5:true, white:false */
-/*globals C, D, W, $,
- Data, Utils */
+/*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-(function (U) {
+define(['util', 'data'], function (U, Data) {
+  'use strict';
+
+  var W = (W && W.window || window);
+  var C = (W.C || W.console || {});
+
   var name = 'timeline',
-      I = Object.create(null);
+    I = Object.create(null);
 
   function Trivent(time, side, icon) {
     this.time = (time || 55) % 91;
@@ -12,11 +16,11 @@
     this.icon = icon || 'goal';
   }
 
-  function Px(n) {
+  function _px(n) {
     return (n | 0) + 'px';
   }
 
-  function Pc(n) {
+  function _pc(n) {
     return (n | 0) + '%';
   }
 
@@ -44,15 +48,15 @@
       set = icon.add(point);
 
       point.css({
-        left: Pc(9),
-        top: Px(pol + off),
+        left: _pc(9),
+        top: _px(pol + off),
       }).appendTo(this.div).addClass('point');
 
       icon.css({
         backgroundColor: Data.lookup(tv.icon),
         color: tv.icon,
-        left: Pc(9),
-        top: Px(2 * pol + off),
+        left: _pc(9),
+        top: _px(2 * pol + off),
       }).appendTo(this.wrap).addClass(tv.icon);
 
       // new call stack
@@ -63,7 +67,7 @@
     },
     moveEvent: function (time, eles) {
       eles.css({
-        left: Pc(this.timeTpc(time)),
+        left: _pc(this.timeTpc(time)),
       });
     },
     measureBar: function () {
@@ -128,7 +132,7 @@
     },
   });
 
-}(Utils));
+});
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

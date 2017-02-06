@@ -1,16 +1,16 @@
-%w1     { width:  240px; }
-%w2     { width:  400px; }
-%w3     { width:  100%;}
-%h1     { height: 10em;}
-%h2     { height: 13em;}
-%h3     { height: 16em;}
-%h4     { height: 26em;}
-%red    { background-color: $red; color: white; }
-%cyan   { background-color: $cyan; color: white; }
-%black  { background-color: black; color: white; }
+%w1 { width: 240px; }
+%w2 { width: 400px; }
+%w3 { width: 100%;}
+%h1 { height: 10em;}
+%h2 { height: 13em;}
+%h3 { height: 16em;}
+%h4 { height: 26em;}
+%red { background-color: $red; color: white; }
+%cyan { background-color: $cyan; color: white; }
+%black { background-color: black; color: white; }
 %yellow { background-color: $yellow; }
-%gray   { background-color: $gray; }
-%shiv   { margin-right: -1em; } // prevent wrap due to chrome/ff px-rounding
+%gray { background-color: $gray; }
+%shiv { margin-right: -1em; } // prevent wrap due to chrome/ff px-rounding
 
 section.cells {
   > div {

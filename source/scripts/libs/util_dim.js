@@ -1,8 +1,11 @@
 /*jslint es5:true, white:false */
-/*globals C, D, W, $,
- Data, Utils */
+/*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-(function (U) {
+define(['jquery', 'util'], function ($, U) {
+  'use strict';
+
+  var W = (W && W.window || window);
+  // var C = (W.C || W.console || {});
 
   U.dim = {
     gxy: function (ele) { // size probe
@@ -70,7 +73,7 @@
     return this;
   };
 
-}(Utils));
+});
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

@@ -1,12 +1,16 @@
 /*jslint es5:true, white:false */
-/*globals C, D, W, $,
- Data, Utils */
+/*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-(function (U) {
-  var name = 'shotsfaced',
-      I = Object.create(null);
+define(['util', 'libs/util_dim'], function (U) {
+  'use strict';
 
-  function Pc(n) {
+  var W = (W && W.window || window);
+  var C = (W.C || W.console || {});
+
+  var name = 'shotsfaced';
+  var I = Object.create(null);
+
+  function _pc(n) {
     return (n | 0) + '%';
   }
 
@@ -17,7 +21,9 @@
     tobj.vert = vert;
   }
 
-  U[name] = $.extend(I, {
+  U[name] = I;
+
+  $.extend(I, {
     total: 0,
     saves: 0,
     goals: 0,
@@ -68,8 +74,8 @@
       y = U.def(y) ? y : x;
 
       ball.css({
-        left: Pc(x | 0),
-        top: Pc(y | 0),
+        left: _pc(x | 0),
+        top: _pc(y | 0),
       });
     },
     updateNums: function () {
@@ -108,7 +114,7 @@
     },
   });
 
-}(Utils));
+});
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

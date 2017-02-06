@@ -8,7 +8,7 @@ define(['util'], function (U) {
   // var C = (W.C || W.console || {});
 
   var Data = {
-    current: 1,
+    current: 0,
     defs: {
       speed: 333,
     },
@@ -118,6 +118,7 @@ define(['util'], function (U) {
     USA           : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'usa.png'           },
   };
 
+  W.Data = Data;
   return Data;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

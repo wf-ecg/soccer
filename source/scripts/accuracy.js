@@ -1,12 +1,18 @@
 /*jslint es5:true, white:false */
-/*globals C, D, W, $,
- Data, Utils */
+/*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-(function (U) {
-  var name = 'accuracy',
-      I = Object.create(null);
+define(['util', 'data'], function (U, Data) {
+  'use strict';
 
-  U[name] = $.extend(I, {
+  var W = (W && W.window || window);
+  var C = (W.C || W.console || {});
+
+  var name = 'accuracy';
+  var I = Object.create(null);
+
+  U[name] = I;
+
+  $.extend(I, {
     div: '.accuracy .limit',
     maj: '.major',
     min: '.minor',
@@ -78,7 +84,8 @@
     },
   });
 
-}(Utils));
+  return I;
+});
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

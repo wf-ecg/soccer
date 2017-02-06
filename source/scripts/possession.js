@@ -1,10 +1,14 @@
 /*jslint es5:true, white:false */
-/*globals C, D, W, $,
- Data, Knob, Ui, Utils */
+/*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-(function (U) {
+define(['util', 'data', 'libs/knob', 'libs/ui'], function (U, Data, Knob, Ui) {
+  'use strict';
+
+  var W = (W && W.window || window);
+  var C = (W.C || W.console || {});
+
   var name = 'possession',
-      I = Object.create(null);
+    I = Object.create(null);
 
   U[name] = $.extend(I, {
     defs: {
@@ -19,7 +23,7 @@
       var obj;
 
       sel = $(sel);
-      obj = new Knob(sel[0], new Ui['Donut']());
+      obj = new Knob(sel[0], new Ui.Donut());
       sel.data('Knob', obj);
 
       this.svg = obj;
@@ -77,7 +81,7 @@
     },
   });
 
-}(Utils));
+});
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

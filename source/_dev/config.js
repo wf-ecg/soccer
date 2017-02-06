@@ -2,7 +2,7 @@
 /*global require, window */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 var W = (W && W.window || window),
-    C = (W.C || W.console || {});
+  C = (W.C || W.console || {});
 
 W._dbug = Number(new Date('2017/01/01') > new Date());
 W.SHIET = {
@@ -14,22 +14,33 @@ require.config({
   paths: {
     lib: 'libs',
     jquery: '../vendors/jquery/jquery',
-    lodash: '../vendors/lodash.js/lodash',
+    lodash: '../vendors/lodash.js/lodash.underscore',
     //
     beacon: 'libs/ecg-beacon',
     jqxtn: 'libs/jq-xtn',
     stats: 'libs/ecg-stats',
     //
+    main: '_main',
+    data: 'libs/_data',
+    util: 'libs/_util',
+    ui: 'libs/ui',
+    //
   },
   shim: {
-    jqmobi: {
-      deps: ['jquery'],
-      exports: '$',
+    main: {
+      deps: ['util', 'data',
+        'accuracy',
+        'handlers',
+        'possession',
+        'rankings',
+        'shotsfaced',
+        'timeline',
+      ],
     },
   },
 });
 
-require(['jqxtn'], function ($) {
+require(['jqxtn', 'data'], function ($) {
   var loc = W.location.hostname === 'localhost';
 
   // ESTABLISH BASELINES
@@ -47,7 +58,7 @@ require(['jqxtn'], function ($) {
 
   /// CUSTOMIZED INIT
 
-  require(['_main'], function (Main) {
+  require(['main', '../data/g1'], function (Main, Data) {
 
     $(Main.init);
 

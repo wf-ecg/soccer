@@ -1,8 +1,12 @@
 /*jslint es5:true, white:false */
-/*globals C, D, W, $,
- Data, Utils */
+/*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-(function (U) {
+define(['util'], function (U) {
+  'use strict';
+
+  var W = (W && W.window || window);
+  var C = (W.C || W.console || {});
+
   var name = 'handlers';
 
   U.tweakpath = function (pic, arr) { // pic'src'.swap[a, b]
@@ -41,17 +45,17 @@
     }
 
     pic1.parent() //
-        .attr('title', 'ENLARGE') //
-        .addClass('raise') //
-        .click(function () {
-          pic2.toggle(333);
-        });
+      .attr('title', 'ENLARGE') //
+      .addClass('raise') //
+      .click(function () {
+        pic2.toggle(333);
+      });
 
     pic2 = $('<img>') //
-        .addClass('fill raise') //
-        .attr('src', path) //
-        .insertAfter(pic1) //
-        .load(_shifter);
+      .addClass('fill raise') //
+      .attr('src', path) //
+      .insertAfter(pic1) //
+      .load(_shifter);
   };
 
   U.picker = (function () {
@@ -69,7 +73,7 @@
   }());
 
   C.debug([name, 'loaded']);
-}(Utils));
+});
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
