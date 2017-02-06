@@ -8,6 +8,7 @@
 // Dependencies
 var pkg          = require('../package.json');
 var gulp         = require('gulp');
+var changed      = require('gulp-changed');
 var include      = require('gulp-include');
 var jscs         = require('gulp-jscs');
 var jshint       = require('gulp-jshint');
@@ -23,6 +24,7 @@ var jshintConfig = require('../gulp_tasks/conf/js-lint.json');
 gulp.task('scripts', function() {
 
   return gulp.src('./source/scripts/**/*.js')
+    .pipe(changed('./build/scripts'))
 
     // Include JS
     // Similar to Sass `@import`
