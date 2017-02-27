@@ -4,7 +4,7 @@
 var W = (W && W.window || window),
   C = (W.C || W.console || {});
 
-W._dbug = Number(new Date('2017/01/01') > new Date());
+W._dbug = Number(new Date('2017/02/21') > new Date());
 W.SHIET = {
   trident: W.navigator.userAgent.indexOf('rident') + 1,
 };
@@ -50,6 +50,7 @@ require(['jqxtn', 'data'], function ($) {
       $('html').addClass('msie');
       W._dbug -= 1;
     } else if (loc) {
+      $('html').addClass('debug');
       W._dbug += 1;
     }
   } catch (err) {
