@@ -8,6 +8,7 @@
 // Dependencies
 var pkg          = require('../package.json');
 var gulp         = require('gulp');
+var babel        = require('gulp-babel');
 var changed      = require('gulp-changed');
 var include      = require('gulp-include');
 var jscs         = require('gulp-jscs');
@@ -38,6 +39,9 @@ gulp.task('scripts', function() {
     // Lint JS
     .pipe(jshint(jshintConfig))
     .pipe(jshint.reporter(stylish))
+    .pipe(babel({
+      presets: ['es2015'],
+    }))
 
     // Add banner
     //.pipe(header(banner, {
