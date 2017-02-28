@@ -14,7 +14,7 @@ require.config({
   paths: {
     lib: 'libs',
     jquery: '../vendors/jquery/jquery',
-    lodash: '../vendors/lodash.js/lodash.underscore',
+    lodash: '../vendors/lodash.js/lodash',
     //
     beacon: 'libs/ecg-beacon',
     jqxtn: 'libs/jq-xtn',
