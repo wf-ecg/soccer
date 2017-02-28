@@ -43,6 +43,7 @@
     "run-sequence": "*"
   },
   "scripts": {
+    "all": "gulp clean && gulp build && gulp serve",
     "build": "gulp build && gulp serve",
     "clean": "gulp clean && gulp build"
   }
