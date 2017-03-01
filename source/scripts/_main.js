@@ -75,46 +75,45 @@ define(['util', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'tim
       // Jersey
       El.player.find('img').first() //
         .attr({
-          src: './images/' + game.pics.player[0],
+          src: `./images/${game.pics.player[0]}`,
           alt: game.pics.player[1],
         });
 
       // SHOT of the match
       El.shot.find('img.fill').first() //
         .attr({
-          src: './images/' + game.pics.shot[0],
+          src: `./images/${game.pics.shot[0]}`,
           alt: game.pics.shot[1],
         });
 
       // FACT pic
       El.factpic.find('img.fill') //
         .attr({
-          src: './images/' + game.pics.fact[0],
+          src: `./images/${game.pics.fact[0]}`,
           alt: game.pics.fact[1],
-        }).end().find('h3') //
-        .text(game.pics.fact[1].split(' ').slice(0, 2).join(' '));
+        }).end() //
+        .find('h3').text(`${game.pics.fact[1].match(/\S+\ ?\w*/)}`);
 
       // cleanup
       $('img.fill.raise').remove();
       $('.fill').lifter();
-
       $('img').each(function () {
         var img = $(this);
-
         img.attr('title', img.attr('alt'));
       });
 
+      // info stuff
       var src = JSON.stringify(Data.games, function (k, v) {
-        return (v && v.join && typeof v[1] !== 'object') ? v.join('...') : v;
+        return (v && v.join && typeof v[1] !== 'object') ? v.join('|') : v;
       }, 4);
 
       El.menu.attr('title', src).parent() //
         .off('dblclick').on('dblclick', function () {
           var tab = W.open('?');
-
-          tab.document.write('<pre>' + src + '</pre>');
+          tab.document.write(`<pre>${src}</pre>`);
           tab.document.title = 'Raw data for games';
-        }).attr('title', 'Double-click for more info.').hide().fadeIn(3333);
+        }).attr('title', 'Double-click for more info.') //
+        .hide().fadeIn(3333);
 
       U.initFinish();
     } catch (err) {
