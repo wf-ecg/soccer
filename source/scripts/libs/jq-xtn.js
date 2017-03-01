@@ -12,7 +12,10 @@ define(['jquery', 'lodash'], function ($, _) {
   // AUTOMATE
   $.reify = function (obj) { // replace vals(selectors) with elements
     return $.each(obj, function (i, sel) {
-      obj[i] = $(sel);
+      if (typeof sel === 'object') {
+        sel = sel.selector;
+      }
+      (obj[i] = $(sel)).selector = sel;
     });
   };
 
@@ -79,12 +82,11 @@ define(['jquery', 'lodash'], function ($, _) {
     $(W).on('hashchange', trackHash());
   };
   $.watchInputDevice = function () {
-    $('body').on('keydown', function () {
-      $(this).removeClass('mouse');
-      $(this).addClass('keyboard');
-    }).on('mouseover', function () { // `mousemove` has side effects on windows browsers
-      $(this).removeClass('keyboard');
-      $(this).addClass('mouse');
+    var body = $('body');
+    body.on('keydown', _.debounce(function () {
+      body.removeClass('mouse').addClass('keyboard');
+    }, 333)).on('mouseover', function () { // `mousemove` has side effects on windows browsers
+      body.removeClass('keyboard').addClass('mouse');
     });
   };
   $.watchResize = function (fn, ns) {
