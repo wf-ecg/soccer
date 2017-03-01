@@ -7,107 +7,114 @@ define(['util', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'tim
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
-
-  // var Test = $.Callbacks();
   var init;
+  var El = {
+    fact: '.thefact',
+    factpic: '.factpic',
+    menu: '#GameNum',
+    player: '.theplayer',
+    score: '.top .score',
+    shot: '.theshot',
+    ticket: '.top .ticket',
+    top: '.top',
+    tweet: '.thetweet',
+  };
 
   function kicker(num) {
-    var div, datg, datm, flag1, flag2, tmp, menu;
+    var game, stats;
 
-    // U.pre('fire tests');    Test.fire();
+    $.reify(El);
+
     try {
-      div = $('.top');
-      datg = Data.game(num);
-      menu = $('#GameNum');
+      game = Data.game(num);
+      stats = game.match;
 
       if (!init.inited) {
-        U.picker.menu(menu, Data.games);
+        U.picker.menu(El.menu, Data.games);
         init.inited = true;
       }
 
-      menu.val(Data.current);
+      El.menu.val(Data.current);
 
       $('section div').hide().fadeIn();
 
-      datm = datg.match;
-      flag1 = Data.team(datm.teams[0]).flag;
-      flag2 = Data.team(datm.teams[1]).flag;
-
-      shotsfaced.init(datm.shots);
-      timeline.init(datm.events);
-      accuracy.init(datm.accuracy);
-      rankings.init(datg.grouping);
-      possession.init('.donut', datm.possession);
+      shotsfaced.init(stats.shots);
+      timeline.init(stats.events);
+      accuracy.init(stats.accuracy);
+      rankings.init(game.grouping);
+      possession.init('.donut', stats.possession);
 
       /// TOP
-      div.find('.score .center').text(datm.score.join('-'));
-      div.find('.score .left img').attr({
-        src: './images/flags/' + flag1,
-        alt: datm.teams[0],
-      });
-      div.find('.score .right img').attr({
-        src: './images/flags/' + flag2,
-        alt: datm.teams[1],
-      });
-      $('.team_left').text(datm.teams[0]);
-      $('.team_right').text(datm.teams[1]);
-      div.find('.ticket .date').text(datm.ticket[0]);
-      div.find('.ticket .stadium').text(datm.ticket[1]);
-      div.find('.ticket .city').text(datm.ticket[2]);
+      El.top //
+        .find('.team_left').text(stats.teams[0]) //
+        .find('.team_right').text(stats.teams[1]);
+      El.score //
+        .find('.center').text(stats.score.join('-')).end() //
+        .find('.left img').attr({
+          src: `./images/flags/${Data.team(stats.teams[0]).flag}`,
+          alt: stats.teams[0],
+        }).end() //
+        .find('.right img').attr({
+          src: `./images/flags/${Data.team(stats.teams[1]).flag}`,
+          alt: stats.teams[1],
+        });
+      El.ticket //
+        .find('.date').text(stats.ticket[0]).end() //
+        .find('.stadium').text(stats.ticket[1]).end() //
+        .find('.city').text(stats.ticket[2]);
 
       // TWEET
-      div = $('.thetweet');
-      div.find('p').html(datg.tweet.text.join(' '));
-      div.find('.author').html(datg.tweet.author);
+      El.tweet.find('p') //
+        .html(game.tweet.text.join(' ')).end() //
+        .find('.author').html(game.tweet.author);
 
       // Did you know
-      div = $('.thefact');
-      div.find('p').html(datg.fact.text.join(' '));
+      El.fact.find('p') //
+        .html(game.fact.text.join(' '));
 
       // Jersey
-      div = $('.theplayer');
-      tmp = datg.pics.player;
-      div.find('img').first().attr({
-        src: './images/' + tmp[0],
-        alt: tmp[1],
-      });
+      El.player.find('img').first() //
+        .attr({
+          src: './images/' + game.pics.player[0],
+          alt: game.pics.player[1],
+        });
 
       // SHOT of the match
-      div = $('.theshot');
-      tmp = datg.pics.shot;
-      div.find('img.fill').first().attr({
-        src: './images/' + tmp[0],
-        alt: tmp[1],
-      });
+      El.shot.find('img.fill').first() //
+        .attr({
+          src: './images/' + game.pics.shot[0],
+          alt: game.pics.shot[1],
+        });
 
       // FACT pic
-      div = $('.factpic');
-      tmp = datg.pics.fact;
-      div.find('img.fill').attr({
-        src: './images/' + tmp[0],
-        alt: tmp[1],
-      });
-      div.find('h3').text(tmp[1].split(' ').slice(0, 2).join(' '));
+      El.factpic.find('img.fill') //
+        .attr({
+          src: './images/' + game.pics.fact[0],
+          alt: game.pics.fact[1],
+        }).end().find('h3') //
+        .text(game.pics.fact[1].split(' ').slice(0, 2).join(' '));
 
       // cleanup
       $('img.fill.raise').remove();
       $('.fill').lifter();
 
       $('img').each(function () {
-        var me = $(this);
-        me.attr('title', me.attr('alt'));
+        var img = $(this);
+
+        img.attr('title', img.attr('alt'));
       });
 
       var src = JSON.stringify(Data.games, function (k, v) {
         return (v && v.join && typeof v[1] !== 'object') ? v.join('...') : v;
       }, 4);
-      menu.attr('title', src);
 
-      menu.parent().off('dblclick').on('dblclick', function () {
-        var w = W.open('?');
-        w.document.write('<pre>' + src + '</pre>');
-        w.document.title = 'Raw data for games';
-      }).attr('title', 'Double-click for more info.').hide().fadeIn(3333);
+      El.menu.attr('title', src).parent() //
+        .off('dblclick').on('dblclick', function () {
+          var tab = W.open('?');
+
+          tab.document.write('<pre>' + src + '</pre>');
+          tab.document.title = 'Raw data for games';
+        }).attr('title', 'Double-click for more info.').hide().fadeIn(3333);
 
       U.initFinish();
     } catch (err) {
@@ -117,7 +124,7 @@ define(['util', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'tim
 
   init = function () {
     kicker();
-    $('#GameNum').change(function () {
+    El.menu.change(function () {
       kicker($(this).val());
     });
   };
