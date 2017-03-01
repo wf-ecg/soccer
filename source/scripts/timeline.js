@@ -1,7 +1,7 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['util', 'data'], function (U, Data) {
+define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
   'use strict';
 
   var W = (W && W.window || window);
@@ -23,6 +23,12 @@ define(['util', 'data'], function (U, Data) {
   function _pc(n) {
     return (n | 0) + '%';
   }
+  $.fn.centerize = function () {
+    this.each(function () {
+      U.dim.prox(this);
+    });
+    return this;
+  };
 
   $.extend(I, {
     defs: {

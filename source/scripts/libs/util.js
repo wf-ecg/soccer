@@ -48,7 +48,7 @@ define(['jquery'], function ($) {
       C.assert(sa === sb, [c || 'notes', ['raw', a, b]]);
     },
     initBegin: function () {
-      C.group('loading');
+      C.group('Utils loading');
     },
     initFinish: function () {
       C.groupEnd();

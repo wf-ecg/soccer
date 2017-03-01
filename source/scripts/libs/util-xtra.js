@@ -1,13 +1,13 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'util'], function ($, U) {
+define(['jquery', 'libs/util-dim'], function ($, U) {
   'use strict';
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
 
-  var name = 'handlers';
+  C.info('extending Utils w/Xtra');
 
   U.tweakpath = function (pic, arr) { // pic'src'.swap[a, b]
     try {
@@ -72,7 +72,7 @@ define(['jquery', 'util'], function ($, U) {
     };
   }());
 
-  C.debug([name, 'loaded']);
+  return U;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

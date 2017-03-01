@@ -1,7 +1,7 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['util', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline'], function (
+define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline'], function (
   U, Data, accuracy, possession, rankings, shotsfaced, timeline) {
   'use strict';
 

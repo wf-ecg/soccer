@@ -5,7 +5,9 @@ define(['jquery', 'util'], function ($, U) {
   'use strict';
 
   var W = (W && W.window || window);
-  // var C = (W.C || W.console || {});
+  var C = (W.C || W.console || {});
+
+  C.info('extending Utils w/Dim');
 
   U.dim = {
     gxy: function (ele) { // size probe
@@ -66,13 +68,7 @@ define(['jquery', 'util'], function ($, U) {
     },
   };
 
-  $.fn.centerize = function () {
-    this.each(function () {
-      U.dim.prox(this);
-    });
-    return this;
-  };
-
+  return U;
 });
 
 

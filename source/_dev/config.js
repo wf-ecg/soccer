@@ -28,13 +28,8 @@ require.config({
   },
   shim: {
     main: {
-      deps: ['util', 'data',
-        'accuracy',
-        'handlers',
-        'possession',
-        'rankings',
-        'shotsfaced',
-        'timeline',
+      deps: [
+        'libs/util-xtra',
       ],
     },
   },
