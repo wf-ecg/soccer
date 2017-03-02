@@ -54,7 +54,7 @@ require(['jqxtn', 'data'], function ($) {
 
   /// CUSTOMIZED INIT
 
-  require(['main', '../data/g2', '../data/g1'], function (Main, Data) {
+  require(['main', '../data/game-2', '../data/game-1'], function (Main, Data) {
 
     $(Main.init);
 
