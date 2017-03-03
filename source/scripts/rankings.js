@@ -8,15 +8,15 @@ define(['jquery'], function ($) {
   var C = (W.C || W.console || {});
 
   var dat, div, rows, name = 'rankings';
-  var I = Object.create(null);
+  var self = Object.create(null);
 
   div = $('.rankings table');
   rows = div.find('tr').not(':first-child');
 
-  $.extend(I, {
+  $.extend(self, {
     set: function (data) {
       dat = data;
-      return I;
+      return self;
     },
     getCxy: function (c, r) {
       var tmp = rows.eq(r);
@@ -30,14 +30,14 @@ define(['jquery'], function ($) {
       var y = 0;
       $.each(dat, function (i, row) {
 
-        I.getCxy(0, y).find('img').attr({
+        self.getCxy(0, y).find('img').attr({
           src: './images/flags/' + i.toLowerCase() + '.png',
           alt: i,
         });
-        I.getCxy(1, y).text(i);
+        self.getCxy(1, y).text(i);
 
         $.each(row, function (j, cell) {
-          I.getCxy(j + 2, y).text(cell);
+          self.getCxy(j + 2, y).text(cell);
         });
 
         y++;
@@ -46,11 +46,11 @@ define(['jquery'], function ($) {
     init: function (dat) {
       this.set(dat).fillup();
 
-      C.debug([name, I]);
+      C.debug([name, self]);
     },
   });
 
-  return I;
+  return self;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

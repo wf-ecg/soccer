@@ -8,7 +8,7 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
   var C = (W.C || W.console || {});
 
   var name = 'shotsfaced';
-  var I = Object.create(null);
+  var self = Object.create(null);
 
   function _pc(n) {
     return (n | 0) + '%';
@@ -21,7 +21,7 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
     tobj.vert = vert;
   }
 
-  $.extend(I, {
+  $.extend(self, {
     total: 0,
     saves: 0,
     goals: 0,
@@ -89,7 +89,7 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
       this.data = arr;
 
       $.each(arr, function (i, e) {
-        I.addBall(e);
+        self.addBall(e);
       });
       this.updateNums();
     },
@@ -101,18 +101,18 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
         data = data || this.data;
 
         this.div = $(this.div).click(function () {
-          I.reset();
+          self.reset();
         });
         this.net = this.div.find(this.net);
         this.nums = this.div.find(this.nums);
         this.load(data);
 
-        C.debug([name, I]);
+        C.debug([name, self]);
       }
     },
   });
 
-  return I;
+  return self;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

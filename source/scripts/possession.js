@@ -8,9 +8,9 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
   var C = (W.C || W.console || {});
 
   var name = 'possession';
-  var I = Object.create(null);
+  var self = Object.create(null);
 
-  $.extend(I, {
+  $.extend(self, {
     defs: {
       girth: 7,
       // 2 = full ... 200 = hairline
@@ -42,10 +42,10 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
         Ui.prototype.createElement.apply(this, arguments);
 
         this.addComponent(new Ui.Arc({
-          arcWidth: this.width / I.defs.girth,
+          arcWidth: this.width / self.defs.girth,
         }));
         this.merge(this.options, {
-          arcWidth: this.width / I.defs.girth,
+          arcWidth: this.width / self.defs.girth,
         });
 
         arc = new Ui.El.Arc(this.options);
@@ -76,12 +76,12 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
         this.load();
         this.set(num);
 
-        C.debug([name, I]);
+        C.debug([name, self]);
       }
     },
   });
 
-  return I;
+  return self;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

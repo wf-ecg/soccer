@@ -8,7 +8,7 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
   var C = (W.C || W.console || {});
 
   var name = 'timeline';
-  var I = Object.create(null);
+  var self = Object.create(null);
 
   function Trivent(time, side, icon) {
     this.time = (time || 55) % 91;
@@ -30,7 +30,7 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
     return this;
   };
 
-  $.extend(I, {
+  $.extend(self, {
     defs: {
       cache: $(),
       h: 0,
@@ -67,7 +67,7 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
 
       // new call stack
       U.delay(0, function () {
-        I.moveEvent(tv.time, set.centerize());
+        self.moveEvent(tv.time, set.centerize());
       });
       this.cache = this.cache.add(set);
     },
@@ -116,7 +116,7 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
       this.measureBar();
 
       $.each(arr, function () {
-        I.addEvent(this);
+        self.addEvent(this);
       });
     },
     init: function (data) {
@@ -127,18 +127,18 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
         data = data || this.data;
 
         this.div = $(this.div).click(function () {
-          I.reset();
+          self.reset();
         });
         this.bar = this.div.find(this.bar);
         this.wrap = this.div.parent();
         this.load(data);
 
-        C.debug([name, I]);
+        C.debug([name, self]);
       }
     },
   });
 
-  return I;
+  return self;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
