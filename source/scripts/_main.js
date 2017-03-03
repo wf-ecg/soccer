@@ -5,6 +5,16 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
   U, Data, accuracy, possession, rankings, shotsfaced, timeline) {
   'use strict';
 
+  try {
+    //document.getElementsByTagName('A')
+    Data.addGame(0, require('dat/game-0'));
+    Data.addGame(1, require('dat/game-1'));
+    Data.addGame(2, require('dat/game-2'));
+    Data.addGame(3, require('dat/game-3'));
+  } catch(err) {
+    console.error(err);
+  }
+
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
   var init;

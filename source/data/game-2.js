@@ -1,4 +1,5 @@
-Data.addGame(2, {
+/*global define */
+define({
   match: {
     accuracy: 74,
     possession: 47,

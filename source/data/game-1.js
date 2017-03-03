@@ -1,4 +1,5 @@
-Data.addGame(1, {
+/*global define */
+define({
   match: {
     accuracy: 80,
     events: [

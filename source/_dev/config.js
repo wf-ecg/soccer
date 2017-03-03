@@ -34,8 +34,8 @@ require.config({
         'dat/game-0',
         'dat/game-1',
         'dat/game-2',
-      ]
-    }
+      ],
+    },
   },
 });
 
