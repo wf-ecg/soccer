@@ -42,8 +42,8 @@ define([], function () {
     }
 
     container.style.cssText = 'position: relative;' + //
-        'width:' + settings.width + 'px;' + //
-        'height:' + settings.height + 'px;';
+      'width:' + settings.width + 'px;' + //
+      'height:' + settings.height + 'px;';
 
     ui.init(container, settings);
     this.container = container;

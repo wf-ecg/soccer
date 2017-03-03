@@ -38,7 +38,7 @@ define(['jquery', 'lodash'], function ($, _) {
     }, limit));
   };
 
-// NEW
+  // NEW
   // add namespace to event names
   $.jqns = function (evs, ns) {
     var arr = (evs || '').split(' ');
@@ -71,8 +71,8 @@ define(['jquery', 'lodash'], function ($, _) {
   $.watchHash = function () {
     function trackHash() {
       var self = trackHash,
-          hash = W.location.hash.slice(1),
-          prev = self.previous;
+        hash = W.location.hash.slice(1),
+        prev = self.previous;
       if (prev !== hash) {
         $('html').removeClass(prev).addClass(hash);
         self.previous = hash;
@@ -110,7 +110,7 @@ define(['jquery', 'lodash'], function ($, _) {
 
     $.watchResize(function () {
       if (ua.match(/mobi/i) ||
-          $(W).width() < 768) { // simulate
+        $(W).width() < 768) { // simulate
         $('html').addClass('mobi');
       } else {
         $('html').removeClass('mobi');
@@ -127,7 +127,7 @@ define(['jquery', 'lodash'], function ($, _) {
     }, 'markAgent');
   };
 
-// ETC
+  // ETC
 
   $.altTitles = function () {
     $('*').each(function () {
@@ -139,7 +139,8 @@ define(['jquery', 'lodash'], function ($, _) {
   $.fn.constantEvent = function (evn1, evn2, fn, ms) {
 
     return this.each(function () {
-      var me = $(this), time;
+      var me = $(this),
+        time;
 
       me.on(evn1, function () {
         if (!time) {
@@ -160,11 +161,13 @@ define(['jquery', 'lodash'], function ($, _) {
   $.fn.stretchTo = function (wid) {
     wid = (typeof wid === 'string' ? wid : 0);
     return this.each(function () {
-      var me = $(this), dd = me.data();
+      var me = $(this),
+        dd = me.data();
 
       me.memwidth().css({
         display: 'inline-block',
-        width: dd.memwidth, /*explicitly set width*/
+        width: dd.memwidth,
+        /*explicitly set width*/
       }).stop().animate({
         width: wid,
       }, 333, function () {
@@ -177,19 +180,21 @@ define(['jquery', 'lodash'], function ($, _) {
 
   $.fn.unstretch = function () {
     return this.each(function () {
-      var me = $(this), dd = me.data();
+      var me = $(this),
+        dd = me.data();
 
       me.css({
         display: 'inline-block',
       }).stop().animate({
-        width: dd.memwidth,
-      }, //
-          333, function () {
-            me.removeClass('stretch').css({
-              display: '',
-              width: dd.memwidth,
-            });
+          width: dd.memwidth,
+        }, //
+        333,
+        function () {
+          me.removeClass('stretch').css({
+            display: '',
+            width: dd.memwidth,
           });
+        });
     });
   };
 
@@ -208,7 +213,7 @@ define(['jquery', 'lodash'], function ($, _) {
 
     return this.each(function () {
       var me = $(this),
-          dd = me.data();
+        dd = me.data();
 
       me.css({
         width: str || dd['width' + num],
@@ -229,8 +234,8 @@ define(['jquery', 'lodash'], function ($, _) {
   };
   $.fn.inlineSvg = function () {
     var $I = $(this),
-        $S, size;
-    size = {// force msie to respect size
+      $S, size;
+    size = { // force msie to respect size
       height: $I.css('height'),
       width: $I.css('width'),
     };
