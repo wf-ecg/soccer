@@ -13,6 +13,7 @@ require.config({
   baseUrl: 'scripts',
   paths: {
     lib: 'libs',
+    dat: '../data',
     jquery: '../vendors/jquery/jquery',
     lodash: '../vendors/lodash.js/lodash',
     //
@@ -30,8 +31,11 @@ require.config({
     main: {
       deps: [
         'libs/util-xtra',
-      ],
-    },
+        'dat/game-0',
+        'dat/game-1',
+        'dat/game-2',
+      ]
+    }
   },
 });
 
@@ -54,7 +58,7 @@ require(['jqxtn', 'data'], function ($) {
 
   /// CUSTOMIZED INIT
 
-  require(['main', '../data/game-2', '../data/game-1'], function (Main, Data) {
+  require(['main'], function (Main, Data) {
 
     $(Main.init);
 
