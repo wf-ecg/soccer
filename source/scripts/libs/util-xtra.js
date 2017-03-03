@@ -61,6 +61,7 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
   U.picker = (function () {
     return {
       menu: function (menu, games) {
+        menu.empty();
         $.each(games, function (i, e) {
           if (!e) {
             return;

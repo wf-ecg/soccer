@@ -30,6 +30,11 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     tweet: '.thetweet',
   };
 
+  function _revMenu() {
+    U.picker.menu(El.menu, Data.games);
+    El.menu.val(Data.current);
+  }
+
   function kicker(num) {
     var game, stats;
 
@@ -40,11 +45,9 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
       stats = game.match;
 
       if (!init.inited) {
-        U.picker.menu(El.menu, Data.games);
+        _revMenu();
         init.inited = true;
       }
-
-      El.menu.val(Data.current);
 
       $('section div').hide().fadeIn();
 
@@ -142,6 +145,7 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     Data: Data,
     U: U,
     init: init,
+    updateMenu: _revMenu,
   };
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
