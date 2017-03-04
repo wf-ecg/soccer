@@ -13,7 +13,7 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
     nums: '.nums span',
   };
   var name = 'shotsfaced';
-  var self = Object.create(null);
+  var MY = Object.create(null);
 
   function _pc(n) {
     return (n | 0) + '%';
@@ -26,7 +26,7 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
     tobj.vert = vert;
   }
 
-  $.extend(self, {
+  $.extend(MY, {
     _EL: EL,
     total: 0,
     saves: 0,
@@ -37,14 +37,14 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
 
       if (typeof tb === 'number') {
         EL.cache = $();
-        self.total = tb;
-        self.saves = 0;
-        self.goals = 0;
+        MY.total = tb;
+        MY.saves = 0;
+        MY.goals = 0;
       } else {
         if (tb.constructor !== Triball) {
           bobj = new Triball(tb[0], tb[1], tb[2]);
         }
-        bdiv = self.makeBall(bobj.goal);
+        bdiv = MY.makeBall(bobj.goal);
         EL.net.append(bdiv);
         U.dim.prox(bdiv);
 
@@ -57,13 +57,13 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
     makeBall: function (goal) {
       var ball = $('<div>').addClass('target');
 
-      ball.posxy = self.positionXY;
+      ball.posxy = MY.positionXY;
 
       if (goal) {
-        self.goals++;
+        MY.goals++;
         ball.addClass('score');
       } else {
-        self.saves++;
+        MY.saves++;
       }
       return ball;
     },
@@ -79,40 +79,40 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
       });
     },
     updateNums: function () {
-      EL.nums.eq(0).text(self.total);
-      EL.nums.eq(1).text(self.saves + self.goals);
-      EL.nums.eq(2).text(self.goals);
+      EL.nums.eq(0).text(MY.total);
+      EL.nums.eq(1).text(MY.saves + MY.goals);
+      EL.nums.eq(2).text(MY.goals);
     },
     reset: function (data) {
       EL.cache.remove();
-      self.load(data || self.data);
+      MY.load(data || MY.data);
     },
     load: function (arr) {
-      self.data = arr;
+      MY.data = arr;
 
       $.each(arr, function (i, e) {
-        self.addBall(e);
+        MY.addBall(e);
       });
-      self.updateNums();
+      MY.updateNums();
     },
     init: function (data) {
-      if (self.inited) {
-        self.reset(data);
+      if (MY.inited) {
+        MY.reset(data);
       } else {
-        self.inited = true;
-        data = data || self.data;
+        MY.inited = true;
+        data = data || MY.data;
         $.reify(EL);
         EL.div.on('click', function () {
-          self.reset();
+          MY.reset();
         });
-        self.load(data);
+        MY.load(data);
 
-        C.debug([name, self]);
+        C.debug([name, MY]);
       }
     },
   });
 
-  return self;
+  return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

@@ -12,9 +12,9 @@ define(['data'], function (Data) {
     min: '.accuracy .limit .minor',
   };
   var name = 'accuracy';
-  var self = Object.create(null);
+  var MY = Object.create(null);
 
-  $.extend(self, {
+  $.extend(MY, {
     _EL: EL,
     percent: function (num) {
       num = num || 0.5;
@@ -28,10 +28,10 @@ define(['data'], function (Data) {
       if (num < 50) {
         C.warn('normalize', num);
         num = 100 - num;
-        self.swapColor();
+        MY.swapColor();
       }
-      self.setValue(EL.maj, num); // mod major div
-      self.setValue(EL.min, 100 - num); // mod minor
+      MY.setValue(EL.maj, num); // mod major div
+      MY.setValue(EL.min, 100 - num); // mod minor
     },
     setValue: function (ele, val) {
       if (val < 44) {
@@ -57,32 +57,32 @@ define(['data'], function (Data) {
       return ele.data('color');
     },
     swapColor: function () {
-      self.colors(self.getColor(EL.min), self.getColor(EL.maj));
+      MY.colors(MY.getColor(EL.min), MY.getColor(EL.maj));
     },
     colors: function (c1, c2) {
       var cs = Data.colors();
       c2 = '#999';
-      self.setColor(EL.maj, c1 || cs[0]);
-      self.setColor(EL.min, c2 || cs[1]);
+      MY.setColor(EL.maj, c1 || cs[0]);
+      MY.setColor(EL.min, c2 || cs[1]);
     },
     load: function (num) {
-      self.colors();
-      self.percent(num);
+      MY.colors();
+      MY.percent(num);
     },
     init: function (num) {
-      if (self.inited) {
-        self.load(num);
+      if (MY.inited) {
+        MY.load(num);
       } else {
-        self.inited = true;
+        MY.inited = true;
         $.reify(EL);
-        self.load(num);
+        MY.load(num);
 
-        C.debug([name, self]);
+        C.debug([name, MY]);
       }
     },
   });
 
-  return self;
+  return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

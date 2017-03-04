@@ -7,7 +7,7 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
-  var self;
+  var MY;
   var EL = {
     fact: '.thefact',
     factpic: '.factpic',
@@ -120,21 +120,21 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
   }
 
   function _init() {
-    if (self.inited) {
+    if (MY.inited) {
       return 'was inited';
     }
 
-    self.inited = true;
+    MY.inited = true;
     $.reify(EL);
     renderGame(1);
 
     EL.menu.change(function (evt) {
       renderGame($(evt.target).val());
     });
-    return self;
+    return MY;
   }
 
-  self = {
+  MY = {
     _EL: EL,
     Data: Data,
     U: U,
@@ -142,7 +142,7 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     init: _init,
   };
 
-  return self;
+  return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

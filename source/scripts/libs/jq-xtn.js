@@ -70,14 +70,14 @@ define(['jquery', 'lodash'], function ($, _) {
   // WATCHERS
   $.watchHash = function () {
     function trackHash() {
-      var self = trackHash,
+      var MY = trackHash,
         hash = W.location.hash.slice(1),
-        prev = self.previous;
+        prev = MY.previous;
       if (prev !== hash) {
         $('html').removeClass(prev).addClass(hash);
-        self.previous = hash;
+        MY.previous = hash;
       }
-      return self;
+      return MY;
     }
     $(W).on('hashchange', trackHash());
   };

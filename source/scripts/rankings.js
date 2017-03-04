@@ -11,13 +11,13 @@ define(['jquery'], function ($) {
     rows: '.rankings table tr:not(:first-child)',
   };
   var dat, name = 'rankings';
-  var self = Object.create(null);
+  var MY = Object.create(null);
 
-  $.extend(self, {
+  $.extend(MY, {
     _EL: EL,
     set: function (data) {
       dat = data;
-      return self;
+      return MY;
     },
     getCxy: function (c, r) {
       var tmp = EL.rows.eq(r);
@@ -31,14 +31,14 @@ define(['jquery'], function ($) {
       var y = 0;
       $.each(dat, function (i, row) {
 
-        self.getCxy(0, y).find('img').attr({
+        MY.getCxy(0, y).find('img').attr({
           src: './images/flags/' + i.toLowerCase() + '.png',
           alt: i,
         });
-        self.getCxy(1, y).text(i);
+        MY.getCxy(1, y).text(i);
 
         $.each(row, function (j, cell) {
-          self.getCxy(j + 2, y).text(cell);
+          MY.getCxy(j + 2, y).text(cell);
         });
 
         y++;
@@ -46,13 +46,13 @@ define(['jquery'], function ($) {
     },
     init: function (dat) {
       $.reify(EL);
-      self.set(dat).fillup();
+      MY.set(dat).fillup();
 
-      C.debug([name, self]);
+      C.debug([name, MY]);
     },
   });
 
-  return self;
+  return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

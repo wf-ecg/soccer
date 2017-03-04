@@ -10,9 +10,9 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
     div: '.possession',
   };
   var name = 'possession';
-  var self = Object.create(null);
+  var MY = Object.create(null);
 
-  $.extend(self, {
+  $.extend(MY, {
     _EL: EL,
     defs: {
       girth: 7,
@@ -27,11 +27,11 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
       obj = new Knob(sel[0], new Ui.Donut());
       sel.data('Knob', obj);
 
-      self.svg = obj;
+      MY.svg = obj;
     },
     set: function (num) {
-      self.svg.changed(-100 / 5);
-      self.svg.changed(num / 5);
+      MY.svg.changed(-100 / 5);
+      MY.svg.changed(num / 5);
       EL.div.find('.major h3').text(num + '%');
     },
     proto: function () {
@@ -43,10 +43,10 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
         Ui.prototype.createElement.apply(this, arguments);
 
         this.addComponent(new Ui.Arc({
-          arcWidth: this.width / self.defs.girth,
+          arcWidth: this.width / MY.defs.girth,
         }));
         this.merge(this.options, {
-          arcWidth: this.width / self.defs.girth,
+          arcWidth: this.width / MY.defs.girth,
         });
 
         arc = new Ui.El.Arc(this.options);
@@ -67,22 +67,22 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
       paths.eq(1).css('fill', cs[0]);
     },
     init: function (sel, num) {
-      if (self.inited) {
-        self.load();
+      if (MY.inited) {
+        MY.load();
       } else {
-        self.inited = true;
+        MY.inited = true;
 
-        self.proto();
-        self.add(sel);
-        self.load();
-        self.set(num);
+        MY.proto();
+        MY.add(sel);
+        MY.load();
+        MY.set(num);
 
-        C.debug([name, self]);
+        C.debug([name, MY]);
       }
     },
   });
 
-  return self;
+  return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
