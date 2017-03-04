@@ -59,7 +59,7 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
 
       /// TOP
       El.top //
-        .find('.team_left').text(stats.teams[0]) //
+        .find('.team_left').text(stats.teams[0]).end() //
         .find('.team_right').text(stats.teams[1]);
       El.score //
         .find('.center').text(stats.score.join('-')).end() //
