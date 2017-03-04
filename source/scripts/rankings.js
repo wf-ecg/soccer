@@ -4,14 +4,15 @@
 define(['jquery'], function ($) {
   'use strict';
 
+  var dat;
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
   var EL = {
     div: '.rankings table',
     rows: '.rankings table tr:not(:first-child)',
   };
-  var dat, name = 'rankings';
   var MY = Object.create(null);
+  var NM = 'Rankings';
 
   $.extend(MY, {
     _EL: EL,
@@ -44,14 +45,15 @@ define(['jquery'], function ($) {
         y++;
       });
     },
-    init: function (dat) {
+    init: function (data) {
       $.reify(EL);
-      MY.set(dat).fillup();
+      MY.set(data).fillup();
 
-      C.debug([name, MY]);
+      C.debug([NM, MY]);
     },
   });
 
+  W[NM] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

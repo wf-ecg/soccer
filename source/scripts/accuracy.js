@@ -11,8 +11,8 @@ define(['data'], function (Data) {
     maj: '.accuracy .limit .major',
     min: '.accuracy .limit .minor',
   };
-  var name = 'accuracy';
   var MY = Object.create(null);
+  var NM = 'Accuracy';
 
   $.extend(MY, {
     _EL: EL,
@@ -77,11 +77,12 @@ define(['data'], function (Data) {
         $.reify(EL);
         MY.load(num);
 
-        C.debug([name, MY]);
+        C.debug([NM, MY]);
       }
     },
   });
 
+  W[NM] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

@@ -12,8 +12,8 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
     net: '.net',
     nums: '.nums span',
   };
-  var name = 'shotsfaced';
   var MY = Object.create(null);
+  var NM = 'Shotsfaced';
 
   function _pc(n) {
     return (n | 0) + '%';
@@ -107,11 +107,12 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
         });
         MY.load(data);
 
-        C.debug([name, MY]);
+        C.debug([NM, MY]);
       }
     },
   });
 
+  W[NM] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

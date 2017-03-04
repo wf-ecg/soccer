@@ -12,8 +12,8 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, UT, Data) {
     bar: '.timeline .events table',
     wrap: '.timeline .linewrap',
   };
-  var name = 'timeline';
   var MY = Object.create(null);
+  var NM = 'Timeline';
 
   function Trivent(time, side, icon) {
     this.time = (time || 55) % 91;
@@ -130,11 +130,12 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, UT, Data) {
         });
         MY.load(data);
 
-        C.debug([name, MY]);
+        C.debug([NM, MY]);
       }
     },
   });
 
+  W[NM] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

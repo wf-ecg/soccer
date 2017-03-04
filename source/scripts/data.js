@@ -7,6 +7,7 @@ define(['util'], function (UT) {
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
   var MY;
+  var NM = 'Data';
 
   function inject(mod) {
     try {
@@ -107,7 +108,7 @@ define(['util'], function (UT) {
     USA           : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'usa.png'           },
   };
 
-  W.Data = MY;
+  W[NM] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

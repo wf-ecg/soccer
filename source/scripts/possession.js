@@ -9,8 +9,8 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
   var EL = {
     div: '.possession',
   };
-  var name = 'possession';
   var MY = Object.create(null);
+  var NM = 'Possession';
 
   $.extend(MY, {
     _EL: EL,
@@ -77,11 +77,12 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
         MY.load();
         MY.set(num);
 
-        C.debug([name, MY]);
+        C.debug([NM, MY]);
       }
     },
   });
 
+  W[NM] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
