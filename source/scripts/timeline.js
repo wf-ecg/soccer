@@ -6,7 +6,12 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
-
+  var EL = {
+    cache: '',
+    div: '.timeline .events',
+    bar: '.timeline .events table',
+    wrap: '.timeline .linewrap',
+  };
   var name = 'timeline';
   var self = Object.create(null);
 
@@ -31,15 +36,10 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
   };
 
   $.extend(self, {
-    defs: {
-      cache: $(),
-      h: 0,
-      w: 0,
-    },
-    bar: 'table',
+    _EL: EL,
+    h: 0,
+    w: 0,
     data: null,
-    div: '.timeline .events',
-    wrap: '',
     addEvent: function (tv) { // trivent [time, icon, side]
       var icon, point, set, off, pol;
       tv = tv || [];
@@ -56,20 +56,20 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
       point.css({
         left: _pc(9),
         top: _px(pol + off),
-      }).appendTo(this.div).addClass('point');
+      }).appendTo(EL.div).addClass('point');
 
       icon.css({
         backgroundColor: Data.lookup(tv.icon),
         color: tv.icon,
         left: _pc(9),
         top: _px(2 * pol + off),
-      }).appendTo(this.wrap).addClass(tv.icon);
+      }).appendTo(EL.wrap).addClass(tv.icon);
 
       // new call stack
       U.delay(0, function () {
         self.moveEvent(tv.time, set.centerize());
       });
-      this.cache = this.cache.add(set);
+      EL.cache = EL.cache.add(set);
     },
     moveEvent: function (time, eles) {
       eles.css({
@@ -77,8 +77,8 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
       });
     },
     measureBar: function () {
-      this.w = this.bar.outerWidth();
-      this.h = this.bar.outerHeight();
+      this.w = EL.bar.outerWidth();
+      this.h = EL.bar.outerHeight();
       this.m = this.w / 10; // figure 10% margins
       this.w -= this.m * 2; // inner cells
       return [this.w, this.h];
@@ -106,13 +106,12 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
       return num;
     },
     reset: function (data) {
-      this.cache.remove();
+      EL.cache.remove();
       this.load(data || this.data);
     },
     load: function (arr) {
       this.data = arr;
 
-      $.extend(this, this.defs);
       this.measureBar();
 
       $.each(arr, function () {
@@ -125,12 +124,10 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
       } else {
         this.inited = true;
         data = data || this.data;
-
-        this.div = $(this.div).click(function () {
+        $.reify(EL);
+        EL.div.click(function () {
           self.reset();
         });
-        this.bar = this.div.find(this.bar);
-        this.wrap = this.div.parent();
         this.load(data);
 
         C.debug([name, self]);

@@ -6,14 +6,16 @@ define(['data'], function (Data) {
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
-
+  var EL = {
+    div: '.accuracy .limit',
+    maj: '.accuracy .limit .major',
+    min: '.accuracy .limit .minor',
+  };
   var name = 'accuracy';
   var self = Object.create(null);
 
   $.extend(self, {
-    div: '.accuracy .limit',
-    maj: '.major',
-    min: '.minor',
+    _EL: EL,
     percent: function (num) {
       num = num || 0.5;
       num = num % 100;
@@ -28,8 +30,8 @@ define(['data'], function (Data) {
         num = 100 - num;
         self.swapColor();
       }
-      self.setValue(self.maj, num); // mod major div
-      self.setValue(self.min, 100 - num); // mod minor
+      self.setValue(EL.maj, num); // mod major div
+      self.setValue(EL.min, 100 - num); // mod minor
     },
     setValue: function (ele, val) {
       if (val < 44) {
@@ -55,13 +57,13 @@ define(['data'], function (Data) {
       return ele.data('color');
     },
     swapColor: function () {
-      self.colors(self.getColor(self.min), self.getColor(self.maj));
+      self.colors(self.getColor(EL.min), self.getColor(EL.maj));
     },
     colors: function (c1, c2) {
       var cs = Data.colors();
       c2 = '#999';
-      self.setColor(self.maj, c1 || cs[0]);
-      self.setColor(self.min, c2 || cs[1]);
+      self.setColor(EL.maj, c1 || cs[0]);
+      self.setColor(EL.min, c2 || cs[1]);
     },
     load: function (num) {
       self.colors();
@@ -72,9 +74,7 @@ define(['data'], function (Data) {
         self.load(num);
       } else {
         self.inited = true;
-        self.div = $(self.div);
-        self.maj = self.div.find(self.maj);
-        self.min = self.div.find(self.min);
+        $.reify(EL);
         self.load(num);
 
         C.debug([name, self]);

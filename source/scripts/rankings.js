@@ -6,20 +6,21 @@ define(['jquery'], function ($) {
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
-
-  var dat, div, rows, name = 'rankings';
+  var EL = {
+    div: '.rankings table',
+    rows: '.rankings table tr:not(:first-child)',
+  };
+  var dat, name = 'rankings';
   var self = Object.create(null);
 
-  div = $('.rankings table');
-  rows = div.find('tr').not(':first-child');
-
   $.extend(self, {
+    _EL: EL,
     set: function (data) {
       dat = data;
       return self;
     },
     getCxy: function (c, r) {
-      var tmp = rows.eq(r);
+      var tmp = EL.rows.eq(r);
       tmp = tmp.children().eq(c);
       return tmp;
     },
@@ -44,6 +45,7 @@ define(['jquery'], function ($) {
       });
     },
     init: function (dat) {
+      $.reify(EL);
       this.set(dat).fillup();
 
       C.debug([name, self]);

@@ -6,18 +6,19 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
-
+  var EL = {
+    div: '.possession',
+  };
   var name = 'possession';
   var self = Object.create(null);
 
   $.extend(self, {
+    _EL: EL,
     defs: {
       girth: 7,
       // 2 = full ... 200 = hairline
       granularity: 0,
     },
-    div: '.possession',
-    bar: null,
     svg: null,
     add: function (sel) {
       var obj;
@@ -31,7 +32,7 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
     set: function (num) {
       this.svg.changed(-100 / 5);
       this.svg.changed(num / 5);
-      this.div.find('.major h3').text(num + '%');
+      EL.div.find('.major h3').text(num + '%');
     },
     proto: function () {
       Ui.Donut = function () {};
@@ -59,8 +60,8 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
       var cs, paths;
 
       cs = Data.colors();
-      this.div = $(this.div);
-      paths = this.div.find('path');
+      $.reify(EL);
+      paths = EL.div.find('path');
 
       paths.eq(0).css('fill', cs[1]);
       paths.eq(1).css('fill', cs[0]);

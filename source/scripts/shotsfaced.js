@@ -6,7 +6,12 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
-
+  var EL = {
+    cache: '',
+    div: '.shotsfaced',
+    net: '.net',
+    nums: '.nums span',
+  };
   var name = 'shotsfaced';
   var self = Object.create(null);
 
@@ -22,19 +27,16 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
   }
 
   $.extend(self, {
+    _EL: EL,
     total: 0,
     saves: 0,
     goals: 0,
-    cache: $(),
     data: null,
-    div: '.shotsfaced',
-    net: '.net',
-    nums: '.nums span',
     addBall: function (tb) {
       var bdiv, bobj;
 
       if (typeof tb === 'number') {
-        this.cache = $();
+        EL.cache = $();
         this.total = tb;
         this.saves = 0;
         this.goals = 0;
@@ -43,13 +45,13 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
           bobj = new Triball(tb[0], tb[1], tb[2]);
         }
         bdiv = this.makeBall(bobj.goal);
-        this.net.append(bdiv);
+        EL.net.append(bdiv);
         U.dim.prox(bdiv);
 
         U.delay(function () {
           bdiv.posxy(bobj.horz, bobj.vert);
         });
-        this.cache = this.cache.add(bdiv);
+        EL.cache = EL.cache.add(bdiv);
       }
     },
     makeBall: function (goal) {
@@ -77,12 +79,12 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
       });
     },
     updateNums: function () {
-      this.nums.eq(0).text(this.total);
-      this.nums.eq(1).text(this.saves + this.goals);
-      this.nums.eq(2).text(this.goals);
+      EL.nums.eq(0).text(this.total);
+      EL.nums.eq(1).text(this.saves + this.goals);
+      EL.nums.eq(2).text(this.goals);
     },
     reset: function (data) {
-      this.cache.remove();
+      EL.cache.remove();
       this.load(data || this.data);
     },
     load: function (arr) {
@@ -99,12 +101,10 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
       } else {
         this.inited = true;
         data = data || this.data;
-
-        this.div = $(this.div).click(function () {
+        $.reify(EL);
+        EL.div.click(function () {
           self.reset();
         });
-        this.net = this.div.find(this.net);
-        this.nums = this.div.find(this.nums);
         this.load(data);
 
         C.debug([name, self]);

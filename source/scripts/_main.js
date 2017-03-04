@@ -8,7 +8,7 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
   var self;
-  var El = {
+  var EL = {
     fact: '.thefact',
     factpic: '.factpic',
     menu: '#GameNum',
@@ -21,8 +21,8 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
   };
 
   function _revMenu() {
-    U.picker.menu(El.menu, Data.games);
-    El.menu.val(Data.current);
+    U.picker.menu(EL.menu, Data.games);
+    EL.menu.val(Data.current);
   }
 
   function renderGame(num) {
@@ -43,10 +43,10 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
       possession.init('.donut', stats.possession);
 
       /// TOP
-      El.top //
+      EL.top //
         .find('.team_left').text(stats.teams[0]).end() //
         .find('.team_right').text(stats.teams[1]);
-      El.score //
+      EL.score //
         .find('.center').text(stats.score.join('-')).end() //
         .find('.left img').attr({
           src: `./images/flags/${Data.team(stats.teams[0]).flag}`,
@@ -56,36 +56,36 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
           src: `./images/flags/${Data.team(stats.teams[1]).flag}`,
           alt: stats.teams[1],
         });
-      El.ticket //
+      EL.ticket //
         .find('.date').text(stats.ticket[0]).end() //
         .find('.stadium').text(stats.ticket[1]).end() //
         .find('.city').text(stats.ticket[2]);
 
       // TWEET
-      El.tweet.find('p') //
+      EL.tweet.find('p') //
         .html(game.tweet.text.join(' ')).end() //
         .find('.author').html(game.tweet.author);
 
       // Did you know
-      El.fact.find('p') //
+      EL.fact.find('p') //
         .html(game.fact.text.join(' '));
 
       // Jersey
-      El.player.find('img').first() //
+      EL.player.find('img').first() //
         .attr({
           src: `./images/${game.pics.player[0]}`,
           alt: game.pics.player[1],
         });
 
       // SHOT of the match
-      El.shot.find('img.fill').first() //
+      EL.shot.find('img.fill').first() //
         .attr({
           src: `./images/${game.pics.shot[0]}`,
           alt: game.pics.shot[1],
         });
 
       // FACT pic
-      El.factpic.find('img.fill') //
+      EL.factpic.find('img.fill') //
         .attr({
           src: `./images/${game.pics.fact[0]}`,
           alt: game.pics.fact[1],
@@ -105,7 +105,7 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
         return (v && v.join && typeof v[1] !== 'object') ? v.join('|') : v;
       }, 4);
 
-      El.menu.attr('title', src).parent() //
+      EL.menu.attr('title', src).parent() //
         .off('dblclick').on('dblclick', function () {
           var tab = W.open('?');
           tab.document.write(`<pre>${src}</pre>`);
@@ -125,16 +125,17 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     }
 
     self.inited = true;
-    $.reify(El);
+    $.reify(EL);
     renderGame(1);
 
-    El.menu.change(function (evt) {
+    EL.menu.change(function (evt) {
       renderGame($(evt.target).val());
     });
     return self;
   }
 
   self = {
+    _EL: EL,
     Data: Data,
     U: U,
     updateMenu: _revMenu,
