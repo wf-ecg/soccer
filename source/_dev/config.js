@@ -13,7 +13,6 @@ require.config({
   baseUrl: 'scripts',
   paths: {
     lib: 'libs',
-    dat: '../data',
     jquery: '../vendors/jquery/jquery',
     lodash: '../vendors/lodash.js/lodash',
     //
@@ -22,7 +21,6 @@ require.config({
     stats: 'libs/ecg-stats',
     //
     main: '_main',
-    data: 'libs/data',
     util: 'libs/util',
     ui: 'libs/ui',
     //
@@ -30,10 +28,6 @@ require.config({
   shim: {
     main: {
       deps: [
-        'libs/util-xtra',
-        'dat/game-0',
-        'dat/game-1',
-        'dat/game-2',
       ],
     },
   },
@@ -58,9 +52,13 @@ require(['jqxtn', 'data'], function ($) {
 
   /// CUSTOMIZED INIT
 
-  require(['main'], function (Main, Data) {
-
-    $(Main.init);
+  require(['data', 'main'], function (Data, Main) {
+    require.config({
+      paths: {
+        games: '../data',
+      },
+    });
+    Data.readFrom('data/index.html', Main.init);
 
     if (W._dbug > 0)
       W.Main = Main; // expose

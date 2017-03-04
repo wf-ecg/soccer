@@ -20,16 +20,6 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     tweet: '.thetweet',
   };
 
-  try {
-    //document.getElementsByTagName('A')
-    Data.addGame(0, require('dat/game-0'));
-    Data.addGame(2, require('dat/game-2'));
-    Data.addGame(1, require('dat/game-1'));
-    Data.addGame(3, require('dat/game-3'));
-  } catch(err) {
-    console.debug(err.message);
-  }
-
   function _revMenu() {
     U.picker.menu(El.menu, Data.games);
     El.menu.val(Data.current);
@@ -125,29 +115,30 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
 
       U.initFinish();
     } catch (err) {
-      C.error(err);
+      C.error(err, game, num);
     }
+  }
+
+  function _init() {
+    if (self.inited) {
+      return 'was inited';
+    }
+
+    self.inited = true;
+    $.reify(El);
+    renderGame(1);
+
+    El.menu.change(function (evt) {
+      renderGame($(evt.target).val());
+    });
+    return self;
   }
 
   self = {
     Data: Data,
     U: U,
     updateMenu: _revMenu,
-    init: function () {
-      if (self.inited) {
-        return;
-      }
-      self.inited = true;
-
-      $.reify(El);
-
-      renderGame();
-
-      El.menu.change(function (evt) {
-        renderGame($(evt.target).val());
-      });
-      return self;
-    },
+    init: _init,
   };
 
   return self;

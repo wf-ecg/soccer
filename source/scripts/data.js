@@ -5,9 +5,19 @@ define(['util'], function (U) {
   'use strict';
 
   var W = (W && W.window || window);
-  // var C = (W.C || W.console || {});
+  var C = (W.C || W.console || {});
+  var Data;
 
-  var Data = {
+  function inject(mod) {
+    try {
+      var num = parseInt(mod.match(/\d+/)[0]);
+      Data.addGame(num, require(mod));
+    } catch (err) {
+      C.debug(err.message);
+    }
+  }
+
+  Data = {
     current: 0,
     defs: {
       speed: 333,
@@ -17,10 +27,8 @@ define(['util'], function (U) {
     addGame: function (num, data) { // opt num/push
       if (data) {
         this.games[num] = data;
-        this.current = num;
       } else {
         this.games.push(num);
-        this.current = this.games.length - 1;
       }
     },
     game: function (num) {
@@ -38,6 +46,17 @@ define(['util'], function (U) {
     },
     lookup: function (key) {
       return (this.dict[key] || key);
+    },
+    readFrom: function (url, cb) {
+      $('<tmp>').load(`${url} a`, function () {
+        var links = $(this).children().get();
+        links = links.map(a => `games/${a.text.replace('.js', '')}`);
+
+        require(links, function () {
+          links.map(inject);
+          if (typeof cb === 'function') cb();
+        });
+      });
     },
   };
 
