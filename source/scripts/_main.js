@@ -5,19 +5,9 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
   U, Data, accuracy, possession, rankings, shotsfaced, timeline) {
   'use strict';
 
-  try {
-    //document.getElementsByTagName('A')
-    Data.addGame(0, require('dat/game-0'));
-    Data.addGame(1, require('dat/game-1'));
-    Data.addGame(2, require('dat/game-2'));
-    Data.addGame(3, require('dat/game-3'));
-  } catch(err) {
-    console.error(err);
-  }
-
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
-  var init;
+  var self;
   var El = {
     fact: '.thefact',
     factpic: '.factpic',
@@ -30,24 +20,29 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     tweet: '.thetweet',
   };
 
+  try {
+    //document.getElementsByTagName('A')
+    Data.addGame(0, require('dat/game-0'));
+    Data.addGame(2, require('dat/game-2'));
+    Data.addGame(1, require('dat/game-1'));
+    Data.addGame(3, require('dat/game-3'));
+  } catch(err) {
+    console.debug(err.message);
+  }
+
   function _revMenu() {
     U.picker.menu(El.menu, Data.games);
     El.menu.val(Data.current);
   }
 
-  function kicker(num) {
+  function renderGame(num) {
     var game, stats;
-
-    $.reify(El);
 
     try {
       game = Data.game(num);
       stats = game.match;
 
-      if (!init.inited) {
-        _revMenu();
-        init.inited = true;
-      }
+      _revMenu();
 
       $('section div').hide().fadeIn();
 
@@ -110,8 +105,8 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
       // cleanup
       $('img.fill.raise').remove();
       $('.fill').lifter();
-      $('img').each(function () {
-        var img = $(this);
+      $('img').each(function (i, e) {
+        var img = $(e);
         img.attr('title', img.attr('alt'));
       });
 
@@ -134,19 +129,28 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     }
   }
 
-  init = function () {
-    kicker();
-    El.menu.change(function () {
-      kicker($(this).val());
-    });
-  };
-
-  return {
+  self = {
     Data: Data,
     U: U,
-    init: init,
     updateMenu: _revMenu,
+    init: function () {
+      if (self.inited) {
+        return;
+      }
+      self.inited = true;
+
+      $.reify(El);
+
+      renderGame();
+
+      El.menu.change(function (evt) {
+        renderGame($(evt.target).val());
+      });
+      return self;
+    },
   };
+
+  return self;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
