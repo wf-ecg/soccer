@@ -47,7 +47,7 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
       if (tv.constructor !== Trivent) {
         tv = new Trivent(tv[0], tv[1], tv[2]);
       }
-      off = this.h / 2;
+      off = self.h / 2;
       pol = (tv.side === 'top') ? -1 - off : off; // -1px fixer??
       point = $('<div>').addClass('trivent').attr('data-time', tv.time);
       icon = point.clone();
@@ -73,31 +73,31 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
     },
     moveEvent: function (time, eles) {
       eles.css({
-        left: _pc(this.timeTpc(time)),
+        left: _pc(self.timeTpc(time)),
       });
     },
     measureBar: function () {
-      this.w = EL.bar.outerWidth();
-      this.h = EL.bar.outerHeight();
-      this.m = this.w / 10; // figure 10% margins
-      this.w -= this.m * 2; // inner cells
-      return [this.w, this.h];
+      self.w = EL.bar.outerWidth();
+      self.h = EL.bar.outerHeight();
+      self.m = self.w / 10; // figure 10% margins
+      self.w -= self.m * 2; // inner cells
+      return [self.w, self.h];
     },
     timeTpc: function (time) {
       //             factor in lead and tail
-      return this.adjustpc(time / 90 * 100);
+      return self.adjustpc(time / 90 * 100);
     },
     pxTpc: function (px) {
       px = px || 0;
-      return (px / this.w * 100) | 0;
+      return (px / self.w * 100) | 0;
     },
     pcTpx: function (pc) {
       pc = pc || 100;
-      return (this.w * pc / 100) | 0;
+      return (self.w * pc / 100) | 0;
     },
     adjustpx: function (num) {
       num *= 0.8; // remove lead and tail (10%)
-      num += this.m;
+      num += self.m;
       return num;
     },
     adjustpc: function (num) {
@@ -107,28 +107,28 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
     },
     reset: function (data) {
       EL.cache.remove();
-      this.load(data || this.data);
+      self.load(data || self.data);
     },
     load: function (arr) {
-      this.data = arr;
+      self.data = arr;
 
-      this.measureBar();
+      self.measureBar();
 
       $.each(arr, function () {
         self.addEvent(this);
       });
     },
     init: function (data) {
-      if (this.inited) {
-        this.reset(data);
+      if (self.inited) {
+        self.reset(data);
       } else {
-        this.inited = true;
-        data = data || this.data;
+        self.inited = true;
+        data = data || self.data;
         $.reify(EL);
-        EL.div.click(function () {
+        EL.div.on('click', function () {
           self.reset();
         });
-        this.load(data);
+        self.load(data);
 
         C.debug([name, self]);
       }

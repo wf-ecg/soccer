@@ -47,7 +47,7 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
     pic1.parent() //
       .attr('title', 'ENLARGE') //
       .addClass('raise') //
-      .click(function () {
+      .on('click', function () {
         pic2.toggle(333);
       });
 

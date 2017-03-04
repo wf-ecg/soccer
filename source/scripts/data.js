@@ -6,18 +6,18 @@ define(['util'], function (U) {
 
   var W = (W && W.window || window);
   var C = (W.C || W.console || {});
-  var Data;
+  var self;
 
   function inject(mod) {
     try {
       var num = parseInt(mod.match(/\d+/)[0]);
-      Data.addGame(num, require(mod));
+      self.addGame(num, require(mod));
     } catch (err) {
       C.debug(err.message);
     }
   }
 
-  Data = {
+  self = {
     current: 0,
     defs: {
       speed: 333,
@@ -26,26 +26,26 @@ define(['util'], function (U) {
     teams: {},
     addGame: function (num, data) { // opt num/push
       if (data) {
-        this.games[num] = data;
+        self.games[num] = data;
       } else {
-        this.games.push(num);
+        self.games.push(num);
       }
     },
     game: function (num) {
-      this.current = U.def(num) ? num : this.current;
-      return this.games[this.current];
+      self.current = U.def(num) ? num : self.current;
+      return self.games[self.current];
     },
     winner: function (num) {
-      return this.game(num).match.teams[0];
+      return self.game(num).match.teams[0];
     },
     colors: function (num) {
-      return this.teams[this.winner(num)].colors;
+      return self.teams[self.winner(num)].colors;
     },
     team: function (nom) {
-      return this.teams[nom];
+      return self.teams[nom];
     },
     lookup: function (key) {
-      return (this.dict[key] || key);
+      return (self.dict[key] || key);
     },
     readFrom: function (url, cb) {
       $('<tmp>').load(`${url} a`, function () {
@@ -60,9 +60,9 @@ define(['util'], function (U) {
     },
   };
 
-  Data.games = [];
+  self.games = [];
 
-  Data.dict = {
+  self.dict = {
     error: '#c20000',
     gray: '#8f8f8f',
     mark: '#00ff00',
@@ -71,7 +71,7 @@ define(['util'], function (U) {
     warning: '#fff200',
   };
 
-  Data.teams = {
+  self.teams = {
     '?'           : { colors: ['#c91721', '#176844'], grouping: 'X', flag: 'mexico.png'        },
     Algeria       : { colors: ['#999999', '#999999'], grouping: 'H', flag: 'algeria.png'       },
     Argentina     : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'argentina.png'     },
@@ -96,7 +96,7 @@ define(['util'], function (U) {
     Ivory_Coast   : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'ivory_coast.png'   },
     Japan         : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'japan.png'         },
     Korea_Republic: { colors: ['#999999', '#999999'], grouping: 'H', flag: 'korea_republic.png'},
-    Mexico        : { colors: ['#176844', Data.dict.yellow], grouping: 'A', flag: 'mexico.png'        },
+    Mexico        : { colors: ['#176844', self.dict.yellow], grouping: 'A', flag: 'mexico.png'        },
     Netherlands   : { colors: ['#999999', '#999999'], grouping: 'B', flag: 'netherlands.png'   },
     Nigeria       : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'nigeria.png'       },
     Portugal      : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'portugal.png'      },
@@ -107,8 +107,8 @@ define(['util'], function (U) {
     USA           : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'usa.png'           },
   };
 
-  W.Data = Data;
-  return Data;
+  W.Data = self;
+  return self;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

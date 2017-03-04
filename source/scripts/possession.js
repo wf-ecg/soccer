@@ -27,11 +27,11 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
       obj = new Knob(sel[0], new Ui.Donut());
       sel.data('Knob', obj);
 
-      this.svg = obj;
+      self.svg = obj;
     },
     set: function (num) {
-      this.svg.changed(-100 / 5);
-      this.svg.changed(num / 5);
+      self.svg.changed(-100 / 5);
+      self.svg.changed(num / 5);
       EL.div.find('.major h3').text(num + '%');
     },
     proto: function () {
@@ -67,15 +67,15 @@ define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
       paths.eq(1).css('fill', cs[0]);
     },
     init: function (sel, num) {
-      if (this.inited) {
-        this.load();
+      if (self.inited) {
+        self.load();
       } else {
-        this.inited = true;
+        self.inited = true;
 
-        this.proto();
-        this.add(sel);
-        this.load();
-        this.set(num);
+        self.proto();
+        self.add(sel);
+        self.load();
+        self.set(num);
 
         C.debug([name, self]);
       }

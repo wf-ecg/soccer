@@ -37,14 +37,14 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
 
       if (typeof tb === 'number') {
         EL.cache = $();
-        this.total = tb;
-        this.saves = 0;
-        this.goals = 0;
+        self.total = tb;
+        self.saves = 0;
+        self.goals = 0;
       } else {
         if (tb.constructor !== Triball) {
           bobj = new Triball(tb[0], tb[1], tb[2]);
         }
-        bdiv = this.makeBall(bobj.goal);
+        bdiv = self.makeBall(bobj.goal);
         EL.net.append(bdiv);
         U.dim.prox(bdiv);
 
@@ -57,13 +57,13 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
     makeBall: function (goal) {
       var ball = $('<div>').addClass('target');
 
-      ball.posxy = this.positionXY;
+      ball.posxy = self.positionXY;
 
       if (goal) {
-        this.goals++;
+        self.goals++;
         ball.addClass('score');
       } else {
-        this.saves++;
+        self.saves++;
       }
       return ball;
     },
@@ -79,33 +79,33 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
       });
     },
     updateNums: function () {
-      EL.nums.eq(0).text(this.total);
-      EL.nums.eq(1).text(this.saves + this.goals);
-      EL.nums.eq(2).text(this.goals);
+      EL.nums.eq(0).text(self.total);
+      EL.nums.eq(1).text(self.saves + self.goals);
+      EL.nums.eq(2).text(self.goals);
     },
     reset: function (data) {
       EL.cache.remove();
-      this.load(data || this.data);
+      self.load(data || self.data);
     },
     load: function (arr) {
-      this.data = arr;
+      self.data = arr;
 
       $.each(arr, function (i, e) {
         self.addBall(e);
       });
-      this.updateNums();
+      self.updateNums();
     },
     init: function (data) {
-      if (this.inited) {
-        this.reset(data);
+      if (self.inited) {
+        self.reset(data);
       } else {
-        this.inited = true;
-        data = data || this.data;
+        self.inited = true;
+        data = data || self.data;
         $.reify(EL);
-        EL.div.click(function () {
+        EL.div.on('click', function () {
           self.reset();
         });
-        this.load(data);
+        self.load(data);
 
         C.debug([name, self]);
       }

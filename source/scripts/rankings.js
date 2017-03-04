@@ -46,7 +46,7 @@ define(['jquery'], function ($) {
     },
     init: function (dat) {
       $.reify(EL);
-      this.set(dat).fillup();
+      self.set(dat).fillup();
 
       C.debug([name, self]);
     },
