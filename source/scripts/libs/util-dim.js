@@ -1,7 +1,7 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'util'], function ($, U) {
+define(['jquery', 'util'], function ($, UT) {
   'use strict';
 
   var W = (W && W.window || window);
@@ -9,7 +9,7 @@ define(['jquery', 'util'], function ($, U) {
 
   C.info('extending Utils w/Dim');
 
-  U.dim = {
+  UT.dim = {
     gxy: function (ele) { // size probe
       ele = $(ele);
       return [ele.width(), ele.height()];
@@ -68,7 +68,7 @@ define(['jquery', 'util'], function ($, U) {
     },
   };
 
-  return U;
+  return UT;
 });
 
 

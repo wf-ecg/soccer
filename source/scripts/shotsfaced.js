@@ -1,7 +1,7 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'libs/util-dim'], function ($, U) {
+define(['jquery', 'libs/util-dim'], function ($, UT) {
   'use strict';
 
   var W = (W && W.window || window);
@@ -46,9 +46,9 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
         }
         bdiv = MY.makeBall(bobj.goal);
         EL.net.append(bdiv);
-        U.dim.prox(bdiv);
+        UT.dim.prox(bdiv);
 
-        U.delay(function () {
+        UT.delay(function () {
           bdiv.posxy(bobj.horz, bobj.vert);
         });
         EL.cache = EL.cache.add(bdiv);
@@ -70,8 +70,8 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
     positionXY: function (x, y) {
       var ball = this;
 
-      x = U.def(x) ? x : 50;
-      y = U.def(y) ? y : x;
+      x = UT.def(x) ? x : 50;
+      y = UT.def(y) ? y : x;
 
       ball.css({
         left: _pc(x | 0),

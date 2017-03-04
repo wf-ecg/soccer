@@ -1,7 +1,7 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['util'], function (U) {
+define(['util'], function (UT) {
   'use strict';
 
   var W = (W && W.window || window);
@@ -32,7 +32,7 @@ define(['util'], function (U) {
       }
     },
     game: function (num) {
-      MY.current = U.def(num) ? num : MY.current;
+      MY.current = UT.def(num) ? num : MY.current;
       return MY.games[MY.current];
     },
     winner: function (num) {

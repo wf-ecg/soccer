@@ -2,7 +2,7 @@
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline'], function (
-  U, Data, accuracy, possession, rankings, shotsfaced, timeline) {
+  UT, Data, accuracy, possession, rankings, shotsfaced, timeline) {
   'use strict';
 
   var W = (W && W.window || window);
@@ -21,7 +21,7 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
   };
 
   function _revMenu() {
-    U.picker.menu(EL.menu, Data.games);
+    UT.picker.menu(EL.menu, Data.games);
     EL.menu.val(Data.current);
   }
 
@@ -113,7 +113,7 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
         }).attr('title', 'Double-click for more info.') //
         .hide().fadeIn(3333);
 
-      U.initFinish();
+      UT.initFinish();
     } catch (err) {
       C.error(err, game, num);
     }
@@ -137,7 +137,7 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
   MY = {
     _EL: EL,
     Data: Data,
-    U: U,
+    UT: UT,
     updateMenu: _revMenu,
     init: _init,
   };

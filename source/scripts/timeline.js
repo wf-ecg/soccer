@@ -1,7 +1,7 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
+define(['jquery', 'libs/util-dim', 'data'], function ($, UT, Data) {
   'use strict';
 
   var W = (W && W.window || window);
@@ -30,7 +30,7 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
   }
   $.fn.centerize = function () {
     this.each(function () {
-      U.dim.prox(this);
+      UT.dim.prox(this);
     });
     return this;
   };
@@ -66,7 +66,7 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, U, Data) {
       }).appendTo(EL.wrap).addClass(tv.icon);
 
       // new call stack
-      U.delay(0, function () {
+      UT.delay(0, function () {
         MY.moveEvent(tv.time, set.centerize());
       });
       EL.cache = EL.cache.add(set);

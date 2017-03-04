@@ -1,7 +1,7 @@
 /*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'libs/util-dim'], function ($, U) {
+define(['jquery', 'libs/util-dim'], function ($, UT) {
   'use strict';
 
   var W = (W && W.window || window);
@@ -9,7 +9,7 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
 
   C.info('extending Utils w/Xtra');
 
-  U.tweakpath = function (pic, arr) { // pic'src'.swap[a, b]
+  UT.tweakpath = function (pic, arr) { // pic'src'.swap[a, b]
     try {
       return $(pic).attr('src').replace(arr[0], arr[1]);
     } catch (E) {
@@ -27,21 +27,21 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
 
       try {
         swap = swap.split(',');
-        md = U.tweakpath(me, swap);
-        U.liftpic(me, md);
+        md = UT.tweakpath(me, swap);
+        UT.liftpic(me, md);
       } catch (E) {
         md = 'no dice';
       }
     });
   };
 
-  U.liftpic = function (pic1, path) {
+  UT.liftpic = function (pic1, path) {
     // make dom img with path
     var pic2;
 
     function _shifter() {
-      var off = U.dim.centxy(pic2);
-      U.dim.prox(pic2, off, pic1);
+      var off = UT.dim.centxy(pic2);
+      UT.dim.prox(pic2, off, pic1);
     }
 
     pic1.parent() //
@@ -58,7 +58,7 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
       .load(_shifter);
   };
 
-  U.picker = (function () {
+  UT.picker = (function () {
     return {
       menu: function (menu, games) {
         menu.empty();
@@ -73,7 +73,7 @@ define(['jquery', 'libs/util-dim'], function ($, U) {
     };
   }());
 
-  return U;
+  return UT;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
