@@ -27,8 +27,8 @@ define({
   pics: {
     /* path, text, lift, size? */
     shot: ['shots/badass1-sm.jpg', 'Shot of the Match'],
-    fact: ['shots/hugo1-sm.jpg', 'Hugo Sanchez 1970, Mexico'],
-    player: ['jersey/g_d_santos.png', 'G. Dos Santos Jersey'],
+    fact: ['facts/hugo1-sm.jpg', 'Hugo Sanchez 1970, Mexico'],
+    player: ['players/g_d_santos.png', 'G. Dos Santos Jersey'],
   },
   tweet: {
     text: [

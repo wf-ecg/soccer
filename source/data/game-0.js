@@ -11,16 +11,23 @@ define({
   },
   pics: {
     /* path, text, lift */
-    shot: ['shots/zeta1-sm.jpg', 'Shot of the Match'],
-    fact: ['shots/czj1-sm.jpg', 'Catherine Z Jones'],
-    player: ['jersey/ez_thanatos.png', 'Z. Jones Jersey'],
+    shot: ['shots/zeta2-sm.jpg', 'Shot of the Match'],
+    fact: ['facts/czj1-sm.jpg', 'Catherine Z Jones'],
+    player: ['players/ez_thanatos.png', 'Z. Jones Jersey'],
   },
   tweet: {
-    text: ['...', ],
-    author: '@???',
+    text: [
+      'asdf asdf asdf',
+      'asdf asdf asdf',
+    ],
+    author: '<a href="https://twitter.com/ESPNMag" target="twitter">@ESPNMag</a>',
   },
   fact: {
-    text: ['...', ],
+    text: [
+      'asdf asdf asdf',
+      'asdf asdf asdf',
+      'asdf asdf asdf',
+    ],
   },
   grouping: {
     /*        P, W, D, L, GD, Pts */

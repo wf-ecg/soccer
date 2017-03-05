@@ -33,9 +33,9 @@ define({
   },
   pics: {
     /* path, text, lift, size? */
-    shot: ['#', '?'],
-    fact: ['#', '?'],
-    player: ['jersey/ochoa.png', 'Ochoa Jersey'],
+    shot: ['shots/zeta1-sm.jpg', 'Shot of the Match'],
+    fact: ['facts/czj2-sm.jpg', 'Catherine Z Jones'],
+    player: ['players/ochoa.png', 'Ochoa Jersey'],
   },
   tweet: {
     text: [
@@ -46,7 +46,9 @@ define({
   },
   fact: {
     text: [
-      '...',
+      'asdf asdf asdf',
+      'asdf asdf asdf',
+      'asdf asdf asdf',
     ],
   },
   grouping: {
