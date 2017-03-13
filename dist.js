@@ -14,33 +14,28 @@
  * Node: if you set relative paths then do them relative to the baseUrl
  */
 ({
-  baseUrl: 'scripts',
   appDir: './build',
   dir: './build/dist',
-  mainConfigFile: 'config.js',
+  mainConfigFile: './build/config.js',
   /*
    * The below 'paths' object is useful for when using plugins/named module paths.
    * If you use plugins or named modules in your code then don't forget to specify the same paths again in your build script.
    * Otherwise your build script wont be able to find your plugins/named modules and will generate an error when building.
    */
+  baseUrl: 'scripts',
   paths: {
-    // ven: '../vendors',
-    // jquery: '../vendors/jquery/jquery.min',
-    // lodash: '../vendors/lodash.js/lodash.min',
-    stats: 'libs/ecg-stats',
+    ven: '../vendors',
   },
   deps: ['./libs/rtree'],
-  // optimize: 'none',
+  optimize: 'none',
   uglify: {
     mangle: false
   },
   useStrict: true,
-  // findNestedDependencies: true,
-  modules: [{
-    name: 'stats',
-    exclude: ['jquery', 'lodash'],
-  }, {
-    name: '_main',
-    exclude: ['jquery', 'lodash'],
-  }],
+  findNestedDependencies: true,
+  modules: [
+    {
+      name: '../config',
+    },
+  ],
 });
