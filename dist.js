@@ -1,6 +1,6 @@
 /*
 
- r.js -o build/dist.js
+ r.js -o ./dist.js
 
  * http://requirejs.org/docs/optimization.html
  *
@@ -15,10 +15,9 @@
  */
 ({
   baseUrl: 'scripts',
-  appDir: '../build',
-  dir: '../dist',
+  appDir: './build',
+  dir: './build/dist',
   mainConfigFile: 'config.js',
-
   /*
    * The below 'paths' object is useful for when using plugins/named module paths.
    * If you use plugins or named modules in your code then don't forget to specify the same paths again in your build script.
@@ -30,7 +29,7 @@
     // lodash: '../vendors/lodash.js/lodash.min',
     stats: 'libs/ecg-stats',
   },
-  deps: ['../rtree'],
+  deps: ['./libs/rtree'],
   // optimize: 'none',
   uglify: {
     mangle: false
