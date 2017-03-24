@@ -1,0 +1,28 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* _top.scss */
+
+.top {
+  background-image: url('../images/bkgr1.jpg');
+  background-position: center bottom;
+
+  span {
+    padding: 1rem;
+  }
+
+  .logos {
+    position: absolute;
+  }
+  .score {
+    color: white;
+    font-size: 166px;
+    font-weight: 900;
+    text-align: center;
+    text-shadow: 0 0 22px rgba(33, 66, 33, 0.6);
+
+    span {
+      color: white;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* _shotsfaced.scss */
+
+.shotsfaced {
+  /*    cursor: no-drop;*/
+
+  .net {
+    height: 118px;
+    margin: 1rem auto;
+    position: relative;
+    width: 202px;
+
+    div {
+      @include ani(0.5s);
+    }
+    img {
+      left: -5px;
+      position: relative;
+      top: -5px;
+    }
+    .target {
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 20px;
+      height: 28px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      width: 28px;
+
+      &.score {
+        background: none;
+        background-image: url('../images/icons/ball-md.png');
+      }
+    }
+  }
+  .nums span {
+    color: black;
+    font-size: 111%;
+    font-weight: 900;
+    padding-left: 0.1em;
+    padding-right: 0.6em;
+  }
+
+}

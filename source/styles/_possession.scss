@@ -1,0 +1,24 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* _possession.scss */
+
+.possession {
+  /*    cursor: progress;*/
+
+  div {
+    display: block;
+    margin: auto;
+  }
+  .p2 path {
+    fill: white;
+  }
+  .p2 path:first-child {
+    fill: black;
+  }
+  .p2 rect {
+    opacity: 0.1;
+  }
+  .major {
+    position: relative;
+    top: -40%;
+  }
+}

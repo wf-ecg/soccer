@@ -1,0 +1,34 @@
+doctype html
+html(lang='en')
+  include ./_head
+
+  body.loading
+    div(data-role='page' tabindex='0')
+
+    form
+      | Select match:
+      select#GameNum(size='1')
+
+    section.cells
+
+      include ./_top
+      include ./_rankings
+      include ./_stats
+
+      .theplayer
+        h4 Player of the Match
+        img(src='#', alt='#')
+        h3.bottom #GettingItDone
+
+      .theshot
+        img.fill(src='#', alt='#')
+        h3.bottom
+          | Photo <br>
+          | of the <br>
+          | Day <br>
+          img(src='./images/icons/camera.png')
+
+      include ./_match
+      include ./_trivia
+
+      // end ui-page

@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://www.netbeans.org/ns/project/1">
-    <type>org.netbeans.modules.php.project</type>
+    <type>org.netbeans.modules.web.clientproject</type>
     <configuration>
-        <data xmlns="http://www.netbeans.org/ns/php-project/1">
+        <data xmlns="http://www.netbeans.org/ns/clientside-project/1">
             <name>soccer</name>
         </data>
+        <libraries xmlns="http://www.netbeans.org/ns/cdnjs-libraries/1">
+            <library name="jquery" version="2.2.4">
+                <file localPath="source/vendors/jquery/jquery.js" path="jquery.js"/>
+                <file localPath="source/vendors/jquery/jquery.min.js" path="jquery.min.js"/>
+                <file localPath="source/vendors/jquery/jquery.min.map" path="jquery.min.map"/>
+            </library>
+            <library name="lodash.js" version="4.17.4">
+                <file localPath="source/vendors/lodash.js/lodash.js" path="lodash.js"/>
+                <file localPath="source/vendors/lodash.js/lodash.min.js" path="lodash.min.js"/>
+                <file localPath="source/vendors/lodash.js/lodash.min.js.map" path="lodash.min.js.map"/>
+            </library>
+            <library name="require.js" version="2.3.2">
+                <file localPath="source/vendors/require.js/require.js" path="require.js"/>
+                <file localPath="source/vendors/require.js/require.min.js" path="require.min.js"/>
+                <file localPath="source/vendors/require.js/require.min.js.map" path="require.min.js.map"/>
+            </library>
+        </libraries>
     </configuration>
 </project>
