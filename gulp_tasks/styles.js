@@ -13,6 +13,7 @@ var header       = require('gulp-header');
 var scsslint     = require('gulp-scss-lint');
 var sass         = require('gulp-sass');
 var compass      = require('gulp-compass');
+var sourcemaps   = require('gulp-sourcemaps');
 //var rename       = require('gulp-rename');
 //var moment       = require('moment');
 //var autoprefixer = require('gulp-autoprefixer');
@@ -55,9 +56,10 @@ gulp.task('styles-build', function() {
     }))
 
     // Compile Sass
+    .pipe(sourcemaps.init()) // needs to be after compass?
     .pipe(sass({
       outputStyle: 'nested'
-    }))
+    }).on('error', sass.logError))
 
     // Add vendor prefixes
     //.pipe(autoprefixer({browsers: ['> 3%', 'last 2 versions'], cascade: false, remove: true, map: false}))
@@ -69,8 +71,11 @@ gulp.task('styles-build', function() {
     //  moment: moment
     //}))
 
+    // Save source maps
+    .pipe(sourcemaps.write())
+
     // Save expanded CSS
-    .pipe(gulp.dest('./build/styles'))
+    .pipe(gulp.dest('./build/styles'));
 
     // Combine Media Queries
     //.pipe(combineMq());
