@@ -1,12 +1,11 @@
 {
-  "only": [
-    "*.babel",
+  only: [
+    "*.es6",
     "*.jsx",
-    "*.js"
   ],
-  "presets": [
+  presets: [
     "es2015",
-    "react"
+    "react",
   ],
-  "retainLines": true
+  retainLines: true,
 }
