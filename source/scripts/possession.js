@@ -3,14 +3,15 @@
 define(['jquery', 'data', 'libs/knob', 'libs/ui',
 ], function ($, Data, Knob, Ui) {
   'use strict';
+  var Nom = 'Possession';
+  var W = window;
+  var C = W._dbug;
+  C('debug', Nom, 'loaded');
 
-  var W = (W && W.window || window);
-  var C = (W.C || W.console || {});
   var EL = {
     div: '.possession',
   };
   var MY = Object.create(null);
-  var NM = 'Possession';
 
   $.extend(MY, {
     _EL: EL,
@@ -77,12 +78,12 @@ define(['jquery', 'data', 'libs/knob', 'libs/ui',
         MY.load();
         MY.set(num);
 
-        C.debug([NM, MY]);
+        C('debug', [Nom, MY]);
       }
     },
   });
 
-  W[NM] = MY;
+  W[Nom] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

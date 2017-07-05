@@ -2,16 +2,17 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 define(['jquery'], function ($) {
   'use strict';
+  var Nom = 'Rankings';
+  var W = window;
+  var C = W._dbug;
+  C('debug', Nom, 'loaded');
 
-  var dat;
-  var W = (W && W.window || window);
-  var C = (W.C || W.console || {});
   var EL = {
     div: '.rankings table',
     rows: '.rankings table tr:not(:first-child)',
   };
   var MY = Object.create(null);
-  var NM = 'Rankings';
+  var dat;
 
   $.extend(MY, {
     _EL: EL,
@@ -48,11 +49,11 @@ define(['jquery'], function ($) {
       $.reify(EL);
       MY.set(data).fillup();
 
-      C.debug([NM, MY]);
+      C('debug', [Nom, MY]);
     },
   });
 
-  W[NM] = MY;
+  W[Nom] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

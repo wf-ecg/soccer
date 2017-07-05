@@ -3,16 +3,17 @@
 define(['jquery', 'data',
 ], function ($, Data) {
   'use strict';
+  var Nom = 'Accuracy';
+  var W = window;
+  var C = W._dbug;
+  C('debug', Nom, 'loaded');
 
-  var W = (W && W.window || window);
-  var C = (W.C || W.console || {});
   var EL = {
     div: '.accuracy .limit',
     maj: '.accuracy .limit .major',
     min: '.accuracy .limit .minor',
   };
   var MY = Object.create(null);
-  var NM = 'Accuracy';
 
   $.extend(MY, {
     _EL: EL,
@@ -26,7 +27,7 @@ define(['jquery', 'data',
       num = num | 0;
 
       if (num < 50) {
-        C.warn('normalize', num);
+        C('warn', 'normalize', num);
         num = 100 - num;
         MY.swapColor();
       }
@@ -77,12 +78,12 @@ define(['jquery', 'data',
         $.reify(EL);
         MY.load(num);
 
-        C.debug([NM, MY]);
+        C('debug', [Nom, MY]);
       }
     },
   });
 
-  W[NM] = MY;
+  W[Nom] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

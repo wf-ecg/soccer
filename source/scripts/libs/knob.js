@@ -2,9 +2,8 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 define([], function () {
   'use strict';
-
-  var W = (W && W.window || window);
-  // var C = (W.C || W.console || {});
+  // var W = window;
+  // var C = W._dbug;
 
   var Knob;
 

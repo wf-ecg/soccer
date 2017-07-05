@@ -3,18 +3,19 @@
 define(['jquery', 'util',
 ], function ($, UT) {
   'use strict';
+  var Nom = 'Data';
+  var W = window;
+  var C = W._dbug;
+  C('debug', Nom, 'loaded');
 
-  var W = (W && W.window || window);
-  var C = (W.C || W.console || {});
   var MY;
-  var NM = 'Data';
 
   function inject(mod) {
     try {
       var num = parseInt(mod.match(/\d+/)[0]);
       MY.addGame(num, require(mod));
     } catch (err) {
-      C.debug(err.message);
+      C('debug', err.message);
     }
   }
 
@@ -108,7 +109,7 @@ define(['jquery', 'util',
     USA           : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'usa.png'           },
   };
 
-  W[NM] = MY;
+  W[Nom] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
