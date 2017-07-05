@@ -1,13 +1,11 @@
-/*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 define(['jquery', 'libs/util-dim'], function ($, UT) {
   'use strict';
+  var W = window;
+  var C = W._dbug;
 
-  var W = (W && W.window || window);
-  var C = (W.C || W.console || {});
-
-  C.info('extending Utils w/Xtra');
+  C('info', 'extending Utils w/Xtra');
 
   UT.tweakpath = function (pic, arr) { // pic'src'.swap[a, b]
     try {

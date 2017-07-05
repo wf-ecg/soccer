@@ -1,11 +1,9 @@
-/*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 define([], function () {
   'use strict';
-
-  var W = (W && W.window || window);
-  // var C = (W.C || W.console || {});
+  // var W = window;
+  // var C = W._dbug;
 
   var Knob;
 
@@ -63,7 +61,7 @@ define([], function () {
           37: -1,
           38: 1,
           39: 1,
-          40: -1
+          40: -1,
         }[keycode] * f);
       }
     },
@@ -134,7 +132,7 @@ define([], function () {
         step: parseFloat(input.step) || 1,
         angleoffset: 0,
         anglerange: 360,
-        labels: labels
+        labels: labels,
       };
       settings.range = settings.max - settings.min;
       data = input.dataset;
@@ -146,7 +144,7 @@ define([], function () {
         }
       }
       return settings;
-    }
+    },
   };
 
   return Knob;

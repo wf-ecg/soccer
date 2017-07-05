@@ -1,11 +1,13 @@
-/*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'libs/util-dim'], function ($, UT) {
+define(['jquery', 'libs/util-dim',
+], function ($, UT) {
   'use strict';
+  var Nom = 'Shotsfaced';
+  var W = window;
+  var C = W._dbug;
+  C('debug', Nom, 'loaded');
 
-  var W = (W && W.window || window);
-  var C = (W.C || W.console || {});
   var EL = {
     cache: '',
     div: '.shotsfaced',
@@ -13,7 +15,6 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
     nums: '.nums span',
   };
   var MY = Object.create(null);
-  var NM = 'Shotsfaced';
 
   function _pc(n) {
     return (n | 0) + '%';
@@ -107,12 +108,12 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
         });
         MY.load(data);
 
-        C.debug([NM, MY]);
+        C('debug', [Nom, MY]);
       }
     },
   });
 
-  W[NM] = MY;
+  W[Nom] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

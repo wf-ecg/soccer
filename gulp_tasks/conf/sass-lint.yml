@@ -74,8 +74,8 @@ linters:
     width: 2
 
   LeadingZero:
-    enabled: false #true
-    style: exclude_zero # or 'include_zero'
+    enabled: true
+    style: include_zero # 'exclude_zero' or 'include_zero'
 
   MergeableSelector:
     enabled: true
@@ -88,7 +88,7 @@ linters:
 
   NestingDepth:
     enabled: true
-    max_depth: 4
+    max_depth: 5
 
   PlaceholderInExtend:
     enabled: true
@@ -129,7 +129,7 @@ linters:
 
   SelectorDepth:
     enabled: true
-    max_depth: 4
+    max_depth: 5
 
   SelectorFormat:
     enabled: false #true

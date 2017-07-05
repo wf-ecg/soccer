@@ -1,12 +1,23 @@
-/*jslint es5:true, white:false */
 /*global define */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline'], function (
-  UT, Data, accuracy, possession, rankings, shotsfaced, timeline) {
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  revised 2017-07-05
+
+  USE: hook up various sub systems
+  - bind events
+  - store configs
+
+  TODO: document a bit
+
+ */
+define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
+], function ($, UT, Data, accuracy, possession, rankings, shotsfaced, timeline) {
   'use strict';
 
-  var W = (W && W.window || window);
-  var C = (W.C || W.console || {});
+  var Nom = 'Main';
+  var W = window;
+  var C = W._dbug;
+  C('debug', Nom, 'loaded');
+
   var MY;
   var EL = {
     fact: '.thefact',
@@ -90,7 +101,7 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
           src: `./images/${game.pics.fact[0]}`,
           alt: game.pics.fact[1],
         }).end() //
-        .find('h3').text(`${game.pics.fact[1].match(/\S+\ ?\w*/)}`);
+        .find('h3').text(`${game.pics.fact[1].match(/\S+ ?\w*/)}`);
 
       // cleanup
       $('img.fill.raise').remove();
@@ -115,9 +126,12 @@ define(['libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
 
       UT.initFinish();
     } catch (err) {
-      C.error(err, game, num);
+      C('error', Nom, err, game, num);
     }
   }
+
+  // - - - - - - - - - - - - - - - - - -
+  // PAGE LOADED
 
   function _init() {
     if (MY.inited) {

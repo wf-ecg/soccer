@@ -1,11 +1,9 @@
-/*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 define([], function () {
   'use strict';
-
-  var W = (W && W.window || window);
-  // var C = (W.C || W.console || {});
+  // var W = window;
+  // var C = W._dbug;
 
   var Ui = function () {};
 
@@ -50,7 +48,7 @@ define([], function () {
         version: '1.2',
         baseProfile: 'tiny',
         width: this.width,
-        height: this.height
+        height: this.height,
       });
       this.appendTo(parentEl);
     },
@@ -109,7 +107,7 @@ define([], function () {
       steps: options.range / options.step,
       radius: this.width / 2,
       tickWidth: 1,
-      tickHeight: 3
+      tickHeight: 3,
     }, options);
     this.options.type = Ui.El[this.options.type || 'Rect'];
   };
@@ -274,7 +272,7 @@ define([], function () {
         this.x + ',' + //
         this.top + ' ' + //
         this.right + ',' + //
-        this.bottom //
+        this.bottom, //
     });
   };
   Ui.El.Triangle.prototype = Object.create(Ui.El.prototype);
@@ -285,7 +283,7 @@ define([], function () {
       x: this.x - this.width / 2,
       y: this.y,
       width: this.width,
-      height: this.height
+      height: this.height,
     });
   };
   Ui.El.Rect.prototype = Object.create(Ui.El.prototype);
@@ -299,7 +297,7 @@ define([], function () {
     this.create('circle', {
       cx: this.x,
       cy: this.y,
-      r: radius
+      r: radius,
     });
   };
   Ui.El.Circle.prototype = Object.create(Ui.El.prototype);
@@ -309,7 +307,7 @@ define([], function () {
       x: x,
       y: y,
       width: width,
-      height: height
+      height: height,
     });
     this.node.textContent = text;
   };
@@ -342,7 +340,7 @@ define([], function () {
     function pointOnCircle(radius, angle) {
       return {
         x: center + radius * Math.cos(angle),
-        y: center + radius * Math.sin(angle)
+        y: center + radius * Math.sin(angle),
       };
     }
     startAngle = this.options.angleoffset;

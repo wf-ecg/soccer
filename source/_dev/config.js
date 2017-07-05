@@ -1,20 +1,12 @@
 /*jslint white:false */
 /*global require, window */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-var W = (W && W.window || window),
-  C = (W.C || W.console || {});
-
-W._dbug = Number(new Date('2017/02/21') > new Date());
-W.SHIET = {
-  trident: W.navigator.userAgent.indexOf('rident') + 1,
-};
-
 require.config({
   baseUrl: 'scripts',
   paths: {
     lib: 'libs',
-    jquery: '../vendors/jquery/jquery',
-    lodash: '../vendors/lodash.js/lodash',
+    jquery: '../vendors/jquery/jquery.min',
+    lodash: '../vendors/lodash.js/lodash.min',
     //
     beacon: 'libs/ecg-beacon',
     jqxtn: 'libs/jq-xtn',
@@ -23,35 +15,30 @@ require.config({
     main: '_main',
     util: 'libs/util',
     ui: 'libs/ui',
-    //
   },
   shim: {
-    main: {
-      deps: [
-      ],
+    _main: {
+      // deps: ['slick'],
     },
   },
 });
 
-require(['jqxtn', 'data'], function ($) {
-  var loc = W.location.hostname === 'localhost';
+require(['lib/jq-xtn', 'lib/dbug'], function ($, Dbug) {
+  var W = window;
+  W._dbug = Dbug('2017/07/25');
+  W._msie = ~W.navigator.userAgent.indexOf('rident');
 
+  // - - - - - - - - - - - - - - - - - -
   // ESTABLISH BASELINES
-
-  try {
-    if (W.SHIET.trident) { // debug IE less
-      $('html').addClass('msie');
-      W._dbug -= 1;
-    } else if (loc) {
-      $('html').addClass('debug');
-      W._dbug += 1;
-    }
-  } catch (err) {
-    C.error('config', err);
+  if (W._msie) {
+    $('html').addClass('msie'); // debug IE less
+  }
+  if (W._dbug > 1) {
+    $('html').addClass('debug');
   }
 
+  // - - - - - - - - - - - - - - - - - -
   /// CUSTOMIZED INIT
-
   require(['data', 'main'], function (Data, Main) {
     require.config({
       paths: {
@@ -60,8 +47,7 @@ require(['jqxtn', 'data'], function ($) {
     });
     Data.readFrom('data/index.html', Main.init);
 
-    if (W._dbug > 0)
-      W.Main = Main; // expose
+    if (W._dbug > 0) W.Main = Main; // expose
   });
 
 });

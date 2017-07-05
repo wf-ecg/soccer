@@ -1,88 +1,83 @@
+/*global process */
 /**
  * Task: Styles
  * --------------------------------------------------
+ * 2017-05-26
  */
 
-'use strict';
-
 // Dependencies
-var pkg          = require('../package.json');
-var gulp         = require('gulp');
-var runSequence  = require('run-sequence');
-var header       = require('gulp-header');
-var scsslint     = require('gulp-scss-lint');
-var sass         = require('gulp-sass');
-var compass      = require('gulp-compass');
-var sourcemaps   = require('gulp-sourcemaps');
+// var pkg = require('../package.json');
+var gulp /*     */ = require('gulp');
+var runSeq /*   */ = require('run-sequence');
+// var header = require('gulp-header');
+var scsslint /* */ = require('gulp-scss-lint');
+var sass /*     */ = require('gulp-sass');
+var compass /*  */ = require('gulp-compass');
 //var rename       = require('gulp-rename');
 //var moment       = require('moment');
-//var autoprefixer = require('gulp-autoprefixer');
+var autoprefixer   = require('gulp-autoprefixer');
 //var csscomb      = require('gulp-csscomb');
 //var combineMq    = require('gulp-combine-mq');
 //var minifyCss    = require('gulp-clean-css');
 //var banner       = '/*! <%= pkg.title %> | <%= moment().format("MMMM Do YYYY, h:mm:ss A") %> */\n';
 
 // Task
-gulp.task('styles', function(cb) {
+gulp.task('styles', function (cb) {
 
   // Run tasks synchronously
-  return runSequence(
-    [ 'styles-lint' ],
-    [ 'styles-build' ],
+  return runSeq(
+    ['styles-lint'], ['styles-build'],
     cb
   );
 });
 
 // Lint Sass
-gulp.task('styles-lint', function() {
+gulp.task('styles-lint', function () {
 
   return gulp.src('./source/styles/**/*.scss')
 
-    // Lint Sass
-    .pipe(scsslint({
-      config: './gulp_tasks/conf/sass-lint.yml'
-    }));
+  // Lint Sass
+  .pipe(scsslint({
+    config: './gulp_tasks/conf/sass-lint.yml',
+  }));
 
 });
 
 // Build styles
-gulp.task('styles-build', function() {
+gulp.task('styles-build', function () {
 
   return gulp.src('./source/styles/*.scss')
 
-    .pipe(compass({
-        css: 'build/styles',
-        sass: 'source/styles',
-    }))
+  .pipe(compass({
+    css: 'build/styles',
+    sass: 'source/styles',
+  }))
 
-    // Compile Sass
-    .pipe(sourcemaps.init()) // needs to be after compass?
-    .pipe(sass({
-      outputStyle: 'nested'
-    }).on('error', sass.logError))
+  // Compile Sass
+  .pipe(sass({
+    outputStyle: 'nested',
+  }))
 
-    // Add vendor prefixes
-    //.pipe(autoprefixer({browsers: ['> 3%', 'last 2 versions'], cascade: false, remove: true, map: false}))
-    // Comb CSS
-    //.pipe(csscomb({configPath: './gulp_tasks/_css-comb.json'}))
-    // Add banner
-    //.pipe(header(banner, {
-    //  pkg: pkg,
-    //  moment: moment
-    //}))
+  // Add vendor prefixes
+  .pipe(autoprefixer({browsers: ['> 1%', 'last 20 versions'], cascade: true, remove: false, map: false}))
+  // Comb CSS
+  //.pipe(csscomb({configPath: './gulp_tasks/_css-comb.json'}))
+  // Add banner
+  //.pipe(header(banner, {
+  //  pkg: pkg,
+  //  moment: moment
+  //}))
 
-    // Save source maps
-    .pipe(sourcemaps.write())
+  // Save expanded CSS
+  .pipe(gulp.dest('./build/styles'))
 
-    // Save expanded CSS
-    .pipe(gulp.dest('./build/styles'));
-
-    // Combine Media Queries
-    //.pipe(combineMq());
-    // Minify CSS
-    //.pipe(minifyCss({ advanced: false, aggressiveMerging: false, debug: true, mediaMerging: false }))
-    // Add `.min` suffix
-    //.pipe(rename({ suffix: '.min' }))
-    // Save compressed CSS
-    //.pipe(gulp.dest('./build/styles'));
+  // Combine Media Queries
+  //.pipe(combineMq());
+  // Minify CSS
+  //.pipe(minifyCss({ advanced: false, aggressiveMerging: false, debug: true, mediaMerging: false }))
+  // Add `.min` suffix
+  //.pipe(rename({ suffix: '.min' }))
+  // Save compressed CSS
+  //.pipe(gulp.dest('./build/styles'))
+  ;
 });

@@ -1,11 +1,13 @@
-/*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'libs/util-dim', 'data'], function ($, UT, Data) {
+define(['jquery', 'libs/util-dim', 'data',
+], function ($, UT, Data) {
   'use strict';
+  var Nom = 'Timeline';
+  var W = window;
+  var C = W._dbug;
+  C('debug', Nom, 'loaded');
 
-  var W = (W && W.window || window);
-  var C = (W.C || W.console || {});
   var EL = {
     cache: '',
     div: '.timeline .events',
@@ -13,7 +15,6 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, UT, Data) {
     wrap: '.timeline .linewrap',
   };
   var MY = Object.create(null);
-  var NM = 'Timeline';
 
   function Trivent(time, side, icon) {
     this.time = (time || 55) % 91;
@@ -130,12 +131,12 @@ define(['jquery', 'libs/util-dim', 'data'], function ($, UT, Data) {
         });
         MY.load(data);
 
-        C.debug([NM, MY]);
+        C('debug', [Nom, MY]);
       }
     },
   });
 
-  W[NM] = MY;
+  W[Nom] = MY;
   return MY;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

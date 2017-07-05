@@ -1,12 +1,16 @@
-/*jslint  white:false */
-/*global define, window */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*global define, */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  tweaked 2017-06-12
 
+  USE: extend jquery
+  - keep to cross-project basics
+  - create addtional extenders for project specifics
+
+ */
 define(['jquery', 'lodash'], function ($, _) {
   'use strict';
 
-  var W = (W && W.window || window);
-  var C = (W.C || W.console || {});
+  var W = window;
 
   // - - - - - - - - - - - - - - - - - -
   // AUTOMATE
@@ -62,7 +66,7 @@ define(['jquery', 'lodash'], function ($, _) {
   $.adaDebug = function () {
     $('body').on('focus', '*', function (evt) {
       evt.stopPropagation();
-      C.debug('$.adaDebug', this);
+      // W.console.warn('$.adaDebug', this);
     });
   };
 
@@ -70,14 +74,15 @@ define(['jquery', 'lodash'], function ($, _) {
   // WATCHERS
   $.watchHash = function () {
     function trackHash() {
-      var MY = trackHash,
-        hash = W.location.hash.slice(1),
-        prev = MY.previous;
+      var self = trackHash;
+      var hash = W.location.hash.slice(1);
+      var prev = self.previous;
+
       if (prev !== hash) {
         $('html').removeClass(prev).addClass(hash);
-        MY.previous = hash;
+        self.previous = hash;
       }
-      return MY;
+      return self;
     }
     $(W).on('hashchange', trackHash());
   };
@@ -109,8 +114,8 @@ define(['jquery', 'lodash'], function ($, _) {
     var ua = W.navigator.userAgent;
 
     $.watchResize(function () {
-      if (ua.match(/mobi/i) ||
-        $(W).width() < 768) { // simulate
+      if (ua.match(/mobi/i) || $(W).width() < 768) {
+        // simulate
         $('html').addClass('mobi');
       } else {
         $('html').removeClass('mobi');
@@ -139,8 +144,8 @@ define(['jquery', 'lodash'], function ($, _) {
   $.fn.constantEvent = function (evn1, evn2, fn, ms) {
 
     return this.each(function () {
-      var me = $(this),
-        time;
+      var me = $(this);
+      var time;
 
       me.on(evn1, function () {
         if (!time) {
@@ -161,13 +166,12 @@ define(['jquery', 'lodash'], function ($, _) {
   $.fn.stretchTo = function (wid) {
     wid = (typeof wid === 'string' ? wid : 0);
     return this.each(function () {
-      var me = $(this),
-        dd = me.data();
+      var me = $(this);
+      var dd = me.data();
 
       me.memwidth().css({
         display: 'inline-block',
-        width: dd.memwidth,
-        /*explicitly set width*/
+        width: dd.memwidth, // explicitly set width
       }).stop().animate({
         width: wid,
       }, 333, function () {
@@ -180,21 +184,20 @@ define(['jquery', 'lodash'], function ($, _) {
 
   $.fn.unstretch = function () {
     return this.each(function () {
-      var me = $(this),
-        dd = me.data();
+      var me = $(this);
+      var dd = me.data();
 
       me.css({
         display: 'inline-block',
       }).stop().animate({
-          width: dd.memwidth,
-        }, //
-        333,
-        function () {
-          me.removeClass('stretch').css({
+        width: dd.memwidth,
+      }, 333, function () {
+        me.removeClass('stretch') //
+          .css({
             display: '',
             width: dd.memwidth,
           });
-        });
+      });
     });
   };
 
@@ -212,8 +215,8 @@ define(['jquery', 'lodash'], function ($, _) {
     }
 
     return this.each(function () {
-      var me = $(this),
-        dd = me.data();
+      var me = $(this);
+      var dd = me.data();
 
       me.css({
         width: str || dd['width' + num],
@@ -229,34 +232,50 @@ define(['jquery', 'lodash'], function ($, _) {
     });
   };
 
-  $.inlineSvgs = function () {
-    $('img.svg').each($.fn.inlineSvg);
-  };
   $.fn.inlineSvg = function () {
-    var $I = $(this),
-      $S, size;
+    var $img = $(this);
+    var $svg, size;
+
     size = { // force msie to respect size
-      height: $I.css('height'),
-      width: $I.css('width'),
+      height: $img.css('height'),
+      width: $img.css('width'),
     };
-    $.get($I.attr('src'), function (data) {
-      $S = $(data).find('svg').attr({
-        id: $I.attr('id'),
-        class: $I.attr('class'),
-        style: ($I.attr('style') || '').replace('color', 'fill'),
-        focusable: $I.attr('focusable'), // for msie 11
+    $.get($img.attr('src'), function (data) {
+      $svg = $(data).find('svg').attr({
+        id: $img.attr('id'),
+        alt: $img.attr('alt'),
+        class: $img.attr('class'),
+        style: ($img.attr('style') || '').replace('color', 'fill'),
+        focusable: $img.attr('focusable'), // for msie 11
         'xmlns:a': null, // for validator.w3.org
       });
       // svg scales if the viewport is set
-      if (!$S.attr('viewBox') && $S.attr('height') && $S.attr('width')) {
-        $S.attr('viewBox', '0 0 ' + $S.attr('height') + ' ' + $S.attr('width'));
+      if (!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {
+        $svg.attr('viewBox', '0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width'));
       }
-      if ($I.attr('height') || $I.attr('width')) {
-        $S.css(size);
+      if ($img.attr('height') || $img.attr('width')) {
+        $svg.css(size);
       }
-      $I.wrap('<span class="replaced-svg">').replaceWith($S);
-      $S.css('visibility', 'visible');
+      // hide but keep original image
+      $img.hide().wrap('<span class="replaced-svg">');
+      $svg.insertBefore($img).css('visibility', 'visible');
     }, 'xml');
+  };
+  $.inlineSvgs = function () {
+    $('img.svg').each($.fn.inlineSvg);
+  };
+
+  $.fn.fixate = function () {
+    var me = $(this).next();
+
+    me.css({
+      marginTop: me.offset().top,
+      position: 'relative',
+    }).end().css({
+      position: 'fixed',
+    });
+
+    return this;
   };
 
   $.fn.finishLoading = function () {
@@ -264,7 +283,8 @@ define(['jquery', 'lodash'], function ($, _) {
 
     W.setTimeout(function () {
       me.removeClass('loaded');
-    }, 3e3);
+      me.find('.fixate').each($.fn.fixate);
+    }, 1e3);
 
     return me.addClass('loaded');
   };

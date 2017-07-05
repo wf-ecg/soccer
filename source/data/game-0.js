@@ -3,11 +3,15 @@ define({
   match: {
     accuracy: 0,
     possession: 0,
-    events: [ /* time, side, type */ ],
+    events: [ /* time, side, type */
+      [],
+    ],
     teams: ['?', '?'],
     ticket: ['?', '?', '?'],
     score: ['9', '9'],
-    shots: [ /* goal, x, y */ [], ],
+    shots: [ /* goal, x, y */
+      [],
+    ],
   },
   pics: {
     /* path, text, lift */

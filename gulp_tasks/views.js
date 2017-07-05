@@ -1,48 +1,43 @@
+/*global process */
 /**
  * Task: Views
  * --------------------------------------------------
+ * 2017-05-15
  */
 
-'use strict';
-
 // Dependencies
-var gulp     = require('gulp');
-var minimist = require('minimist');
-var jade     = require('gulp-pug');
+var gulp /*     */ = require('gulp');
+var minimist /* */ = require('minimist');
+var jade /*     */ = require('gulp-pug');
 //var htmlhint = require('gulp-htmlhint');
 
 // Build options
 var options = minimist(process.argv.slice(2), {
-  string: [ 'env' ],
+  string: ['env'],
   default: {
-    env: 'dev'
-  }
+    env: 'dev',
+  },
 });
 
 // Task
-gulp.task('views', function() {
+gulp.task('views', function () {
 
-  return gulp.src([
-    './source/views/**/*.jade',
-    './source/views/**/*.pug',
-    '!./source/views/**/_*',
-    '!./source/views/**/_*/*'
-  ])
+  return gulp.src(['./source/views/*.jade', './source/views/*.pug', '!./source/views/_*'])
 
-    // Jade compilation
-    .pipe(jade({
-      pretty: true,
-      data: {
-        env: options.env
-      }
-    }))
+  // Jade compilation
+  .pipe(jade({
+    pretty: true,
+    data: {
+      env: options.env,
+    },
+  }))
 
-    // Lint HTML
-    //.pipe(htmlhint({
-    //  htmlhintrc: './gulp_tasks/_html-lint.json'
-    //}))
-    //.pipe(htmlhint.reporter())
+  // Lint HTML
+  //.pipe(htmlhint({
+  //  htmlhintrc: './gulp_tasks/_html-lint.json'
+  //}))
+  //.pipe(htmlhint.reporter())
 
-    // Save optimized HTML
-    .pipe(gulp.dest('./build'));
+  // Save optimized HTML
+  .pipe(gulp.dest('./build'));
 });
