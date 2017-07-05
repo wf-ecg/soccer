@@ -1,4 +1,3 @@
-/*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 define(['jquery', 'util'], function ($, UT) {

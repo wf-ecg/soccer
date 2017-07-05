@@ -1,7 +1,7 @@
-/*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['data', 'libs/knob', 'libs/ui'], function (Data, Knob, Ui) {
+define(['jquery', 'data', 'libs/knob', 'libs/ui',
+], function ($, Data, Knob, Ui) {
   'use strict';
 
   var W = (W && W.window || window);

@@ -1,7 +1,7 @@
-/*jslint es5:true, white:false */
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['data'], function (Data) {
+define(['jquery', 'data',
+], function ($, Data) {
   'use strict';
 
   var W = (W && W.window || window);
