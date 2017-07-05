@@ -43,13 +43,13 @@ define(['jquery'], function ($) {
       var sb = JSON.stringify(b);
 
       this.pre('strings', sa, sb);
-      W.console.assert(sa === sb, [c || 'notes', ['raw', a, b]]);
+      C('assert', sa === sb, [c || 'notes', ['raw', a, b]]);
     },
     initBegin: function () {
-      W.console.group('Utils loading');
+      C('group', 'Utils loading');
     },
     initFinish: function () {
-      W.console.groupEnd();
+      C('groupEnd');
     },
   };
 

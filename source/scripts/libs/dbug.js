@@ -1,13 +1,13 @@
-/*jslint  white:false */
-/*global define, window */
+/*global define, window, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  revised 2017-06-08
+  revised 2017-07-05
 
   USE: as a singleton function
   - init with date to auto-zero debug level
   - value of function is the debug number
   - takes console method name + args
   - always debugs for localhosts
+  - override available thru reduceBy()
 
  */
 define([], function () {
@@ -21,8 +21,8 @@ define([], function () {
   var bug = 0 + loc;
 
   function Dbug(lvl, etc) {
-    if (bug > 0 && etc) {
-      etc = [].slice.call(arguments, 1);
+    etc = [].slice.call(arguments, 1);
+    if (bug > 0 && etc.length) {
       try {
         W.console[lvl].apply(W.console, etc);
       } catch (err) {
@@ -34,6 +34,9 @@ define([], function () {
   }
   Dbug.valueOf = function () {
     return bug;
+  };
+  Dbug.reduceBy = function (num) {
+    return bug -= (Number(num) || 1);
   };
 
   // - - - - - - - - - - - - - - - - - -

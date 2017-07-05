@@ -26,6 +26,7 @@ require.config({
 require(['lib/jq-xtn', 'lib/dbug'], function ($, Dbug) {
   var W = window;
   W._dbug = Dbug('2017/07/25');
+  W._dbug.reduceBy(1);
   W._msie = ~W.navigator.userAgent.indexOf('rident');
 
   // - - - - - - - - - - - - - - - - - -
