@@ -1,6 +1,6 @@
 doctype html
 html(lang='en')
-  include ./_head
+  include ./parts/_head
 
   body.loading
     div(data-role='page' tabindex='0')
@@ -11,9 +11,9 @@ html(lang='en')
 
     section.cells
 
-      include ./_top
-      include ./_rankings
-      include ./_stats
+      include ./parts/top
+      include ./parts/rankings
+      include ./parts/stats
 
       .theplayer
         h4 Player of the Match
@@ -28,7 +28,7 @@ html(lang='en')
           | Day <br>
           img(src='./images/icons/camera.png')
 
-      include ./_match
-      include ./_trivia
+      include ./parts/match
+      include ./parts/trivia
 
       // end ui-page
