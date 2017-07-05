@@ -29,7 +29,7 @@
   deps: ['./libs/rtree'],
   optimize: 'none',
   uglify: {
-    mangle: false
+    mangle: false,
   },
   useStrict: true,
   findNestedDependencies: true,

@@ -1,7 +1,4 @@
 * alias
 .sass-cache/
 build/
-nbproject/private/
 node_modules/
-source/vendors/*/*
-dist/

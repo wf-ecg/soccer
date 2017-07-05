@@ -1,23 +1,20 @@
+/*global process */
 /**
  * Task: Build
  * --------------------------------------------------
+ * 2017-05-15
  */
 
-'use strict';
-
 // Dependencies
-var gulp        = require('gulp');
-var runSequence = require('run-sequence');
+var gulp /*   */ = require('gulp');
+var runSeq /* */ = require('run-sequence');
 
 // Task
-gulp.task('build', function(cb) {
+gulp.task('build', function (cb) {
 
   // Run tasks synchronously
-  return runSequence(
-    [ 'assets' ],
-    [ 'scripts' ],
-    [ 'styles' ],
-    [ 'views' ],
+  return runSeq(
+    ['assets'], ['scripts'], ['styles'], ['views'],
     cb
   );
 });

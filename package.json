@@ -25,6 +25,7 @@
     "browser-sync": "*",
     "del": "*",
     "gulp": "*",
+    "gulp-autoprefixer": "*",
     "gulp-babel": "*",
     "gulp-changed": "*",
     "gulp-compass": "*",
