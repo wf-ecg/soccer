@@ -11,8 +11,12 @@
 // - UML Website: http://yuml.me/diagram/scruffy/class/draw
 requirejs.onResourceLoad = function (context, map, depMaps) {
   'use strict';
+  var Nom = 'Rtree';
+  var W = window;
+  var C = W._dbug;
 
-  var rtree = window.rtree, tree, i;
+  var tree, i;
+  var rtree = W.rtree;
 
   function Node() {
     this.deps = [];
@@ -20,7 +24,7 @@ requirejs.onResourceLoad = function (context, map, depMaps) {
   }
 
   if (!rtree) {
-    rtree = window.rtree = {
+    rtree = W.rtree = {
       tree: {},
       map: function () {
         var i, dep, key, val;
@@ -37,7 +41,8 @@ requirejs.onResourceLoad = function (context, map, depMaps) {
         }
       },
       toUml: function () {
-        var uml = [], i, key, val;
+        var i, key, val;
+        var uml = [];
 
         for (key in this.tree) {
           if (this.tree.hasOwnProperty(key)) {
@@ -49,7 +54,7 @@ requirejs.onResourceLoad = function (context, map, depMaps) {
         }
 
         return uml.join('\n');
-      }
+      },
     };
   }
 
@@ -78,14 +83,14 @@ requirejs.onResourceLoad = function (context, map, depMaps) {
   //   }
   // }
 
-  window.clearTimeout(rtree.tout);
-  rtree.tout = window.setTimeout(function () {
+  W.clearTimeout(rtree.tout);
+  rtree.tout = W.setTimeout(function () {
     var uml = rtree.toUml();
-    if (uml) {
-      console.groupCollapsed('rtree');
-      console.log(rtree);
-      console.log(uml);
-      console.groupEnd();
+    if (uml && C > 0) {
+      C('groupCollapsed', Nom);
+      C('log', rtree);
+      C('log', uml);
+      C('groupEnd');
     }
   }, 999);
 
