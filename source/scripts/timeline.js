@@ -4,7 +4,7 @@ define(['jqxtn', 'libs/util-dim', 'data',
 ], function ($, UT, Data) {
   'use strict';
   var NOM = 'Timeline';
-  var W = window;
+  // var W = window;
   var C = console;
   C.debug(NOM, 'loaded');
 
@@ -129,7 +129,7 @@ define(['jqxtn', 'libs/util-dim', 'data',
 
       C.debug([NOM, API]);
 
-      API.init = 'INITED';
+      API.init = API.reset;
     },
   });
 

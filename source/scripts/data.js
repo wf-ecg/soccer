@@ -4,7 +4,7 @@ define(['jquery', 'util',
 ], function ($, UT) {
   'use strict';
   var NOM = 'Data';
-  var W = window;
+  // var W = window;
   var C = console;
   C.debug(NOM, 'loaded');
 

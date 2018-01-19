@@ -4,7 +4,7 @@ define(['jqxtn', 'data', 'libs/knob', 'libs/ui',
 ], function ($, Data, Knob, Ui) {
   'use strict';
   var NOM = 'Possession';
-  var W = window;
+  // var W = window;
   var C = console;
   C.debug(NOM, 'loaded');
 
@@ -75,7 +75,7 @@ define(['jqxtn', 'data', 'libs/knob', 'libs/ui',
 
       C.debug([NOM, API]);
 
-      API.init = 'INITED';
+      API.init = API.load;
     },
   });
 

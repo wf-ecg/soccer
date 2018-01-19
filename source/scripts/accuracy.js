@@ -4,7 +4,7 @@ define(['jqxtn', 'data',
 ], function ($, Data) {
   'use strict';
   var NOM = 'Accuracy';
-  var W = window;
+  // var W = window;
   var C = console;
   C.debug(NOM, 'loaded');
 
@@ -76,7 +76,7 @@ define(['jqxtn', 'data',
 
       C.debug([NOM, API]);
 
-      API.init = 'INITED';
+      API.init = API.load;
     },
   });
 

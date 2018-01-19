@@ -3,7 +3,7 @@
 define(['jqxtn'], function ($) {
   'use strict';
   var NOM = 'Rankings';
-  var W = window;
+  // var W = window;
   var C = console;
   C.debug(NOM, 'loaded');
 

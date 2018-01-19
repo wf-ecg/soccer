@@ -4,7 +4,7 @@ define(['jqxtn', 'libs/util-dim',
 ], function ($, UT) {
   'use strict';
   var NOM = 'Shotsfaced';
-  var W = window;
+  // var W = window;
   var C = console;
   C.debug(NOM, 'loaded');
 
@@ -106,7 +106,7 @@ define(['jqxtn', 'libs/util-dim',
 
       C.debug([NOM, API]);
 
-      API.init = 'INITED';
+      API.init = API.reset;
     },
   });
 
