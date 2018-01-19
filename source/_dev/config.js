@@ -1,15 +1,27 @@
-/*jslint white:false */
 /*global require, window */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  revised 2017-11-22
+
+  NOTE: config and bootstrap
+  - extend jquery
+  - identify Msie
+  - initialize dbug and main
+
+  TODO: keep simple
+
+ */
 require.config({
   baseUrl: 'scripts',
   paths: {
     lib: 'libs',
     jquery: '../vendors/jquery/jquery.min',
     lodash: '../vendors/lodash.js/lodash.min',
+    bondo: '../vendors/babel/polyfill.min',
     //
     beacon: 'libs/ecg-beacon',
+    dialog: 'libs/dialog',
     jqxtn: 'libs/jq-xtn',
+    modal: 'libs/modal',
     stats: 'libs/ecg-stats',
     //
     main: '_main',
@@ -18,37 +30,57 @@ require.config({
   },
   shim: {
     _main: {
-      // deps: ['slick'],
+      // deps: ['bondo'],
     },
   },
 });
 
-require(['lib/jq-xtn', 'lib/dbug'], function ($, Dbug) {
+var HOSTS = {
+  loc: 'http://localhost',
+  mac: 'http://10.94.211.93',
+  dev: 'http://10.94.211.163',
+  ecg: 'http://ecgsolutions.hosting.wellsfargo.com/marketing',
+  adhocEnet: 'http://10.94.210.233',
+  adhocWifi: 'http://11.112.37.111',
+  macLaptop: 'http://c02q9bb1g8wn.local',
+  pulseWifi: 'http://172.25.77.160',
+};
+
+require(['jquery', 'lib/dbug'], function ($, Dbug) {
   var W = window;
-  W._dbug = Dbug('2017/07/25');
-  W._dbug.reduceBy(1);
+  W._dbug = Dbug('2020/01/01');
+  W._host = (W._dbug > 1) ? HOSTS.loc : HOSTS.ecg;
   W._msie = ~W.navigator.userAgent.indexOf('rident');
 
   // - - - - - - - - - - - - - - - - - -
   // ESTABLISH BASELINES
   if (W._msie) {
     $('html').addClass('msie'); // debug IE less
+    require(['bondo']);
   }
-  if (W._dbug > 1) {
+
+  if (W._dbug > 1 || W.location.hostname === 'localhost') {
     $('html').addClass('debug');
+  } else if (W._dbug === 1) {
+    W._dbug.mute(); // stop applying to console
+  } else {
+    W._dbug.silent(); // stop most of console
   }
 
   // - - - - - - - - - - - - - - - - - -
-  /// CUSTOMIZED INIT
-  require(['data', 'main'], function (Data, Main) {
+  /// CUSTOMIZATIONS
+  require(['data', 'main', 'jqxtn'], function (Data, Main) {
     require.config({
       paths: {
         games: '../data',
       },
     });
+
+    // lazily init
     Data.readFrom('data/index.html', Main.init);
 
-    if (W._dbug > 0) W.Main = Main; // expose
+    // expose for debug
+    if (W._dbug > -1) W.Main = Main;
   });
 
 });

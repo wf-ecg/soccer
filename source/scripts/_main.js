@@ -1,4 +1,4 @@
-/*global define */
+/*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   revised 2017-07-05
 
@@ -158,9 +158,8 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
 
   return MY;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
 /*
+
 
 
  */
