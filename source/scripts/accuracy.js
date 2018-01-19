@@ -3,19 +3,19 @@
 define(['jquery', 'data',
 ], function ($, Data) {
   'use strict';
-  var Nom = 'Accuracy';
+  var NOM = 'Accuracy';
   var W = window;
   var C = console;
-  C.debug(Nom, 'loaded');
+  C.debug(NOM, 'loaded');
 
   var EL = {
     div: '.accuracy .limit',
     maj: '.accuracy .limit .major',
     min: '.accuracy .limit .minor',
   };
-  var MY = Object.create(null);
+  var API = Object.create(null);
 
-  $.extend(MY, {
+  $.extend(API, {
     _EL: EL,
     percent: function (num) {
       num = num || 0.5;
@@ -29,10 +29,10 @@ define(['jquery', 'data',
       if (num < 50) {
         C.warn('normalize', num);
         num = 100 - num;
-        MY.swapColor();
+        API.swapColor();
       }
-      MY.setValue(EL.maj, num); // mod major div
-      MY.setValue(EL.min, 100 - num); // mod minor
+      API.setValue(EL.maj, num); // mod major div
+      API.setValue(EL.min, 100 - num); // mod minor
     },
     setValue: function (ele, val) {
       if (val < 44) {
@@ -58,33 +58,32 @@ define(['jquery', 'data',
       return ele.data('color');
     },
     swapColor: function () {
-      MY.colors(MY.getColor(EL.min), MY.getColor(EL.maj));
+      API.colors(API.getColor(EL.min), API.getColor(EL.maj));
     },
     colors: function (c1, c2) {
       var cs = Data.colors();
       c2 = '#999';
-      MY.setColor(EL.maj, c1 || cs[0]);
-      MY.setColor(EL.min, c2 || cs[1]);
+      API.setColor(EL.maj, c1 || cs[0]);
+      API.setColor(EL.min, c2 || cs[1]);
     },
     load: function (num) {
-      MY.colors();
-      MY.percent(num);
+      API.colors();
+      API.percent(num);
     },
     init: function (num) {
-      if (MY.inited) {
-        MY.load(num);
+      if (API.inited) {
+        API.load(num);
       } else {
-        MY.inited = true;
+        API.inited = true;
         $.reify(EL);
-        MY.load(num);
+        API.load(num);
 
-        C.debug([Nom, MY]);
+        C.debug([NOM, API]);
       }
     },
   });
 
-  W[Nom] = MY;
-  return MY;
+  return API;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

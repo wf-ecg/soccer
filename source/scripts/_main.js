@@ -13,12 +13,12 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
 ], function ($, UT, Data, accuracy, possession, rankings, shotsfaced, timeline) {
   'use strict';
 
-  var Nom = 'Main';
+  var NOM = 'Main';
   var W = window;
   var C = console;
-  C.debug(Nom, 'loaded');
+  C.debug(NOM, 'loaded');
 
-  var MY;
+  var API;
   var EL = {
     fact: '.thefact',
     factpic: '.factpic',
@@ -126,7 +126,7 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
 
       UT.initFinish();
     } catch (err) {
-      C.error(Nom, err, game, num);
+      C.error(NOM, err, game, num);
     }
   }
 
@@ -134,21 +134,21 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
   // PAGE LOADED
 
   function _init() {
-    if (MY.inited) {
+    if (API.inited) {
       return 'was inited';
     }
 
-    MY.inited = true;
+    API.inited = true;
     $.reify(EL);
     renderGame(1);
 
     EL.menu.change(function (evt) {
       renderGame($(evt.target).val());
     });
-    return MY;
+    return API;
   }
 
-  MY = {
+  API = {
     _EL: EL,
     Data: Data,
     UT: UT,
@@ -156,7 +156,7 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
     init: _init,
   };
 
-  return MY;
+  return API;
 });
 /*
 

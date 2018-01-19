@@ -3,10 +3,10 @@
 define(['jquery', 'libs/util-dim',
 ], function ($, UT) {
   'use strict';
-  var Nom = 'Shotsfaced';
+  var NOM = 'Shotsfaced';
   var W = window;
   var C = console;
-  C.debug(Nom, 'loaded');
+  C.debug(NOM, 'loaded');
 
   var EL = {
     cache: '',
@@ -14,7 +14,7 @@ define(['jquery', 'libs/util-dim',
     net: '.net',
     nums: '.nums span',
   };
-  var MY = Object.create(null);
+  var API = Object.create(null);
 
   function _pc(n) {
     return (n | 0) + '%';
@@ -27,7 +27,7 @@ define(['jquery', 'libs/util-dim',
     tobj.vert = vert;
   }
 
-  $.extend(MY, {
+  $.extend(API, {
     _EL: EL,
     total: 0,
     saves: 0,
@@ -38,14 +38,14 @@ define(['jquery', 'libs/util-dim',
 
       if (typeof tb === 'number') {
         EL.cache = $();
-        MY.total = tb;
-        MY.saves = 0;
-        MY.goals = 0;
+        API.total = tb;
+        API.saves = 0;
+        API.goals = 0;
       } else {
         if (tb.constructor !== Triball) {
           bobj = new Triball(tb[0], tb[1], tb[2]);
         }
-        bdiv = MY.makeBall(bobj.goal);
+        bdiv = API.makeBall(bobj.goal);
         EL.net.append(bdiv);
         UT.dim.prox(bdiv);
 
@@ -58,13 +58,13 @@ define(['jquery', 'libs/util-dim',
     makeBall: function (goal) {
       var ball = $('<div>').addClass('target');
 
-      ball.posxy = MY.positionXY;
+      ball.posxy = API.positionXY;
 
       if (goal) {
-        MY.goals++;
+        API.goals++;
         ball.addClass('score');
       } else {
-        MY.saves++;
+        API.saves++;
       }
       return ball;
     },
@@ -80,41 +80,40 @@ define(['jquery', 'libs/util-dim',
       });
     },
     updateNums: function () {
-      EL.nums.eq(0).text(MY.total);
-      EL.nums.eq(1).text(MY.saves + MY.goals);
-      EL.nums.eq(2).text(MY.goals);
+      EL.nums.eq(0).text(API.total);
+      EL.nums.eq(1).text(API.saves + API.goals);
+      EL.nums.eq(2).text(API.goals);
     },
     reset: function (data) {
       EL.cache.remove();
-      MY.load(data || MY.data);
+      API.load(data || API.data);
     },
     load: function (arr) {
-      MY.data = arr;
+      API.data = arr;
 
       $.each(arr, function (i, e) {
-        MY.addBall(e);
+        API.addBall(e);
       });
-      MY.updateNums();
+      API.updateNums();
     },
     init: function (data) {
-      if (MY.inited) {
-        MY.reset(data);
+      if (API.inited) {
+        API.reset(data);
       } else {
-        MY.inited = true;
-        data = data || MY.data;
+        API.inited = true;
+        data = data || API.data;
         $.reify(EL);
         EL.div.on('click', function () {
-          MY.reset();
+          API.reset();
         });
-        MY.load(data);
+        API.load(data);
 
-        C.debug([Nom, MY]);
+        C.debug([NOM, API]);
       }
     },
   });
 
-  W[Nom] = MY;
-  return MY;
+  return API;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

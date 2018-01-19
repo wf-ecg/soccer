@@ -3,10 +3,10 @@
 define(['jquery', 'libs/util-dim', 'data',
 ], function ($, UT, Data) {
   'use strict';
-  var Nom = 'Timeline';
+  var NOM = 'Timeline';
   var W = window;
   var C = console;
-  C.debug(Nom, 'loaded');
+  C.debug(NOM, 'loaded');
 
   var EL = {
     cache: '',
@@ -14,7 +14,7 @@ define(['jquery', 'libs/util-dim', 'data',
     bar: '.timeline .events table',
     wrap: '.timeline .linewrap',
   };
-  var MY = Object.create(null);
+  var API = Object.create(null);
 
   function Trivent(time, side, icon) {
     this.time = (time || 55) % 91;
@@ -36,7 +36,7 @@ define(['jquery', 'libs/util-dim', 'data',
     return this;
   };
 
-  $.extend(MY, {
+  $.extend(API, {
     _EL: EL,
     h: 0,
     w: 0,
@@ -48,7 +48,7 @@ define(['jquery', 'libs/util-dim', 'data',
       if (tv.constructor !== Trivent) {
         tv = new Trivent(tv[0], tv[1], tv[2]);
       }
-      off = MY.h / 2;
+      off = API.h / 2;
       pol = (tv.side === 'top') ? -1 - off : off; // -1px fixer??
       point = $('<div>').addClass('trivent').attr('data-time', tv.time);
       icon = point.clone();
@@ -68,37 +68,37 @@ define(['jquery', 'libs/util-dim', 'data',
 
       // new call stack
       UT.delay(0, function () {
-        MY.moveEvent(tv.time, set.centerize());
+        API.moveEvent(tv.time, set.centerize());
       });
       EL.cache = EL.cache.add(set);
     },
     moveEvent: function (time, eles) {
       eles.css({
-        left: _pc(MY.timeTpc(time)),
+        left: _pc(API.timeTpc(time)),
       });
     },
     measureBar: function () {
-      MY.w = EL.bar.outerWidth();
-      MY.h = EL.bar.outerHeight();
-      MY.m = MY.w / 10; // figure 10% margins
-      MY.w -= MY.m * 2; // inner cells
-      return [MY.w, MY.h];
+      API.w = EL.bar.outerWidth();
+      API.h = EL.bar.outerHeight();
+      API.m = API.w / 10; // figure 10% margins
+      API.w -= API.m * 2; // inner cells
+      return [API.w, API.h];
     },
     timeTpc: function (time) {
       //             factor in lead and tail
-      return MY.adjustpc(time / 90 * 100);
+      return API.adjustpc(time / 90 * 100);
     },
     pxTpc: function (px) {
       px = px || 0;
-      return (px / MY.w * 100) | 0;
+      return (px / API.w * 100) | 0;
     },
     pcTpx: function (pc) {
       pc = pc || 100;
-      return (MY.w * pc / 100) | 0;
+      return (API.w * pc / 100) | 0;
     },
     adjustpx: function (num) {
       num *= 0.8; // remove lead and tail (10%)
-      num += MY.m;
+      num += API.m;
       return num;
     },
     adjustpc: function (num) {
@@ -108,36 +108,35 @@ define(['jquery', 'libs/util-dim', 'data',
     },
     reset: function (data) {
       EL.cache.remove();
-      MY.load(data || MY.data);
+      API.load(data || API.data);
     },
     load: function (arr) {
-      MY.data = arr;
+      API.data = arr;
 
-      MY.measureBar();
+      API.measureBar();
 
       $.each(arr, function () {
-        MY.addEvent(this);
+        API.addEvent(this);
       });
     },
     init: function (data) {
-      if (MY.inited) {
-        MY.reset(data);
+      if (API.inited) {
+        API.reset(data);
       } else {
-        MY.inited = true;
-        data = data || MY.data;
+        API.inited = true;
+        data = data || API.data;
         $.reify(EL);
         EL.div.on('click', function () {
-          MY.reset();
+          API.reset();
         });
-        MY.load(data);
+        API.load(data);
 
-        C.debug([Nom, MY]);
+        C.debug([NOM, API]);
       }
     },
   });
 
-  W[Nom] = MY;
-  return MY;
+  return API;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

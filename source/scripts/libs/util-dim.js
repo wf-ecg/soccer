@@ -2,7 +2,7 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 define(['jquery', 'util'], function ($, UT) {
   'use strict';
-  var W = window;
+  // var W = window;
   var C = console;
 
   C.info('extending Utils w/Dim');

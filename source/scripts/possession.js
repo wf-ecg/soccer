@@ -3,17 +3,17 @@
 define(['jquery', 'data', 'libs/knob', 'libs/ui',
 ], function ($, Data, Knob, Ui) {
   'use strict';
-  var Nom = 'Possession';
+  var NOM = 'Possession';
   var W = window;
   var C = console;
-  C.debug(Nom, 'loaded');
+  C.debug(NOM, 'loaded');
 
   var EL = {
     div: '.possession',
   };
-  var MY = Object.create(null);
+  var API = Object.create(null);
 
-  $.extend(MY, {
+  $.extend(API, {
     _EL: EL,
     defs: {
       girth: 7,
@@ -28,11 +28,11 @@ define(['jquery', 'data', 'libs/knob', 'libs/ui',
       obj = new Knob(sel[0], new Ui.Donut());
       sel.data('Knob', obj);
 
-      MY.svg = obj;
+      API.svg = obj;
     },
     set: function (num) {
-      MY.svg.changed(-100 / 5);
-      MY.svg.changed(num / 5);
+      API.svg.changed(-100 / 5);
+      API.svg.changed(num / 5);
       EL.div.find('.major h3').text(num + '%');
     },
     proto: function () {
@@ -44,10 +44,10 @@ define(['jquery', 'data', 'libs/knob', 'libs/ui',
         Ui.prototype.createElement.apply(this, arguments);
 
         this.addComponent(new Ui.Arc({
-          arcWidth: this.width / MY.defs.girth,
+          arcWidth: this.width / API.defs.girth,
         }));
         this.merge(this.options, {
-          arcWidth: this.width / MY.defs.girth,
+          arcWidth: this.width / API.defs.girth,
         });
 
         arc = new Ui.El.Arc(this.options);
@@ -68,23 +68,22 @@ define(['jquery', 'data', 'libs/knob', 'libs/ui',
       paths.eq(1).css('fill', cs[0]);
     },
     init: function (sel, num) {
-      if (MY.inited) {
-        MY.load();
+      if (API.inited) {
+        API.load();
       } else {
-        MY.inited = true;
+        API.inited = true;
 
-        MY.proto();
-        MY.add(sel);
-        MY.load();
-        MY.set(num);
+        API.proto();
+        API.add(sel);
+        API.load();
+        API.set(num);
 
-        C.debug([Nom, MY]);
+        C.debug([NOM, API]);
       }
     },
   });
 
-  W[Nom] = MY;
-  return MY;
+  return API;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
