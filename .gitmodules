@@ -1,0 +1,3 @@
+[submodule "source/vendors"]
+	path = source/vendors
+	url = https://github.com/dvdrtrgn/vendors-gulp.git

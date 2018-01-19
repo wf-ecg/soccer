@@ -1,24 +1,29 @@
-/*global define */
+/*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  revised 2017-07-05
-
-  USE: hook up various sub systems
-  - bind events
-  - store configs
-
-  TODO: document a bit
+  CHANGED 2017-08-08
+  IDEA    Hook up various sub systems
+  NOTE    bind events, store configs
+  TODO    ???
 
  */
 define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
 ], function ($, UT, Data, accuracy, possession, rankings, shotsfaced, timeline) {
   'use strict';
 
-  var Nom = 'Main';
+  var NOM = 'Main';
   var W = window;
-  var C = W._dbug;
-  C('debug', Nom, 'loaded');
+  var C = console;
+  C.debug(NOM, 'loaded');
 
-  var MY;
+  // - - - - - - - - - - - - - - - - - -
+
+  var API = {
+    init: null,
+    //
+    _: NOM,
+    UT: UT,
+    Data: Data,
+  };
   var EL = {
     fact: '.thefact',
     factpic: '.factpic',
@@ -126,41 +131,38 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
 
       UT.initFinish();
     } catch (err) {
-      C('error', Nom, err, game, num);
+      C.error(NOM, err, game, num);
     }
   }
 
   // - - - - - - - - - - - - - - - - - -
   // PAGE LOADED
 
-  function _init() {
-    if (MY.inited) {
-      return 'was inited';
-    }
-
-    MY.inited = true;
+  function init() {
     $.reify(EL);
     renderGame(1);
 
     EL.menu.change(function (evt) {
       renderGame($(evt.target).val());
     });
-    return MY;
+
+    // if (C > 0) { require(['_tests']); }
+    C.warn(NOM, 'inited @ ' + W._dbug, API);
+    API.init = 'INITED';
+    return API;
   }
 
-  MY = {
+  $.extend(API, {
+    init: init,
+    //
     _EL: EL,
-    Data: Data,
-    UT: UT,
     updateMenu: _revMenu,
-    init: _init,
-  };
+  });
 
-  return MY;
+  return API;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
 /*
+
 
 
  */

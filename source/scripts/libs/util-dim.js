@@ -2,10 +2,10 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 define(['jquery', 'util'], function ($, UT) {
   'use strict';
-  var W = window;
-  var C = W._dbug;
+  // var W = window;
+  var C = console;
 
-  C('info', 'extending Utils w/Dim');
+  C.info('extending Utils w/Dim');
 
   UT.dim = {
     gxy: function (ele) { // size probe

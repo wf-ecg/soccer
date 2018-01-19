@@ -1,4 +1,4 @@
-/*global requirejs, window, */
+/*global requirejs, */
 // Usage:
 // Put this in a separate file and load it as the first module
 // (See https://github.com/jrburke/requirejs/wiki/Internal-API:-onResourceLoad)
@@ -11,9 +11,10 @@
 // - UML Website: http://yuml.me/diagram/scruffy/class/draw
 requirejs.onResourceLoad = function (context, map, depMaps) {
   'use strict';
-  var Nom = 'Rtree';
+
+  var NOM = 'Rtree';
   var W = window;
-  var C = W._dbug;
+  var C = console;
 
   var tree, i;
   var rtree = W.rtree;
@@ -86,12 +87,18 @@ requirejs.onResourceLoad = function (context, map, depMaps) {
   W.clearTimeout(rtree.tout);
   rtree.tout = W.setTimeout(function () {
     var uml = rtree.toUml();
-    if (uml && C > 0) {
-      C('groupCollapsed', Nom);
-      C('log', rtree);
-      C('log', uml);
-      C('groupEnd');
+    if (uml && W._dbug > 0) {
+      C.groupCollapsed(NOM);
+      C.log(rtree);
+      C.log(uml);
+      C.groupEnd();
     }
   }, 999);
 
 };
+
+/*
+
+
+
+ */

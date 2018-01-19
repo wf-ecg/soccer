@@ -3,23 +3,23 @@
 define(['jquery', 'util',
 ], function ($, UT) {
   'use strict';
-  var Nom = 'Data';
+  var NOM = 'Data';
   var W = window;
-  var C = W._dbug;
-  C('debug', Nom, 'loaded');
+  var C = console;
+  C.debug(NOM, 'loaded');
 
-  var MY;
+  var API;
 
   function inject(mod) {
     try {
       var num = parseInt(mod.match(/\d+/)[0]);
-      MY.addGame(num, require(mod));
+      API.addGame(num, require(mod));
     } catch (err) {
-      C('debug', err.message);
+      C.debug(err.message);
     }
   }
 
-  MY = {
+  API = {
     current: 0,
     defs: {
       speed: 333,
@@ -28,26 +28,26 @@ define(['jquery', 'util',
     teams: {},
     addGame: function (num, data) { // opt num/push
       if (data) {
-        MY.games[num] = data;
+        API.games[num] = data;
       } else {
-        MY.games.push(num);
+        API.games.push(num);
       }
     },
     game: function (num) {
-      MY.current = UT.def(num) ? num : MY.current;
-      return MY.games[MY.current];
+      API.current = UT.def(num) ? num : API.current;
+      return API.games[API.current];
     },
     winner: function (num) {
-      return MY.game(num).match.teams[0];
+      return API.game(num).match.teams[0];
     },
     colors: function (num) {
-      return MY.teams[MY.winner(num)].colors;
+      return API.teams[API.winner(num)].colors;
     },
     team: function (nom) {
-      return MY.teams[nom];
+      return API.teams[nom];
     },
     lookup: function (key) {
-      return (MY.dict[key] || key);
+      return (API.dict[key] || key);
     },
     readFrom: function (url, cb) {
       $('<tmp>').load(`${url} a`, function () {
@@ -62,9 +62,9 @@ define(['jquery', 'util',
     },
   };
 
-  MY.games = [];
+  API.games = [];
 
-  MY.dict = {
+  API.dict = {
     error: '#c20000',
     gray: '#8f8f8f',
     mark: '#00ff00',
@@ -73,7 +73,7 @@ define(['jquery', 'util',
     warning: '#fff200',
   };
 
-  MY.teams = {
+  API.teams = {
     '?'           : { colors: ['#c91721', '#176844'], grouping: 'X', flag: 'mexico.png'        },
     Algeria       : { colors: ['#999999', '#999999'], grouping: 'H', flag: 'algeria.png'       },
     Argentina     : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'argentina.png'     },
@@ -98,7 +98,7 @@ define(['jquery', 'util',
     Ivory_Coast   : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'ivory_coast.png'   },
     Japan         : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'japan.png'         },
     Korea_Republic: { colors: ['#999999', '#999999'], grouping: 'H', flag: 'korea_republic.png'},
-    Mexico        : { colors: ['#176844', MY.dict.yellow], grouping: 'A', flag: 'mexico.png'        },
+    Mexico        : { colors: ['#176844', API.dict.yellow], grouping: 'A', flag: 'mexico.png'        },
     Netherlands   : { colors: ['#999999', '#999999'], grouping: 'B', flag: 'netherlands.png'   },
     Nigeria       : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'nigeria.png'       },
     Portugal      : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'portugal.png'      },
@@ -109,8 +109,7 @@ define(['jquery', 'util',
     USA           : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'usa.png'           },
   };
 
-  W[Nom] = MY;
-  return MY;
+  return API;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
