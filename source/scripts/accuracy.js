@@ -71,15 +71,12 @@ define(['jquery', 'data',
       API.percent(num);
     },
     init: function (num) {
-      if (API.inited) {
-        API.load(num);
-      } else {
-        API.inited = true;
-        $.reify(EL);
-        API.load(num);
+      $.reify(EL);
+      API.load(num);
 
-        C.debug([NOM, API]);
-      }
+      C.debug([NOM, API]);
+
+      API.init = 'INITED';
     },
   });
 

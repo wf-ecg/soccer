@@ -1,12 +1,9 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  revised 2017-07-05
-
-  USE: hook up various sub systems
-  - bind events
-  - store configs
-
-  TODO: document a bit
+  CHANGED 2017-08-08
+  IDEA    Hook up various sub systems
+  NOTE    bind events, store configs
+  TODO    ???
 
  */
 define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
@@ -18,7 +15,15 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
   var C = console;
   C.debug(NOM, 'loaded');
 
-  var API;
+  // - - - - - - - - - - - - - - - - - -
+
+  var API = {
+    init: null,
+    //
+    _: NOM,
+    UT: UT,
+    Data: Data,
+  };
   var EL = {
     fact: '.thefact',
     factpic: '.factpic',
@@ -133,28 +138,26 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
   // - - - - - - - - - - - - - - - - - -
   // PAGE LOADED
 
-  function _init() {
-    if (API.inited) {
-      return 'was inited';
-    }
-
-    API.inited = true;
+  function init() {
     $.reify(EL);
     renderGame(1);
 
     EL.menu.change(function (evt) {
       renderGame($(evt.target).val());
     });
+
+    // if (C > 0) { require(['_tests']); }
+    C.warn(NOM, 'inited @ ' + W._dbug, API);
+    API.init = 'INITED';
     return API;
   }
 
-  API = {
+  $.extend(API, {
+    init: init,
+    //
     _EL: EL,
-    Data: Data,
-    UT: UT,
     updateMenu: _revMenu,
-    init: _init,
-  };
+  });
 
   return API;
 });

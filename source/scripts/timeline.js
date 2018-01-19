@@ -120,19 +120,16 @@ define(['jquery', 'libs/util-dim', 'data',
       });
     },
     init: function (data) {
-      if (API.inited) {
-        API.reset(data);
-      } else {
-        API.inited = true;
-        data = data || API.data;
-        $.reify(EL);
-        EL.div.on('click', function () {
-          API.reset();
-        });
-        API.load(data);
+      data = data || API.data;
+      $.reify(EL);
+      EL.div.on('click', function () {
+        API.reset();
+      });
+      API.load(data);
 
-        C.debug([NOM, API]);
-      }
+      C.debug([NOM, API]);
+
+      API.init = 'INITED';
     },
   });
 

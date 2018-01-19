@@ -68,18 +68,14 @@ define(['jquery', 'data', 'libs/knob', 'libs/ui',
       paths.eq(1).css('fill', cs[0]);
     },
     init: function (sel, num) {
-      if (API.inited) {
-        API.load();
-      } else {
-        API.inited = true;
+      API.proto();
+      API.add(sel);
+      API.load();
+      API.set(num);
 
-        API.proto();
-        API.add(sel);
-        API.load();
-        API.set(num);
+      C.debug([NOM, API]);
 
-        C.debug([NOM, API]);
-      }
+      API.init = 'INITED';
     },
   });
 
