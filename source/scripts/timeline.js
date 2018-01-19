@@ -5,8 +5,8 @@ define(['jquery', 'libs/util-dim', 'data',
   'use strict';
   var Nom = 'Timeline';
   var W = window;
-  var C = W._dbug;
-  C('debug', Nom, 'loaded');
+  var C = console;
+  C.debug(Nom, 'loaded');
 
   var EL = {
     cache: '',
@@ -131,7 +131,7 @@ define(['jquery', 'libs/util-dim', 'data',
         });
         MY.load(data);
 
-        C('debug', [Nom, MY]);
+        C.debug([Nom, MY]);
       }
     },
   });

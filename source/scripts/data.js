@@ -5,8 +5,8 @@ define(['jquery', 'util',
   'use strict';
   var Nom = 'Data';
   var W = window;
-  var C = W._dbug;
-  C('debug', Nom, 'loaded');
+  var C = console;
+  C.debug(Nom, 'loaded');
 
   var MY;
 
@@ -15,7 +15,7 @@ define(['jquery', 'util',
       var num = parseInt(mod.match(/\d+/)[0]);
       MY.addGame(num, require(mod));
     } catch (err) {
-      C('debug', err.message);
+      C.debug(err.message);
     }
   }
 

@@ -4,8 +4,8 @@ define(['jquery'], function ($) {
   'use strict';
   var Nom = 'Rankings';
   var W = window;
-  var C = W._dbug;
-  C('debug', Nom, 'loaded');
+  var C = console;
+  C.debug(Nom, 'loaded');
 
   var EL = {
     div: '.rankings table',
@@ -49,7 +49,7 @@ define(['jquery'], function ($) {
       $.reify(EL);
       MY.set(data).fillup();
 
-      C('debug', [Nom, MY]);
+      C.debug([Nom, MY]);
     },
   });
 

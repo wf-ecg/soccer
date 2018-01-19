@@ -5,8 +5,8 @@ define(['jquery', 'libs/util-dim',
   'use strict';
   var Nom = 'Shotsfaced';
   var W = window;
-  var C = W._dbug;
-  C('debug', Nom, 'loaded');
+  var C = console;
+  C.debug(Nom, 'loaded');
 
   var EL = {
     cache: '',
@@ -108,7 +108,7 @@ define(['jquery', 'libs/util-dim',
         });
         MY.load(data);
 
-        C('debug', [Nom, MY]);
+        C.debug([Nom, MY]);
       }
     },
   });

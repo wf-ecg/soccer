@@ -3,7 +3,7 @@
 define(['jquery'], function ($) {
   'use strict';
   var W = window;
-  var C = W._dbug;
+  var C = console;
 
   var Utils = {
     delay: function (ms, fn) {
@@ -43,13 +43,13 @@ define(['jquery'], function ($) {
       var sb = JSON.stringify(b);
 
       this.pre('strings', sa, sb);
-      C('assert', sa === sb, [c || 'notes', ['raw', a, b]]);
+      C.assert(sa === sb, [c || 'notes', ['raw', a, b]]);
     },
     initBegin: function () {
-      C('group', 'Utils loading');
+      C.group('Utils loading');
     },
     initFinish: function () {
-      C('groupEnd');
+      C.groupEnd();
     },
   };
 

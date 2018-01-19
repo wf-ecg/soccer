@@ -5,8 +5,8 @@ define(['jquery', 'data', 'libs/knob', 'libs/ui',
   'use strict';
   var Nom = 'Possession';
   var W = window;
-  var C = W._dbug;
-  C('debug', Nom, 'loaded');
+  var C = console;
+  C.debug(Nom, 'loaded');
 
   var EL = {
     div: '.possession',
@@ -78,7 +78,7 @@ define(['jquery', 'data', 'libs/knob', 'libs/ui',
         MY.load();
         MY.set(num);
 
-        C('debug', [Nom, MY]);
+        C.debug([Nom, MY]);
       }
     },
   });

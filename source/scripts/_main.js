@@ -15,8 +15,8 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
 
   var Nom = 'Main';
   var W = window;
-  var C = W._dbug;
-  C('debug', Nom, 'loaded');
+  var C = console;
+  C.debug(Nom, 'loaded');
 
   var MY;
   var EL = {
@@ -126,7 +126,7 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
 
       UT.initFinish();
     } catch (err) {
-      C('error', Nom, err, game, num);
+      C.error(Nom, err, game, num);
     }
   }
 

@@ -5,8 +5,8 @@ define(['jquery', 'data',
   'use strict';
   var Nom = 'Accuracy';
   var W = window;
-  var C = W._dbug;
-  C('debug', Nom, 'loaded');
+  var C = console;
+  C.debug(Nom, 'loaded');
 
   var EL = {
     div: '.accuracy .limit',
@@ -27,7 +27,7 @@ define(['jquery', 'data',
       num = num | 0;
 
       if (num < 50) {
-        C('warn', 'normalize', num);
+        C.warn('normalize', num);
         num = 100 - num;
         MY.swapColor();
       }
@@ -78,7 +78,7 @@ define(['jquery', 'data',
         $.reify(EL);
         MY.load(num);
 
-        C('debug', [Nom, MY]);
+        C.debug([Nom, MY]);
       }
     },
   });

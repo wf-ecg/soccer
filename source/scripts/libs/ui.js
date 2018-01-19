@@ -3,7 +3,7 @@
 define([], function () {
   'use strict';
   // var W = window;
-  // var C = W._dbug;
+  // var C = console;
 
   var Ui = function () {};
 
