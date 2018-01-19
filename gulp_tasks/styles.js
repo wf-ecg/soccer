@@ -6,7 +6,7 @@
  */
 
 // Dependencies
-// var pkg = require('../package.json');
+var pkg /*      */ = require('../package.json');
 var gulp /*     */ = require('gulp');
 var runSeq /*   */ = require('run-sequence');
 // var header = require('gulp-header');
@@ -46,6 +46,13 @@ gulp.task('styles-lint', function () {
 // Build styles
 gulp.task('styles-build', function () {
 
+  var pstcss = autoprefixer({
+    browsers: pkg.stage < 2 ? ['> 99%'] : ['> 1%', 'last 20 versions', 'ie 11'],
+    cascade: true,
+    map: false,
+    remove: false,
+  });
+
   return gulp.src('./source/styles/*.scss')
 
   .pipe(compass({
@@ -59,7 +66,7 @@ gulp.task('styles-build', function () {
   }))
 
   // Add vendor prefixes
-  .pipe(autoprefixer({browsers: ['> 1%', 'last 20 versions'], cascade: true, remove: false, map: false}))
+  .pipe(pstcss)
   // Comb CSS
   //.pipe(csscomb({configPath: './gulp_tasks/_css-comb.json'}))
   // Add banner

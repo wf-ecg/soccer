@@ -17,3 +17,4 @@ Copy the folder to your machine. Open Terminal.app:
 0. 0
 
 [site]: http://site/
+
