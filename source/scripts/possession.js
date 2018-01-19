@@ -1,6 +1,6 @@
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'data', 'libs/knob', 'libs/ui',
+define(['jqxtn', 'data', 'libs/knob', 'libs/ui',
 ], function ($, Data, Knob, Ui) {
   'use strict';
   var NOM = 'Possession';

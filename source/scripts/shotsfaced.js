@@ -1,6 +1,6 @@
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'libs/util-dim',
+define(['jqxtn', 'libs/util-dim',
 ], function ($, UT) {
   'use strict';
   var NOM = 'Shotsfaced';

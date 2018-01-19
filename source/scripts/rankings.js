@@ -1,6 +1,6 @@
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery'], function ($) {
+define(['jqxtn'], function ($) {
   'use strict';
   var NOM = 'Rankings';
   var W = window;

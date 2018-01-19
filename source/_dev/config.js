@@ -25,8 +25,9 @@ require.config({
     stats: 'libs/ecg-stats',
     //
     main: '_main',
-    util: 'libs/util',
     ui: 'libs/ui',
+    util: 'libs/util',
+    uxtra: 'libs/util-xtra',
   },
   shim: {
     _main: {

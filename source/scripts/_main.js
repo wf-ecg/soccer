@@ -6,7 +6,7 @@
   TODO    ???
 
  */
-define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
+define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
 ], function ($, UT, Data, Accuracy, Possession, Rankings, Shotsfaced, Timeline) {
   'use strict';
 

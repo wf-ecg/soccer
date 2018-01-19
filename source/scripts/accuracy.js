@@ -1,6 +1,6 @@
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'data',
+define(['jqxtn', 'data',
 ], function ($, Data) {
   'use strict';
   var NOM = 'Accuracy';

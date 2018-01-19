@@ -1,6 +1,6 @@
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'libs/util-dim', 'data',
+define(['jqxtn', 'libs/util-dim', 'data',
 ], function ($, UT, Data) {
   'use strict';
   var NOM = 'Timeline';
