@@ -16,7 +16,7 @@ define(['jquery', 'data',
   var API = Object.create(null);
 
   $.extend(API, {
-    _EL: EL,
+    EL: EL,
     percent: function (num) {
       num = num || 0.5;
       num = num % 100;

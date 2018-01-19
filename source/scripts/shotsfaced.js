@@ -28,7 +28,7 @@ define(['jquery', 'libs/util-dim',
   }
 
   $.extend(API, {
-    _EL: EL,
+    EL: EL,
     total: 0,
     saves: 0,
     goals: 0,

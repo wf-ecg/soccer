@@ -37,7 +37,7 @@ define(['jquery', 'libs/util-dim', 'data',
   };
 
   $.extend(API, {
-    _EL: EL,
+    EL: EL,
     h: 0,
     w: 0,
     data: null,

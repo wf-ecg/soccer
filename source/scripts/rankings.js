@@ -12,12 +12,12 @@ define(['jquery'], function ($) {
     rows: '.rankings table tr:not(:first-child)',
   };
   var API = Object.create(null);
-  var dat;
+  var Dat;
 
   $.extend(API, {
-    _EL: EL,
+    EL: EL,
     set: function (data) {
-      dat = data;
+      Dat = data;
       return API;
     },
     getCxy: function (c, r) {
@@ -26,11 +26,11 @@ define(['jquery'], function ($) {
       return tmp;
     },
     get: function () {
-      return dat;
+      return Dat;
     },
     fillup: function () {
       var y = 0;
-      $.each(dat, function (i, row) {
+      $.each(Dat, function (i, row) {
 
         API.getCxy(0, y).find('img').attr({
           src: './images/flags/' + i.toLowerCase() + '.png',

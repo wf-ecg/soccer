@@ -14,7 +14,7 @@ define(['jquery', 'data', 'libs/knob', 'libs/ui',
   var API = Object.create(null);
 
   $.extend(API, {
-    _EL: EL,
+    EL: EL,
     defs: {
       girth: 7,
       // 2 = full ... 200 = hairline

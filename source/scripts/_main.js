@@ -7,7 +7,7 @@
 
  */
 define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
-], function ($, UT, Data, accuracy, possession, rankings, shotsfaced, timeline) {
+], function ($, UT, Data, Accuracy, Possession, Rankings, Shotsfaced, Timeline) {
   'use strict';
 
   var NOM = 'Main';
@@ -23,6 +23,11 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
     _: NOM,
     UT: UT,
     Data: Data,
+    Accuracy: Accuracy,
+    Possession: Possession,
+    Rankings: Rankings,
+    Shotsfaced: Shotsfaced,
+    Timeline: Timeline,
   };
   var EL = {
     fact: '.thefact',
@@ -52,11 +57,11 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
 
       $('section div').hide().fadeIn();
 
-      shotsfaced.init(stats.shots);
-      timeline.init(stats.events);
-      accuracy.init(stats.accuracy);
-      rankings.init(game.grouping);
-      possession.init('.donut', stats.possession);
+      Shotsfaced.init(stats.shots);
+      Timeline.init(stats.events);
+      Accuracy.init(stats.accuracy);
+      Rankings.init(game.grouping);
+      Possession.init('.donut', stats.possession);
 
       /// TOP
       EL.top //
@@ -155,7 +160,7 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
   $.extend(API, {
     init: init,
     //
-    _EL: EL,
+    EL: EL,
     updateMenu: _revMenu,
   });
 
