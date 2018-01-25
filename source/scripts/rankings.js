@@ -7,17 +7,17 @@ define(['jqxtn'], function ($) {
   var C = console;
   C.debug(NOM, 'loaded');
 
+  // - - - - - - - - - - - - - - - - - -
+
+  var _Data;
   var EL = {
     div: '.rankings table',
     rows: '.rankings table tr:not(:first-child)',
   };
-  var API = Object.create(null);
-  var Dat;
-
-  $.extend(API, {
+  var API = Object.create({
     EL: EL,
     set: function (data) {
-      Dat = data;
+      _Data = data;
       return API;
     },
     getCxy: function (c, r) {
@@ -26,11 +26,11 @@ define(['jqxtn'], function ($) {
       return tmp;
     },
     get: function () {
-      return Dat;
+      return _Data;
     },
     fillup: function () {
       var y = 0;
-      $.each(Dat, function (i, row) {
+      $.each(_Data, function (i, row) {
 
         API.getCxy(0, y).find('img').attr({
           src: './images/flags/' + i.toLowerCase() + '.png',

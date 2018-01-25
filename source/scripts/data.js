@@ -8,7 +8,7 @@ define(['jquery', 'util',
   var C = console;
   C.debug(NOM, 'loaded');
 
-  var API;
+  // - - - - - - - - - - - - - - - - - -
 
   function inject(mod) {
     try {
@@ -19,7 +19,13 @@ define(['jquery', 'util',
     }
   }
 
-  API = {
+  // - - - - - - - - - - - - - - - - - -
+
+  var API = Object.create({
+    init: null,
+    //
+    _: NOM,
+    UT: UT,
     current: 0,
     defs: {
       speed: 333,
@@ -60,7 +66,7 @@ define(['jquery', 'util',
         });
       });
     },
-  };
+  });
 
   API.games = [];
 

@@ -17,7 +17,7 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
 
   // - - - - - - - - - - - - - - - - - -
 
-  var API = {
+  var API = Object.create({
     init: null,
     //
     _: NOM,
@@ -28,7 +28,7 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     Rankings: Rankings,
     Shotsfaced: Shotsfaced,
     Timeline: Timeline,
-  };
+  });
   var EL = {
     fact: '.thefact',
     factpic: '.factpic',

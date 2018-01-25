@@ -8,12 +8,12 @@ define(['jqxtn', 'data', 'libs/knob', 'libs/ui',
   var C = console;
   C.debug(NOM, 'loaded');
 
+  // - - - - - - - - - - - - - - - - - -
+
   var EL = {
     div: '.possession',
   };
-  var API = Object.create(null);
-
-  $.extend(API, {
+  var API = Object.create({
     EL: EL,
     defs: {
       girth: 7,

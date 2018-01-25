@@ -8,14 +8,15 @@ define(['jqxtn', 'data',
   var C = console;
   C.debug(NOM, 'loaded');
 
+  // - - - - - - - - - - - - - - - - - -
+
   var EL = {
     div: '.accuracy .limit',
     maj: '.accuracy .limit .major',
     min: '.accuracy .limit .minor',
   };
-  var API = Object.create(null);
-
-  $.extend(API, {
+  var API = Object.create({
+    Data: Data,
     EL: EL,
     percent: function (num) {
       num = num || 0.5;

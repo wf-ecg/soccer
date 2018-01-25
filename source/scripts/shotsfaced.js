@@ -8,13 +8,7 @@ define(['jqxtn', 'libs/util-dim',
   var C = console;
   C.debug(NOM, 'loaded');
 
-  var EL = {
-    cache: '',
-    div: '.shotsfaced',
-    net: '.net',
-    nums: '.nums span',
-  };
-  var API = Object.create(null);
+  // - - - - - - - - - - - - - - - - - -
 
   function _pc(n) {
     return (n | 0) + '%';
@@ -27,7 +21,15 @@ define(['jqxtn', 'libs/util-dim',
     tobj.vert = vert;
   }
 
-  $.extend(API, {
+  // - - - - - - - - - - - - - - - - - -
+
+  var EL = {
+    cache: '',
+    div: '.shotsfaced',
+    net: '.net',
+    nums: '.nums span',
+  };
+  var API = Object.create({
     EL: EL,
     total: 0,
     saves: 0,

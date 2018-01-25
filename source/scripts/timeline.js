@@ -8,13 +8,7 @@ define(['jqxtn', 'libs/util-dim', 'data',
   var C = console;
   C.debug(NOM, 'loaded');
 
-  var EL = {
-    cache: '',
-    div: '.timeline .events',
-    bar: '.timeline .events table',
-    wrap: '.timeline .linewrap',
-  };
-  var API = Object.create(null);
+  // - - - - - - - - - - - - - - - - - -
 
   function Trivent(time, side, icon) {
     this.time = (time || 55) % 91;
@@ -29,6 +23,7 @@ define(['jqxtn', 'libs/util-dim', 'data',
   function _pc(n) {
     return (n | 0) + '%';
   }
+
   $.fn.centerize = function () {
     this.each(function () {
       UT.dim.prox(this);
@@ -36,7 +31,15 @@ define(['jqxtn', 'libs/util-dim', 'data',
     return this;
   };
 
-  $.extend(API, {
+  // - - - - - - - - - - - - - - - - - -
+
+  var EL = {
+    cache: '',
+    div: '.timeline .events',
+    bar: '.timeline .events table',
+    wrap: '.timeline .linewrap',
+  };
+  var API = Object.create({
     EL: EL,
     h: 0,
     w: 0,
