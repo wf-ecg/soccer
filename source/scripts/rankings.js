@@ -18,8 +18,29 @@ define(['jqxtn',
 
   // - - - - - - - - - - - - - - - - - -
 
+  function getCxy(c, r) {
+    var tmp = EL.rows.eq(r);
+    tmp = tmp.children().eq(c);
+    return tmp;
+  }
 
-  var _Data;
+  function fillup(data) {
+    var y = 0;
+    $.each(data, function (i, row) {
+
+      getCxy(0, y).find('img').attr({
+        src: './images/flags/' + i.toLowerCase() + '.png',
+        alt: i,
+      });
+      getCxy(1, y).text(i);
+
+      $.each(row, function (j, cell) {
+        getCxy(j + 2, y).text(cell);
+      });
+
+      y++;
+    });
+  }
 
   // - - - - - - - - - - - - - - - - - -
 
@@ -31,38 +52,21 @@ define(['jqxtn',
     EL: EL,
     set: function (data) {
       _Data = data;
-      return API;
-    },
-    getCxy: function (c, r) {
-      var tmp = EL.rows.eq(r);
-      tmp = tmp.children().eq(c);
-      return tmp;
     },
     get: function () {
       return _Data;
     },
-    fillup: function () {
-      var y = 0;
-      $.each(_Data, function (i, row) {
-
-        API.getCxy(0, y).find('img').attr({
-          src: './images/flags/' + i.toLowerCase() + '.png',
-          alt: i,
-        });
-        API.getCxy(1, y).text(i);
-
-        $.each(row, function (j, cell) {
-          API.getCxy(j + 2, y).text(cell);
-        });
-
-        y++;
-      });
+    load: function (data) {
+      this.set(data);
+      fillup(_Data);
     },
     init: function (data) {
       $.reify(EL);
-      API.set(data).fillup();
+      this.load(data);
 
       C.debug([NOM, API]);
+
+      this.init = this.load;
     },
   });
 

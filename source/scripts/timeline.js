@@ -18,6 +18,12 @@ define(['jqxtn', 'libs/util-dim', 'data',
 
   // - - - - - - - - - - - - - - - - - -
 
+  $.fn.centerize = function () {
+    this.each(function () {
+      UT.dim.prox(this);
+    });
+    return this;
+  };
 
   function Trivent(time, side, icon) {
     this.time = (time || 55) % 91;
@@ -33,12 +39,30 @@ define(['jqxtn', 'libs/util-dim', 'data',
     return (n | 0) + '%';
   }
 
-  $.fn.centerize = function () {
-    this.each(function () {
-      UT.dim.prox(this);
+  // function pxTpc(px) {
+  //   px = px || 0;
+  //   return (px / API.w * 100) | 0; }
+  // function pcTpx(pc) {
+  //   pc = pc || 100;
+  //   return (API.w * pc / 100) | 0; }
+  // function adjustpx(num) {
+  //   num *= 0.8; // remove lead and tail (10%)
+  //   num += API.m;
+  //   return num; }
+
+  function adjustpc(num) { // remove lead and tail (10%)
+    return num * 0.8 + 10;
+  }
+
+  function timeTpc(time) { // factor in lead and tail
+    return adjustpc(time / 90 * 100);
+  }
+
+  function moveEvent(time, eles) {
+    eles.css({
+      left: _pc(timeTpc(time)),
     });
-    return this;
-  };
+  }
 
   // - - - - - - - - - - - - - - - - - -
 
@@ -60,7 +84,7 @@ define(['jqxtn', 'libs/util-dim', 'data',
       if (tv.constructor !== Trivent) {
         tv = new Trivent(tv[0], tv[1], tv[2]);
       }
-      off = API.h / 2;
+      off = this.h / 2;
       pol = (tv.side === 'top') ? -1 - off : off; // -1px fixer??
       point = $('<div>').addClass('trivent').attr('data-time', tv.time);
       icon = point.clone();
@@ -80,68 +104,41 @@ define(['jqxtn', 'libs/util-dim', 'data',
 
       // new call stack
       UT.delay(0, function () {
-        API.moveEvent(tv.time, set.centerize());
+        moveEvent(tv.time, set.centerize());
       });
       EL.cache = EL.cache.add(set);
     },
-    moveEvent: function (time, eles) {
-      eles.css({
-        left: _pc(API.timeTpc(time)),
-      });
-    },
     measureBar: function () {
-      API.w = EL.bar.outerWidth();
-      API.h = EL.bar.outerHeight();
-      API.m = API.w / 10; // figure 10% margins
-      API.w -= API.m * 2; // inner cells
-      return [API.w, API.h];
-    },
-    timeTpc: function (time) {
-      //             factor in lead and tail
-      return API.adjustpc(time / 90 * 100);
-    },
-    pxTpc: function (px) {
-      px = px || 0;
-      return (px / API.w * 100) | 0;
-    },
-    pcTpx: function (pc) {
-      pc = pc || 100;
-      return (API.w * pc / 100) | 0;
-    },
-    adjustpx: function (num) {
-      num *= 0.8; // remove lead and tail (10%)
-      num += API.m;
-      return num;
-    },
-    adjustpc: function (num) {
-      num *= 0.8; // remove lead and tail (10%)
-      num += 10;
-      return num;
+      this.w = EL.bar.outerWidth();
+      this.h = EL.bar.outerHeight();
+      this.m = this.w / 10; // figure 10% margins
+      this.w -= this.m * 2; // inner cells
+      return [this.w, this.h];
     },
     reset: function (data) {
       EL.cache.remove();
-      API.load(data || API.data);
+      this.load(data || this.data);
     },
     load: function (arr) {
-      API.data = arr;
+      this.data = arr;
 
-      API.measureBar();
+      this.measureBar();
 
       $.each(arr, function () {
         API.addEvent(this);
       });
     },
     init: function (data) {
-      data = data || API.data;
+      data = data || this.data;
       $.reify(EL);
       EL.div.on('click', function () {
         API.reset();
       });
-      API.load(data);
+      this.load(data);
 
       C.debug([NOM, API]);
 
-      API.init = API.reset;
+      this.init = this.reset;
     },
   });
 

@@ -18,6 +18,15 @@ define(['jqxtn', 'data',
 
   // - - - - - - - - - - - - - - - - - -
 
+  // function getValue(ele) {
+  //   return ele.data('value'); }
+
+  function getColor(ele) {
+    return ele.data('color');
+  }
+
+  // - - - - - - - - - - - - - - - - - -
+
   EL = {
     div: '.accuracy .limit',
     maj: '.accuracy .limit .major',
@@ -38,10 +47,10 @@ define(['jqxtn', 'data',
       if (num < 50) {
         C.warn('normalize', num);
         num = 100 - num;
-        API.swapColor();
+        this.swapColor();
       }
-      API.setValue(EL.maj, num); // mod major div
-      API.setValue(EL.min, 100 - num); // mod minor
+      this.setValue(EL.maj, num); // mod major div
+      this.setValue(EL.min, 100 - num); // mod minor
     },
     setValue: function (ele, val) {
       if (val < 44) {
@@ -54,38 +63,32 @@ define(['jqxtn', 'data',
       });
       ele.data('value', val); // store
     },
-    getValue: function (ele) {
-      return ele.data('value');
-    },
     setColor: function (ele, val) {
       ele.css({
         backgroundColor: val,
       });
       ele.data('color', val); // store
     },
-    getColor: function (ele) {
-      return ele.data('color');
-    },
     swapColor: function () {
-      API.colors(API.getColor(EL.min), API.getColor(EL.maj));
+      this.colors(getColor(EL.min), getColor(EL.maj));
     },
     colors: function (c1, c2) {
       var cs = Data.colors();
       c2 = '#999';
-      API.setColor(EL.maj, c1 || cs[0]);
-      API.setColor(EL.min, c2 || cs[1]);
+      this.setColor(EL.maj, c1 || cs[0]);
+      this.setColor(EL.min, c2 || cs[1]);
     },
     load: function (num) {
-      API.colors();
-      API.percent(num);
+      this.colors();
+      this.percent(num);
     },
     init: function (num) {
       $.reify(EL);
-      API.load(num);
+      this.load(num);
 
       C.debug([NOM, API]);
 
-      API.init = API.load;
+      this.init = this.load;
     },
   });
 

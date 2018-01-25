@@ -18,30 +18,6 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
 
   // - - - - - - - - - - - - - - - - - -
 
-  API = Object.create({
-    init: null,
-    //
-    _: NOM,
-    UT: UT,
-    Data: Data,
-    Accuracy: Accuracy,
-    Possession: Possession,
-    Rankings: Rankings,
-    Shotsfaced: Shotsfaced,
-    Timeline: Timeline,
-  });
-  EL = {
-    fact: '.thefact',
-    factpic: '.factpic',
-    menu: '#GameNum',
-    player: '.theplayer',
-    score: '.top .score',
-    shot: '.theshot',
-    ticket: '.top .ticket',
-    top: '.top',
-    tweet: '.thetweet',
-  };
-
   function _revMenu() {
     UT.picker.menu(EL.menu, Data.games);
     EL.menu.val(Data.current);
@@ -51,7 +27,7 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     var game, stats;
 
     try {
-      game = Data.game(num);
+      game = Data.getGame(num);
       stats = game.match;
 
       _revMenu();
@@ -71,11 +47,11 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
       EL.score //
         .find('.center').text(stats.score.join('-')).end() //
         .find('.left img').attr({
-          src: `./images/flags/${Data.team(stats.teams[0]).flag}`,
+          src: `./images/flags/${Data.getTeam(stats.teams[0]).flag}`,
           alt: stats.teams[0],
         }).end() //
         .find('.right img').attr({
-          src: `./images/flags/${Data.team(stats.teams[1]).flag}`,
+          src: `./images/flags/${Data.getTeam(stats.teams[1]).flag}`,
           alt: stats.teams[1],
         });
       EL.ticket //
@@ -142,6 +118,33 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
   }
 
   // - - - - - - - - - - - - - - - - - -
+
+  EL = {
+    fact: '.thefact',
+    factpic: '.factpic',
+    menu: '#GameNum',
+    player: '.theplayer',
+    score: '.top .score',
+    shot: '.theshot',
+    ticket: '.top .ticket',
+    top: '.top',
+    tweet: '.thetweet',
+  };
+  API = Object.create({
+    init: null,
+    //
+    _: NOM,
+    EL: EL,
+    UT: UT,
+    Data: Data,
+    Accuracy: Accuracy,
+    Possession: Possession,
+    Rankings: Rankings,
+    Shotsfaced: Shotsfaced,
+    Timeline: Timeline,
+  });
+
+  // - - - - - - - - - - - - - - - - - -
   // PAGE LOADED
 
   function init() {
@@ -155,14 +158,10 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     // if (C > 0) { require(['_tests']); }
     C.warn(NOM, 'inited @ ' + W._dbug, API);
     API.init = 'INITED';
-    return API;
   }
 
   $.extend(API, {
     init: init,
-    //
-    EL: EL,
-    updateMenu: _revMenu,
   });
 
   return API;

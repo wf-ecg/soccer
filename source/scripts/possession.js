@@ -18,6 +18,31 @@ define(['jqxtn', 'data', 'libs/knob', 'libs/ui',
 
   // - - - - - - - - - - - - - - - - - -
 
+  function proto() {
+    Ui.Donut = function () {};
+    Ui.Donut.prototype = Object.create(Ui.prototype);
+    Ui.Donut.prototype.createElement = function () {
+      var arc;
+
+      Ui.prototype.createElement.apply(this, arguments);
+
+      this.addComponent(new Ui.Arc({
+        arcWidth: this.width / API.defs.girth,
+      }));
+      this.merge(this.options, {
+        arcWidth: this.width / API.defs.girth,
+      });
+
+      arc = new Ui.El.Arc(this.options);
+      arc.setAngle(this.options.anglerange);
+
+      this.el.node.appendChild(arc.node);
+      this.el.node.setAttribute('class', 'p2');
+    };
+  }
+
+  // - - - - - - - - - - - - - - - - - -
+
   EL = {
     div: '.possession',
   };
@@ -36,34 +61,12 @@ define(['jqxtn', 'data', 'libs/knob', 'libs/ui',
       obj = new Knob(sel[0], new Ui.Donut());
       sel.data('Knob', obj);
 
-      API.svg = obj;
+      this.svg = obj;
     },
     set: function (num) {
-      API.svg.changed(-100 / 5);
-      API.svg.changed(num / 5);
+      this.svg.changed(-100 / 5);
+      this.svg.changed(num / 5);
       EL.div.find('.major h3').text(num + '%');
-    },
-    proto: function () {
-      Ui.Donut = function () {};
-      Ui.Donut.prototype = Object.create(Ui.prototype);
-      Ui.Donut.prototype.createElement = function () {
-        var arc;
-
-        Ui.prototype.createElement.apply(this, arguments);
-
-        this.addComponent(new Ui.Arc({
-          arcWidth: this.width / API.defs.girth,
-        }));
-        this.merge(this.options, {
-          arcWidth: this.width / API.defs.girth,
-        });
-
-        arc = new Ui.El.Arc(this.options);
-        arc.setAngle(this.options.anglerange);
-
-        this.el.node.appendChild(arc.node);
-        this.el.node.setAttribute('class', 'p2');
-      };
     },
     load: function () {
       var cs, paths;
@@ -76,14 +79,14 @@ define(['jqxtn', 'data', 'libs/knob', 'libs/ui',
       paths.eq(1).css('fill', cs[0]);
     },
     init: function (sel, num) {
-      API.proto();
-      API.add(sel);
-      API.load();
-      API.set(num);
+      proto();
+      this.add(sel);
+      this.load();
+      this.set(num);
 
       C.debug([NOM, API]);
 
-      API.init = API.load;
+      this.init = this.load;
     },
   });
 
