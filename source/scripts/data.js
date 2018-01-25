@@ -1,11 +1,19 @@
-/*global define */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*global define, */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  CHANGED 2018-01-25
+  IDEA    Model and adjust data: for gui, and from ajax
+  NOTE    ???
+  TODO    ???
+
+ */
 define(['jquery', 'util',
 ], function ($, UT) {
   'use strict';
+
+  var API;
   var NOM = 'Data';
-  // var W = window;
   var C = console;
+  // var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
@@ -21,7 +29,7 @@ define(['jquery', 'util',
 
   // - - - - - - - - - - - - - - - - - -
 
-  var API = Object.create({
+  API = Object.create({
     init: null,
     //
     _: NOM,

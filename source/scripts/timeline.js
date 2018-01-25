@@ -1,14 +1,23 @@
-/*global define */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*global define, */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  CHANGED 2018-01-25
+  IDEA    Manage match-timeline eles: cards, goals
+  NOTE    ???
+  TODO    ???
+
+ */
 define(['jqxtn', 'libs/util-dim', 'data',
 ], function ($, UT, Data) {
   'use strict';
+
+  var API, EL;
   var NOM = 'Timeline';
-  // var W = window;
   var C = console;
+  // var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
+
 
   function Trivent(time, side, icon) {
     this.time = (time || 55) % 91;
@@ -33,13 +42,13 @@ define(['jqxtn', 'libs/util-dim', 'data',
 
   // - - - - - - - - - - - - - - - - - -
 
-  var EL = {
+  EL = {
     cache: '',
     div: '.timeline .events',
     bar: '.timeline .events table',
     wrap: '.timeline .linewrap',
   };
-  var API = Object.create({
+  API = Object.create({
     EL: EL,
     h: 0,
     w: 0,

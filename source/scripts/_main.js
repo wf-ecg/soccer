@@ -1,6 +1,6 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2017-08-08
+  CHANGED 2018-01-25
   IDEA    Hook up various sub systems
   NOTE    bind events, store configs
   TODO    ???
@@ -10,14 +10,15 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
 ], function ($, UT, Data, Accuracy, Possession, Rankings, Shotsfaced, Timeline) {
   'use strict';
 
+  var API, EL;
   var NOM = 'Main';
-  var W = window;
   var C = console;
+  var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
 
-  var API = Object.create({
+  API = Object.create({
     init: null,
     //
     _: NOM,
@@ -29,7 +30,7 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     Shotsfaced: Shotsfaced,
     Timeline: Timeline,
   });
-  var EL = {
+  EL = {
     fact: '.thefact',
     factpic: '.factpic',
     menu: '#GameNum',

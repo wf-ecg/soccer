@@ -1,11 +1,19 @@
-/*global define */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*global define, */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  CHANGED 2018-01-25
+  IDEA    Paint hits/misses eles over net graphic
+  NOTE    ???
+  TODO    ???
+
+ */
 define(['jqxtn', 'libs/util-dim',
 ], function ($, UT) {
   'use strict';
+
+  var API, EL;
   var NOM = 'Shotsfaced';
-  // var W = window;
   var C = console;
+  // var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
@@ -23,13 +31,13 @@ define(['jqxtn', 'libs/util-dim',
 
   // - - - - - - - - - - - - - - - - - -
 
-  var EL = {
+  EL = {
     cache: '',
     div: '.shotsfaced',
     net: '.net',
     nums: '.nums span',
   };
-  var API = Object.create({
+  API = Object.create({
     EL: EL,
     total: 0,
     saves: 0,

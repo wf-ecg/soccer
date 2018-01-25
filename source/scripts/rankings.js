@@ -1,20 +1,33 @@
-/*global define */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jqxtn'], function ($) {
+/*global define, */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  CHANGED 2018-01-25
+  IDEA    Fill group... table of stats
+  NOTE    ???
+  TODO    ???
+
+ */
+define(['jqxtn',
+], function ($) {
   'use strict';
+
+  var API, EL, _Data;
   var NOM = 'Rankings';
-  // var W = window;
   var C = console;
+  // var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
 
+
   var _Data;
-  var EL = {
+
+  // - - - - - - - - - - - - - - - - - -
+
+  EL = {
     div: '.rankings table',
     rows: '.rankings table tr:not(:first-child)',
   };
-  var API = Object.create({
+  API = Object.create({
     EL: EL,
     set: function (data) {
       _Data = data;
@@ -58,6 +71,37 @@ define(['jqxtn'], function ($) {
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  */

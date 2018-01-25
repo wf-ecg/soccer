@@ -1,21 +1,29 @@
-/*global define */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*global define, */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  CHANGED 2018-01-25
+  IDEA    Generate and modify pass-accuracy divs (boxes)
+  NOTE    ???
+  TODO    ???
+
+ */
 define(['jqxtn', 'data',
 ], function ($, Data) {
   'use strict';
+
+  var API, EL;
   var NOM = 'Accuracy';
-  // var W = window;
   var C = console;
+  // var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
 
-  var EL = {
+  EL = {
     div: '.accuracy .limit',
     maj: '.accuracy .limit .major',
     min: '.accuracy .limit .minor',
   };
-  var API = Object.create({
+  API = Object.create({
     Data: Data,
     EL: EL,
     percent: function (num) {
