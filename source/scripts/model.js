@@ -64,9 +64,11 @@ define(['jquery', 'util',
       return (this.dict[key] || key);
     },
     readFrom: function (url, cb) {
-      $('<tmp>').load(`${url} a`, function () {
+      $('<tmp>').load(url + ' a', function () {
         var links = $(this).children().get();
-        links = links.map(a => `games/${a.text.replace('.js', '')}`);
+        links = links.map(function (a) {
+          return 'games/' + a.text.replace('.js', '');
+        });
 
         require(links, function () {
           links.map(inject);

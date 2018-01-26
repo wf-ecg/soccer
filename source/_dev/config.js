@@ -28,6 +28,7 @@ require.config({
     ui: 'libs/ui',
     util: 'libs/util',
     uxtra: 'libs/util-xtra',
+    games: '../data',
   },
   shim: {
     _main: {
@@ -70,12 +71,7 @@ require(['jquery', 'lib/dbug'], function ($, Dbug) {
 
   // - - - - - - - - - - - - - - - - - -
   /// CUSTOMIZATIONS
-  require(['model', 'main', 'jqxtn'], function (Model, Main) {
-    require.config({
-      paths: {
-        games: '../data',
-      },
-    });
+  require(['model', 'main'], function (Model, Main) {
 
     // lazily init
     Model.readFrom('data/index.html', Main.init);
