@@ -51,7 +51,8 @@ define(['jqxtn',
   API = Object.create({
     EL: EL,
     load: function (data) {
-      fillup(data);
+      this.data = data || this.data;
+      fillup(this.data);
     },
     init: function (data) {
       $.reify(EL);

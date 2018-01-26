@@ -117,19 +117,18 @@ define(['jqxtn', 'libs/util-dim', 'model',
     },
     reset: function (data) {
       EL.cache.remove();
-      this.load(data || this.data);
+      this.load(data);
     },
-    load: function (arr) {
-      this.data = arr;
+    load: function (data) {
+      this.data = data || this.data;
 
       this.measureBar();
 
-      $.each(arr, function () {
+      $.each(this.data, function () {
         API.addEvent(this);
       });
     },
     init: function (data) {
-      data = data || this.data;
       $.reify(EL);
       EL.div.on('click', function () {
         API.reset();

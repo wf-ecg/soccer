@@ -98,18 +98,18 @@ define(['jqxtn', 'libs/util-dim',
     },
     reset: function (data) {
       EL.cache.remove();
-      this.load(data || this.data);
+      this.load(data);
     },
-    load: function (arr) {
-      this.data = arr;
+    load: function (data) {
+      this.data = data || this.data;
 
-      $.each(arr, function (i, e) {
+      $.each(this.data, function (i, e) {
         API.addBall(e);
       });
+
       this.updateNums();
     },
     init: function (data) {
-      data = data || this.data;
       $.reify(EL);
       EL.div.on('click', function () {
         API.reset();
