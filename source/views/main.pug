@@ -1,14 +1,16 @@
 doctype html
-html(lang='en')
+html(lang='en').loading
   include ./parts/_head
 
-  body.loading
+  body
+
     div(data-role='page' tabindex='0')
 
     form
       | Select match:
       select#GameNum(size='1')
 
+    // main
     section.cells
 
       include ./parts/top
@@ -17,11 +19,11 @@ html(lang='en')
 
       .theplayer
         h4 Player of the Match
-        img(src='#', alt='#')
+        img(src='#' alt='#')
         h3.bottom #GettingItDone
 
       .theshot
-        img.fill(src='#', alt='#')
+        img.fill(src='#' alt='#')
         h3.bottom
           | Photo <br>
           | of the <br>
