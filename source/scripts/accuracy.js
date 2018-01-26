@@ -6,8 +6,8 @@
   TODO    ???
 
  */
-define(['jqxtn', 'data',
-], function ($, Data) {
+define(['jqxtn', 'model',
+], function ($, Model) {
   'use strict';
 
   var API, EL;
@@ -33,7 +33,7 @@ define(['jqxtn', 'data',
     min: '.accuracy .limit .minor',
   };
   API = Object.create({
-    Data: Data,
+    Model: Model,
     EL: EL,
     percent: function (num) {
       num = num || 0.5;
@@ -73,7 +73,7 @@ define(['jqxtn', 'data',
       this.colors(getColor(EL.min), getColor(EL.maj));
     },
     colors: function (c1, c2) {
-      var cs = Data.colors();
+      var cs = Model.colors();
       c2 = '#999';
       this.setColor(EL.maj, c1 || cs[0]);
       this.setColor(EL.min, c2 || cs[1]);

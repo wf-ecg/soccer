@@ -6,8 +6,8 @@
   TODO    ???
 
  */
-define(['jqxtn', 'data', 'libs/knob', 'libs/ui',
-], function ($, Data, Knob, Ui) {
+define(['jqxtn', 'model', 'libs/knob', 'libs/ui',
+], function ($, Model, Knob, Ui) {
   'use strict';
 
   var API, EL;
@@ -71,7 +71,7 @@ define(['jqxtn', 'data', 'libs/knob', 'libs/ui',
     load: function () {
       var cs, paths;
 
-      cs = Data.colors();
+      cs = Model.colors();
       $.reify(EL);
       paths = EL.div.find('path');
 

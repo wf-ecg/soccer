@@ -6,8 +6,8 @@
   TODO    ???
 
  */
-define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
-], function ($, UT, Data, Accuracy, Possession, Rankings, Shotsfaced, Timeline) {
+define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
+], function ($, UT, Model, Accuracy, Possession, Rankings, Shotsfaced, Timeline) {
   'use strict';
 
   var API, EL;
@@ -19,15 +19,15 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
   // - - - - - - - - - - - - - - - - - -
 
   function _revMenu() {
-    UT.picker.menu(EL.menu, Data.games);
-    EL.menu.val(Data.current);
+    UT.picker.menu(EL.menu, Model.games);
+    EL.menu.val(Model.current);
   }
 
   function renderGame(num) {
     var game, stats;
 
     try {
-      game = Data.getGame(num);
+      game = Model.getGame(num);
       stats = game.match;
 
       _revMenu();
@@ -47,11 +47,11 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
       EL.score //
         .find('.center').text(stats.score.join('-')).end() //
         .find('.left img').attr({
-          src: `./images/flags/${Data.getTeam(stats.teams[0]).flag}`,
+          src: `./images/flags/${Model.getTeam(stats.teams[0]).flag}`,
           alt: stats.teams[0],
         }).end() //
         .find('.right img').attr({
-          src: `./images/flags/${Data.getTeam(stats.teams[1]).flag}`,
+          src: `./images/flags/${Model.getTeam(stats.teams[1]).flag}`,
           alt: stats.teams[1],
         });
       EL.ticket //
@@ -99,7 +99,7 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
       });
 
       // info stuff
-      var src = JSON.stringify(Data.games, function (k, v) {
+      var src = JSON.stringify(Model.games, function (k, v) {
         return (v && v.join && typeof v[1] !== 'object') ? v.join('|') : v;
       }, 4);
 
@@ -131,12 +131,7 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
     tweet: '.thetweet',
   };
   API = Object.create({
-    init: null,
-    //
-    _: NOM,
-    EL: EL,
-    UT: UT,
-    Data: Data,
+    Model: Model,
     Accuracy: Accuracy,
     Possession: Possession,
     Rankings: Rankings,
@@ -162,6 +157,10 @@ define(['jqxtn', 'uxtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfa
 
   $.extend(API, {
     init: init,
+    //
+    _: NOM,
+    EL: EL,
+    UT: UT,
   });
 
   return API;

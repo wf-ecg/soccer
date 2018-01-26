@@ -6,8 +6,8 @@
   TODO    ???
 
  */
-define(['jqxtn', 'libs/util-dim', 'data',
-], function ($, UT, Data) {
+define(['jqxtn', 'libs/util-dim', 'model',
+], function ($, UT, Model) {
   'use strict';
 
   var API, EL;
@@ -96,7 +96,7 @@ define(['jqxtn', 'libs/util-dim', 'data',
       }).appendTo(EL.div).addClass('point');
 
       icon.css({
-        backgroundColor: Data.lookup(tv.icon),
+        backgroundColor: Model.lookup(tv.icon),
         color: tv.icon,
         left: _pc(9),
         top: _px(2 * pol + off),

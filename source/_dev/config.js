@@ -70,7 +70,7 @@ require(['jquery', 'lib/dbug'], function ($, Dbug) {
 
   // - - - - - - - - - - - - - - - - - -
   /// CUSTOMIZATIONS
-  require(['data', 'main', 'jqxtn'], function (Data, Main) {
+  require(['model', 'main', 'jqxtn'], function (Model, Main) {
     require.config({
       paths: {
         games: '../data',
@@ -78,7 +78,7 @@ require(['jquery', 'lib/dbug'], function ($, Dbug) {
     });
 
     // lazily init
-    Data.readFrom('data/index.html', Main.init);
+    Model.readFrom('data/index.html', Main.init);
 
     // expose for debug
     if (W._dbug > -1) W.Main = Main;
