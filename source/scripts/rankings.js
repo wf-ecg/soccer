@@ -10,7 +10,7 @@ define(['jqxtn',
 ], function ($) {
   'use strict';
 
-  var API, EL, _Data;
+  var API, EL;
   var NOM = 'Rankings';
   var C = console;
   // var W = window;
@@ -50,15 +50,8 @@ define(['jqxtn',
   };
   API = Object.create({
     EL: EL,
-    set: function (data) {
-      _Data = data;
-    },
-    get: function () {
-      return _Data;
-    },
     load: function (data) {
-      this.set(data);
-      fillup(_Data);
+      fillup(data);
     },
     init: function (data) {
       $.reify(EL);
