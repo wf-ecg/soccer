@@ -7,6 +7,7 @@
 
 // Dependencies
 // var pkg = require('../package.json');
+var pkg /*        */ = require('../package.json');
 var gulp /*       */ = require('gulp');
 var babel /*      */ = require('gulp-babel');
 var changed /*    */ = require('gulp-changed');
@@ -38,8 +39,7 @@ gulp.task('scripts', function () {
 
   // Lint JS
   .pipe(jshint(jshintConf))
-    .pipe(jshint.reporter(stylish))
-    .pipe(babel({
+    .pipe(pkg.stage < 2 ? jshint.reporter(stylish) : babel({
       presets: ['es2015'],
     }))
 

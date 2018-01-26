@@ -1,62 +1,44 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2017-08-08
+  CHANGED 2018-01-25
   IDEA    Hook up various sub systems
   NOTE    bind events, store configs
   TODO    ???
 
  */
-define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
-], function ($, UT, Data, accuracy, possession, rankings, shotsfaced, timeline) {
+define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
+], function ($, UT, Model, Accuracy, Possession, Rankings, Shotsfaced, Timeline) {
   'use strict';
 
+  var API, EL;
   var NOM = 'Main';
-  var W = window;
   var C = console;
+  var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
 
-  var API = {
-    init: null,
-    //
-    _: NOM,
-    UT: UT,
-    Data: Data,
-  };
-  var EL = {
-    fact: '.thefact',
-    factpic: '.factpic',
-    menu: '#GameNum',
-    player: '.theplayer',
-    score: '.top .score',
-    shot: '.theshot',
-    ticket: '.top .ticket',
-    top: '.top',
-    tweet: '.thetweet',
-  };
-
   function _revMenu() {
-    UT.picker.menu(EL.menu, Data.games);
-    EL.menu.val(Data.current);
+    UT.picker.menu(EL.menu, Model.games);
+    EL.menu.val(Model.current);
   }
 
   function renderGame(num) {
     var game, stats;
 
     try {
-      game = Data.game(num);
+      game = Model.getGame(num);
       stats = game.match;
 
       _revMenu();
 
       $('section div').hide().fadeIn();
 
-      shotsfaced.init(stats.shots);
-      timeline.init(stats.events);
-      accuracy.init(stats.accuracy);
-      rankings.init(game.grouping);
-      possession.init('.donut', stats.possession);
+      Shotsfaced.init(stats.shots);
+      Timeline.init(stats.events);
+      Accuracy.init(stats.accuracy);
+      Rankings.init(game.grouping);
+      Possession.init('.donut', stats.possession);
 
       /// TOP
       EL.top //
@@ -65,11 +47,11 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
       EL.score //
         .find('.center').text(stats.score.join('-')).end() //
         .find('.left img').attr({
-          src: `./images/flags/${Data.team(stats.teams[0]).flag}`,
+          src: `./images/flags/${Model.getTeam(stats.teams[0]).flag}`,
           alt: stats.teams[0],
         }).end() //
         .find('.right img').attr({
-          src: `./images/flags/${Data.team(stats.teams[1]).flag}`,
+          src: `./images/flags/${Model.getTeam(stats.teams[1]).flag}`,
           alt: stats.teams[1],
         });
       EL.ticket //
@@ -117,7 +99,7 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
       });
 
       // info stuff
-      var src = JSON.stringify(Data.games, function (k, v) {
+      var src = JSON.stringify(Model.games, function (k, v) {
         return (v && v.join && typeof v[1] !== 'object') ? v.join('|') : v;
       }, 4);
 
@@ -136,6 +118,28 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
   }
 
   // - - - - - - - - - - - - - - - - - -
+
+  EL = {
+    fact: '.thefact',
+    factpic: '.factpic',
+    menu: '#GameNum',
+    player: '.theplayer',
+    score: '.top .score',
+    shot: '.theshot',
+    ticket: '.top .ticket',
+    top: '.top',
+    tweet: '.thetweet',
+  };
+  API = Object.create({
+    Model: Model,
+    Accuracy: Accuracy,
+    Possession: Possession,
+    Rankings: Rankings,
+    Shotsfaced: Shotsfaced,
+    Timeline: Timeline,
+  });
+
+  // - - - - - - - - - - - - - - - - - -
   // PAGE LOADED
 
   function init() {
@@ -149,14 +153,14 @@ define(['jquery', 'libs/util-xtra', 'data', 'accuracy', 'possession', 'rankings'
     // if (C > 0) { require(['_tests']); }
     C.warn(NOM, 'inited @ ' + W._dbug, API);
     API.init = 'INITED';
-    return API;
   }
 
   $.extend(API, {
     init: init,
     //
-    _EL: EL,
-    updateMenu: _revMenu,
+    _: NOM,
+    EL: EL,
+    UT: UT,
   });
 
   return API;

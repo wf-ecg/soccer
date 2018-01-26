@@ -2,6 +2,7 @@
   only: [
     "*.es6",
     "*.jsx",
+    "*.js",
   ],
   presets: [
     "es2015",

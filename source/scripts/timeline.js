@@ -1,20 +1,29 @@
-/*global define */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'libs/util-dim', 'data',
-], function ($, UT, Data) {
+/*global define, */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  CHANGED 2018-01-25
+  IDEA    Manage match-timeline eles: cards, goals
+  NOTE    ???
+  TODO    ???
+
+ */
+define(['jqxtn', 'libs/util-dim', 'model',
+], function ($, UT, Model) {
   'use strict';
+
+  var API, EL;
   var NOM = 'Timeline';
-  var W = window;
   var C = console;
+  // var W = window;
   C.debug(NOM, 'loaded');
 
-  var EL = {
-    cache: '',
-    div: '.timeline .events',
-    bar: '.timeline .events table',
-    wrap: '.timeline .linewrap',
+  // - - - - - - - - - - - - - - - - - -
+
+  $.fn.centerize = function () {
+    this.each(function () {
+      UT.dim.prox(this);
+    });
+    return this;
   };
-  var API = Object.create(null);
 
   function Trivent(time, side, icon) {
     this.time = (time || 55) % 91;
@@ -29,15 +38,42 @@ define(['jquery', 'libs/util-dim', 'data',
   function _pc(n) {
     return (n | 0) + '%';
   }
-  $.fn.centerize = function () {
-    this.each(function () {
-      UT.dim.prox(this);
-    });
-    return this;
-  };
 
-  $.extend(API, {
-    _EL: EL,
+  // function pxTpc(px) {
+  //   px = px || 0;
+  //   return (px / API.w * 100) | 0; }
+  // function pcTpx(pc) {
+  //   pc = pc || 100;
+  //   return (API.w * pc / 100) | 0; }
+  // function adjustpx(num) {
+  //   num *= 0.8; // remove lead and tail (10%)
+  //   num += API.m;
+  //   return num; }
+
+  function adjustpc(num) { // remove lead and tail (10%)
+    return num * 0.8 + 10;
+  }
+
+  function timeTpc(time) { // factor in lead and tail
+    return adjustpc(time / 90 * 100);
+  }
+
+  function moveEvent(time, eles) {
+    eles.css({
+      left: _pc(timeTpc(time)),
+    });
+  }
+
+  // - - - - - - - - - - - - - - - - - -
+
+  EL = {
+    cache: '',
+    div: '.timeline .events',
+    bar: '.timeline .events table',
+    wrap: '.timeline .linewrap',
+  };
+  API = Object.create({
+    EL: EL,
     h: 0,
     w: 0,
     data: null,
@@ -48,7 +84,7 @@ define(['jquery', 'libs/util-dim', 'data',
       if (tv.constructor !== Trivent) {
         tv = new Trivent(tv[0], tv[1], tv[2]);
       }
-      off = API.h / 2;
+      off = this.h / 2;
       pol = (tv.side === 'top') ? -1 - off : off; // -1px fixer??
       point = $('<div>').addClass('trivent').attr('data-time', tv.time);
       icon = point.clone();
@@ -60,7 +96,7 @@ define(['jquery', 'libs/util-dim', 'data',
       }).appendTo(EL.div).addClass('point');
 
       icon.css({
-        backgroundColor: Data.lookup(tv.icon),
+        backgroundColor: Model.lookup(tv.icon),
         color: tv.icon,
         left: _pc(9),
         top: _px(2 * pol + off),
@@ -68,68 +104,40 @@ define(['jquery', 'libs/util-dim', 'data',
 
       // new call stack
       UT.delay(0, function () {
-        API.moveEvent(tv.time, set.centerize());
+        moveEvent(tv.time, set.centerize());
       });
       EL.cache = EL.cache.add(set);
     },
-    moveEvent: function (time, eles) {
-      eles.css({
-        left: _pc(API.timeTpc(time)),
-      });
-    },
     measureBar: function () {
-      API.w = EL.bar.outerWidth();
-      API.h = EL.bar.outerHeight();
-      API.m = API.w / 10; // figure 10% margins
-      API.w -= API.m * 2; // inner cells
-      return [API.w, API.h];
-    },
-    timeTpc: function (time) {
-      //             factor in lead and tail
-      return API.adjustpc(time / 90 * 100);
-    },
-    pxTpc: function (px) {
-      px = px || 0;
-      return (px / API.w * 100) | 0;
-    },
-    pcTpx: function (pc) {
-      pc = pc || 100;
-      return (API.w * pc / 100) | 0;
-    },
-    adjustpx: function (num) {
-      num *= 0.8; // remove lead and tail (10%)
-      num += API.m;
-      return num;
-    },
-    adjustpc: function (num) {
-      num *= 0.8; // remove lead and tail (10%)
-      num += 10;
-      return num;
+      this.w = EL.bar.outerWidth();
+      this.h = EL.bar.outerHeight();
+      this.m = this.w / 10; // figure 10% margins
+      this.w -= this.m * 2; // inner cells
+      return [this.w, this.h];
     },
     reset: function (data) {
       EL.cache.remove();
-      API.load(data || API.data);
+      this.load(data);
     },
-    load: function (arr) {
-      API.data = arr;
+    load: function (data) {
+      this.data = data || this.data;
 
-      API.measureBar();
+      this.measureBar();
 
-      $.each(arr, function () {
+      $.each(this.data, function () {
         API.addEvent(this);
       });
     },
     init: function (data) {
-      data = data || API.data;
       $.reify(EL);
       EL.div.on('click', function () {
         API.reset();
       });
-      API.load(data);
+      this.load(data);
 
       C.debug([NOM, API]);
 
-      API.init = 'INITED';
+      this.init = this.reset;
     },
   });
 

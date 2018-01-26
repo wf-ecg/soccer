@@ -1,55 +1,66 @@
-/*global define */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery'], function ($) {
+/*global define, */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  CHANGED 2018-01-25
+  IDEA    Fill group... table of stats
+  NOTE    ???
+  TODO    ???
+
+ */
+define(['jqxtn',
+], function ($) {
   'use strict';
+
+  var API, EL;
   var NOM = 'Rankings';
-  var W = window;
   var C = console;
+  // var W = window;
   C.debug(NOM, 'loaded');
 
-  var EL = {
+  // - - - - - - - - - - - - - - - - - -
+
+  function getCxy(c, r) {
+    var tmp = EL.rows.eq(r);
+    tmp = tmp.children().eq(c);
+    return tmp;
+  }
+
+  function fillup(data) {
+    var y = 0;
+    $.each(data, function (i, row) {
+
+      getCxy(0, y).find('img').attr({
+        src: './images/flags/' + i.toLowerCase() + '.png',
+        alt: i,
+      });
+      getCxy(1, y).text(i);
+
+      $.each(row, function (j, cell) {
+        getCxy(j + 2, y).text(cell);
+      });
+
+      y++;
+    });
+  }
+
+  // - - - - - - - - - - - - - - - - - -
+
+  EL = {
     div: '.rankings table',
     rows: '.rankings table tr:not(:first-child)',
   };
-  var API = Object.create(null);
-  var dat;
-
-  $.extend(API, {
-    _EL: EL,
-    set: function (data) {
-      dat = data;
-      return API;
-    },
-    getCxy: function (c, r) {
-      var tmp = EL.rows.eq(r);
-      tmp = tmp.children().eq(c);
-      return tmp;
-    },
-    get: function () {
-      return dat;
-    },
-    fillup: function () {
-      var y = 0;
-      $.each(dat, function (i, row) {
-
-        API.getCxy(0, y).find('img').attr({
-          src: './images/flags/' + i.toLowerCase() + '.png',
-          alt: i,
-        });
-        API.getCxy(1, y).text(i);
-
-        $.each(row, function (j, cell) {
-          API.getCxy(j + 2, y).text(cell);
-        });
-
-        y++;
-      });
+  API = Object.create({
+    EL: EL,
+    load: function (data) {
+      this.data = data || this.data;
+      fillup(this.data);
     },
     init: function (data) {
       $.reify(EL);
-      API.set(data).fillup();
+      this.load(data);
 
       C.debug([NOM, API]);
+
+      this.init = this.load;
     },
   });
 
@@ -58,6 +69,37 @@ define(['jquery'], function ($) {
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  */

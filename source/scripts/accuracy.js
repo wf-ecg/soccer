@@ -1,22 +1,40 @@
-/*global define */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'data',
-], function ($, Data) {
+/*global define, */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  CHANGED 2018-01-25
+  IDEA    Generate and modify pass-accuracy divs (boxes)
+  NOTE    ???
+  TODO    ???
+
+ */
+define(['jqxtn', 'model',
+], function ($, Model) {
   'use strict';
+
+  var API, EL;
   var NOM = 'Accuracy';
-  var W = window;
   var C = console;
+  // var W = window;
   C.debug(NOM, 'loaded');
 
-  var EL = {
+  // - - - - - - - - - - - - - - - - - -
+
+  // function getValue(ele) {
+  //   return ele.data('value'); }
+
+  function getColor(ele) {
+    return ele.data('color');
+  }
+
+  // - - - - - - - - - - - - - - - - - -
+
+  EL = {
     div: '.accuracy .limit',
     maj: '.accuracy .limit .major',
     min: '.accuracy .limit .minor',
   };
-  var API = Object.create(null);
-
-  $.extend(API, {
-    _EL: EL,
+  API = Object.create({
+    Model: Model,
+    EL: EL,
     percent: function (num) {
       num = num || 0.5;
       num = num % 100;
@@ -29,10 +47,10 @@ define(['jquery', 'data',
       if (num < 50) {
         C.warn('normalize', num);
         num = 100 - num;
-        API.swapColor();
+        this.swapColor();
       }
-      API.setValue(EL.maj, num); // mod major div
-      API.setValue(EL.min, 100 - num); // mod minor
+      this.setValue(EL.maj, num); // mod major div
+      this.setValue(EL.min, 100 - num); // mod minor
     },
     setValue: function (ele, val) {
       if (val < 44) {
@@ -45,38 +63,32 @@ define(['jquery', 'data',
       });
       ele.data('value', val); // store
     },
-    getValue: function (ele) {
-      return ele.data('value');
-    },
     setColor: function (ele, val) {
       ele.css({
         backgroundColor: val,
       });
       ele.data('color', val); // store
     },
-    getColor: function (ele) {
-      return ele.data('color');
-    },
     swapColor: function () {
-      API.colors(API.getColor(EL.min), API.getColor(EL.maj));
+      this.colors(getColor(EL.min), getColor(EL.maj));
     },
     colors: function (c1, c2) {
-      var cs = Data.colors();
+      var cs = Model.colors();
       c2 = '#999';
-      API.setColor(EL.maj, c1 || cs[0]);
-      API.setColor(EL.min, c2 || cs[1]);
+      this.setColor(EL.maj, c1 || cs[0]);
+      this.setColor(EL.min, c2 || cs[1]);
     },
     load: function (num) {
-      API.colors();
-      API.percent(num);
+      this.colors();
+      this.percent(num);
     },
     init: function (num) {
       $.reify(EL);
-      API.load(num);
+      this.load(num);
 
       C.debug([NOM, API]);
 
-      API.init = 'INITED';
+      this.init = this.load;
     },
   });
 

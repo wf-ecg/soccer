@@ -25,8 +25,10 @@ require.config({
     stats: 'libs/ecg-stats',
     //
     main: '_main',
-    util: 'libs/util',
     ui: 'libs/ui',
+    util: 'libs/util',
+    uxtra: 'libs/util-xtra',
+    games: '../data',
   },
   shim: {
     _main: {
@@ -69,15 +71,10 @@ require(['jquery', 'lib/dbug'], function ($, Dbug) {
 
   // - - - - - - - - - - - - - - - - - -
   /// CUSTOMIZATIONS
-  require(['data', 'main', 'jqxtn'], function (Data, Main) {
-    require.config({
-      paths: {
-        games: '../data',
-      },
-    });
+  require(['model', 'main'], function (Model, Main) {
 
     // lazily init
-    Data.readFrom('data/index.html', Main.init);
+    Model.readFrom('data/index.html', Main.init);
 
     // expose for debug
     if (W._dbug > -1) W.Main = Main;

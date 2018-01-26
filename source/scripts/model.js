@@ -1,14 +1,22 @@
-/*global define */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*global define, */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  CHANGED 2018-01-25
+  IDEA    Model and adjust data: for gui, and from ajax
+  NOTE    ???
+  TODO    ???
+
+ */
 define(['jquery', 'util',
 ], function ($, UT) {
   'use strict';
-  var NOM = 'Data';
-  var W = window;
-  var C = console;
-  C.debug(NOM, 'loaded');
 
   var API;
+  var NOM = 'Model';
+  var C = console;
+  // var W = window;
+  C.debug(NOM, 'loaded');
+
+  // - - - - - - - - - - - - - - - - - -
 
   function inject(mod) {
     try {
@@ -19,7 +27,13 @@ define(['jquery', 'util',
     }
   }
 
-  API = {
+  // - - - - - - - - - - - - - - - - - -
+
+  API = Object.create({
+    init: null,
+    //
+    _: NOM,
+    UT: UT,
     current: 0,
     defs: {
       speed: 333,
@@ -28,31 +42,33 @@ define(['jquery', 'util',
     teams: {},
     addGame: function (num, data) { // opt num/push
       if (data) {
-        API.games[num] = data;
+        this.games[num] = data;
       } else {
-        API.games.push(num);
+        this.games.push(num);
       }
     },
-    game: function (num) {
-      API.current = UT.def(num) ? num : API.current;
-      return API.games[API.current];
+    getGame: function (num) {
+      this.current = UT.def(num) ? num : this.current;
+      return this.games[this.current];
     },
-    winner: function (num) {
-      return API.game(num).match.teams[0];
+    getWinner: function (num) {
+      return this.getGame(num).match.teams[0];
     },
     colors: function (num) {
-      return API.teams[API.winner(num)].colors;
+      return this.teams[this.getWinner(num)].colors;
     },
-    team: function (nom) {
-      return API.teams[nom];
+    getTeam: function (nom) {
+      return this.teams[nom];
     },
     lookup: function (key) {
-      return (API.dict[key] || key);
+      return (this.dict[key] || key);
     },
     readFrom: function (url, cb) {
-      $('<tmp>').load(`${url} a`, function () {
+      $('<tmp>').load(url + ' a', function () {
         var links = $(this).children().get();
-        links = links.map(a => `games/${a.text.replace('.js', '')}`);
+        links = links.map(function (a) {
+          return 'games/' + a.text.replace('.js', '');
+        });
 
         require(links, function () {
           links.map(inject);
@@ -60,7 +76,7 @@ define(['jquery', 'util',
         });
       });
     },
-  };
+  });
 
   API.games = [];
 
