@@ -3,8 +3,16 @@ define({
   match: {
     accuracy: 0,
     possession: 0,
-    events: [ /* time, side, type */
-      [],
+    events: [
+      /* time, side, type */
+      [10, 'top', 'error'],
+      [20, 'not', 'warning'],
+      [30, 'top', 'goal'],
+      [40, 'not', 'error'],
+      [50, 'top', 'warning'],
+      [60, 'not', 'goal'],
+      [70, 'top', 'error'],
+      [80, 'not', 'warning'],
     ],
     teams: ['?', '?'],
     ticket: ['?', '?', '?'],
@@ -21,16 +29,19 @@ define({
   },
   tweet: {
     text: [
-      'asdf asdf asdf',
-      'asdf asdf asdf',
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit,\
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      // 'Ut enim ad minim veniam, quis nostrud exercitation ullamco\
+      // laboris nisi ut aliquip ex ea commodo consequat.',
     ],
     author: '<a href="https://twitter.com/ESPNMag" target="twitter">@ESPNMag</a>',
   },
   fact: {
     text: [
-      'asdf asdf asdf',
-      'asdf asdf asdf',
-      'asdf asdf asdf',
+      'Duis aute irure dolor in reprehenderit in voluptate\
+      velit esse cillum dolore eu fugiat nulla pariatur.\
+      Excepteur sint occaecat cupidatat non proident,\
+      sunt in culpa qui officia deserunt mollit anim id est laborum.',
     ],
   },
   grouping: {
