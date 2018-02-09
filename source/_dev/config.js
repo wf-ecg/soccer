@@ -32,9 +32,10 @@ require.config({
   },
   shim: {
     _main: {
-      // deps: ['bondo'],
+      deps: ['bondo'],
     },
   },
+  waitSeconds: 33,
 });
 
 var HOSTS = {

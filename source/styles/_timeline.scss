@@ -3,43 +3,48 @@
 
 .timeline {
   .linewrap {
-    margin: 2.5rem auto;
     position: relative;
-  }
-  .events {
-    overflow: hidden;
-    position: relative;
+    width: 100%;
 
-    table {
-      border-collapse: collapse;
+    .time {
+      display: flex;
       font-size: 1.2rem;
-      font-weight: 900;
       height: 30px;
-      margin: auto;
-      width: 100%;
-    }
-    td {
-      background-color: white;
-      color: $cyan;
-      text-align: right;
-      width: 14%;
-
-      .debug & {
-        border: 1px solid red;
+      line-height: 1.5;
+      span {
+        background-color: white;
+        color: $cyan;
+        flex-basis: 100%;
+        text-align: right;
+        &:last-child {
+          flex-basis: 90%;
+        }
       }
     }
-    td:first-child,
-    td:last-child {
+  }
+
+  .events {
+    border: 1px dotted red;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: 100%;
+  }
+
+  .bounds {
+    display: flex;
+    font-weight: 900;
+    margin: 2.5rem 0;
+
+    .start,
+    .end {
       background-color: $cyan;
       color: white;
       font-size: 1.5rem;
-      text-align: center;
-      width: 10%;
-    }
-    .gap {
-      width: 1rem;
+      padding: 0 0.5em;
     }
   }
+
   .trivent {
     color: $cyan;
     position: absolute;
