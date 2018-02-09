@@ -3,7 +3,10 @@ head
   meta(charset='utf-8')
   meta(http-equiv='x-ua-compatible' content='ie=edge')
   meta(name='viewport' content='width=device-width')
-  meta(name = 'author' content = 'WF-ECG INTERACTIVE')
+
+  // about
+  meta(name='author' content='Wells Fargo')
+
   // static
   link(rel='canonical'
     href='http://ecg.hosting.wellsfargo.com/x/index.html')
@@ -17,8 +20,16 @@ head
     content='http://ecg.hosting.wellsfargo.com/x/images/icons/x.svg')
   meta(property='og:type'
     content='website')
+
   // css
-  link(href='./fonts/archer.ssm.css' rel='stylesheet' media='all')
-  link(href='./styles/main.css' rel='stylesheet' media='all')
+  link(rel='stylesheet' href='./fonts/archer.ssm.css' )
+  link(rel='stylesheet' href='./styles/main.css')
+
+  // req
+  script.
+    (function(l,i,s,t){s=l.pathname;t=s.toLowerCase().replace(/index/,i||'index');t=t.match
+      (/\w+\.\w+$/)?t:t.replace(/\/*$/,'/index.html');if(t!==s)l.pathname=t;}(location));
+  //script(src='./scripts/libs/globs.js')
+  script(src='./vendors/require.js/require.min.js' data-main='./config')
+
   //
-  script(src='./vendors/require.js/require.js' data-main='./config')
