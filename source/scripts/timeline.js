@@ -50,12 +50,8 @@ define(['jqxtn', 'libs/util-dim', 'model',
   //   num += API.m;
   //   return num; }
 
-  function adjustpc(num) { // remove lead and tail (10%)
-    return num * 0.8 + 10;
-  }
-
   function timeTpc(time) { // factor in lead and tail
-    return adjustpc(time / 90 * 100);
+    return time / 90 * 100;
   }
 
   function moveEvent(time, eles) {
@@ -69,7 +65,7 @@ define(['jqxtn', 'libs/util-dim', 'model',
   EL = {
     cache: '',
     div: '.timeline .events',
-    bar: '.timeline .events table',
+    bar: '.timeline .time',
     wrap: '.timeline .linewrap',
   };
   API = Object.create({
@@ -85,20 +81,20 @@ define(['jqxtn', 'libs/util-dim', 'model',
         tv = new Trivent(tv[0], tv[1], tv[2]);
       }
       off = this.h / 2;
-      pol = (tv.side === 'top') ? -1 - off : off; // -1px fixer??
+      pol = (tv.side === 'top') ? -off : off;
       point = $('<div>').addClass('trivent').attr('data-time', tv.time);
       icon = point.clone();
       set = icon.add(point);
 
       point.css({
-        left: _pc(9),
+        left: _pc(0),
         top: _px(pol + off),
       }).appendTo(EL.div).addClass('point');
 
       icon.css({
         backgroundColor: Model.lookup(tv.icon),
         color: tv.icon,
-        left: _pc(9),
+        left: _pc(0),
         top: _px(2 * pol + off),
       }).appendTo(EL.wrap).addClass(tv.icon);
 
@@ -111,8 +107,8 @@ define(['jqxtn', 'libs/util-dim', 'model',
     measureBar: function () {
       this.w = EL.bar.outerWidth();
       this.h = EL.bar.outerHeight();
-      this.m = this.w / 10; // figure 10% margins
-      this.w -= this.m * 2; // inner cells
+      // this.m = this.w / 10; // figure 10% margins
+      // this.w -= this.m * 2; // inner cells
       return [this.w, this.h];
     },
     reset: function (data) {
