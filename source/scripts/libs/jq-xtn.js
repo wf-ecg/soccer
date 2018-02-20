@@ -1,6 +1,6 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  tweaked 2017-06-12
+  CHANGED 2018-02-15
 
   USE: extend jquery
   - keep to cross-project basics
@@ -44,6 +44,15 @@ define(['jquery', 'lodash'], function ($, _) {
 
   // NEW
   // add namespace to event names
+  $.isAffirmative = function (evt, trig) {
+    trig = trig || 'click keyup'; // keypress 'return' will not fire on msie
+    if (evt.type.slice(0, 3) === 'key') {
+      return evt.which === 13; // no evt.key for safari < 10.1
+    } else if (trig.indexOf(evt.type > -1)) {
+      return true; // click probably
+    }
+  };
+
   $.jqns = function (evs, ns) {
     var arr = (evs || '').split(' ');
 
