@@ -17,6 +17,9 @@ form {
 [title] {
   cursor: help;
 }
+[title=Enlarge] {
+  cursor: zoom-in;
+}
 .author {
   background-image: url('../images/icons/tweet.png');
   background-position: 90% 50%;
