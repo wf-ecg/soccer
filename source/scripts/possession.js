@@ -6,8 +6,8 @@
   TODO    ???
 
  */
-define(['jqxtn', 'model', 'donut',
-], function ($, Model, Donut) {
+define(['jqxtn', 'model', 'donut', 'dial',
+], function ($, Model, Donut, Dial) {
   'use strict';
 
   var API, EL;
@@ -23,6 +23,10 @@ define(['jqxtn', 'model', 'donut',
   };
   API = Object.create({
     EL: EL,
+    Dial: Dial,
+    Donut: Donut,
+    Model: Model,
+    //
     svg: null,
     add: function (sel) {
       var obj;
@@ -52,10 +56,18 @@ define(['jqxtn', 'model', 'donut',
       paths.eq(0).css('fill', cs[1]);
       paths.eq(1).css('fill', cs[0]);
     },
+    test: function () {
+      var dial = Dial.make();
+
+      EL.div.prev().prepend(dial.input, dial.svg);
+
+      API.dial = dial;
+    },
     init: function (sel, num) {
       this.add(sel);
       this.load();
       this.set(num);
+      this.test();
 
       C.debug([NOM, API]);
 
