@@ -1,13 +1,13 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
-  IDEA    Generate and modify ball-possession svg (donut)
+  CHANGED 2018-02-28
+  IDEA    Generate and modify ball-possession donut
   NOTE    ???
   TODO    ???
 
  */
-define(['jqxtn', 'model', 'libs/knob', 'libs/ui',
-], function ($, Model, Knob, Ui) {
+define(['jqxtn', 'model', 'donut',
+], function ($, Model, Donut) {
   'use strict';
 
   var API, EL;
@@ -18,50 +18,24 @@ define(['jqxtn', 'model', 'libs/knob', 'libs/ui',
 
   // - - - - - - - - - - - - - - - - - -
 
-  function proto() {
-    Ui.Donut = function () {};
-    Ui.Donut.prototype = Object.create(Ui.prototype);
-    Ui.Donut.prototype.createElement = function () {
-      var arc;
-
-      Ui.prototype.createElement.apply(this, arguments);
-
-      this.addComponent(new Ui.Arc({
-        arcWidth: this.width / API.defs.girth,
-      }));
-      this.merge(this.options, {
-        arcWidth: this.width / API.defs.girth,
-      });
-
-      arc = new Ui.El.Arc(this.options);
-      arc.setAngle(this.options.anglerange);
-
-      this.el.node.appendChild(arc.node);
-      this.el.node.setAttribute('class', 'p2');
-    };
-  }
-
-  // - - - - - - - - - - - - - - - - - -
-
   EL = {
     div: '.possession',
   };
   API = Object.create({
     EL: EL,
-    defs: {
-      girth: 7,
-      // 2 = full ... 200 = hairline
-      granularity: 0,
-    },
     svg: null,
     add: function (sel) {
       var obj;
 
       sel = $(sel);
-      obj = new Knob(sel[0], new Ui.Donut());
-      sel.data('Knob', obj);
+      obj = new Donut(sel[0], {
+        girth: 7,
+        // 2 = full ... 200 = hairline
+        granularity: 0,
+      });
+      sel.data('DonutKnob', obj);
 
-      this.svg = obj;
+      this.svg = obj.knob;
     },
     set: function (num) {
       this.svg.changed(-100 / 5);
@@ -79,7 +53,6 @@ define(['jqxtn', 'model', 'libs/knob', 'libs/ui',
       paths.eq(1).css('fill', cs[0]);
     },
     init: function (sel, num) {
-      proto();
       this.add(sel);
       this.load();
       this.set(num);
