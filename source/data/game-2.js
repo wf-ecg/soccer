@@ -10,7 +10,7 @@ define({
       [62, 'top', 'warning'],
       [81, 'top', 'warning'],
     ],
-    teams: ['Mexico', 'Brazil'],
+    teams: ['Cameroon', 'Brazil'],
     ticket: ['June 17', 'Estádio Castelão', 'Fortaleza'],
     score: ['0', '0'],
     shots: [

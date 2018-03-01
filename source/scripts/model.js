@@ -90,13 +90,13 @@ define(['jquery', 'util',
   };
 
   API.teams = {
-    '?'           : { colors: ['#c91721', '#176844'], grouping: 'X', flag: 'mexico.png'        },
+    '?'           : { colors: ['#591721', '#273864'], grouping: 'X', flag: 'mexico.png'        },
     Algeria       : { colors: ['#999999', '#999999'], grouping: 'H', flag: 'algeria.png'       },
     Argentina     : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'argentina.png'     },
     Australia     : { colors: ['#999999', '#999999'], grouping: 'B', flag: 'australia.png'     },
     Belgium       : { colors: ['#999999', '#999999'], grouping: 'H', flag: 'belgium.png'       },
     Bosnia        : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'bosnia.png'        },
-    Brazil        : { colors: ['#289b24', '#02277b'], grouping: 'A', flag: 'brazil.png'        },
+    Brazil        : { colors: ['#689b24', '#02277b'], grouping: 'A', flag: 'brazil.png'        },
     Cameroon      : { colors: ['#289900', '#ffff00'], grouping: 'A', flag: 'cameroon.png'      },
     Chile         : { colors: ['#999999', '#999999'], grouping: 'B', flag: 'chile.png'         },
     Colombia      : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'colombia.png'      },

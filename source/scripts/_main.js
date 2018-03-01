@@ -47,11 +47,11 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
       EL.score //
         .find('.center').text(stats.score.join('-')).end() //
         .find('.left img').attr({
-          src: `./images/flags/${Model.getTeam(stats.teams[0]).flag}`,
+          src: './images/flags/' + Model.getTeam(stats.teams[0]).flag,
           alt: stats.teams[0],
         }).end() //
         .find('.right img').attr({
-          src: `./images/flags/${Model.getTeam(stats.teams[1]).flag}`,
+          src: './images/flags/' + Model.getTeam(stats.teams[1]).flag,
           alt: stats.teams[1],
         });
       EL.ticket //
