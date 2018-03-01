@@ -159,7 +159,7 @@ linters:
     enabled: true
 
   SpaceBeforeBrace:
-    enabled: true
+    enabled: false #true
     style: space # or 'new_line'
     allow_single_line_padding: false
 
