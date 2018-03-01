@@ -11,8 +11,8 @@ $team1: $green;
 $team2: $red;
 $team3: #00698c;
 $team4: #702f8a;
-@mixin ani($time: 2s) {
-  transition-property: all;
+@mixin ani($time: 2s, $prop: all) {
+  transition-property: $prop;
   transition-duration: $time;
 }
 h1,

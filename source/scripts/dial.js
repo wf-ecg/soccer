@@ -112,13 +112,12 @@ define(['jquery'], function ($) {
         num = 100;
         min = 0;
       }
-      if (max) {
-        this.input[0].max = max;
-        this.input[0].min = min;
-      }
-      if (num) {
-        this.input.val(num).change();
-      }
+
+      this.input.attr({
+        max: max,
+        min: min,
+      }).val(num).change();
+
       return this;
     },
     setTransform: function (flip, pitch) {
@@ -131,6 +130,8 @@ define(['jquery'], function ($) {
 
       this.circle.css({
         transform: str, // 'scaleX(-1) rotate(-90deg)'
+        // '-ms-transform': str,
+        // '-webkit-transform': str,
       });
     },
     setWeight: function (num) {

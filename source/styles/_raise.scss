@@ -4,11 +4,18 @@
 .raise {
   cursor: zoom-out;
 
+  .clip {
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
   img.fill {
     bottom: 0;
     position: absolute;
     right: 0;
-    z-index: -1;
   }
   img.raise {
     border-radius: 0.5em;

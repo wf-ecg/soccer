@@ -35,24 +35,26 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
 
   UT.liftpic = function (pic1, path) {
     // make dom img with path
-    var pic2;
+    var clip = pic1.parent();
+    var div = clip.parent();
+    var pic2 = $('<img>');
 
     function _shifter() {
       var off = UT.dim.centxy(pic2);
       UT.dim.prox(pic2, off, pic1);
     }
 
-    pic1.parent() //
+    div //
       .attr('title', 'Enlarge') //
       .addClass('raise') //
       .on('click', function () {
         pic2.toggle(333);
       });
 
-    pic2 = $('<img>') //
+    pic2 //
       .addClass('fill raise') //
       .attr('src', path) //
-      .insertAfter(pic1) //
+      .insertAfter(clip) //
       .load(_shifter);
   };
 

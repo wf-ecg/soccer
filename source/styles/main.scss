@@ -13,7 +13,6 @@ body {
   margin: 1em;
   padding: 1em;
   position: relative;
-  z-index: -3;
   user-select: none;
 }
 h1,
@@ -30,7 +29,6 @@ p {
 section {
   background-color: white;
   position: relative;
-  z-index: -2;
 }
 small {
   font-family: Helvetica, Arial, Geneva, sans-serif;

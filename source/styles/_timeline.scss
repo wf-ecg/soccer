@@ -52,7 +52,7 @@
     color: $cyan;
     position: absolute;
     text-align: center;
-    @include ani;
+    @include ani(2s, left);
   }
   .error,
   .goal,
@@ -74,7 +74,7 @@
   .point {
     color: $cyan;
     font-size: 1.2rem;
-    line-height: 0.8;
+    line-height: 0.9;
     height: 1rem;
     width: 1rem;
     &:before {
