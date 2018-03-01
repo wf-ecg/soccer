@@ -40,16 +40,16 @@ define(['jqxtn', 'model', 'dial',
       });
 
       sel.prepend(API.dial1.svg, API.dial2.svg);
-      // sel.parent().append(API.dial1.input, API.dial2.input);
+      sel.parent().append(API.dial1.input, API.dial2.input);
     },
     set: function (sel, num) {
       var cs = Model.colors();
-      var mun = 100 - num;
+      var inv = 100 - num;
 
       EL.div.find('.major h3').text(num + '%');
 
       API.dial1.setColor(cs[0]).setInput(num);
-      API.dial2.setColor(cs[1]).setInput(mun);
+      API.dial2.setColor(cs[1]).setInput(inv);
     },
     init: function (sel, num) {
       $.reify(EL);

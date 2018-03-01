@@ -20,27 +20,26 @@ define(['jquery'], function ($) {
     color: 'gray',
     flip: false,
     pitch: 0,
+    radius: 50,
     value: 25,
     weight: 15,
-    defs: {
-      circle: {
-        fill: 'transparent',
-        stroke: 'gray',
-        strokeDasharray: '100 100',
-        strokeWidth: '1',
-        transform: 'rotate(-90deg)',
-        transition: 'all 0.2s',
-      },
-      input: {
-        top: '-1rem',
-        opacity: 0.5,
-        position: 'relative',
-        width: '100%',
-      },
-      svg: {
-        opacity: 0.8,
-        position: 'absolute',
-      },
+    circle: {
+      fill: 'transparent',
+      stroke: 'gray',
+      strokeDasharray: '100 100',
+      strokeWidth: '1',
+      transform: 'rotate(-90deg)',
+      transition: 'all 0.2s',
+    },
+    input: {
+      top: '-1rem',
+      opacity: 0.2,
+      position: 'relative',
+      width: '100%',
+    },
+    svg: {
+      opacity: 1,
+      position: 'absolute',
     },
   };
   var EL = {
@@ -107,8 +106,19 @@ define(['jquery'], function ($) {
       this.circle.css('stroke', str || 'transparent');
       return this;
     },
-    setInput: function (num) {
-      if (num) this.input.val(num).change();
+    setInput: function (num, max, min) {
+      if (!max) {
+        max = num;
+        num = 100;
+        min = 0;
+      }
+      if (max) {
+        this.input[0].max = max;
+        this.input[0].min = min;
+      }
+      if (num) {
+        this.input.val(num).change();
+      }
       return this;
     },
     setTransform: function (flip, pitch) {
@@ -125,7 +135,7 @@ define(['jquery'], function ($) {
     },
     setWeight: function (num) {
       var data = this;
-      var radius = 50 - num / 2;
+      var radius = (CF.radius - 1) - (num / 2); // -1px for breathing room
       var circum = UL.calcmax(radius);
 
       data.vals.max = circum;
@@ -189,9 +199,9 @@ define(['jquery'], function ($) {
   // INITS
 
   EL.circle = EL.svg.find('circle');
-  EL.circle.css(CF.defs.circle);
-  EL.input.css(CF.defs.input);
-  EL.svg.css(CF.defs.svg);
+  EL.circle.css(CF.circle);
+  EL.input.css(CF.input);
+  EL.svg.css(CF.svg);
 
   return {
     UL: UL,
