@@ -57,8 +57,13 @@ define(['jqxtn', 'model', 'donut', 'dial',
       paths.eq(1).css('fill', cs[0]);
     },
     test: function () {
-      var dial1 = Dial.make('blue', 50);
-      var dial2 = Dial.make('red', 33);
+      var dial1 = Dial.make({
+        color: 'blue',
+      });
+      var dial2 = Dial.make({
+        color: 'red',
+        value: 50,
+      });
       var foo = EL.div.find('div').first();
 
       foo.prepend(dial1.svg, dial2.svg);

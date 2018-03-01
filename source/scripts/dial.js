@@ -16,13 +16,10 @@ define(['jquery'], function ($) {
 
   // - - - - - - - - - - - - - - - - - -
 
-  var EL = {
-    svg: $('<svg viewBox="-50 -50 100 100"><circle r="1"></circle></svg>'),
-    input: $('<input type="range" min="0" max="100" value="50" step="1">'),
-  };
   var CF = {
-    lastval: +EL.input[0].value,
-    stepbase: +EL.input[0].step,
+    color: 'gray',
+    value: 25,
+    weight: 15,
     defs: {
       circle: {
         fill: 'transparent',
@@ -43,6 +40,10 @@ define(['jquery'], function ($) {
       },
     },
   };
+  var EL = {
+    svg: $('<svg viewBox="-50 -50 100 100"><circle r="1"></circle></svg>'),
+    input: $('<input type="range" min="0" max="100" value="50" step="1">'),
+  };
   var UL = {
     calcmax: function (r) {
       return Math.round(Math.PI * 2 * r);
@@ -54,83 +55,115 @@ define(['jquery'], function ($) {
       return Math.round(val * (max / 100));
     },
     selfclean: function () {
-      this.removeEventListener('transitionend', UL.selfclean);
-      this.style.transform = '';
+      var ele = this;
+      ele.removeEventListener('transitionend', UL.selfclean);
+      ele.style.transform = '';
     },
     chromeclean: function () {
-      this.addEventListener('transitionend', UL.selfclean);
-      this.style.transform = 'translate3d(0, 0, 0)';
+      var ele = this;
+      ele.addEventListener('transitionend', UL.selfclean);
+      ele.style.transform = 'translate3d(0, 0, 0)';
     },
-    changestep: function (evt) {
-      this.step = CF.stepbase * (evt.shiftKey ? 10 : 1);
+    setOffset: function (data, val) {
+      var vs = data.vals;
+
+      vs.input = val || 0;
+      vs.norm = UL.normalize(vs.input, vs.max);
+      vs.output = UL.invert(vs.norm, vs.max);
+
+      data.circle[0].style.strokeDashoffset = vs.output;
+      // UL.chromeclean.bind(data.svg[0])(); // if redraws funny
     },
   };
 
-  function setDial(data, val) {
-    val = {
-      input: val || 0,
-      max: data.maxValue,
-    };
-    val.norm = UL.normalize(val.input, val.max);
-    val.output = UL.invert(val.norm, val.max);
+  function _changeAmount(evt) {
+    var data = $(this).data(NOM);
+    var val = +data.input.val();
 
-    data.circle[0].style.strokeDashoffset = val.output;
-    // UL.chromeclean.bind(data.svg[0])();
-    data.setDial = val;
+    if (evt.which === 0 || val === data.vals.last) return;
+    data.vals.last = val;
+
+    UL.setOffset(data, val);
+  }
+
+  function _changeStep(evt) {
+    var data = $(this).data(NOM);
+    var num = data.vals.step * (evt.shiftKey ? 10 : 1);
+
+    data.input[0].step = num;
   }
 
   // - - - - - - - - - - - - - - - - - -
 
-  function _changeAmount(evt) {
-    var dial = $(this).data(NOM);
-    var val = +dial.input.val();
-    if (evt.which === 0 || val === this.lastval) return;
-    this.lastval = val;
-    setDial(dial, val);
-  }
-
   var proto = {
-    lastValue: 1,
-    maxValue: 100,
+    vals: {},
     setColor: function (str) {
       this.circle.css('stroke', str || 'transparent');
       return this;
     },
-    setValue: function (num) {
+    setInput: function (num) {
       if (num) this.input.val(num);
-      this.input.change();
       return this;
     },
     setWeight: function (num) {
-      var rad = 50 - num / 2;
-      var cir = UL.calcmax(rad);
-      this.maxValue = cir;
-      this.circle.attr('r', rad);
-      this.circle.css({
+      var data = this;
+      var radius = 50 - num / 2;
+      var circum = UL.calcmax(radius);
+
+      data.vals.max = circum;
+      data.circle.attr('r', radius);
+      data.circle.css({
         strokeWidth: num,
-        strokeDasharray: cir + ',' + cir,
+        strokeDasharray: circum + ',' + circum,
       });
-      return this.setValue();
+
+      return this;
+    },
+    update: function () {
+      this.input.change();
+      return this;
+    },
+    init: function (cf) {
+      var data = this;
+
+      data.svg = EL.svg.clone().data(NOM, data);
+      data.input = EL.input.clone().data(NOM, data);
+      data.circle = data.svg.find('circle');
+      data.vals = {
+        input: +data.input[0].value,
+        last: 0,
+        max: 0,
+        norm: 0,
+        output: 0,
+        step: +data.input[0].step,
+      };
+
+      data.setInput(cf.value);
+      data.setWeight(cf.weight);
+      data.setColor(cf.color);
+
+      data.input //
+        .on('change mousemove', _changeAmount) //
+        .on('keyup keydown', _changeStep);
+
+      data.update(); // hack relies on event
+      data.init = 'INITED';
+
+      return data;
     },
   };
 
-  function make(color, value, weight) {
+  // - - - - - - - - - - - - - - - - - -
+
+  function construct(cf) {
+    cf = (typeof cf === 'object') ? cf : {};
+    cf = $.extend({}, CF, cf);
+
     var self = Object.create(proto);
 
-    self.svg = EL.svg.clone();
-    self.circle = self.svg.find('circle');
-    self.input = EL.input.clone().data(NOM, self);
-    self.setColor(color);
-    self.setValue(value || 33);
+    C.log(NOM, 'construct', self);
 
-    self.input //
-      .on('change mousemove', _changeAmount) //
-      .on('keyup keydown', UL.changestep);
-
-    self.setWeight(weight || 15); // hack relies on event
-    C.log(NOM, self);
-
-    return self;
+    return self.init(cf);
   }
 
   // - - - - - - - - - - - - - - - - - -
@@ -143,7 +176,7 @@ define(['jquery'], function ($) {
 
   return {
     UL: UL,
-    make: make,
+    make: construct,
   };
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
