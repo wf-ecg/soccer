@@ -1,8 +1,8 @@
 /*global define */
 define({
   match: {
-    accuracy: 0,
-    possession: 0,
+    accuracy: 63,
+    possession: 36,
     events: [
       /* time, side, type */
       [10, 'top', 'error'],

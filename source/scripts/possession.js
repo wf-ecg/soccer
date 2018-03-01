@@ -6,8 +6,8 @@
   TODO    ???
 
  */
-define(['jqxtn', 'model', 'donut', 'dial',
-], function ($, Model, Donut, Dial) {
+define(['jqxtn', 'model', 'dial',
+], function ($, Model, Dial) {
   'use strict';
 
   var API, EL;
@@ -22,76 +22,47 @@ define(['jqxtn', 'model', 'donut', 'dial',
     div: '.possession',
   };
   API = Object.create({
-    EL: EL,
     Dial: Dial,
-    Donut: Donut,
     Model: Model,
     //
+    dial1: {},
+    dial2: {},
     svg: null,
     add: function (sel) {
-      var obj;
-
       sel = $(sel);
-      obj = new Donut(sel[0], {
-        girth: 7,
-        // 2 = full ... 200 = hairline
-        granularity: 0,
-      });
-      sel.data('DonutKnob', obj);
-
-      this.svg = obj.knob;
-    },
-    set: function (num) {
-      this.svg.changed(-100 / 5);
-      this.svg.changed(num / 5);
-      EL.div.find('.major h3').text(num + '%');
-    },
-    load: function () {
-      var cs, paths;
-
-      cs = Model.colors();
-      $.reify(EL);
-      paths = EL.div.find('path');
-
-      paths.eq(0).css('fill', cs[1]);
-      paths.eq(1).css('fill', cs[0]);
-    },
-    test: function (v1) {
-      var v2 = 100 - v1;
-
-      var dial1 = Dial.make({
-        color: 'blue',
-        control: true,
+      API.dial1 = Dial.make({
         flip: true,
         pitch: 30,
-        value: v1,
       });
-      var dial2 = Dial.make({
-        color: 'red',
+      API.dial2 = Dial.make({
         control: true,
         pitch: 30,
-        value: v2,
       });
-      var foo = EL.div.find('div').first();
 
-      foo.prepend(dial1.svg, dial2.svg);
-      foo.append(dial1.input, dial2.input);
+      sel.prepend(API.dial1.svg, API.dial2.svg);
+      // sel.parent().append(API.dial1.input, API.dial2.input);
+    },
+    set: function (sel, num) {
+      var cs = Model.colors();
+      var mun = 100 - num;
 
-      API.dial1 = dial1;
-      API.dial2 = dial2;
+      EL.div.find('.major h3').text(num + '%');
+
+      API.dial1.setColor(cs[0]).setInput(num);
+      API.dial2.setColor(cs[1]).setInput(mun);
     },
     init: function (sel, num) {
+      $.reify(EL);
       this.add(sel);
-      this.load();
-      this.set(num);
-      this.test(58);
+      this.set(sel, num);
 
       C.debug([NOM, API]);
 
-      this.init = this.load;
+      this.init = this.set;
     },
   });
 
+  API.EL = EL;
   return API;
 });
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

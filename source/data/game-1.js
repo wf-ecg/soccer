@@ -2,6 +2,7 @@
 define({
   match: {
     accuracy: 80,
+    possession: 58,
     events: [
       /* time, side, type */
       [13, 'top', 'error'],
@@ -10,7 +11,6 @@ define({
       [62, 'top', 'goal'],
       [80, 'not', 'warning'],
     ],
-    possession: 58,
     teams: ['Mexico', 'Cameroon'],
     ticket: ['June 13', 'Arena da Dunas', 'Natal'],
     score: [1, 0],

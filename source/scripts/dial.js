@@ -1,7 +1,7 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-02-28
-  IDEA    Generate (svg)
+  CHANGED 2018-03-01
+  IDEA    Generate dial object elements accessors (svg)
   NOTE    ???
   TODO    ???
 
@@ -10,7 +10,7 @@ define(['jquery'], function ($) {
   'use strict';
 
   var NOM = 'Dial';
-  // var W = window;
+  var W = window;
   var C = console;
   C.debug(NOM, 'loaded');
 
@@ -32,8 +32,9 @@ define(['jquery'], function ($) {
         transition: 'all 0.2s',
       },
       input: {
-        marginTop: '-3rem',
+        top: '-1rem',
         opacity: 0.5,
+        position: 'relative',
         width: '100%',
       },
       svg: {
@@ -78,7 +79,10 @@ define(['jquery'], function ($) {
     },
   };
 
-  function _changeAmount(evt) {
+  // - - - - - - - - - - - - - - - - - -
+  // HANDLERS
+
+  var _changeAmount = function (evt) {
     var data = $(this).data(NOM);
     var val = +data.input.val();
 
@@ -86,14 +90,14 @@ define(['jquery'], function ($) {
     data.vals.last = val;
 
     UL.setOffset(data, val);
-  }
+  };
 
-  function _changeStep(evt) {
+  var _changeStep = function (evt) {
     var data = $(this).data(NOM);
     var num = data.vals.step * (evt.shiftKey ? 10 : 1);
 
     data.input[0].step = num;
-  }
+  };
 
   // - - - - - - - - - - - - - - - - - -
 
@@ -104,13 +108,13 @@ define(['jquery'], function ($) {
       return this;
     },
     setInput: function (num) {
-      if (num) this.input.val(num);
+      if (num) this.input.val(num).change();
       return this;
     },
-    setTransform: function (cf) {
+    setTransform: function (flip, pitch) {
       var str = '';
-      var x = cf.flip ? -1 : 1;
-      var r = cf.pitch * x;
+      var x = flip ? -1 : 1;
+      var r = pitch * x;
 
       str += 'scaleX( ' + x + ' )';
       str += 'rotate( ' + (-90 + r)  + 'deg )';
@@ -155,7 +159,7 @@ define(['jquery'], function ($) {
       data.setInput(cf.value);
       data.setWeight(cf.weight);
       data.setColor(cf.color);
-      data.setTransform(cf);
+      data.setTransform(cf.flip, cf.pitch);
 
       data.input //
         .on('change mousemove', _changeAmount) //
@@ -176,15 +180,15 @@ define(['jquery'], function ($) {
 
     var self = Object.create(proto);
 
-    C.log(NOM, 'construct', self);
+    if (W._dbug > 2) C.log(NOM, 'construct', self);
 
     return self.init(cf);
   }
 
   // - - - - - - - - - - - - - - - - - -
+  // INITS
 
   EL.circle = EL.svg.find('circle');
-
   EL.circle.css(CF.defs.circle);
   EL.input.css(CF.defs.input);
   EL.svg.css(CF.defs.svg);
