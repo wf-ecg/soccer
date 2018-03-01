@@ -18,6 +18,8 @@ define(['jquery'], function ($) {
 
   var CF = {
     color: 'gray',
+    flip: false,
+    pitch: 0,
     value: 25,
     weight: 15,
     defs: {
@@ -105,6 +107,18 @@ define(['jquery'], function ($) {
       if (num) this.input.val(num);
       return this;
     },
+    setTransform: function (cf) {
+      var str = '';
+      var x = cf.flip ? -1 : 1;
+      var r = cf.pitch * x;
+
+      str += 'scaleX( ' + x + ' )';
+      str += 'rotate( ' + (-90 + r)  + 'deg )';
+
+      this.circle.css({
+        transform: str, // 'scaleX(-1) rotate(-90deg)'
+      });
+    },
     setWeight: function (num) {
       var data = this;
       var radius = 50 - num / 2;
@@ -141,6 +155,7 @@ define(['jquery'], function ($) {
       data.setInput(cf.value);
       data.setWeight(cf.weight);
       data.setColor(cf.color);
+      data.setTransform(cf);
 
       data.input //
         .on('change mousemove', _changeAmount) //

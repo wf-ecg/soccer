@@ -56,22 +56,26 @@ define(['jqxtn', 'model', 'donut', 'dial',
       paths.eq(0).css('fill', cs[1]);
       paths.eq(1).css('fill', cs[0]);
     },
-    test: function () {
+    test: function (v1) {
+      var v2 = 100 - v1;
+
       var dial1 = Dial.make({
         color: 'blue',
+        control: true,
+        flip: true,
+        pitch: 30,
+        value: v1,
       });
       var dial2 = Dial.make({
         color: 'red',
-        value: 50,
+        control: true,
+        pitch: 30,
+        value: v2,
       });
       var foo = EL.div.find('div').first();
 
       foo.prepend(dial1.svg, dial2.svg);
       foo.append(dial1.input, dial2.input);
-
-      dial2.circle.css({
-        transform: 'scaleX(-1) rotate(-90deg)',
-      });
 
       API.dial1 = dial1;
       API.dial2 = dial2;
@@ -80,7 +84,7 @@ define(['jqxtn', 'model', 'donut', 'dial',
       this.add(sel);
       this.load();
       this.set(num);
-      this.test();
+      this.test(58);
 
       C.debug([NOM, API]);
 
