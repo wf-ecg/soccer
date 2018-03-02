@@ -73,12 +73,16 @@
   }
   .point {
     color: $cyan;
-    font-size: 1.2rem;
-    line-height: 0.9;
+    font-size: 1.5rem;
+    line-height: 0.75;
     height: 1rem;
     width: 1rem;
     &:before {
       content: '♦';
+      line-height: 0;
+    }
+    .msie & {
+      line-height: 0.5;
     }
   }
   .goal {

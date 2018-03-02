@@ -28,7 +28,6 @@ define(['jquery'], function ($) {
       stroke: 'gray',
       strokeDasharray: '100 100',
       strokeWidth: '1',
-      transform: 'rotate(-90deg)',
       transition: 'all 0.2s',
     },
     input: {
@@ -121,18 +120,18 @@ define(['jquery'], function ($) {
       return this;
     },
     setTransform: function (flip, pitch) {
-      var str = '';
       var x = flip ? -1 : 1;
-      var r = pitch * x;
+      var r = -90 + pitch * x;
 
-      str += 'scaleX( ' + x + ' )';
-      str += 'rotate( ' + (-90 + r)  + 'deg )';
-
-      this.circle.css({
-        transform: str, // 'scaleX(-1) rotate(-90deg)'
-        // '-ms-transform': str,
-        // '-webkit-transform': str,
-      });
+      if ($('html').is('.msie')) {
+        this.circle.attr({
+          transform: `scale(${x}, 1) rotate(${r})`, // scale(-1, 1) rotate(-90)
+        });
+      } else {
+        this.circle.css({
+          transform: `scaleX(${x}) rotate(${r}deg)`, // 'scaleX(-1) rotate(-90deg)'
+        });
+      }
     },
     setWeight: function (num) {
       var data = this;

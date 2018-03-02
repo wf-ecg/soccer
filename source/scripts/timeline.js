@@ -32,11 +32,11 @@ define(['jqxtn', 'libs/util-dim', 'model',
   }
 
   function _px(n) {
-    return (n | 0) + 'px';
+    return Math.round(n) + 'px';
   }
 
   function _pc(n) {
-    return (n | 0) + '%';
+    return Math.round(n) + '%';
   }
 
   // function pxTpc(px) {
@@ -74,28 +74,28 @@ define(['jqxtn', 'libs/util-dim', 'model',
     w: 0,
     data: null,
     addEvent: function (tv) { // trivent [time, icon, side]
-      var icon, point, set, off, pol;
+      var icon, point, set, mid, vrt;
       tv = tv || [];
 
       if (tv.constructor !== Trivent) {
         tv = new Trivent(tv[0], tv[1], tv[2]);
       }
-      off = this.h / 2;
-      pol = (tv.side === 'top') ? -off : off;
+      mid = this.h / 2;
+      vrt = (tv.side === 'top' ? -mid : mid);
       point = $('<div>').addClass('trivent').attr('data-time', tv.time);
       icon = point.clone();
       set = icon.add(point);
 
       point.css({
         left: _pc(0),
-        top: _px(pol + off),
+        top: _px(1.2 * vrt + mid),
       }).appendTo(EL.div).addClass('point');
 
       icon.css({
         backgroundColor: Model.lookup(tv.icon),
         color: tv.icon,
         left: _pc(0),
-        top: _px(2 * pol + off),
+        top: _px(2 * vrt + mid),
       }).appendTo(EL.wrap).addClass(tv.icon);
 
       // new call stack

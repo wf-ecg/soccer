@@ -45,15 +45,14 @@ define(['jquery', 'util'], function ($, UT) {
     },
     //   reduce/centralize boundary (reverse)
     prox: function (img, arr, pic) {
-      var rxy;
+      var css, rxy;
       img = $(img);
       arr = this.fourxy(arr || this.centxy(img));
 
       if (pic) {
         rxy = this.centxy(pic); // relative to center of ?
       }
-
-      img.css({
+      css = {
         marginTop: -arr[0],
         marginRight: -arr[1],
         marginBottom: -arr[2],
@@ -62,7 +61,9 @@ define(['jquery', 'util'], function ($, UT) {
         left: rxy ? rxy[0] : null,
         top: rxy ? rxy[1] : null,
         // right: mid[1], bottom: mid[2],
-      });
+      };
+
+      img.css(css);
     },
   };
 
