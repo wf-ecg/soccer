@@ -18,6 +18,29 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
 
   // - - - - - - - - - - - - - - - - - -
 
+  API = Object.create({
+    Model: Model,
+    Accuracy: Accuracy,
+    Possession: Possession,
+    Rankings: Rankings,
+    Shotsfaced: Shotsfaced,
+    Timeline: Timeline,
+  });
+
+  EL = {
+    fact: '.thefact',
+    factpic: '.factpic',
+    main: 'main',
+    menu: '#GameNum',
+    player: '.theplayer',
+    score: '.top .score',
+    shot: '.theshot',
+    ticket: '.top .ticket',
+    tweet: '.thetweet',
+  };
+
+  // - - - - - - - - - - - - - - - - - -
+
   function _revMenu() {
     UT.picker.menu(EL.menu, Model.games);
     EL.menu.val(Model.current);
@@ -120,28 +143,6 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
   }
 
   // - - - - - - - - - - - - - - - - - -
-
-  EL = {
-    fact: '.thefact',
-    factpic: '.factpic',
-    main: 'main',
-    menu: '#GameNum',
-    player: '.theplayer',
-    score: '.top .score',
-    shot: '.theshot',
-    ticket: '.top .ticket',
-    tweet: '.thetweet',
-  };
-  API = Object.create({
-    Model: Model,
-    Accuracy: Accuracy,
-    Possession: Possession,
-    Rankings: Rankings,
-    Shotsfaced: Shotsfaced,
-    Timeline: Timeline,
-  });
-
-  // - - - - - - - - - - - - - - - - - -
   // PAGE LOADED
 
   function init() {
@@ -167,6 +168,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
 
   return API;
 });
+
 /*
 
 

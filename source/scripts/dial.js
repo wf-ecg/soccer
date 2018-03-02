@@ -10,8 +10,8 @@ define(['jquery'], function ($) {
   'use strict';
 
   var NOM = 'Dial';
-  var W = window;
   var C = console;
+  var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
@@ -208,11 +208,8 @@ define(['jquery'], function ($) {
     make: construct,
   };
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
-
-
 
 
 

@@ -13,7 +13,7 @@ define(['jqxtn', 'libs/util-dim', 'model',
   var API, EL;
   var NOM = 'Timeline';
   var C = console;
-  // var W = window;
+  var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
@@ -131,7 +131,7 @@ define(['jqxtn', 'libs/util-dim', 'model',
       });
       this.load(data);
 
-      C.debug([NOM, API]);
+      if (W._dbug > 1) C.debug([NOM, API]);
 
       this.init = this.reset;
     },
@@ -139,9 +139,9 @@ define(['jqxtn', 'libs/util-dim', 'model',
 
   return API;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
+
 
 
  */

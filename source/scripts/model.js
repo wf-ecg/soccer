@@ -13,7 +13,7 @@ define(['jquery', 'util',
   var API;
   var NOM = 'Model';
   var C = console;
-  // var W = window;
+  var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
@@ -23,7 +23,7 @@ define(['jquery', 'util',
       var num = parseInt(mod.match(/\d+/)[0]);
       API.addGame(num, require(mod));
     } catch (err) {
-      C.debug(err.message);
+      if (W._dbug > 0) C.error(err.message);
     }
   }
 
@@ -90,7 +90,7 @@ define(['jquery', 'util',
   };
 
   API.teams = {
-    '?'           : { colors: ['#591721', '#273864'], grouping: 'X', flag: 'mexico.png'        },
+    '?'           : { colors: ['#591721', '#273864'], grouping: 'X', flag: '?.png'             },
     Algeria       : { colors: ['#999999', '#999999'], grouping: 'H', flag: 'algeria.png'       },
     Argentina     : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'argentina.png'     },
     Australia     : { colors: ['#999999', '#999999'], grouping: 'B', flag: 'australia.png'     },
@@ -114,7 +114,7 @@ define(['jquery', 'util',
     Ivory_Coast   : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'ivory_coast.png'   },
     Japan         : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'japan.png'         },
     Korea_Republic: { colors: ['#999999', '#999999'], grouping: 'H', flag: 'korea_republic.png'},
-    Mexico        : { colors: ['#176844', API.dict.yellow], grouping: 'A', flag: 'mexico.png'        },
+    Mexico        : { colors: ['#176844', '#fcc60a'], grouping: 'A', flag: 'mexico.png'        },
     Netherlands   : { colors: ['#999999', '#999999'], grouping: 'B', flag: 'netherlands.png'   },
     Nigeria       : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'nigeria.png'       },
     Portugal      : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'portugal.png'      },
@@ -127,9 +127,9 @@ define(['jquery', 'util',
 
   return API;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
+
 
 
  */

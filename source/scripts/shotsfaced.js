@@ -13,7 +13,7 @@ define(['jqxtn', 'libs/util-dim',
   var API, EL;
   var NOM = 'Shotsfaced';
   var C = console;
-  // var W = window;
+  var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
@@ -116,7 +116,7 @@ define(['jqxtn', 'libs/util-dim',
       });
       this.load(data);
 
-      C.debug([NOM, API]);
+      if (W._dbug > 1) C.debug([NOM, API]);
 
       this.init = this.reset;
     },
@@ -124,7 +124,6 @@ define(['jqxtn', 'libs/util-dim',
 
   return API;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
 

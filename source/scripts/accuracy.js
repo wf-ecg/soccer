@@ -13,7 +13,7 @@ define(['jqxtn', 'model',
   var API, EL;
   var NOM = 'Accuracy';
   var C = console;
-  // var W = window;
+  var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
@@ -86,7 +86,7 @@ define(['jqxtn', 'model',
       $.reify(EL);
       this.load(num);
 
-      C.debug([NOM, API]);
+      if (W._dbug > 1) C.debug([NOM, API]);
 
       this.init = this.load;
     },
@@ -94,9 +94,9 @@ define(['jqxtn', 'model',
 
   return API;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
+
 
 
  */

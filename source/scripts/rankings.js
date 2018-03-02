@@ -1,6 +1,6 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
+  CHANGED 2018-03-02
   IDEA    Fill group... table of stats
   NOTE    ???
   TODO    ???
@@ -13,7 +13,7 @@ define(['jqxtn',
   var API, EL;
   var NOM = 'Rankings';
   var C = console;
-  // var W = window;
+  var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
@@ -58,7 +58,7 @@ define(['jqxtn',
       $.reify(EL);
       this.load(data);
 
-      C.debug([NOM, API]);
+      if (W._dbug > 1) C.debug([NOM, API]);
 
       this.init = this.load;
     },
@@ -66,39 +66,8 @@ define(['jqxtn',
 
   return API;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

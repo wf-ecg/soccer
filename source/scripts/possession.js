@@ -13,7 +13,7 @@ define(['jqxtn', 'model', 'dial',
   var API, EL;
   var NOM = 'Possession';
   var C = console;
-  // var W = window;
+  var W = window;
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
@@ -56,7 +56,7 @@ define(['jqxtn', 'model', 'dial',
       this.add(sel);
       this.set(sel, num);
 
-      C.debug([NOM, API]);
+      if (W._dbug > 1) C.debug([NOM, API]);
 
       this.init = this.set;
     },
@@ -65,11 +65,8 @@ define(['jqxtn', 'model', 'dial',
   API.EL = EL;
   return API;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
-
-
 
 
 
