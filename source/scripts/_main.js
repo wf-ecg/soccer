@@ -32,7 +32,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
 
       _revMenu();
 
-      $('main div').hide().fadeIn();
+      $('main').hide().fadeIn();
 
       Shotsfaced.init(stats.shots);
       Timeline.init(stats.events);
@@ -40,10 +40,12 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
       Rankings.init(game.grouping);
       Possession.init('.donut', stats.possession);
 
-      /// TOP
-      EL.top //
+      /// general
+      EL.main //
         .find('.team_left').text(stats.teams[0]).end() //
         .find('.team_right').text(stats.teams[1]);
+
+      /// TOP
       EL.score //
         .find('.center').text(stats.score.join('-')).end() //
         .find('.left img').attr({
@@ -122,12 +124,12 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
   EL = {
     fact: '.thefact',
     factpic: '.factpic',
+    main: 'main',
     menu: '#GameNum',
     player: '.theplayer',
     score: '.top .score',
     shot: '.theshot',
     ticket: '.top .ticket',
-    top: '.top',
     tweet: '.thetweet',
   };
   API = Object.create({
