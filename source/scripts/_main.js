@@ -32,7 +32,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
 
       _revMenu();
 
-      $('section div').hide().fadeIn();
+      $('main div').hide().fadeIn();
 
       Shotsfaced.init(stats.shots);
       Timeline.init(stats.events);

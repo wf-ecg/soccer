@@ -15,9 +15,13 @@
 %gray { background-color: $gray; }
 %shiv { margin-right: -1em; } // prevent wrap due to chrome/ff px-rounding
 
-section.cells {
+.cells {
   > div {
+    display: table-row;
+  }
+  > div > div {
     @extend %h3;
+    display: table-cell;
     float: left;
     padding: 1.333rem 1rem;
     position: relative;
