@@ -37,7 +37,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
     score: '.top .score',
     shot: '.the-photo',
     ticket: '.top .ticket',
-    tweet: '.thetweet',
+    tweet: '.the-tweet',
   });
 
   // - - - - - - - - - - - - - - - - - -
