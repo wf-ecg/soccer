@@ -50,6 +50,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
     var game, stats;
 
     try {
+      W.localStorage.game = num;
       game = Model.getGame(num);
       stats = game.match;
 
@@ -147,7 +148,8 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
 
   function init() {
     $.reify(EL);
-    renderGame(1);
+    var game = Number(W.localStorage.game || 1);
+    renderGame(game);
 
     EL.menu.change(function (evt) {
       renderGame($(evt.target).val());
