@@ -28,6 +28,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
   });
 
   EL = Object.create({
+    dial: '.donut',
     fact: '.thefact',
     factpic: '.factpic',
     main: 'main',
@@ -46,6 +47,68 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
     EL.menu.val(Model.current);
   }
 
+  function initImports(game, stats) {
+    Shotsfaced.init(stats.shots);
+    Timeline.init(stats.events);
+    Accuracy.init(stats.accuracy);
+    Rankings.init(game.grouping);
+    Possession.init(EL.dial, stats.possession);
+  }
+
+  function mutateDOM(game, stats) {
+    /// general
+    EL.main //
+      .find('.team_left').text(stats.teams[0]).end() //
+      .find('.team_right').text(stats.teams[1]);
+
+    /// TOP
+    EL.score //
+      .find('.center').text(stats.score.join('-')).end() //
+      .find('.left img').attr({
+        src: './images/flags/' + Model.getTeam(stats.teams[0]).flag,
+        alt: stats.teams[0],
+      }).end() //
+      .find('.right img').attr({
+        src: './images/flags/' + Model.getTeam(stats.teams[1]).flag,
+        alt: stats.teams[1],
+      });
+    EL.ticket //
+      .find('.date').text(stats.ticket[0]).end() //
+      .find('.stadium').text(stats.ticket[1]).end() //
+      .find('.city').text(stats.ticket[2]);
+
+    // TWEET
+    EL.tweet.find('p') //
+      .html(game.tweet.text.join(' ')).end() //
+      .find('.author').html(game.tweet.author);
+
+    // Did you know
+    EL.fact.find('p') //
+      .html(game.fact.text.join(' '));
+
+    // Jersey
+    EL.player.find('img').first() //
+      .attr({
+        src: `./images/${game.pics.player[0]}`,
+        alt: game.pics.player[1],
+      });
+
+    // SHOT of the match
+    EL.shot.find('img.fill').first() //
+      .attr({
+        src: `./images/${game.pics.shot[0]}`,
+        alt: game.pics.shot[1],
+      });
+
+    // FACT pic
+    EL.factpic.find('img.fill') //
+      .attr({
+        src: `./images/${game.pics.fact[0]}`,
+        alt: game.pics.fact[1],
+      }).end() //
+      .find('h3').text(`${game.pics.fact[1].match(/\S+ ?\w*/)}`);
+  }
+
   function renderGame(num) {
     var game, stats;
 
@@ -58,63 +121,8 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
 
       $('main').hide().fadeIn();
 
-      Shotsfaced.init(stats.shots);
-      Timeline.init(stats.events);
-      Accuracy.init(stats.accuracy);
-      Rankings.init(game.grouping);
-      Possession.init('.donut', stats.possession);
-
-      /// general
-      EL.main //
-        .find('.team_left').text(stats.teams[0]).end() //
-        .find('.team_right').text(stats.teams[1]);
-
-      /// TOP
-      EL.score //
-        .find('.center').text(stats.score.join('-')).end() //
-        .find('.left img').attr({
-          src: './images/flags/' + Model.getTeam(stats.teams[0]).flag,
-          alt: stats.teams[0],
-        }).end() //
-        .find('.right img').attr({
-          src: './images/flags/' + Model.getTeam(stats.teams[1]).flag,
-          alt: stats.teams[1],
-        });
-      EL.ticket //
-        .find('.date').text(stats.ticket[0]).end() //
-        .find('.stadium').text(stats.ticket[1]).end() //
-        .find('.city').text(stats.ticket[2]);
-
-      // TWEET
-      EL.tweet.find('p') //
-        .html(game.tweet.text.join(' ')).end() //
-        .find('.author').html(game.tweet.author);
-
-      // Did you know
-      EL.fact.find('p') //
-        .html(game.fact.text.join(' '));
-
-      // Jersey
-      EL.player.find('img').first() //
-        .attr({
-          src: `./images/${game.pics.player[0]}`,
-          alt: game.pics.player[1],
-        });
-
-      // SHOT of the match
-      EL.shot.find('img.fill').first() //
-        .attr({
-          src: `./images/${game.pics.shot[0]}`,
-          alt: game.pics.shot[1],
-        });
-
-      // FACT pic
-      EL.factpic.find('img.fill') //
-        .attr({
-          src: `./images/${game.pics.fact[0]}`,
-          alt: game.pics.fact[1],
-        }).end() //
-        .find('h3').text(`${game.pics.fact[1].match(/\S+ ?\w*/)}`);
+      initImports(game, stats);
+      mutateDOM(game, stats);
 
       // cleanup
       $('img.fill.raise').remove();
@@ -161,11 +169,11 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
   }
 
   $.extend(API, {
-    init: init,
-    //
     _: NOM,
     EL: EL,
     UT: UT,
+    init: init,
+    //
   });
 
   return API;
