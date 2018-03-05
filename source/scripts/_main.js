@@ -33,7 +33,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
     factpic: '.factpic',
     main: 'main',
     menu: '#GameNum',
-    player: '.theplayer',
+    player: '.the-player',
     score: '.top .score',
     shot: '.the-photo',
     ticket: '.top .ticket',
