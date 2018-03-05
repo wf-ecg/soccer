@@ -42,7 +42,7 @@ define(['jqxtn', 'model',
       if (num <= 1) {
         num = num * 100;
       }
-      num = num | 0;
+      num = Math.round(num);
 
       if (num < 50) {
         C.warn('normalize', num);

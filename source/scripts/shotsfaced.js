@@ -19,7 +19,7 @@ define(['jqxtn', 'libs/util-dim',
   // - - - - - - - - - - - - - - - - - -
 
   function Pc(n) {
-    return (n | 0) + '%';
+    return Math.round(n) + '%';
   }
 
   var _positionXY = function (x, y) {
@@ -29,8 +29,8 @@ define(['jqxtn', 'libs/util-dim',
     y = UT.def(y) ? y : x;
 
     ball.css({
-      left: Pc(x | 0),
-      top: Pc(y | 0),
+      left: Pc(x),
+      top: Pc(y),
     });
   };
 
