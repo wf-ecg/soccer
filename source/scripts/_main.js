@@ -29,7 +29,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
 
   EL = Object.create({
     dial: '.donut',
-    fact: '.thefact',
+    fact: '.the-fact',
     factpic: '.factpic',
     main: 'main',
     menu: '#GameNum',
