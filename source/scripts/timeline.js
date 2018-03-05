@@ -62,12 +62,13 @@ define(['jqxtn', 'libs/util-dim', 'model',
 
   // - - - - - - - - - - - - - - - - - -
 
-  EL = {
+  EL = Object.create({
     cache: '',
     div: '.timeline .events',
     bar: '.timeline .time',
     wrap: '.timeline .linewrap',
-  };
+  });
+
   API = Object.create({
     EL: EL,
     h: 0,

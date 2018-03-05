@@ -6,9 +6,11 @@
   TODO    ???
 
  */
-define(['jquery'], function ($) {
+define(['jquery',
+], function ($) {
   'use strict';
 
+  var CF, EL, UL;
   var NOM = 'Dial';
   var C = console;
   var W = window;
@@ -16,7 +18,7 @@ define(['jquery'], function ($) {
 
   // - - - - - - - - - - - - - - - - - -
 
-  var CF = {
+  CF = Object.create({
     color: 'gray',
     flip: false,
     pitch: 0,
@@ -40,12 +42,14 @@ define(['jquery'], function ($) {
       opacity: 1,
       position: 'absolute',
     },
-  };
-  var EL = {
+  });
+
+  EL = Object.create({
     svg: $('<svg viewBox="-50 -50 100 100"><circle r="1"></circle></svg>'),
     input: $('<input type="range" min="0" max="100" value="50" step="1">'),
-  };
-  var UL = {
+  });
+
+  UL = Object.create({
     calcmax: function (r) {
       return Math.round(Math.PI * 2 * r);
     },
@@ -75,7 +79,7 @@ define(['jquery'], function ($) {
       data.circle[0].style.strokeDashoffset = vs.output;
       // UL.chromeclean.bind(data.svg[0])(); // if redraws funny
     },
-  };
+  });
 
   // - - - - - - - - - - - - - - - - - -
   // HANDLERS
@@ -204,6 +208,7 @@ define(['jquery'], function ($) {
   EL.svg.css(CF.svg);
 
   return {
+    EL: EL,
     UL: UL,
     make: construct,
   };

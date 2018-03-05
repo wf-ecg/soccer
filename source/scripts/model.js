@@ -80,16 +80,16 @@ define(['jquery', 'util',
 
   API.games = [];
 
-  API.dict = {
+  API.dict = Object.create({
     error: '#c20000',
     gray: '#8f8f8f',
     mark: '#00ff00',
     red: '#bb0826',
     yellow: '#fcc60a',
     warning: '#fff200',
-  };
+  });
 
-  API.teams = {
+  API.teams = Object.create({
     '?'           : { colors: ['#591721', '#273864'], grouping: 'X', flag: '?.png'             },
     Algeria       : { colors: ['#999999', '#999999'], grouping: 'H', flag: 'algeria.png'       },
     Argentina     : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'argentina.png'     },
@@ -123,7 +123,7 @@ define(['jquery', 'util',
     Switzerland   : { colors: ['#999999', '#999999'], grouping: 'E', flag: 'switzerland.png'   },
     Uruguay       : { colors: ['#999999', '#999999'], grouping: 'D', flag: 'uruguay.png'       },
     USA           : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'usa.png'           },
-  };
+  });
 
   return API;
 });

@@ -27,7 +27,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
     Timeline: Timeline,
   });
 
-  EL = {
+  EL = Object.create({
     fact: '.thefact',
     factpic: '.factpic',
     main: 'main',
@@ -37,7 +37,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
     shot: '.theshot',
     ticket: '.top .ticket',
     tweet: '.thetweet',
-  };
+  });
 
   // - - - - - - - - - - - - - - - - - -
 

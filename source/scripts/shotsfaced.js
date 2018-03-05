@@ -57,12 +57,13 @@ define(['jqxtn', 'libs/util-dim',
 
   // - - - - - - - - - - - - - - - - - -
 
-  EL = {
+  EL = Object.create({
     cache: '',
     div: '.shotsfaced',
     net: '.net',
     nums: '.nums span',
-  };
+  });
+
   API = Object.create({
     EL: EL,
     total: 0,

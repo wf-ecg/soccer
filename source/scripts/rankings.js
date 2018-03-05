@@ -44,10 +44,11 @@ define(['jqxtn',
 
   // - - - - - - - - - - - - - - - - - -
 
-  EL = {
+  EL = Object.create({
     div: '.rankings table',
     rows: '.rankings table tr:not(:first-child)',
-  };
+  });
+
   API = Object.create({
     EL: EL,
     load: function (data) {
