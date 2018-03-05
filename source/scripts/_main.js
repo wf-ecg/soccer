@@ -35,7 +35,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
     menu: '#GameNum',
     player: '.theplayer',
     score: '.top .score',
-    shot: '.theshot',
+    shot: '.the-photo',
     ticket: '.top .ticket',
     tweet: '.thetweet',
   });
