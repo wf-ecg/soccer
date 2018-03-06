@@ -44,7 +44,7 @@ define(['jqxtn', 'model', 'dial',
       sel.parent().append(API.dial1.input, API.dial2.input);
     },
     set: function (sel, num) {
-      var cs = Model.colors();
+      var cs = Model.getColors();
       var inv = 100 - num;
 
       EL.div.find('.major h3').text(num + '%');

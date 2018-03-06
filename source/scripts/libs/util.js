@@ -6,6 +6,10 @@ define(['jquery'], function ($) {
   var C = console;
   void($);
 
+  function _stringify(k, v) {
+    return (v && v.join && typeof v[1] !== 'object') ? v.join('|') : v;
+  }
+
   var Utils = {
     delay: function (ms, fn) {
       if (!fn) {
@@ -23,10 +27,12 @@ define(['jquery'], function ($) {
     initFinish: function () {
       C.groupEnd();
     },
+    stringify: function (obj) {
+      return JSON.stringify(obj, _stringify, 4);
+    },
   };
 
   Utils.initBegin();
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
   /*
    Polyfills
@@ -36,4 +42,9 @@ define(['jquery'], function ($) {
 
   return Utils;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+/*
+
+
+
+ */

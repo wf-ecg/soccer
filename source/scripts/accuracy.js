@@ -73,7 +73,7 @@ define(['jqxtn', 'model',
       this.colors(getColor(EL.min), getColor(EL.maj));
     },
     colors: function (c1, c2) {
-      var cs = Model.colors();
+      var cs = Model.getColors();
       c2 = '#999';
       this.setColor(EL.maj, c1 || cs[0]);
       this.setColor(EL.min, c2 || cs[1]);

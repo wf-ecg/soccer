@@ -2,7 +2,6 @@
 /* _raise.scss */
 
 .raise {
-  cursor: zoom-out;
 
   .clip {
     height: 100%;
@@ -14,13 +13,16 @@
   }
   img.fill {
     bottom: 0;
+    cursor: zoom-in;
     position: absolute;
     right: 0;
   }
   img.raise {
     border-radius: 0.5em;
     box-shadow: 3px 11px 33px rgba(66, 33, 33, 0.5);
+    cursor: zoom-out;
     display: none;
+    position: absolute;
     z-index: 1;
   }
   img:not(.raise) {

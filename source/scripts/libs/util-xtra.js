@@ -25,7 +25,7 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
       });
 
     img.attr('src', path) //
-      .addClass('fill raise') //
+      .addClass('raise') //
       .insertAfter(clip) //
       .load(_shifter);
   }
@@ -39,7 +39,7 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
   };
 
   UT.addPicLifters = function (swap) {
-    $('img.fill.raise').remove();
+    $('img.raise').remove();
     return $('.fill').each(function () {
       var me = $(this);
 
@@ -58,26 +58,20 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
     });
   };
 
-  UT.picker = (function () {
-    return {
-      menu: function (menu, games) {
-        menu.empty();
-        $.each(games, function (i, e) {
-          if (!e) {
-            return;
-          }
-          var opt = $('<option>').text('Game ' + i).val(i);
-          menu.append(opt);
-        });
-      },
-    };
-  }());
+  UT.picker = function (menu, games) {
+    menu.empty();
+    $.each(games, function (i, e) {
+      if (!e) return;
+      var opt = $('<option>').text('Game ' + i).val(i);
+      menu.append(opt);
+    });
+  };
 
   return UT;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
+
 
 
  */

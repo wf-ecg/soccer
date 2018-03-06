@@ -48,13 +48,13 @@ define(['jquery', 'util',
       }
     },
     getGame: function (num) {
-      this.current = UT.hasdef(num) ? num : this.current;
+      this.current = num || this.current;
       return this.games[this.current];
     },
     getWinner: function (num) {
       return this.getGame(num).match.teams[0];
     },
-    colors: function (num) {
+    getColors: function (num) {
       return this.teams[this.getWinner(num)].colors;
     },
     getTeam: function (nom) {
