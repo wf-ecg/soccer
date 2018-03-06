@@ -64,9 +64,9 @@ define(['jqxtn', 'libs/util-dim', 'model',
 
   EL = Object.create({
     cache: '',
-    div: '.timeline .events',
-    bar: '.timeline .time',
-    wrap: '.timeline .linewrap',
+    div: '.the-timeline .events',
+    bar: '.the-timeline .time',
+    wrap: '.the-timeline .linewrap',
   });
 
   API = Object.create({
