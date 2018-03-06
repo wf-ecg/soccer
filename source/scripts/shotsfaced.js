@@ -16,6 +16,13 @@ define(['jqxtn', 'libs/util-dim',
   var W = window;
   C.debug(NOM, 'loaded');
 
+  EL = Object.create({
+    cache: '',
+    div: '.the-shots',
+    net: '.net',
+    nums: '.nums span',
+  });
+
   // - - - - - - - - - - - - - - - - - -
 
   function Pc(n) {
@@ -56,13 +63,6 @@ define(['jqxtn', 'libs/util-dim',
   }
 
   // - - - - - - - - - - - - - - - - - -
-
-  EL = Object.create({
-    cache: '',
-    div: '.the-shots',
-    net: '.net',
-    nums: '.nums span',
-  });
 
   API = Object.create({
     total: 0,

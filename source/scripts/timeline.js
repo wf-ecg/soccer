@@ -6,8 +6,8 @@
   TODO    ???
 
  */
-define(['jqxtn', 'libs/util-dim', 'model',
-], function ($, UT, Model) {
+define(['jqxtn', 'libs/util-dim',
+], function ($, UT) {
   'use strict';
 
   var API, EL;
@@ -15,6 +15,12 @@ define(['jqxtn', 'libs/util-dim', 'model',
   var C = console;
   var W = window;
   C.debug(NOM, 'loaded');
+
+  EL = Object.create({
+    line: '.the-timeline .time',
+    evts: '.the-timeline .events',
+    wrap: '.the-timeline .linewrap',
+  });
 
   // - - - - - - - - - - - - - - - - - -
 
@@ -59,12 +65,6 @@ define(['jqxtn', 'libs/util-dim', 'model',
 
   // - - - - - - - - - - - - - - - - - -
 
-  EL = Object.create({
-    line: '.the-timeline .time',
-    evts: '.the-timeline .events',
-    wrap: '.the-timeline .linewrap',
-  });
-
   API = Object.create({
     h: 0,
     w: 0,
@@ -78,10 +78,6 @@ define(['jqxtn', 'libs/util-dim', 'model',
       point = addTriv(1.2 * vrt + mid, 'point');
       triv = addTriv(2 * vrt + mid, obj.icon);
       duo = triv.add(point);
-
-      triv.addClass(obj.icon).css({
-        backgroundColor: Model.lookup(obj.icon),
-      });
 
       // new call stack
       UT.delay(0, function () {

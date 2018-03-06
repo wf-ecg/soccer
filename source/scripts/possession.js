@@ -6,8 +6,8 @@
   TODO    ???
 
  */
-define(['jqxtn', 'model', 'libs/dial',
-], function ($, Model, Dial) {
+define(['jqxtn', 'libs/dial',
+], function ($, Dial) {
   'use strict';
 
   var API, EL;
@@ -16,20 +16,19 @@ define(['jqxtn', 'model', 'libs/dial',
   var W = window;
   C.debug(NOM, 'loaded');
 
-  // - - - - - - - - - - - - - - - - - -
-
   EL = Object.create({
     div: '.the-possession',
   });
 
+  // - - - - - - - - - - - - - - - - - -
+
   API = Object.create({
     Dial: Dial,
-    Model: Model,
     //
     dial1: {},
     dial2: {},
     svg: null,
-    add: function (sel) {
+    addDials: function (sel) {
       sel = $(sel);
       API.dial1 = Dial.make({
         flip: true,
@@ -55,7 +54,7 @@ define(['jqxtn', 'model', 'libs/dial',
       this.init = $.noop;
       $.reify(EL);
 
-      this.add(sel);
+      this.addDials(sel);
       if (W._dbug > 1) C.debug([NOM, API]);
     },
   });

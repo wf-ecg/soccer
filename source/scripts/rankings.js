@@ -16,44 +16,41 @@ define(['jqxtn',
   var W = window;
   C.debug(NOM, 'loaded');
 
+  EL = Object.create({
+    rows: '.the-rankings table tr',
+  });
+
   // - - - - - - - - - - - - - - - - - -
 
-  function getCxy(c, r) {
-    var tmp = EL.rows.eq(r);
-    tmp = tmp.children().eq(c);
-    return tmp;
+  function getCell(r, c) {
+    return EL.rows.eq(1 + r).children().eq(c);
   }
 
-  function fillup(data) {
-    var y = 0;
-    $.each(data, function (i, row) {
+  function fillTable(data) {
+    var rnum = 0;
 
-      getCxy(0, y).find('img').attr({
-        src: './images/flags/' + i.toLowerCase() + '.png',
-        alt: i,
+    $.each(data, function (team, row) {
+      getCell(rnum, 0).find('img').attr({
+        src: './images/flags/' + team.toLowerCase() + '.png',
+        alt: team,
       });
-      getCxy(1, y).text(i);
+      getCell(rnum, 1).text(team);
 
-      $.each(row, function (j, cell) {
-        getCxy(j + 2, y).text(cell);
+      $.each(row, function (cnum, cell) {
+        getCell(rnum, 2 + cnum).text(cell);
       });
 
-      y++;
+      rnum++;
     });
   }
 
   // - - - - - - - - - - - - - - - - - -
 
-  EL = Object.create({
-    div: '.the-rankings table',
-    rows: '.the-rankings table tr:not(:first-child)',
-  });
-
   API = Object.create({
     load: function (data) {
       this.init();
 
-      fillup(data);
+      fillTable(data);
     },
     init: function () {
       this.init = $.noop;
