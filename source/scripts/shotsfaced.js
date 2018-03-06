@@ -1,6 +1,6 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
+  CHANGED 2018-03-06
   IDEA    Paint hits/misses eles over net graphic
   NOTE    ???
   TODO    ???

@@ -1,13 +1,13 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
+  CHANGED 2018-03-06
   IDEA    Model and adjust data: for gui, and from ajax
   NOTE    ???
   TODO    ???
 
  */
-define(['jquery', 'util',
-], function ($, UT) {
+define(['jquery',
+], function ($) {
   'use strict';
 
   var API;
@@ -33,7 +33,6 @@ define(['jquery', 'util',
     init: null,
     //
     _: NOM,
-    UT: UT,
     current: 0,
     defs: {
       speed: 333,
@@ -81,12 +80,12 @@ define(['jquery', 'util',
   API.games = [];
 
   API.dict = Object.create({
-    error: '#c20000',
-    gray: '#8f8f8f',
-    mark: '#00ff00',
-    red: '#bb0826',
-    yellow: '#fcc60a',
-    warning: '#fff200',
+    error:    '#c20000',
+    gray:     '#8f8f8f',
+    mark:     '#00ff00',
+    red:      '#bb0826',
+    yellow:   '#fcc60a',
+    warning:  '#fff200',
   });
 
   API.teams = Object.create({

@@ -1,6 +1,6 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-03-02
+  CHANGED 2018-03-06
   IDEA    Fill group... table of stats
   NOTE    ???
   TODO    ???
