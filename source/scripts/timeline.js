@@ -70,7 +70,6 @@ define(['jqxtn', 'libs/util-dim', 'model',
   });
 
   API = Object.create({
-    EL: EL,
     h: 0,
     w: 0,
     data: null,
@@ -112,32 +111,28 @@ define(['jqxtn', 'libs/util-dim', 'model',
       // this.w -= this.m * 2; // inner cells
       return [this.w, this.h];
     },
-    reset: function (data) {
-      EL.cache.remove();
-      this.load(data);
-    },
     load: function (data) {
-      this.data = data || this.data;
+      this.init();
 
+      EL.cache.remove();
+
+      this.data = Array.isArray(data) ? data : this.data;
       this.measureBar();
 
       $.each(this.data, function () {
         API.addEvent(this);
       });
     },
-    init: function (data) {
+    init: function () {
+      this.init = $.noop;
       $.reify(EL);
-      EL.div.on('click', function () {
-        API.reset();
-      });
-      this.load(data);
 
+      EL.div.on('click', API.load.bind(API));
       if (W._dbug > 1) C.debug([NOM, API]);
-
-      this.init = this.reset;
     },
   });
 
+  API.EL = EL;
   return API;
 });
 

@@ -34,8 +34,7 @@ define(['jqxtn', 'model',
   });
   API = Object.create({
     Model: Model,
-    EL: EL,
-    percent: function (num) {
+    setPercent: function (num) {
       num = num || 0.5;
       num = num % 100;
 
@@ -70,28 +69,29 @@ define(['jqxtn', 'model',
       ele.data('color', val); // store
     },
     swapColor: function () {
-      this.colors(getColor(EL.min), getColor(EL.maj));
+      this.setColors(getColor(EL.min), getColor(EL.maj));
     },
-    colors: function (c1, c2) {
-      var cs = Model.getColors();
+    setColors: function (c1, c2) {
       c2 = '#999';
-      this.setColor(EL.maj, c1 || cs[0]);
-      this.setColor(EL.min, c2 || cs[1]);
+      this.setColor(EL.maj, c1 || this.tints[0]);
+      this.setColor(EL.min, c2 || this.tints[1]);
     },
-    load: function (num) {
-      this.colors();
-      this.percent(num);
+    load: function (num, tints) {
+      this.init();
+
+      this.tints = tints;
+      this.setColors();
+      this.setPercent(num);
     },
-    init: function (num) {
+    init: function () {
+      this.init = $.noop;
       $.reify(EL);
-      this.load(num);
 
       if (W._dbug > 1) C.debug([NOM, API]);
-
-      this.init = this.load;
     },
   });
 
+  API.EL = EL;
   return API;
 });
 

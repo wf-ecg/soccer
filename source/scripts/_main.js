@@ -49,11 +49,13 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
   }
 
   function initModules(game, stats) {
-    Shotsfaced.init(stats.shots);
-    Timeline.init(stats.events);
-    Accuracy.init(stats.accuracy);
-    Rankings.init(game.grouping);
-    Possession.init(EL.dial, stats.possession);
+    var colors = Model.getColors();
+
+    Shotsfaced.load(stats.shots);
+    Timeline.load(stats.events);
+    Accuracy.load(stats.accuracy, colors);
+    Rankings.load(game.grouping);
+    Possession.load(EL.dial, stats.possession, colors);
   }
 
   function updateDisplay(game, stats) {

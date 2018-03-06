@@ -6,7 +6,7 @@
   TODO    ???
 
  */
-define(['jqxtn', 'model', 'dial',
+define(['jqxtn', 'model', 'libs/dial',
 ], function ($, Model, Dial) {
   'use strict';
 
@@ -43,23 +43,20 @@ define(['jqxtn', 'model', 'dial',
       sel.prepend(API.dial1.svg, API.dial2.svg);
       sel.parent().append(API.dial1.input, API.dial2.input);
     },
-    set: function (sel, num) {
-      var cs = Model.getColors();
-      var inv = 100 - num;
+    load: function (sel, num, tints) {
+      this.init(sel);
 
       EL.div.find('.major h3').text(num + '%');
 
-      API.dial1.setColor(cs[0]).setInput(num);
-      API.dial2.setColor(cs[1]).setInput(inv);
+      API.dial1.setColor(tints[0]).setInput(num);
+      API.dial2.setColor(tints[1]).setInput(100 - num);
     },
-    init: function (sel, num) {
+    init: function (sel) {
+      this.init = $.noop;
       $.reify(EL);
+
       this.add(sel);
-      this.set(sel, num);
-
       if (W._dbug > 1) C.debug([NOM, API]);
-
-      this.init = this.set;
     },
   });
 

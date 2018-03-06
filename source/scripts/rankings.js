@@ -50,21 +50,20 @@ define(['jqxtn',
   });
 
   API = Object.create({
-    EL: EL,
     load: function (data) {
-      this.data = data || this.data;
-      fillup(this.data);
+      this.init();
+
+      fillup(data);
     },
-    init: function (data) {
+    init: function () {
+      this.init = $.noop;
       $.reify(EL);
-      this.load(data);
 
       if (W._dbug > 1) C.debug([NOM, API]);
-
-      this.init = this.load;
     },
   });
 
+  API.EL = EL;
   return API;
 });
 

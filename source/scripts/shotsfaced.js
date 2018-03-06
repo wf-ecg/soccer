@@ -65,7 +65,6 @@ define(['jqxtn', 'libs/util-dim',
   });
 
   API = Object.create({
-    EL: EL,
     total: 0,
     saves: 0,
     goals: 0,
@@ -97,12 +96,11 @@ define(['jqxtn', 'libs/util-dim',
       EL.nums.eq(1).text(this.saves + this.goals);
       EL.nums.eq(2).text(this.goals);
     },
-    reset: function (data) {
-      EL.cache.remove();
-      this.load(data);
-    },
     load: function (data) {
-      this.data = data || this.data;
+      this.init();
+
+      EL.cache.remove();
+      this.data = Array.isArray(data) ? data : this.data;
 
       $.each(this.data, function (i, e) {
         API.addBall(e);
@@ -110,19 +108,16 @@ define(['jqxtn', 'libs/util-dim',
 
       this.updateNums();
     },
-    init: function (data) {
+    init: function () {
+      this.init = $.noop;
       $.reify(EL);
-      EL.div.on('click', function () {
-        API.reset();
-      });
-      this.load(data);
 
+      EL.div.on('click', API.load.bind(API));
       if (W._dbug > 1) C.debug([NOM, API]);
-
-      this.init = this.reset;
     },
   });
 
+  API.EL = EL;
   return API;
 });
 
