@@ -1,13 +1,13 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
+  CHANGED 2018-03-06
   IDEA    Model and adjust data: for gui, and from ajax
   NOTE    ???
   TODO    ???
 
  */
-define(['jquery', 'util',
-], function ($, UT) {
+define(['jquery',
+], function ($) {
   'use strict';
 
   var API;
@@ -18,6 +18,20 @@ define(['jquery', 'util',
 
   // - - - - - - - - - - - - - - - - - -
 
+  const MIN = 0x55;
+  const MAX = 0xFF - (MIN * 2);
+
+  var util = {
+    hex: function () {
+      var num = Math.round(Math.random() * MAX);
+      var hex = (num + MIN).toString(16);
+      return ('00' + hex).slice(-2);
+    },
+    reverse: function(str) {
+      return str.split('').reverse().join('');
+    },
+  };
+
   function inject(mod) {
     try {
       var num = parseInt(mod.match(/\d+/)[0]);
@@ -27,19 +41,27 @@ define(['jquery', 'util',
     }
   }
 
+  function randHex(norm) {
+    var hex = util.hex() + util.hex() + util.hex();
+    return '#' + (norm ? hex : util.reverse(hex));
+  }
+
+  function getRandoHexColorPair() {
+    return [randHex(), randHex(1)];
+  }
+
   // - - - - - - - - - - - - - - - - - -
 
   API = Object.create({
     init: null,
     //
     _: NOM,
-    UT: UT,
     current: 0,
     defs: {
       speed: 333,
     },
-    games: [],
-    teams: {},
+    games: null,
+    teams: null,
     addGame: function (num, data) { // opt num/push
       if (data) {
         this.games[num] = data;
@@ -48,20 +70,17 @@ define(['jquery', 'util',
       }
     },
     getGame: function (num) {
-      this.current = UT.def(num) ? num : this.current;
+      this.current = num || this.current;
       return this.games[this.current];
     },
     getWinner: function (num) {
       return this.getGame(num).match.teams[0];
     },
-    colors: function (num) {
+    getColors: function (num) {
       return this.teams[this.getWinner(num)].colors;
     },
     getTeam: function (nom) {
       return this.teams[nom];
-    },
-    lookup: function (key) {
-      return (this.dict[key] || key);
     },
     readFrom: function (url, cb) {
       $('<tmp>').load(url + ' a', function () {
@@ -80,51 +99,50 @@ define(['jquery', 'util',
 
   API.games = [];
 
-  API.dict = Object.create({
-    error: '#c20000',
-    gray: '#8f8f8f',
-    mark: '#00ff00',
-    red: '#bb0826',
-    yellow: '#fcc60a',
-    warning: '#fff200',
-  });
-
   API.teams = Object.create({
-    '?'           : { colors: ['#591721', '#273864'], grouping: 'X', flag: '?.png'             },
-    Algeria       : { colors: ['#999999', '#999999'], grouping: 'H', flag: 'algeria.png'       },
-    Argentina     : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'argentina.png'     },
-    Australia     : { colors: ['#999999', '#999999'], grouping: 'B', flag: 'australia.png'     },
-    Belgium       : { colors: ['#999999', '#999999'], grouping: 'H', flag: 'belgium.png'       },
-    Bosnia        : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'bosnia.png'        },
-    Brazil        : { colors: ['#689b24', '#02277b'], grouping: 'A', flag: 'brazil.png'        },
-    Cameroon      : { colors: ['#289900', '#ffff00'], grouping: 'A', flag: 'cameroon.png'      },
-    Chile         : { colors: ['#999999', '#999999'], grouping: 'B', flag: 'chile.png'         },
-    Colombia      : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'colombia.png'      },
-    Costa_Rica    : { colors: ['#999999', '#999999'], grouping: 'D', flag: 'costa_rica.png'    },
-    Croatia       : { colors: ['#f91800', '#0a0f9b'], grouping: 'A', flag: 'croatia.png'       },
-    Ecuador       : { colors: ['#999999', '#999999'], grouping: 'E', flag: 'ecuador.png'       },
-    England       : { colors: ['#999999', '#999999'], grouping: 'D', flag: 'england.png'       },
-    France        : { colors: ['#999999', '#999999'], grouping: 'E', flag: 'france.png'        },
-    Germany       : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'germany.png'       },
-    Ghana         : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'ghana.png'         },
-    Greece        : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'greece.png'        },
-    Honduras      : { colors: ['#999999', '#999999'], grouping: 'E', flag: 'honduras.png'      },
-    Iran          : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'iran.png'          },
-    Italy         : { colors: ['#999999', '#999999'], grouping: 'D', flag: 'italy.png'         },
-    Ivory_Coast   : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'ivory_coast.png'   },
-    Japan         : { colors: ['#999999', '#999999'], grouping: 'C', flag: 'japan.png'         },
-    Korea_Republic: { colors: ['#999999', '#999999'], grouping: 'H', flag: 'korea_republic.png'},
+    '?'           : { colors: getRandoHexColorPair(), grouping: 'X', flag: 'switzerland.png'   },
+    Algeria       : { colors: getRandoHexColorPair(), grouping: 'H', flag: 'algeria.png'       },
+    Argentina     : { colors: getRandoHexColorPair(), grouping: 'F', flag: 'argentina.png'     },
+    Australia     : { colors: getRandoHexColorPair(), grouping: 'B', flag: 'australia.png'     },
+    Belgium       : { colors: getRandoHexColorPair(), grouping: 'H', flag: 'belgium.png'       },
+    Bosnia        : { colors: getRandoHexColorPair(), grouping: 'F', flag: 'bosnia.png'        },
+    Brazil        : { colors: getRandoHexColorPair(), grouping: 'A', flag: 'brazil.png'        },
+    Cameroon      : { colors: getRandoHexColorPair(), grouping: 'A', flag: 'cameroon.png'      },
+    Chile         : { colors: getRandoHexColorPair(), grouping: 'B', flag: 'chile.png'         },
+    Colombia      : { colors: getRandoHexColorPair(), grouping: 'C', flag: 'colombia.png'      },
+    Costa_Rica    : { colors: getRandoHexColorPair(), grouping: 'D', flag: 'costa_rica.png'    },
+    Croatia       : { colors: getRandoHexColorPair(), grouping: 'A', flag: 'croatia.png'       },
+    Ecuador       : { colors: getRandoHexColorPair(), grouping: 'E', flag: 'ecuador.png'       },
+    England       : { colors: getRandoHexColorPair(), grouping: 'D', flag: 'england.png'       },
+    France        : { colors: getRandoHexColorPair(), grouping: 'E', flag: 'france.png'        },
+    Germany       : { colors: getRandoHexColorPair(), grouping: 'G', flag: 'germany.png'       },
+    Ghana         : { colors: getRandoHexColorPair(), grouping: 'G', flag: 'ghana.png'         },
+    Greece        : { colors: getRandoHexColorPair(), grouping: 'C', flag: 'greece.png'        },
+    Honduras      : { colors: getRandoHexColorPair(), grouping: 'E', flag: 'honduras.png'      },
+    Iran          : { colors: getRandoHexColorPair(), grouping: 'F', flag: 'iran.png'          },
+    Italy         : { colors: getRandoHexColorPair(), grouping: 'D', flag: 'italy.png'         },
+    Ivory_Coast   : { colors: getRandoHexColorPair(), grouping: 'C', flag: 'ivory_coast.png'   },
+    Japan         : { colors: getRandoHexColorPair(), grouping: 'C', flag: 'japan.png'         },
+    Korea_Republic: { colors: getRandoHexColorPair(), grouping: 'H', flag: 'korea_republic.png'},
     Mexico        : { colors: ['#176844', '#fcc60a'], grouping: 'A', flag: 'mexico.png'        },
-    Netherlands   : { colors: ['#999999', '#999999'], grouping: 'B', flag: 'netherlands.png'   },
-    Nigeria       : { colors: ['#999999', '#999999'], grouping: 'F', flag: 'nigeria.png'       },
-    Portugal      : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'portugal.png'      },
-    Russia        : { colors: ['#999999', '#999999'], grouping: 'H', flag: 'russia.png'        },
-    Spain         : { colors: ['#999999', '#999999'], grouping: 'B', flag: 'spain.png'         },
-    Switzerland   : { colors: ['#999999', '#999999'], grouping: 'E', flag: 'switzerland.png'   },
-    Uruguay       : { colors: ['#999999', '#999999'], grouping: 'D', flag: 'uruguay.png'       },
-    USA           : { colors: ['#999999', '#999999'], grouping: 'G', flag: 'usa.png'           },
+    Netherlands   : { colors: getRandoHexColorPair(), grouping: 'B', flag: 'netherlands.png'   },
+    Nigeria       : { colors: getRandoHexColorPair(), grouping: 'F', flag: 'nigeria.png'       },
+    Portugal      : { colors: getRandoHexColorPair(), grouping: 'G', flag: 'portugal.png'      },
+    Russia        : { colors: getRandoHexColorPair(), grouping: 'H', flag: 'russia.png'        },
+    Spain         : { colors: getRandoHexColorPair(), grouping: 'B', flag: 'spain.png'         },
+    Switzerland   : { colors: getRandoHexColorPair(), grouping: 'E', flag: 'switzerland.png'   },
+    Uruguay       : { colors: getRandoHexColorPair(), grouping: 'D', flag: 'uruguay.png'       },
+    USA           : { colors: getRandoHexColorPair(), grouping: 'G', flag: 'usa.png'           },
   });
 
+  API.funk = function (i = 1) {
+    while (--i > -1) $('<div>').css({
+      backgroundColor: randHex(),
+      display: 'inline-block',
+      height: '40px',
+      width: '40px',
+    }).prependTo('body');
+  };
   return API;
 });
 

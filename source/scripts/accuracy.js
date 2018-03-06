@@ -1,13 +1,13 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
+  CHANGED 2018-03-06
   IDEA    Generate and modify pass-accuracy divs (boxes)
   NOTE    ???
   TODO    ???
 
  */
-define(['jqxtn', 'model',
-], function ($, Model) {
+define(['jqxtn',
+], function ($) {
   'use strict';
 
   var API, EL;
@@ -16,10 +16,13 @@ define(['jqxtn', 'model',
   var W = window;
   C.debug(NOM, 'loaded');
 
-  // - - - - - - - - - - - - - - - - - -
+  EL = Object.create({
+    div: '.the-accuracy .limit',
+    maj: '.the-accuracy .limit .major',
+    min: '.the-accuracy .limit .minor',
+  });
 
-  // function getValue(ele) {
-  //   return ele.data('value'); }
+  // - - - - - - - - - - - - - - - - - -
 
   function getColor(ele) {
     return ele.data('color');
@@ -27,22 +30,12 @@ define(['jqxtn', 'model',
 
   // - - - - - - - - - - - - - - - - - -
 
-  EL = Object.create({
-    div: '.the-accuracy .limit',
-    maj: '.the-accuracy .limit .major',
-    min: '.the-accuracy .limit .minor',
-  });
   API = Object.create({
-    Model: Model,
-    EL: EL,
-    percent: function (num) {
-      num = num || 0.5;
-      num = num % 100;
+    setPercent: function (num) {
+      num = (num || 0.5);
 
-      if (num <= 1) {
-        num = num * 100;
-      }
-      num = Math.round(num);
+      if (num <= 1) num = Math.abs(num * 100); // decimal to percent
+      num = Math.round(num) % 100;
 
       if (num < 50) {
         C.warn('normalize', num);
@@ -60,38 +53,36 @@ define(['jqxtn', 'model',
       }
       ele.css({
         height: val + '%',
-      });
-      ele.data('value', val); // store
+      }).data('value', val); // store
     },
     setColor: function (ele, val) {
       ele.css({
         backgroundColor: val,
-      });
-      ele.data('color', val); // store
+      }).data('color', val); // store
     },
     swapColor: function () {
-      this.colors(getColor(EL.min), getColor(EL.maj));
+      this.setColors(getColor(EL.min), getColor(EL.maj));
     },
-    colors: function (c1, c2) {
-      var cs = Model.colors();
-      c2 = '#999';
-      this.setColor(EL.maj, c1 || cs[0]);
-      this.setColor(EL.min, c2 || cs[1]);
+    setColors: function (c1, c2) {
+      // c2 = '#999';
+      this.setColor(EL.maj, c1);
+      this.setColor(EL.min, c2);
     },
-    load: function (num) {
-      this.colors();
-      this.percent(num);
+    load: function (num, tints) {
+      this.init();
+
+      this.setColors(...tints);
+      this.setPercent(num);
     },
-    init: function (num) {
+    init: function () {
+      this.init = $.noop;
       $.reify(EL);
-      this.load(num);
 
       if (W._dbug > 1) C.debug([NOM, API]);
-
-      this.init = this.load;
     },
   });
 
+  API.EL = EL;
   return API;
 });
 

@@ -1,13 +1,13 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-02-28
+  CHANGED 2018-03-06
   IDEA    Generate and modify ball-possession donut
   NOTE    ???
   TODO    ???
 
  */
-define(['jqxtn', 'model', 'dial',
-], function ($, Model, Dial) {
+define(['jqxtn', 'libs/dial',
+], function ($, Dial) {
   'use strict';
 
   var API, EL;
@@ -16,20 +16,19 @@ define(['jqxtn', 'model', 'dial',
   var W = window;
   C.debug(NOM, 'loaded');
 
-  // - - - - - - - - - - - - - - - - - -
-
   EL = Object.create({
     div: '.the-possession',
   });
 
+  // - - - - - - - - - - - - - - - - - -
+
   API = Object.create({
     Dial: Dial,
-    Model: Model,
     //
     dial1: {},
     dial2: {},
     svg: null,
-    add: function (sel) {
+    addDials: function (sel) {
       sel = $(sel);
       API.dial1 = Dial.make({
         flip: true,
@@ -43,23 +42,20 @@ define(['jqxtn', 'model', 'dial',
       sel.prepend(API.dial1.svg, API.dial2.svg);
       sel.parent().append(API.dial1.input, API.dial2.input);
     },
-    set: function (sel, num) {
-      var cs = Model.colors();
-      var inv = 100 - num;
+    load: function (sel, num, tints) {
+      this.init(sel);
 
       EL.div.find('.major h3').text(num + '%');
 
-      API.dial1.setColor(cs[0]).setInput(num);
-      API.dial2.setColor(cs[1]).setInput(inv);
+      API.dial1.setColor(tints[0]).setInput(num);
+      API.dial2.setColor(tints[1]).setInput(100 - num);
     },
-    init: function (sel, num) {
+    init: function (sel) {
+      this.init = $.noop;
       $.reify(EL);
-      this.add(sel);
-      this.set(sel, num);
 
+      this.addDials(sel);
       if (W._dbug > 1) C.debug([NOM, API]);
-
-      this.init = this.set;
     },
   });
 

@@ -1,6 +1,6 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
+  CHANGED 2018-03-06
   IDEA    Hook up various sub systems
   NOTE    bind events, store configs
   TODO    ???
@@ -42,20 +42,23 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
 
   // - - - - - - - - - - - - - - - - - -
 
-  function _revMenu() {
-    UT.picker.menu(EL.menu, Model.games);
-    EL.menu.val(Model.current);
+  function updatePicker(num) {
+    UT.picker(EL.menu, Model.games);
+    EL.menu.val(num);
+    EL.main.hide().fadeTo(333, 1);
   }
 
-  function initImports(game, stats) {
-    Shotsfaced.init(stats.shots);
-    Timeline.init(stats.events);
-    Accuracy.init(stats.accuracy);
-    Rankings.init(game.grouping);
-    Possession.init(EL.dial, stats.possession);
+  function initModules(game, stats) {
+    var colors = Model.getColors();
+
+    Shotsfaced.load(stats.shots);
+    Timeline.load(stats.events);
+    Accuracy.load(stats.accuracy, colors);
+    Rankings.load(game.grouping);
+    Possession.load(EL.dial, stats.possession, colors);
   }
 
-  function mutateDOM(game, stats) {
+  function updateDisplay(game, stats) {
     /// general
     EL.main //
       .find('.team_left').text(stats.teams[0]).end() //
@@ -65,11 +68,11 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
     EL.score //
       .find('.center').text(stats.score.join('-')).end() //
       .find('.left img').attr({
-        src: './images/flags/' + Model.getTeam(stats.teams[0]).flag,
+        src: `./images/flags/${Model.getTeam(stats.teams[0]).flag}`,
         alt: stats.teams[0],
       }).end() //
       .find('.right img').attr({
-        src: './images/flags/' + Model.getTeam(stats.teams[1]).flag,
+        src: `./images/flags/${Model.getTeam(stats.teams[1]).flag}`,
         alt: stats.teams[1],
       });
     EL.ticket //
@@ -109,6 +112,19 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
       .find('h3').text(`${game.pics.fact[1].match(/\S+ ?\w*/)}`);
   }
 
+  function exposeModel(game) {
+    var bigsrc = UT.stringify(Model.games);
+    var lilsrc = UT.stringify(game);
+
+    EL.menu.attr('title', lilsrc).parent() //
+      .off('dblclick').on('dblclick', function () {
+        var tab = W.open('?');
+        tab.document.write(`<pre>${bigsrc}</pre>`);
+        tab.document.title = 'Raw data for games';
+      }).attr('title', 'Double-click for more info.') //
+      .hide().fadeIn(999);
+  }
+
   function renderGame(num) {
     var game, stats;
 
@@ -117,33 +133,13 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
       game = Model.getGame(num);
       stats = game.match;
 
-      _revMenu();
+      initModules(game, stats);
+      updateDisplay(game, stats);
+      updatePicker(num);
+      exposeModel(game);
 
-      $('main').hide().fadeIn();
-
-      initImports(game, stats);
-      mutateDOM(game, stats);
-
-      // cleanup
-      $('img.fill.raise').remove();
-      $('.fill').lifter();
-      $('img').each(function (i, e) {
-        var img = $(e);
-        img.attr('title', img.attr('alt'));
-      });
-
-      // info stuff
-      var src = JSON.stringify(Model.games, function (k, v) {
-        return (v && v.join && typeof v[1] !== 'object') ? v.join('|') : v;
-      }, 4);
-
-      EL.menu.attr('title', src).parent() //
-        .off('dblclick').on('dblclick', function () {
-          var tab = W.open('?');
-          tab.document.write(`<pre>${src}</pre>`);
-          tab.document.title = 'Raw data for games';
-        }).attr('title', 'Double-click for more info.') //
-        .hide().fadeIn(3333);
+      UT.addPicLifters(['sm', 'md']);
+      UT.attributeTitles('img');
 
       UT.initFinish();
     } catch (err) {

@@ -1,6 +1,6 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
+  CHANGED 2018-03-06
   IDEA    Paint hits/misses eles over net graphic
   NOTE    ???
   TODO    ???
@@ -16,6 +16,13 @@ define(['jqxtn', 'libs/util-dim',
   var W = window;
   C.debug(NOM, 'loaded');
 
+  EL = Object.create({
+    cache: '',
+    div: '.the-shots',
+    net: '.net',
+    nums: '.nums span',
+  });
+
   // - - - - - - - - - - - - - - - - - -
 
   function Pc(n) {
@@ -25,8 +32,8 @@ define(['jqxtn', 'libs/util-dim',
   var _positionXY = function (x, y) {
     var ball = this;
 
-    x = UT.def(x) ? x : 50;
-    y = UT.def(y) ? y : x;
+    x = UT.hasdef(x) ? x : 50;
+    y = UT.hasdef(y) ? y : x;
 
     ball.css({
       left: Pc(x),
@@ -57,15 +64,7 @@ define(['jqxtn', 'libs/util-dim',
 
   // - - - - - - - - - - - - - - - - - -
 
-  EL = Object.create({
-    cache: '',
-    div: '.the-shots',
-    net: '.net',
-    nums: '.nums span',
-  });
-
   API = Object.create({
-    EL: EL,
     total: 0,
     saves: 0,
     goals: 0,
@@ -84,7 +83,7 @@ define(['jqxtn', 'libs/util-dim',
         }
         bdiv = MakeBall(bobj.goal);
         EL.net.append(bdiv);
-        UT.dim.prox(bdiv);
+        UT.dim.centerMiddle(bdiv);
 
         UT.delay(function () {
           bdiv.posxy(bobj.horz, bobj.vert);
@@ -97,12 +96,11 @@ define(['jqxtn', 'libs/util-dim',
       EL.nums.eq(1).text(this.saves + this.goals);
       EL.nums.eq(2).text(this.goals);
     },
-    reset: function (data) {
-      EL.cache.remove();
-      this.load(data);
-    },
     load: function (data) {
-      this.data = data || this.data;
+      this.init();
+
+      EL.cache.remove();
+      this.data = Array.isArray(data) ? data : this.data;
 
       $.each(this.data, function (i, e) {
         API.addBall(e);
@@ -110,19 +108,16 @@ define(['jqxtn', 'libs/util-dim',
 
       this.updateNums();
     },
-    init: function (data) {
+    init: function () {
+      this.init = $.noop;
       $.reify(EL);
-      EL.div.on('click', function () {
-        API.reset();
-      });
-      this.load(data);
 
+      EL.div.on('click', API.load.bind(API));
       if (W._dbug > 1) C.debug([NOM, API]);
-
-      this.init = this.reset;
     },
   });
 
+  API.EL = EL;
   return API;
 });
 
