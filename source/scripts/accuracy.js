@@ -28,9 +28,9 @@ define(['jqxtn', 'model',
   // - - - - - - - - - - - - - - - - - -
 
   EL = Object.create({
-    div: '.accuracy .limit',
-    maj: '.accuracy .limit .major',
-    min: '.accuracy .limit .minor',
+    div: '.the-accuracy .limit',
+    maj: '.the-accuracy .limit .major',
+    min: '.the-accuracy .limit .minor',
   });
   API = Object.create({
     Model: Model,

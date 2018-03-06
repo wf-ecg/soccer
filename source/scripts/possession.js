@@ -19,7 +19,7 @@ define(['jqxtn', 'model', 'dial',
   // - - - - - - - - - - - - - - - - - -
 
   EL = Object.create({
-    div: '.possession',
+    div: '.the-possession',
   });
 
   API = Object.create({

@@ -29,15 +29,15 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
 
   EL = Object.create({
     dial: '.donut',
-    fact: '.thefact',
-    factpic: '.factpic',
+    fact: '.the-fact',
+    factpic: '.the-portrait',
     main: 'main',
     menu: '#GameNum',
-    player: '.theplayer',
-    score: '.top .score',
-    shot: '.theshot',
-    ticket: '.top .ticket',
-    tweet: '.thetweet',
+    player: '.the-player',
+    score: '.the-top .score',
+    shot: '.the-photo',
+    ticket: '.the-top .ticket',
+    tweet: '.the-tweet',
   });
 
   // - - - - - - - - - - - - - - - - - -

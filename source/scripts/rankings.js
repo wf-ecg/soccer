@@ -45,8 +45,8 @@ define(['jqxtn',
   // - - - - - - - - - - - - - - - - - -
 
   EL = Object.create({
-    div: '.rankings table',
-    rows: '.rankings table tr:not(:first-child)',
+    div: '.the-rankings table',
+    rows: '.the-rankings table tr:not(:first-child)',
   });
 
   API = Object.create({

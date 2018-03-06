@@ -29,13 +29,13 @@
   &:hover img:not(.raise) {
     opacity: 0.9;
   }
-  &.thefact p {
+  &.the-fact p {
     text-align: center;
   }
-  &.factpic h3 {
+  &.the-portrait h3 {
     @extend %reddish;
   }
-  &.theshot h3 {
+  &.the-photo h3 {
     @extend %reddish;
     height: 100%;
     text-align: left;
