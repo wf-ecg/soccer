@@ -59,7 +59,7 @@ define(['jqxtn', 'libs/util-dim',
 
   EL = Object.create({
     cache: '',
-    div: '.shotsfaced',
+    div: '.the-shots',
     net: '.net',
     nums: '.nums span',
   });
