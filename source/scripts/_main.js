@@ -124,13 +124,8 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
       initImports(game, stats);
       mutateDOM(game, stats);
 
-      // cleanup
-      $('img.fill.raise').remove();
-      $('.fill').lifter();
-      $('img').each(function (i, e) {
-        var img = $(e);
-        img.attr('title', img.attr('alt'));
-      });
+      UT.addPicLifters(['sm', 'md']);
+      UT.attributeTitles('img');
 
       // info stuff
       var src = JSON.stringify(Model.games, function (k, v) {

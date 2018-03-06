@@ -48,7 +48,7 @@ define(['jquery', 'util',
       }
     },
     getGame: function (num) {
-      this.current = UT.def(num) ? num : this.current;
+      this.current = UT.hasdef(num) ? num : this.current;
       return this.games[this.current];
     },
     getWinner: function (num) {

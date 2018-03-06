@@ -25,8 +25,8 @@ define(['jqxtn', 'libs/util-dim',
   var _positionXY = function (x, y) {
     var ball = this;
 
-    x = UT.def(x) ? x : 50;
-    y = UT.def(y) ? y : x;
+    x = UT.hasdef(x) ? x : 50;
+    y = UT.hasdef(y) ? y : x;
 
     ball.css({
       left: Pc(x),
@@ -84,7 +84,7 @@ define(['jqxtn', 'libs/util-dim',
         }
         bdiv = MakeBall(bobj.goal);
         EL.net.append(bdiv);
-        UT.dim.prox(bdiv);
+        UT.dim.centerMiddle(bdiv);
 
         UT.delay(function () {
           bdiv.posxy(bobj.horz, bobj.vert);

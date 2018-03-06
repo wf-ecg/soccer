@@ -20,7 +20,7 @@ define(['jqxtn', 'libs/util-dim', 'model',
 
   $.fn.centerize = function () {
     this.each(function () {
-      UT.dim.prox(this);
+      UT.dim.centerMiddle(this);
     });
     return this;
   };

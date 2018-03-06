@@ -7,6 +7,29 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
 
   C.info('extending Utils w/Xtra');
 
+  function _liftpic(pic, path) {
+    // make dom img with path
+    var clip = pic.parent();
+    var div = clip.parent();
+    var img = $('<img>');
+
+    function _shifter() {
+      var off = UT.dim.getCenter(img);
+      UT.dim.centerMiddle(img, off, pic);
+    }
+
+    div.attr('title', 'Enlarge') //
+      .addClass('raise') //
+      .on('click', function () {
+        img.toggle(333);
+      });
+
+    img.attr('src', path) //
+      .addClass('fill raise') //
+      .insertAfter(clip) //
+      .load(_shifter);
+  }
+
   UT.tweakpath = function (pic, arr) { // pic'src'.swap[a, b]
     try {
       return $(pic).attr('src').replace(arr[0], arr[1]);
@@ -15,47 +38,24 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
     }
   };
 
-  $.fn.lifter = function () {
-
-    this.each(function () {
-      var me, swap, md;
-
-      me = $(this);
-      swap = 'sm,md';
+  UT.addPicLifters = function (swap) {
+    $('img.fill.raise').remove();
+    return $('.fill').each(function () {
+      var me = $(this);
 
       try {
-        swap = swap.split(',');
-        md = UT.tweakpath(me, swap);
-        UT.liftpic(me, md);
+        _liftpic(me, UT.tweakpath(me, swap));
       } catch (E) {
-        md = 'no dice';
+        throw 'no dice';
       }
     });
   };
 
-  UT.liftpic = function (pic1, path) {
-    // make dom img with path
-    var clip = pic1.parent();
-    var div = clip.parent();
-    var pic2 = $('<img>');
-
-    function _shifter() {
-      var off = UT.dim.centxy(pic2);
-      UT.dim.prox(pic2, off, pic1);
-    }
-
-    div //
-      .attr('title', 'Enlarge') //
-      .addClass('raise') //
-      .on('click', function () {
-        pic2.toggle(333);
-      });
-
-    pic2 //
-      .addClass('fill raise') //
-      .attr('src', path) //
-      .insertAfter(clip) //
-      .load(_shifter);
+  UT.attributeTitles = function (sel) {
+    return $(sel).each(function () {
+      var me = $(this);
+      me.attr('title', me.attr('alt'));
+    });
   };
 
   UT.picker = (function () {
