@@ -24,55 +24,32 @@ define(['jqxtn',
 
   // - - - - - - - - - - - - - - - - - -
 
-  function getColor(ele) {
-    return ele.data('color');
-  }
-
-  // - - - - - - - - - - - - - - - - - -
-
   API = Object.create({
     setPercent: function (num) {
-      num = (num || 0.5);
+      var c1 = this.color1;
+      var c2 = this.color2;
 
-      if (num <= 1) num = Math.abs(num * 100); // decimal to percent
+      if (num <= 1) num *= 100; // decimal to percent
       num = Math.round(num) % 100;
 
-      if (num < 50) {
-        C.warn('normalize', num);
-        num = 100 - num;
-        this.swapColor();
-      }
-      this.setValue(EL.maj, num); // mod major div
-      this.setValue(EL.min, 100 - num); // mod minor
+      this.setValue(EL.maj, num, c1, 'success');
+      this.setValue(EL.min, 100 - num, c2, 'failure');
     },
-    setValue: function (ele, val) {
-      if (val < 44) {
-        ele.find('h3').text('');
-      } else {
-        ele.find('h3').text(val + '%');
-      }
+    setValue: function (ele, num, color, tip) {
+      ele.find('h3').text(num < 44 ? '' : num + '%');
+
       ele.css({
-        height: val + '%',
-      }).data('value', val); // store
+        backgroundColor: color,
+        height: num + '%',
+      }).attr('title', tip);
     },
-    setColor: function (ele, val) {
-      ele.css({
-        backgroundColor: val,
-      }).data('color', val); // store
-    },
-    swapColor: function () {
-      this.setColors(getColor(EL.min), getColor(EL.maj));
-    },
-    setColors: function (c1, c2) {
-      // c2 = '#999';
-      this.setColor(EL.maj, c1);
-      this.setColor(EL.min, c2);
-    },
-    load: function (num, tints) {
+    load: function (accuracy, tints) {
       this.init();
 
-      this.setColors(...tints);
-      this.setPercent(num);
+      this.color1 = tints[0];
+      this.color2 = '#333';
+
+      this.setPercent(accuracy);
     },
     init: function () {
       this.init = $.noop;
