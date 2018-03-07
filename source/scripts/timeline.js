@@ -96,7 +96,7 @@ define(['jqxtn', 'libs/util-dim',
       $.reify(EL);
 
       this.measureBar();
-      EL.evts.on('click', API.load.bind(API));
+      // EL.evts.on('click', API.load.bind(API));
       if (W._dbug > 1) C.debug([NOM, API]);
     },
   });

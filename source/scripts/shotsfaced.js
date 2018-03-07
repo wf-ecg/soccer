@@ -99,7 +99,7 @@ define(['jqxtn', 'libs/util-dim',
       this.init = $.noop;
       $.reify(EL);
 
-      EL.div.on('click', API.load.bind(API));
+      // EL.div.on('click', API.load.bind(API));
       if (W._dbug > 1) C.debug([NOM, API]);
     },
   });
