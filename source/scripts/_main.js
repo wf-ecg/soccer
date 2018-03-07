@@ -55,7 +55,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
     Timeline.load(stats.events);
     Accuracy.load(stats.accuracy, colors);
     Rankings.load(game.grouping);
-    Possession.load(EL.dial, stats.possession, colors);
+    Possession.load(EL.dial, stats, colors);
   }
 
   function updateDisplay(game, stats) {

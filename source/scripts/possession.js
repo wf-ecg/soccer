@@ -42,13 +42,14 @@ define(['jqxtn', 'libs/dial',
       sel.prepend(API.dial1.svg, API.dial2.svg);
       sel.parent().append(API.dial1.input, API.dial2.input);
     },
-    load: function (sel, num, tints) {
+    load: function (sel, stats, tints) {
       this.init(sel);
 
-      EL.div.find('.major h3').text(num + '%');
+      var {possession, teams} = stats;
+      EL.div.find('.major h3').html(possession + '%');
 
-      API.dial1.setColor(tints[0]).setInput(num);
-      API.dial2.setColor(tints[1]).setInput(100 - num);
+      API.dial1.setColor(tints[0]).setTip(teams[0]).setInput(possession);
+      API.dial2.setColor(tints[1]).setTip(teams[1]).setInput(100 - possession);
     },
     init: function (sel) {
       this.init = $.noop;

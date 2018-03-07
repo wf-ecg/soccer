@@ -21,4 +21,11 @@
     position: relative;
     top: -40%;
   }
+  svg {
+    pointer-events: none;
+  }
+  circle {
+    cursor: help;
+    pointer-events: visibleStroke;
+  }
 }

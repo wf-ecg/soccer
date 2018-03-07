@@ -45,7 +45,7 @@ define(['jquery',
   });
 
   EL = Object.create({
-    svg: $('<svg viewBox="-50 -50 100 100"><circle r="1"></circle></svg>'),
+    svg: $('<svg viewBox="-50 -50 100 100"><circle r="1"><title></title></circle></svg>'),
     input: $('<input type="range" min="0" max="100" value="50" step="1">'),
   });
 
@@ -109,13 +109,14 @@ define(['jquery',
       this.circle.css('stroke', str || 'transparent');
       return this;
     },
+    setTip: function (str) {
+      this.svg.find('title').text(str);
+      return this;
+    },
     setInput: function (num, max, min) {
       if (!max) {
-        max = num;
-        num = 100;
-        min = 0;
+        [num, max, min] = [100, num, 0];
       }
-
       this.input.attr({
         max: max,
         min: min,
