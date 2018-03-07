@@ -30,29 +30,42 @@ define(['jqxtn', 'libs/util-dim',
     });
   }
 
-  function Trivent(time, side, icon) {
-    this.time = (time || 55) % 91;
-    this.side = side || 'top';
-    this.icon = icon || 'goal';
-  }
-
   function timePercent(time) {
-    return time / 90 * 100;
+    return U.pct(time / 90 * 100);
   }
 
-  function moveEvent(time, eles) {
-    eles.css({
-      left: U.pct(timePercent(time)),
+  function _moveEvent() {
+    this.eles.css({
+      left: this.time,
     });
   }
 
-  function addTriv(top, type) {
+  function makeTdiv(top, type) {
     var div = $('<div>').addClass('trivent ' + type);
-    div.css({
+
+    return div.css({
       left: U.pct(0),
       top: U.pix(top),
-    });
-    return div.appendTo(EL.evts);
+    }).appendTo(EL.evts);
+  }
+
+  function Trivent(time, side, icon) {
+    var mid = API.h / 2;
+    var vrt = (side === 'top' ? -mid : mid);
+    var idiv, pdiv;
+
+    time = (time || 55) % 91;
+    side = side || 'top';
+    icon = icon || 'goal';
+
+    // add first for z-index
+    pdiv = makeTdiv(1.2 * vrt + mid, 'point');
+    idiv = makeTdiv(2 * vrt + mid, icon);
+
+    this.time = timePercent(time);
+    this.eles = idiv.add(pdiv);
+
+    centerize(this.eles);
   }
 
   // - - - - - - - - - - - - - - - - - -
@@ -61,20 +74,11 @@ define(['jqxtn', 'libs/util-dim',
     h: 0,
     w: 0,
     data: null,
-    addEvent: function (obj) { // trivent [time, icon, side]
-      var triv, point, duo;
-      var mid = this.h / 2;
-      var vrt = (obj.side === 'top' ? -mid : mid);
+    addEvent: function (data) { // [time, side, icon]
+      var obj = new Trivent(...data);
 
-      // add first for z-index
-      point = addTriv(1.2 * vrt + mid, 'point');
-      triv = addTriv(2 * vrt + mid, obj.icon);
-      duo = triv.add(point);
-
-      // new call stack
-      U.delay(0, function () {
-        moveEvent(obj.time, centerize(duo));
-      });
+      // allow next frame to be css transition
+      U.delay(0, _moveEvent.bind(obj));
     },
     measureBar: function () {
       this.w = EL.line.outerWidth();
@@ -88,7 +92,7 @@ define(['jqxtn', 'libs/util-dim',
       this.data = Array.isArray(data) ? data : this.data;
 
       $.each(this.data, function () {
-        API.addEvent(new Trivent(...this));
+        API.addEvent(this);
       });
     },
     init: function () {
