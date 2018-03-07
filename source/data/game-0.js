@@ -18,7 +18,6 @@ define({
     ticket: ['?', '?', '?'],
     score: ['9', '9'],
     shots: [ /* goal, x, y */
-      [],
     ],
   },
   pics: {

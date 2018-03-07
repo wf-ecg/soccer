@@ -6,8 +6,8 @@
   TODO    ???
 
  */
-define(['jqxtn',
-], function ($) {
+define(['jqxtn', 'util',
+], function ($, U) {
   'use strict';
 
   var API, EL;
@@ -32,16 +32,18 @@ define(['jqxtn',
       if (num <= 1) num *= 100; // decimal to percent
       num = Math.round(num) % 100;
 
-      this.setValue(EL.maj, num, c1, 'success');
-      this.setValue(EL.min, 100 - num, c2, 'failure');
+      this.setValue(EL.maj, num, c1, 'Success');
+      this.setValue(EL.min, 100 - num, c2, 'Failed');
     },
     setValue: function (ele, num, color, tip) {
-      ele.find('h3').text(num < 44 ? '' : num + '%');
+      var str = U.pct(num);
 
       ele.css({
         backgroundColor: color,
-        height: num + '%',
-      }).attr('title', tip);
+        height: U.pct(num),
+      }).find('h3').text(44 > num ? '' : str);
+
+      ele.attr('title', `${tip} ${str}`);
     },
     load: function (accuracy, tints) {
       this.init();

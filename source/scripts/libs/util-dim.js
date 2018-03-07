@@ -1,13 +1,13 @@
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'util'], function ($, UT) {
+define(['jquery', 'util'], function ($, U) {
   'use strict';
   // var W = window;
   var C = console;
 
   C.info('extending Utils w/Dim');
 
-  UT.dim = {
+  U.dim = {
     arrWH: function (ele) { // size probe
       ele = $(ele);
       return [ele.width(), ele.height()];
@@ -57,7 +57,7 @@ define(['jquery', 'util'], function ($, UT) {
     },
   };
 
-  return UT;
+  return U;
 });
 
 /*

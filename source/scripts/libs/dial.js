@@ -10,7 +10,7 @@ define(['jquery',
 ], function ($) {
   'use strict';
 
-  var CF, EL, UL;
+  var CF, EL, UT;
   var NOM = 'Dial';
   var C = console;
   var W = window;
@@ -49,7 +49,7 @@ define(['jquery',
     input: $('<input type="range" min="0" max="100" value="50" step="1">'),
   });
 
-  UL = Object.create({
+  UT = Object.create({
     calcmax: function (r) {
       return Math.round(Math.PI * 2 * r);
     },
@@ -61,23 +61,23 @@ define(['jquery',
     },
     selfclean: function () {
       var ele = this;
-      ele.removeEventListener('transitionend', UL.selfclean);
+      ele.removeEventListener('transitionend', UT.selfclean);
       ele.style.transform = '';
     },
     chromeclean: function () {
       var ele = this;
-      ele.addEventListener('transitionend', UL.selfclean);
+      ele.addEventListener('transitionend', UT.selfclean);
       ele.style.transform = 'translate3d(0, 0, 0)';
     },
     setOffset: function (data, val) {
       var vs = data.vals;
 
       vs.input = val || 0;
-      vs.norm = UL.normalize(vs.input, vs.max);
-      vs.output = UL.invert(vs.norm, vs.max);
+      vs.norm = UT.normalize(vs.input, vs.max);
+      vs.output = UT.invert(vs.norm, vs.max);
 
       data.circle[0].style.strokeDashoffset = vs.output;
-      // UL.chromeclean.bind(data.svg[0])(); // if redraws funny
+      // UT.chromeclean.bind(data.svg[0])(); // if redraws funny
     },
   });
 
@@ -91,7 +91,7 @@ define(['jquery',
     if (evt.which === 0 || val === data.vals.last) return;
     data.vals.last = val;
 
-    UL.setOffset(data, val);
+    UT.setOffset(data, val);
   };
 
   var _changeStep = function (evt) {
@@ -141,7 +141,7 @@ define(['jquery',
     setWeight: function (num) {
       var data = this;
       var radius = (CF.radius - 1) - (num / 2); // -1px for breathing room
-      var circum = UL.calcmax(radius);
+      var circum = UT.calcmax(radius);
 
       data.vals.max = circum;
       data.circle.attr('r', radius);
@@ -210,7 +210,7 @@ define(['jquery',
 
   return {
     EL: EL,
-    UL: UL,
+    UT: UT,
     make: construct,
   };
 });
