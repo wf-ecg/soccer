@@ -9,7 +9,7 @@
 var gulp /*     */ = require('gulp');
 var minimist /* */ = require('minimist');
 var jade /*     */ = require('gulp-pug');
-//var htmlhint = require('gulp-htmlhint');
+//var htmlhint     = require('gulp-htmlhint');
 
 // Build options
 var options = minimist(process.argv.slice(2), {
@@ -25,12 +25,12 @@ gulp.task('views', function () {
   return gulp.src(['./source/views/*.jade', './source/views/*.pug', '!./source/views/_*'])
 
   // Jade compilation
-  .pipe(jade({
-    pretty: true,
-    data: {
-      env: options.env,
-    },
-  }))
+    .pipe(jade({
+      pretty: true,
+      data: {
+        env: options.env,
+      },
+    }))
 
   // Lint HTML
   //.pipe(htmlhint({
@@ -39,5 +39,5 @@ gulp.task('views', function () {
   //.pipe(htmlhint.reporter())
 
   // Save optimized HTML
-  .pipe(gulp.dest('./build'));
+    .pipe(gulp.dest('./build'));
 });

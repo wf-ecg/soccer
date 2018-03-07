@@ -30,15 +30,15 @@ gulp.task('scripts', function () {
 
   // Include JS
   // Similar to Sass `@import`
-  .pipe(include())
+    .pipe(include())
 
   // Check JSCS
-  .pipe(jscs({
-    configPath: './gulp_tasks/conf/js-guide.json',
-  }))
+    .pipe(jscs({
+      configPath: './gulp_tasks/conf/js-guide.json',
+    }))
 
   // Lint JS
-  .pipe(jshint(jshintConf))
+    .pipe(jshint(jshintConf))
     .pipe(pkg.stage < 2 ? jshint.reporter(stylish) : babel({
       presets: ['es2015'],
     }))
@@ -50,7 +50,7 @@ gulp.task('scripts', function () {
   //}))
 
   // Save uncompressed JS
-  .pipe(gulp.dest('./build/scripts'))
+    .pipe(gulp.dest('./build/scripts'))
 
   // Minify JS
   //.pipe(uglify({
@@ -62,5 +62,5 @@ gulp.task('scripts', function () {
   //}))
 
   // Save compressed JS
-  .pipe(gulp.dest('./build/scripts'));
+    .pipe(gulp.dest('./build/scripts'));
 });

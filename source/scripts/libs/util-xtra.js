@@ -1,13 +1,36 @@
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'libs/util-dim'], function ($, UT) {
+define(['jquery', 'util_d'], function ($, U) {
   'use strict';
   // var W = window;
   var C = console;
 
   C.info('extending Utils w/Xtra');
 
-  UT.tweakpath = function (pic, arr) { // pic'src'.swap[a, b]
+  function _liftpic(pic, path) {
+    // make dom img with path
+    var clip = pic.parent();
+    var div = clip.parent();
+    var img = $('<img>');
+
+    function _shifter() {
+      var off = U.dim.getCenter(img);
+      U.dim.centerMiddle(img, off, pic);
+    }
+
+    div.attr('title', 'Enlarge') //
+      .addClass('raise') //
+      .on('click', function () {
+        img.toggle(333);
+      });
+
+    img.attr('src', path) //
+      .addClass('raise') //
+      .insertAfter(clip) //
+      .load(_shifter);
+  }
+
+  U.tweakpath = function (pic, arr) { // pic'src'.swap[a, b]
     try {
       return $(pic).attr('src').replace(arr[0], arr[1]);
     } catch (E) {
@@ -15,67 +38,40 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
     }
   };
 
-  $.fn.lifter = function () {
-
-    this.each(function () {
-      var me, swap, md;
-
-      me = $(this);
-      swap = 'sm,md';
+  U.addPicLifters = function (swap) {
+    $('img.raise').remove();
+    return $('.fill').each(function () {
+      var me = $(this);
 
       try {
-        swap = swap.split(',');
-        md = UT.tweakpath(me, swap);
-        UT.liftpic(me, md);
+        _liftpic(me, U.tweakpath(me, swap));
       } catch (E) {
-        md = 'no dice';
+        throw 'no dice';
       }
     });
   };
 
-  UT.liftpic = function (pic1, path) {
-    // make dom img with path
-    var pic2;
-
-    function _shifter() {
-      var off = UT.dim.centxy(pic2);
-      UT.dim.prox(pic2, off, pic1);
-    }
-
-    pic1.parent() //
-      .attr('title', 'ENLARGE') //
-      .addClass('raise') //
-      .on('click', function () {
-        pic2.toggle(333);
-      });
-
-    pic2 = $('<img>') //
-      .addClass('fill raise') //
-      .attr('src', path) //
-      .insertAfter(pic1) //
-      .load(_shifter);
+  U.attributeTitles = function (sel) {
+    return $(sel).each(function () {
+      var me = $(this);
+      me.attr('title', me.attr('alt'));
+    });
   };
 
-  UT.picker = (function () {
-    return {
-      menu: function (menu, games) {
-        menu.empty();
-        $.each(games, function (i, e) {
-          if (!e) {
-            return;
-          }
-          var opt = $('<option>').text('Game ' + i).val(i);
-          menu.append(opt);
-        });
-      },
-    };
-  }());
+  U.picker = function (menu, games) {
+    menu.empty();
+    $.each(games, function (i, e) {
+      if (!e) return;
+      var opt = $('<option>').text('Game ' + i).val(i);
+      menu.append(opt);
+    });
+  };
 
-  return UT;
+  return U;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
+
 
 
  */

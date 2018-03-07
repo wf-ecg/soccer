@@ -13,7 +13,6 @@ body {
   margin: 1em;
   padding: 1em;
   position: relative;
-  z-index: -3;
   user-select: none;
 }
 h1,
@@ -27,10 +26,10 @@ p {
   text-align: center;
   user-select: initial;
 }
-section {
+main {
   background-color: white;
+  opacity: 0.1;
   position: relative;
-  z-index: -2;
 }
 small {
   font-family: Helvetica, Arial, Geneva, sans-serif;

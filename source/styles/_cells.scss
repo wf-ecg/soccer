@@ -15,9 +15,13 @@
 %gray { background-color: $gray; }
 %shiv { margin-right: -1em; } // prevent wrap due to chrome/ff px-rounding
 
-section.cells {
+.cells {
   > div {
+    display: table-row;
+  }
+  > div > div {
     @extend %h3;
+    display: table-cell;
     float: left;
     padding: 1.333rem 1rem;
     position: relative;
@@ -29,54 +33,54 @@ section.cells {
     position: absolute;
     right: 0;
   }
-  .top {
+  .the-top {
     @extend %black;
     @extend %h4;
     @extend %w3;
     padding: 2rem 4rem;
   }
-  .rankings {
+  .the-rankings {
     @extend %h1;
     @extend %w3;
   }
-  .possession {
+  .the-possession {
     @extend %black;
     @extend %w1;
   }
-  .shotsfaced {
+  .the-shots {
     @extend %red;
     @extend %w2;
     @extend %shiv;
   }
-  .theplayer {
+  .the-player {
     @extend %cyan;
     @extend %w1;
   }
-  .theshot {
+  .the-photo {
     @extend %w2;
     @extend %shiv;
   }
-  .accuracy {
+  .the-accuracy {
     @extend %black;
     @extend %h2;
     @extend %w1;
   }
-  .thetweet {
+  .the-tweet {
     @extend %h2;
     @extend %w2;
     @extend %yellow;
     @extend %shiv;
   }
-  .timeline {
+  .the-timeline {
     @extend %cyan;
     @extend %h1;
     @extend %w3;
   }
-  .thefact {
+  .the-fact {
     @extend %w2;
     @extend %yellow;
   }
-  .factpic {
+  .the-portrait {
     @extend %w1;
     @extend %shiv;
   }

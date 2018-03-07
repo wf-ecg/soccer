@@ -1,102 +1,70 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
-  IDEA    Generate and modify ball-possession svg (donut)
+  CHANGED 2018-03-06
+  IDEA    Generate and modify ball-possession donut
   NOTE    ???
   TODO    ???
 
  */
-define(['jqxtn', 'model', 'libs/knob', 'libs/ui',
-], function ($, Model, Knob, Ui) {
+define(['jqxtn', 'libs/dial',
+], function ($, Dial) {
   'use strict';
 
   var API, EL;
   var NOM = 'Possession';
   var C = console;
-  // var W = window;
+  var W = window;
   C.debug(NOM, 'loaded');
 
+  EL = Object.create({
+    div: '.the-possession',
+  });
+
   // - - - - - - - - - - - - - - - - - -
 
-  function proto() {
-    Ui.Donut = function () {};
-    Ui.Donut.prototype = Object.create(Ui.prototype);
-    Ui.Donut.prototype.createElement = function () {
-      var arc;
-
-      Ui.prototype.createElement.apply(this, arguments);
-
-      this.addComponent(new Ui.Arc({
-        arcWidth: this.width / API.defs.girth,
-      }));
-      this.merge(this.options, {
-        arcWidth: this.width / API.defs.girth,
+  API = Object.create({
+    Dial: Dial,
+    //
+    dial1: {},
+    dial2: {},
+    svg: null,
+    addDials: function (sel) {
+      sel = $(sel);
+      API.dial1 = Dial.make({
+        flip: true,
+        pitch: 30,
+      });
+      API.dial2 = Dial.make({
+        control: true,
+        pitch: 30,
       });
 
-      arc = new Ui.El.Arc(this.options);
-      arc.setAngle(this.options.anglerange);
-
-      this.el.node.appendChild(arc.node);
-      this.el.node.setAttribute('class', 'p2');
-    };
-  }
-
-  // - - - - - - - - - - - - - - - - - -
-
-  EL = {
-    div: '.possession',
-  };
-  API = Object.create({
-    EL: EL,
-    defs: {
-      girth: 7,
-      // 2 = full ... 200 = hairline
-      granularity: 0,
+      sel.prepend(API.dial1.svg, API.dial2.svg);
+      sel.parent().append(API.dial1.input, API.dial2.input);
     },
-    svg: null,
-    add: function (sel) {
-      var obj;
+    load: function (sel, stats, tints) {
+      this.init(sel);
 
-      sel = $(sel);
-      obj = new Knob(sel[0], new Ui.Donut());
-      sel.data('Knob', obj);
+      var {possession, teams} = stats;
+      EL.div.find('.major h3').html(possession + '%');
 
-      this.svg = obj;
+      API.dial1.setColor(tints[0]).setTip(teams[0]).setInput(possession);
+      API.dial2.setColor(tints[1]).setTip(teams[1]).setInput(100 - possession);
     },
-    set: function (num) {
-      this.svg.changed(-100 / 5);
-      this.svg.changed(num / 5);
-      EL.div.find('.major h3').text(num + '%');
-    },
-    load: function () {
-      var cs, paths;
-
-      cs = Model.colors();
+    init: function (sel) {
+      this.init = $.noop;
       $.reify(EL);
-      paths = EL.div.find('path');
 
-      paths.eq(0).css('fill', cs[1]);
-      paths.eq(1).css('fill', cs[0]);
-    },
-    init: function (sel, num) {
-      proto();
-      this.add(sel);
-      this.load();
-      this.set(num);
-
-      C.debug([NOM, API]);
-
-      this.init = this.load;
+      this.addDials(sel);
+      if (W._dbug > 1) C.debug([NOM, API]);
     },
   });
 
+  API.EL = EL;
   return API;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
-
-
 
 
 

@@ -9,10 +9,10 @@
 var pkg /*      */ = require('../package.json');
 var gulp /*     */ = require('gulp');
 var runSeq /*   */ = require('run-sequence');
-// var header = require('gulp-header');
-var scsslint /* */ = require('gulp-scss-lint');
+//var header       = require('gulp-header');
+var scsslint       = require('gulp-scss-lint');
 var sass /*     */ = require('gulp-sass');
-var compass /*  */ = require('gulp-compass');
+// var compass /*  */ = require('gulp-compass');
 //var rename       = require('gulp-rename');
 //var moment       = require('moment');
 var autoprefixer   = require('gulp-autoprefixer');
@@ -37,9 +37,9 @@ gulp.task('styles-lint', function () {
   return gulp.src('./source/styles/**/*.scss')
 
   // Lint Sass
-  .pipe(scsslint({
-    config: './gulp_tasks/conf/sass-lint.yml',
-  }));
+    .pipe(scsslint({
+      config: './gulp_tasks/conf/sass-lint.yml',
+    }));
 
 });
 
@@ -55,18 +55,18 @@ gulp.task('styles-build', function () {
 
   return gulp.src('./source/styles/*.scss')
 
-  .pipe(compass({
-    css: 'build/styles',
-    sass: 'source/styles',
-  }))
+  // .pipe(compass({
+  //   css: 'build/styles',
+  //   sass: 'source/styles',
+  // }))
 
   // Compile Sass
-  .pipe(sass({
-    outputStyle: 'nested',
-  }))
+    .pipe(sass({
+      outputStyle: 'nested',
+    }))
 
   // Add vendor prefixes
-  .pipe(pstcss)
+    .pipe(pstcss)
   // Comb CSS
   //.pipe(csscomb({configPath: './gulp_tasks/_css-comb.json'}))
   // Add banner
@@ -76,7 +76,7 @@ gulp.task('styles-build', function () {
   //}))
 
   // Save expanded CSS
-  .pipe(gulp.dest('./build/styles'))
+    .pipe(gulp.dest('./build/styles'))
 
   // Combine Media Queries
   //.pipe(combineMq());

@@ -1,16 +1,17 @@
 /*global define */
 define({
   match: {
-    accuracy: 74,
-    possession: 47,
+    accuracy: 47,
+    possession: 74,
     events: [
       /* time, side, type */
+      [15, 'not', 'warning'],
+      [30, 'top', 'warning'],
       [45, 'not', 'warning'],
-      [57, 'top', 'warning'],
-      [62, 'top', 'warning'],
-      [81, 'top', 'warning'],
+      [60, 'top', 'warning'],
+      [75, 'not', 'warning'],
     ],
-    teams: ['Mexico', 'Brazil'],
+    teams: ['Cameroon', 'Brazil'],
     ticket: ['June 17', 'Estádio Castelão', 'Fortaleza'],
     score: ['0', '0'],
     shots: [

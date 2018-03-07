@@ -1,6 +1,6 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
+  CHANGED 2018-03-06
   IDEA    Fill group... table of stats
   NOTE    ???
   TODO    ???
@@ -13,92 +13,58 @@ define(['jqxtn',
   var API, EL;
   var NOM = 'Rankings';
   var C = console;
-  // var W = window;
+  var W = window;
   C.debug(NOM, 'loaded');
+
+  EL = Object.create({
+    rows: '.the-rankings table tr',
+  });
 
   // - - - - - - - - - - - - - - - - - -
 
-  function getCxy(c, r) {
-    var tmp = EL.rows.eq(r);
-    tmp = tmp.children().eq(c);
-    return tmp;
+  function getCell(r, c) {
+    return EL.rows.eq(1 + r).children().eq(c);
   }
 
-  function fillup(data) {
-    var y = 0;
-    $.each(data, function (i, row) {
+  function fillTable(data) {
+    var rnum = 0;
 
-      getCxy(0, y).find('img').attr({
-        src: './images/flags/' + i.toLowerCase() + '.png',
-        alt: i,
+    $.each(data, function (team, row) {
+      getCell(rnum, 0).find('img').attr({
+        src: './images/flags/' + team.toLowerCase() + '.png',
+        alt: team,
       });
-      getCxy(1, y).text(i);
+      getCell(rnum, 1).text(team);
 
-      $.each(row, function (j, cell) {
-        getCxy(j + 2, y).text(cell);
+      $.each(row, function (cnum, cell) {
+        getCell(rnum, 2 + cnum).text(cell);
       });
 
-      y++;
+      rnum++;
     });
   }
 
   // - - - - - - - - - - - - - - - - - -
 
-  EL = {
-    div: '.rankings table',
-    rows: '.rankings table tr:not(:first-child)',
-  };
   API = Object.create({
-    EL: EL,
     load: function (data) {
-      this.data = data || this.data;
-      fillup(this.data);
+      this.init();
+
+      fillTable(data);
     },
-    init: function (data) {
+    init: function () {
+      this.init = $.noop;
       $.reify(EL);
-      this.load(data);
 
-      C.debug([NOM, API]);
-
-      this.init = this.load;
+      if (W._dbug > 1) C.debug([NOM, API]);
     },
   });
 
+  API.EL = EL;
   return API;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

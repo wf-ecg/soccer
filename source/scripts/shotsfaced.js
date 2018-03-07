@@ -1,107 +1,93 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
+  CHANGED 2018-03-06
   IDEA    Paint hits/misses eles over net graphic
   NOTE    ???
   TODO    ???
 
  */
-define(['jqxtn', 'libs/util-dim',
-], function ($, UT) {
+define(['jqxtn', 'util_d',
+], function ($, U) {
   'use strict';
 
   var API, EL;
   var NOM = 'Shotsfaced';
   var C = console;
-  // var W = window;
+  var W = window;
   C.debug(NOM, 'loaded');
+
+  EL = Object.create({
+    div: '.the-shots',
+    net: '.net',
+    nums: '.nums span',
+  });
 
   // - - - - - - - - - - - - - - - - - -
 
-  function Pc(n) {
-    return (n | 0) + '%';
+  function _posxy() {
+    this.ele.css({
+      left: this.x,
+      top: this.y,
+    });
   }
 
-  var _positionXY = function (x, y) {
-    var ball = this;
-
-    x = UT.def(x) ? x : 50;
-    y = UT.def(y) ? y : x;
-
-    ball.css({
-      left: Pc(x | 0),
-      top: Pc(y | 0),
-    });
-  };
-
-  function MakeBall(goal) {
-    var ball = $('<div>').addClass('target');
-
-    ball.posxy = _positionXY;
+  function makeBdiv(goal) {
+    var div = $('<div>').addClass('target');
+    var cls, tip;
 
     if (goal) {
-      API.goals++;
-      ball.addClass('score');
+      API.goals++; tip = 'Goal'; cls = 'score';
     } else {
-      API.saves++;
+      API.saves++; tip = 'Blocked'; cls = '';
     }
-    return ball;
+    return div.addClass(cls).attr('title', tip);
   }
 
   function Triball(goal, horz, vert) {
-    var tobj = this;
-    tobj.goal = goal;
-    tobj.horz = horz;
-    tobj.vert = vert;
+    var bdiv = makeBdiv(goal);
+
+    this.ele = bdiv;
+    this.x = U.pct(U.hasdef(horz) ? horz : 50);
+    this.y = U.pct(U.hasdef(vert) ? vert : horz);
+
+    EL.net.append(bdiv);
+    U.dim.centerMiddle(bdiv);
   }
 
   // - - - - - - - - - - - - - - - - - -
 
-  EL = {
-    cache: '',
-    div: '.shotsfaced',
-    net: '.net',
-    nums: '.nums span',
-  };
   API = Object.create({
-    EL: EL,
     total: 0,
     saves: 0,
     goals: 0,
     data: null,
     addBall: function (tb) {
-      var bdiv, bobj;
+      var ball;
 
       if (typeof tb === 'number') {
-        EL.cache = $();
-        this.total = tb;
-        this.saves = 0;
-        this.goals = 0;
+        this.total = tb; // head value of shots array
       } else {
-        if (tb.constructor !== Triball) {
-          bobj = new Triball(tb[0], tb[1], tb[2]);
-        }
-        bdiv = MakeBall(bobj.goal);
-        EL.net.append(bdiv);
-        UT.dim.prox(bdiv);
-
-        UT.delay(function () {
-          bdiv.posxy(bobj.horz, bobj.vert);
-        });
-        EL.cache = EL.cache.add(bdiv);
+        ball = new Triball(tb[0], tb[1], tb[2]);
+        // allow next frame to be css transition
+        U.delay(_posxy.bind(ball));
       }
+    },
+    resetNet: function () {
+      EL.net.find('.target').remove();
+      this.total = 0;
+      this.saves = 0;
+      this.goals = 0;
     },
     updateNums: function () {
       EL.nums.eq(0).text(this.total);
       EL.nums.eq(1).text(this.saves + this.goals);
       EL.nums.eq(2).text(this.goals);
     },
-    reset: function (data) {
-      EL.cache.remove();
-      this.load(data);
-    },
     load: function (data) {
-      this.data = data || this.data;
+      this.init();
+
+      this.resetNet();
+      this.data = Array.isArray(data) ? data : this.data;
 
       $.each(this.data, function (i, e) {
         API.addBall(e);
@@ -109,22 +95,18 @@ define(['jqxtn', 'libs/util-dim',
 
       this.updateNums();
     },
-    init: function (data) {
+    init: function () {
+      this.init = $.noop;
       $.reify(EL);
-      EL.div.on('click', function () {
-        API.reset();
-      });
-      this.load(data);
 
-      C.debug([NOM, API]);
-
-      this.init = this.reset;
+      // EL.div.on('click', API.load.bind(API));
+      if (W._dbug > 1) C.debug([NOM, API]);
     },
   });
 
+  API.EL = EL;
   return API;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
 

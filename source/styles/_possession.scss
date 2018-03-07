@@ -1,7 +1,7 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* _possession.scss */
 
-.possession {
+.the-possession {
   /*    cursor: progress;*/
 
   div {
@@ -20,5 +20,12 @@
   .major {
     position: relative;
     top: -40%;
+  }
+  svg {
+    pointer-events: none;
+  }
+  circle {
+    cursor: help;
+    pointer-events: visibleStroke;
   }
 }

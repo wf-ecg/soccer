@@ -1,102 +1,72 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-01-25
+  CHANGED 2018-03-06
   IDEA    Generate and modify pass-accuracy divs (boxes)
   NOTE    ???
   TODO    ???
 
  */
-define(['jqxtn', 'model',
-], function ($, Model) {
+define(['jqxtn', 'util',
+], function ($, U) {
   'use strict';
 
   var API, EL;
   var NOM = 'Accuracy';
   var C = console;
-  // var W = window;
+  var W = window;
   C.debug(NOM, 'loaded');
 
-  // - - - - - - - - - - - - - - - - - -
-
-  // function getValue(ele) {
-  //   return ele.data('value'); }
-
-  function getColor(ele) {
-    return ele.data('color');
-  }
+  EL = Object.create({
+    div: '.the-accuracy .limit',
+    maj: '.the-accuracy .limit .major',
+    min: '.the-accuracy .limit .minor',
+  });
 
   // - - - - - - - - - - - - - - - - - -
 
-  EL = {
-    div: '.accuracy .limit',
-    maj: '.accuracy .limit .major',
-    min: '.accuracy .limit .minor',
-  };
   API = Object.create({
-    Model: Model,
-    EL: EL,
-    percent: function (num) {
-      num = num || 0.5;
-      num = num % 100;
+    setPercent: function (num) {
+      var c1 = this.color1;
+      var c2 = this.color2;
 
-      if (num <= 1) {
-        num = num * 100;
-      }
-      num = num | 0;
+      if (num <= 1) num *= 100; // decimal to percent
+      num = Math.round(num) % 100;
 
-      if (num < 50) {
-        C.warn('normalize', num);
-        num = 100 - num;
-        this.swapColor();
-      }
-      this.setValue(EL.maj, num); // mod major div
-      this.setValue(EL.min, 100 - num); // mod minor
+      this.setValue(EL.maj, num, c1, 'Success');
+      this.setValue(EL.min, 100 - num, c2, 'Failed');
     },
-    setValue: function (ele, val) {
-      if (val < 44) {
-        ele.find('h3').text('');
-      } else {
-        ele.find('h3').text(val + '%');
-      }
+    setValue: function (ele, num, color, tip) {
+      var str = U.pct(num);
+
       ele.css({
-        height: val + '%',
-      });
-      ele.data('value', val); // store
+        backgroundColor: color,
+        height: U.pct(num),
+      }).find('h3').text(44 > num ? '' : str);
+
+      ele.attr('title', `${tip} ${str}`);
     },
-    setColor: function (ele, val) {
-      ele.css({
-        backgroundColor: val,
-      });
-      ele.data('color', val); // store
+    load: function (accuracy, tints) {
+      this.init();
+
+      this.color1 = tints[0];
+      this.color2 = '#333';
+
+      this.setPercent(accuracy);
     },
-    swapColor: function () {
-      this.colors(getColor(EL.min), getColor(EL.maj));
-    },
-    colors: function (c1, c2) {
-      var cs = Model.colors();
-      c2 = '#999';
-      this.setColor(EL.maj, c1 || cs[0]);
-      this.setColor(EL.min, c2 || cs[1]);
-    },
-    load: function (num) {
-      this.colors();
-      this.percent(num);
-    },
-    init: function (num) {
+    init: function () {
+      this.init = $.noop;
       $.reify(EL);
-      this.load(num);
 
-      C.debug([NOM, API]);
-
-      this.init = this.load;
+      if (W._dbug > 1) C.debug([NOM, API]);
     },
   });
 
+  API.EL = EL;
   return API;
 });
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
+
 
 
  */

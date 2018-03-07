@@ -10,27 +10,24 @@ html(lang='en').loading
       | Select match:
       select#GameNum(size='1')
 
-    // main
-    section.cells
-
-      include ./parts/top
-      include ./parts/rankings
-      include ./parts/stats
-
-      .theplayer
-        h4 Player of the Match
-        img(src='#' alt='#')
-        h3.bottom #GettingItDone
-
-      .theshot
-        img.fill(src='#' alt='#')
-        h3.bottom
-          | Photo <br>
-          | of the <br>
-          | Day <br>
-          img(src='./images/icons/camera.png')
-
-      include ./parts/match
-      include ./parts/trivia
+    main.cells
+      .row1
+        include ./parts/the-top
+      .row2
+        include ./parts/the-rankings
+      .row3
+        include ./parts/the-possession
+        include ./parts/the-shots
+      .row4
+        include ./parts/the-player
+        include ./parts/the-photo
+      .row5
+        include ./parts/the-accuracy
+        include ./parts/the-tweet
+      .row6
+        include ./parts/the-timeline
+      .row7
+        include ./parts/the-fact
+        include ./parts/the-portrait
 
       // end ui-page
