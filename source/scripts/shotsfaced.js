@@ -7,7 +7,7 @@
 
  */
 define(['jqxtn', 'libs/util-dim',
-], function ($, UT) {
+], function ($, U) {
   'use strict';
 
   var API, EL;
@@ -47,11 +47,11 @@ define(['jqxtn', 'libs/util-dim',
     var bdiv = makeBdiv(goal);
 
     this.ele = bdiv;
-    this.x = UT.pc(UT.hasdef(horz) ? horz : 50);
-    this.y = UT.pc(UT.hasdef(vert) ? vert : horz);
+    this.x = U.pc(U.hasdef(horz) ? horz : 50);
+    this.y = U.pc(U.hasdef(vert) ? vert : horz);
 
     EL.net.append(bdiv);
-    UT.dim.centerMiddle(bdiv);
+    U.dim.centerMiddle(bdiv);
   }
 
   // - - - - - - - - - - - - - - - - - -
@@ -69,7 +69,7 @@ define(['jqxtn', 'libs/util-dim',
       } else {
         ball = new Triball(tb[0], tb[1], tb[2]);
         // allow next frame to be css transition
-        UT.delay(_posxy.bind(ball));
+        U.delay(_posxy.bind(ball));
       }
     },
     resetNet: function () {

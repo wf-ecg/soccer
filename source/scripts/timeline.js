@@ -7,7 +7,7 @@
 
  */
 define(['jqxtn', 'libs/util-dim',
-], function ($, UT) {
+], function ($, U) {
   'use strict';
 
   var API, EL;
@@ -26,7 +26,7 @@ define(['jqxtn', 'libs/util-dim',
 
   function centerize(sel) {
     return $(sel).each(function () {
-      UT.dim.centerMiddle(this);
+      U.dim.centerMiddle(this);
     });
   }
 
@@ -42,15 +42,15 @@ define(['jqxtn', 'libs/util-dim',
 
   function moveEvent(time, eles) {
     eles.css({
-      left: UT.pc(timePercent(time)),
+      left: U.pc(timePercent(time)),
     });
   }
 
   function addTriv(top, type) {
     var div = $('<div>').addClass('trivent ' + type);
     div.css({
-      left: UT.pc(0),
-      top: UT.px(top),
+      left: U.pc(0),
+      top: U.px(top),
     });
     return div.appendTo(EL.evts);
   }
@@ -72,7 +72,7 @@ define(['jqxtn', 'libs/util-dim',
       duo = triv.add(point);
 
       // new call stack
-      UT.delay(0, function () {
+      U.delay(0, function () {
         moveEvent(obj.time, centerize(duo));
       });
     },

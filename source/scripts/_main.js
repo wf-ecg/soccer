@@ -7,7 +7,7 @@
 
  */
 define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
-], function ($, UT, Model, Accuracy, Possession, Rankings, Shotsfaced, Timeline) {
+], function ($, U, Model, Accuracy, Possession, Rankings, Shotsfaced, Timeline) {
   'use strict';
 
   var API, EL;
@@ -43,7 +43,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
   // - - - - - - - - - - - - - - - - - -
 
   function updatePicker(num) {
-    UT.picker(EL.menu, Model.games);
+    U.picker(EL.menu, Model.games);
     EL.menu.val(num);
     EL.main.hide().fadeTo(333, 1);
   }
@@ -113,8 +113,8 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
   }
 
   function exposeModel(game) {
-    var bigsrc = UT.stringify(Model.games);
-    var lilsrc = UT.stringify(game);
+    var bigsrc = U.stringify(Model.games);
+    var lilsrc = U.stringify(game);
 
     EL.menu.attr('title', lilsrc).parent() //
       .off('dblclick').on('dblclick', function () {
@@ -138,10 +138,10 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
       updatePicker(num);
       exposeModel(game);
 
-      UT.addPicLifters(['sm', 'md']);
-      UT.attributeTitles('img');
+      U.addPicLifters(['sm', 'md']);
+      U.attributeTitles('img');
 
-      UT.initFinish();
+      U.initFinish();
     } catch (err) {
       C.error(NOM, err, game, num);
     }
@@ -167,7 +167,7 @@ define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsf
   $.extend(API, {
     _: NOM,
     EL: EL,
-    UT: UT,
+    U: U,
     init: init,
     //
   });

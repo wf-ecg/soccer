@@ -1,6 +1,6 @@
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'libs/util-dim'], function ($, UT) {
+define(['jquery', 'libs/util-dim'], function ($, U) {
   'use strict';
   // var W = window;
   var C = console;
@@ -14,8 +14,8 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
     var img = $('<img>');
 
     function _shifter() {
-      var off = UT.dim.getCenter(img);
-      UT.dim.centerMiddle(img, off, pic);
+      var off = U.dim.getCenter(img);
+      U.dim.centerMiddle(img, off, pic);
     }
 
     div.attr('title', 'Enlarge') //
@@ -30,7 +30,7 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
       .load(_shifter);
   }
 
-  UT.tweakpath = function (pic, arr) { // pic'src'.swap[a, b]
+  U.tweakpath = function (pic, arr) { // pic'src'.swap[a, b]
     try {
       return $(pic).attr('src').replace(arr[0], arr[1]);
     } catch (E) {
@@ -38,27 +38,27 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
     }
   };
 
-  UT.addPicLifters = function (swap) {
+  U.addPicLifters = function (swap) {
     $('img.raise').remove();
     return $('.fill').each(function () {
       var me = $(this);
 
       try {
-        _liftpic(me, UT.tweakpath(me, swap));
+        _liftpic(me, U.tweakpath(me, swap));
       } catch (E) {
         throw 'no dice';
       }
     });
   };
 
-  UT.attributeTitles = function (sel) {
+  U.attributeTitles = function (sel) {
     return $(sel).each(function () {
       var me = $(this);
       me.attr('title', me.attr('alt'));
     });
   };
 
-  UT.picker = function (menu, games) {
+  U.picker = function (menu, games) {
     menu.empty();
     $.each(games, function (i, e) {
       if (!e) return;
@@ -67,7 +67,7 @@ define(['jquery', 'libs/util-dim'], function ($, UT) {
     });
   };
 
-  return UT;
+  return U;
 });
 
 /*
