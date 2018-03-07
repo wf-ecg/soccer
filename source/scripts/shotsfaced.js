@@ -6,7 +6,7 @@
   TODO    ???
 
  */
-define(['jqxtn', 'libs/util-dim',
+define(['jqxtn', 'util_d',
 ], function ($, U) {
   'use strict';
 

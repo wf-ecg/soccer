@@ -6,7 +6,7 @@
   TODO    ???
 
  */
-define(['jqxtn', 'uxtra', 'model', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
+define(['jqxtn', 'util_x', 'model', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
 ], function ($, U, Model, Accuracy, Possession, Rankings, Shotsfaced, Timeline) {
   'use strict';
 

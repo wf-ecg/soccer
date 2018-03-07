@@ -1,6 +1,6 @@
 /*global define */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-define(['jquery', 'libs/util-dim'], function ($, U) {
+define(['jquery', 'util_d'], function ($, U) {
   'use strict';
   // var W = window;
   var C = console;

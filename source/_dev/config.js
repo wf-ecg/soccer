@@ -28,7 +28,8 @@ require.config({
     model: '_model',
     ui: 'libs/ui',
     util: 'libs/util',
-    uxtra: 'libs/util-xtra',
+    util_d: 'libs/util-dim',
+    util_x: 'libs/util-xtra',
     games: '../data',
   },
   shim: {
