@@ -6,8 +6,8 @@
   TODO    ???
 
  */
-define(['jqxtn', 'libs/dial',
-], function ($, Dial) {
+define(['jqxtn', 'util', 'libs/dial',
+], function ($, U, Dial) {
   'use strict';
 
   var API, EL;
@@ -46,10 +46,12 @@ define(['jqxtn', 'libs/dial',
       this.init(sel);
 
       var {possession, teams} = stats;
-      EL.div.find('.major h3').html(possession + '%');
+      var times = [possession, 100 - possession];
 
-      API.dial1.setColor(tints[0]).setTip(teams[0]).setInput(possession);
-      API.dial2.setColor(tints[1]).setTip(teams[1]).setInput(100 - possession);
+      EL.div.find('.major h3').html(U.pct(times[0]));
+
+      API.dial1.setColor(tints[0]).setTip(teams[0]).setInput(times[0]);
+      API.dial2.setColor(tints[1]).setTip(teams[1]).setInput(times[1]);
     },
     init: function (sel) {
       this.init = $.noop;
