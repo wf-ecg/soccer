@@ -25,6 +25,7 @@ require.config({
     stats: 'libs/ecg-stats',
     //
     main: '_main',
+    model: '_model',
     ui: 'libs/ui',
     util: 'libs/util',
     uxtra: 'libs/util-xtra',
