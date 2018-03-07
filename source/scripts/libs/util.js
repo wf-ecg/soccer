@@ -30,6 +30,12 @@ define(['jquery'], function ($) {
     stringify: function (obj) {
       return JSON.stringify(obj, _stringify, 4);
     },
+    pc: function (n) {
+      return Math.round(n || 0) + '%';
+    },
+    px: function (n) {
+      return Math.round(n || 0) + 'px';
+    },
   };
 
   Utils.initBegin();

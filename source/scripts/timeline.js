@@ -36,29 +36,21 @@ define(['jqxtn', 'libs/util-dim',
     this.icon = icon || 'goal';
   }
 
-  function _px(n) {
-    return Math.round(n) + 'px';
-  }
-
-  function _pc(n) {
-    return Math.round(n) + '%';
-  }
-
   function timePercent(time) {
     return time / 90 * 100;
   }
 
   function moveEvent(time, eles) {
     eles.css({
-      left: _pc(timePercent(time)),
+      left: UT.pc(timePercent(time)),
     });
   }
 
   function addTriv(top, type) {
     var div = $('<div>').addClass('trivent ' + type);
     div.css({
-      left: _pc(0),
-      top: _px(top),
+      left: UT.pc(0),
+      top: UT.px(top),
     });
     return div.appendTo(EL.evts);
   }
