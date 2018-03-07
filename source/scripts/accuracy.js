@@ -36,11 +36,11 @@ define(['jqxtn', 'util',
       this.setValue(EL.min, 100 - num, c2, 'Failed');
     },
     setValue: function (ele, num, color, tip) {
-      var str = U.pc(num);
+      var str = U.pct(num);
 
       ele.css({
         backgroundColor: color,
-        height: U.pc(num),
+        height: U.pct(num),
       }).find('h3').text(44 > num ? '' : str);
 
       ele.attr('title', `${tip} ${str}`);

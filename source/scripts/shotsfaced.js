@@ -47,8 +47,8 @@ define(['jqxtn', 'libs/util-dim',
     var bdiv = makeBdiv(goal);
 
     this.ele = bdiv;
-    this.x = U.pc(U.hasdef(horz) ? horz : 50);
-    this.y = U.pc(U.hasdef(vert) ? vert : horz);
+    this.x = U.pct(U.hasdef(horz) ? horz : 50);
+    this.y = U.pct(U.hasdef(vert) ? vert : horz);
 
     EL.net.append(bdiv);
     U.dim.centerMiddle(bdiv);

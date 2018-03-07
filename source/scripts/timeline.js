@@ -42,15 +42,15 @@ define(['jqxtn', 'libs/util-dim',
 
   function moveEvent(time, eles) {
     eles.css({
-      left: U.pc(timePercent(time)),
+      left: U.pct(timePercent(time)),
     });
   }
 
   function addTriv(top, type) {
     var div = $('<div>').addClass('trivent ' + type);
     div.css({
-      left: U.pc(0),
-      top: U.px(top),
+      left: U.pct(0),
+      top: U.pix(top),
     });
     return div.appendTo(EL.evts);
   }
