@@ -15,14 +15,14 @@ define({
       [80, 'not', 'warning'],
     ],
     teams: ['?', '?'],
-    ticket: ['?', '?', '?'],
-    score: ['9', '9'],
+    ticket: ['?', 'Who Knows', '?'],
+    score: ['0', '0'],
     shots: [ /* goal, x, y */
     ],
   },
   pics: {
     /* path, text, lift */
-    shot: ['shots/zeta2-sm.jpg', 'Shot of the Match'],
+    shot: ['shots/zeta1-sm.jpg', 'Shot of the Match'],
     fact: ['facts/czj1-sm.jpg', 'Catherine Z Jones'],
     player: ['players/ez_thanatos.png', 'Z. Jones Jersey'],
   },
@@ -33,21 +33,20 @@ define({
       // 'Ut enim ad minim veniam, quis nostrud exercitation ullamco\
       // laboris nisi ut aliquip ex ea commodo consequat.',
     ],
-    author: '<a href="https://twitter.com/ESPNMag" target="twitter">@ESPNMag</a>',
+    author: '<a href="https://twitter.com/FoolioRex" target="twitter">@FoolioRex</a>',
   },
   fact: {
     text: [
       'Duis aute irure dolor in reprehenderit in voluptate\
       velit esse cillum dolore eu fugiat nulla pariatur.\
-      Excepteur sint occaecat cupidatat non proident,\
-      sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      Excepteur sint occaecat cupidatat non proident est laborum.',
     ],
   },
   grouping: {
-    /*        P, W, D, L, GD, Pts */
-    Brazil: [0, 0, 0, 0, 0, 0],
-    Mexico: [0, 0, 0, 0, 0, 0],
-    Cameroon: [0, 0, 0, 0, 0, 0],
-    Croatia: [0, 0, 0, 0, 0, 0],
+    /*         P, W, D, L, GD, Pts */
+    Brazil:   [0, 0, 0, 0, 0,  0],
+    Mexico:   [0, 0, 0, 0, 0,  0],
+    Cameroon: [0, 0, 0, 0, 0,  0],
+    Croatia:  [0, 0, 0, 0, 0,  0],
   },
 });

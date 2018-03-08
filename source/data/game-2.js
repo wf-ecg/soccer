@@ -1,41 +1,35 @@
 /*global define */
 define({
   match: {
-    accuracy: 47,
-    possession: 74,
+    accuracy: 76,
+    possession: 53,
     events: [
       /* time, side, type */
-      [15, 'not', 'warning'],
-      [30, 'top', 'warning'],
-      [45, 'not', 'warning'],
-      [60, 'top', 'warning'],
-      [75, 'not', 'warning'],
+      [45, 'top', 'warning'],
+      [59, 'not', 'warning'],
+      [62, 'not', 'warning'],
+      [79, 'top', 'warning'],
     ],
-    teams: ['Cameroon', 'Brazil'],
+    teams: ['Brazil', 'Mexico'],
     ticket: ['June 17', 'Estádio Castelão', 'Fortaleza'],
     score: ['0', '0'],
     shots: [
-      13,
+      14,
       /* goal, x, y */
       [false, 15, 25],
       [false, 10, 85],
       [false, 35, 10],
-      [false, 28, 60],
-      [false, 28, 90],
       [false, 50, 30],
-      [false, 50, 70],
-      [false, 75, 5],
       [false, 75, 40],
       [false, 70, 80],
-      [false, 90, 40],
       [false, 85, 70],
       [false, 90, 95],
     ],
   },
   pics: {
     /* path, text, lift, size? */
-    shot: ['shots/zeta1-sm.jpg', 'Shot of the Match'],
-    fact: ['facts/czj2-sm.jpg', 'Catherine Z Jones'],
+    shot: ['facts/hugo1-md.jpg', 'Shot of the Match'],
+    fact: ['shots/badass1-sm.jpg', 'Hugo Sanchez 1970, Mexico'],
     player: ['players/ochoa.png', 'Ochoa Jersey'],
   },
   tweet: {
@@ -47,9 +41,9 @@ define({
   },
   fact: {
     text: [
-      'asdf asdf asdf',
-      'asdf asdf asdf',
-      'asdf asdf asdf',
+      'In 1970, Mexico hosted the World Cup and kicked off their',
+      'campaign with a scoreless draw against the Soviet Union.',
+      'This was followed by a win over El Salvador (4–0).',
     ],
   },
   grouping: {
