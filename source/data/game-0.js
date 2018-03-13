@@ -18,6 +18,11 @@ define({
     ticket: ['?', 'Who Knows', '?'],
     score: ['0', '0'],
     shots: [ /* goal, x, y */
+      4,
+      [true, 0, 0],
+      [true, 0, 100],
+      [true, 100, 0],
+      [true, 100, 100],
     ],
   },
   pics: {
