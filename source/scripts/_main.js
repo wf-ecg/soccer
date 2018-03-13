@@ -1,12 +1,13 @@
 /*global define, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  CHANGED 2018-03-06
+  CHANGED 2018-03-13
   IDEA    Hook up various sub systems
   NOTE    bind events, store configs
   TODO    ???
 
  */
-define(['jqxtn', 'util_x', 'model', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
+define([
+  'jqxtn', 'util_x', 'model', 'accuracy', 'possession', 'rankings', 'shotsfaced', 'timeline',
 ], function ($, U, Model, Accuracy, Possession, Rankings, Shotsfaced, Timeline) {
   'use strict';
 
@@ -17,6 +18,8 @@ define(['jqxtn', 'util_x', 'model', 'accuracy', 'possession', 'rankings', 'shots
   // - - - - - - - - - - - - - - - - - -
 
   API = Object.create({
+    init: null,
+    _: NOM,
     Model: Model,
     Accuracy: Accuracy,
     Possession: Possession,
@@ -31,6 +34,7 @@ define(['jqxtn', 'util_x', 'model', 'accuracy', 'possession', 'rankings', 'shots
     factpic: '.the-portrait',
     main: 'main',
     menu: '#GameNum',
+    page: 'html',
     player: '.the-player',
     score: '.the-top .score',
     shot: '.the-photo',
@@ -148,8 +152,20 @@ define(['jqxtn', 'util_x', 'model', 'accuracy', 'possession', 'rankings', 'shots
   // - - - - - - - - - - - - - - - - - -
   // PAGE LOADED
 
-  function init() {
+  function bind() {
     $.reify(EL);
+    $.inlineSvgs();
+    $.pubEscape();
+    $.watchInputDevice();
+    $.adaDebug();
+
+    EL.page.finishLoading();
+    // $('.ghost *').greeker();
+  }
+
+  function init() {
+    bind(); // get the page viewable first
+
     var game = Number(W.localStorage.game || 1);
     renderGame(game);
 
@@ -157,22 +173,20 @@ define(['jqxtn', 'util_x', 'model', 'accuracy', 'possession', 'rankings', 'shots
       renderGame($(evt.target).val());
     });
 
-    // if (C > 0) { require(['_tests']); }
-    C.warn(NOM, 'inited @ ' + W._dbug, API);
     API.init = 'INITED';
+    C.warn(NOM, 'inited @ ' + W._dbug, API);
+    // if (W._dbug > 0) { require(['_tests']); }
   }
 
   $.extend(API, {
-    _: NOM,
-    EL: EL,
-    U: U,
     init: init,
     //
+    EL: EL,
+    U: U,
   });
 
   return API;
 });
-
 /*
 
 

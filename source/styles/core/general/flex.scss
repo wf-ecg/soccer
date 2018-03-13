@@ -1,0 +1,19 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * core/general/flex.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.flex {
+  display: flex;
+  // align-items: center; // vertical
+  // justify-content: center; // horizontal
+  margin: auto;
+  max-width: $maxW;
+  > * {
+    flex-grow: 1;
+    max-width: 100%; // magic fix?
+  }
+
+  @include only (sm) {
+    flex-wrap: wrap;
+  }
+}

@@ -11,7 +11,6 @@
 require.config({
   baseUrl: 'scripts',
   paths: {
-    lib: 'libs',
     jquery: '../vendors/jquery/jquery.min',
     lodash: '../vendors/lodash.js/lodash.min',
     bondo: '../vendors/babel/polyfill.min',
@@ -50,7 +49,7 @@ var HOSTS = {
   pulseWifi: 'http://172.25.77.160',
 };
 
-require(['jquery', 'lib/dbug'], function ($, Dbug) {
+require(['jquery', 'libs/dbug'], function ($, Dbug) {
   var W = window;
   W._dbug = Dbug('2020/01/01');
   W._host = (W._dbug > 1) ? HOSTS.loc : HOSTS.ecg;

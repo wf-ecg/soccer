@@ -1,0 +1,41 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * custom/defs.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+$red: #bb0826;
+$green: #006847;
+$cyan: #66a5ba;
+$yellow: #fcc60a;
+$gray: #ccc;
+
+$team1: $green;
+$team2: $red;
+$team3: #00698c;
+$team4: #702f8a;
+
+@mixin ani($time: 2s, $prop: all) {
+  transition-property: $prop;
+  transition-duration: $time;
+}
+
+%w1 { width: 240px; }
+%w2 { width: 400px; }
+%w3 { width: 100%;}
+%h1 { height: 10em;}
+%h2 { height: 13em;}
+%h3 { height: 16em;}
+%h4 { height: 26em;}
+%red { background-color: $red; color: white; }
+%cyan { background-color: $cyan; color: white; }
+%black { background-color: black; color: white; }
+%yellow { background-color: $yellow; }
+%gray { background-color: $gray; }
+%shiv { margin-right: -1em; } // prevent wrap due to chrome/ff px-rounding
+
+%reddish {
+  background-color: rgba(133, 0, 0, 0.6);
+  color: white;
+  font-weight: 900;
+  padding: 0.7rem;
+  text-transform: uppercase;
+}

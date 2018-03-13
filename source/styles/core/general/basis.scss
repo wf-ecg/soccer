@@ -1,0 +1,161 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * core/general/basis.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: gray;
+  [tabindex] {
+    cursor: pointer;
+  }
+}
+html, body {
+  -webkit-overflow-scrolling: touch;
+  font-family: $sans;
+}
+body {
+  background-color: $white;
+  * {
+    -webkit-backface-visibility: hidden; // so annoying
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    transform: translate3d(0, 0, 0);
+  }
+}
+body, nav {
+  margin: 0 auto;
+  width: 100%;
+}
+a {
+  color: #00698c;
+  &:focus, &:hover {
+    outline: initial; // override normalize
+    outline-offset: initial;
+    text-decoration: none;
+  }
+  &[disabled],
+  &.disabled {
+    cursor: default;
+  }
+}
+b {
+  font-weight: 600;
+}
+div {
+  -webkit-overflow-scrolling: touch;
+}
+h1, h2, h3 {
+  font-family: $serif;
+}
+hr {
+  background-color: gray;
+  border: 0;
+  height: 3px;
+}
+iframe {
+  border: 0;
+}
+img {
+  max-width: 100%;
+}
+li {
+  margin: 0.5rem 0;
+}
+main {
+  min-height: 95vh;
+}
+table {
+  position: relative;
+}
+ul {
+  list-style-position: outside;
+  margin: 0;
+  padding-left: 1.3rem;
+
+  .msie & {
+    padding-left: 1rem;
+  }
+}
+
+.button {
+  background-color: $a-d-red;
+  border: 0;
+  border-radius: 0.2em;
+  color: $white;
+  display: inline-block;
+  font-weight: 600;
+  margin: 1em auto 0;
+  min-width: 8em;
+  padding: 0.35em 1.4em;
+  text-align: center;
+  text-decoration: none;
+  &:focus, &:hover {
+    background-color: $a-warmred;
+    text-decoration: none;
+  }
+}
+
+.biggen {
+  font-size: 1.15em;
+}
+.externalize {
+  &:not(a)::before {
+    content: '\f08e\a0';
+    font-family: FontAwesome;
+    font-size: 90%;
+  }
+  &[target='external'] {
+    margin-right: 1em;
+    &::after {
+      content: '\f08e';
+      font-family: FontAwesome;
+      font-size: 70%;
+      margin: 0.15em 0 0 0.15em;
+      position: absolute;
+    }
+  }
+}
+.hide {
+  display: none;
+}
+.hidden {
+  visibility: hidden;
+}
+.pad {
+  padding: 1rem 2rem;
+}
+.ralign {
+  text-align: right;
+}
+.sans {
+  font-family: $sans;
+}
+.serif {
+  font-family: $serif;
+}
+.shrink {
+  font-size: 0.85em;
+}
+.toggle {
+  cursor: help;
+}
+
+//
+// MEDIA
+//
+@include only (sm) {
+  .onwide {
+    display: none;
+  }
+}
+@include and-above (md) {
+  .onthin {
+    display: none;
+  }
+}
+@media print {
+  .noprint {
+    display: none;
+  }
+}

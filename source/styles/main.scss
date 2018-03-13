@@ -1,47 +1,18 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html {
-  font-size: 16px;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-body {
-  background-color: #ccc;
-  margin: 1em;
-  padding: 1em;
-  position: relative;
-  user-select: none;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  font-weight: 600;
-  text-align: center;
-  user-select: initial;
-}
-main {
-  background-color: white;
-  opacity: 0.1;
-  position: relative;
-}
-small {
-  font-family: Helvetica, Arial, Geneva, sans-serif;
-  font-size: 9px;
-}
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * main.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 @import 'defs';
-@import 'accuracy';
-@import 'cells';
-@import 'raise';
-@import 'misc';
-@import 'possession';
-@import 'rankings';
-@import 'shotsfaced';
-@import 'timeline';
-@import 'top';
+@import 'core/all';
+
+html {
+  // scss-lint:disable SpaceBeforeBrace
+  @include only (sm) { font-size: $main * 1.4; }
+  @include only (md) { font-size: $main * 1.2; }
+  @include only (lg) { font-size: $main * 1.3; }
+  @include only ()   { font-size: $main * 1.4; }
+  // @include only (sm) { x: 1; } @include only (md) { x: 2; } @include only (lg) { x: 3; }
+  // @include and-above (sm) { x: 1; } @include and-above (md) { x: 2; } @include and-above (lg) { x: 3; }
+  // @include and-below (lg) { x: 3; } @include and-below (md) { x: 2; } @include and-below (sm) { x: 1; }
+}
+
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //

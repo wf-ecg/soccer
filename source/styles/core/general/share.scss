@@ -1,0 +1,100 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * core/general/share.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+body {
+  $V: $navH;
+  $S: $V / 1.75;
+  $Bg: $a-d-red;
+  $Fg: white;
+
+  a.burger,
+  ul.shares > li > a {
+    font-family: FontAwesome;
+    text-decoration: none;
+  }
+  ul.shares {
+    list-style: none;
+    padding-left: 0;
+    > li {
+      display: inline-block;
+      margin: 0;
+      transition: all 0.5s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+      white-space: nowrap;
+      zoom: 1;
+    }
+    .icon-facebook::before { content: '\f09a'; }
+    .icon-googleplus::before { content: '\f0d5'; }
+    .icon-instagram::before { content: '\f16d'; }
+    .icon-pinterest::before { content: '\f231'; }
+    .icon-share::before { content: '\f0e0'; }
+    .icon-twitter::before { content: '\f099'; }
+  }
+
+  .shareBar {
+    font-size: $S;
+    line-height: $V;
+    text-align: center;
+    z-index: 1;
+    &:focus, &:hover {
+      opacity: 1;
+    }
+
+    a.burger,
+    ul.shares > li > a {
+      color: $Fg;
+      cursor: pointer;
+      display: none;
+      float: right;
+      height: $V;
+      width: $V;
+    }
+
+    ul.shares > li > a {
+      display: block;
+      &:focus, &:hover {
+        background-color: $Fg;
+        color: $Bg;
+      }
+    }
+
+    // small only
+    @include only (sm) {
+      right: 0;
+      a.burger {
+        display: block;
+      }
+      a.burger::before {
+        content: '\f0c9';
+      }
+      ul.shares {
+        background-color: $Bg;
+        box-shadow: -1px 3px 9px -3px black;
+        max-height: 0;
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        top: $V;
+        visibility: hidden;
+      }
+      &.expanded {
+        a.burger {
+          background-color: $Fg;
+          color: $Bg;
+          &::before {
+            content: '\d7';
+          }
+        }
+        ul.shares {
+          max-height: 90vh;
+          visibility: visible;
+          li {
+            margin: 1rem;
+          }
+        }
+      }
+    }
+
+    ///.shareBar
+  }
+}

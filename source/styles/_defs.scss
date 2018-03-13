@@ -1,53 +1,18 @@
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-/* _defs.scss */
+// @import 'compass/css3';
+@import '_define/all';
 
-$red: #bb0826;
-$green: #006847;
-$cyan: #66a5ba;
-$yellow: #fcc60a;
-$gray: #ccc;
+$black: #121212;
+$white: #fafafa;
+$links: #00609c;
 
-$team1: $green;
-$team2: $red;
-$team3: #00698c;
-$team4: #702f8a;
-@mixin ani($time: 2s, $prop: all) {
-  transition-property: $prop;
-  transition-duration: $time;
-}
-h1,
-h4,
-h6 {
-  font-weight: 800;
-  text-transform: uppercase;
-}
-h4 {
-  margin-bottom: 1rem;
-}
-main {
-  border: 1px solid gray;
-  display: table;
-  font-family: 'Archer SSm A', 'Archer SSm B', Archer, Georgia, serif;
-  font-weight: 400;
-  margin: auto;
-  max-width: 642px;
-  width: 642px;
+$litegreen: #f1f7f1;
+$litebrown: #d9d9d6;
 
-  img {
-    display: block;
-    margin: auto;
-  }
-  h1 {
-    font-size: 40px;
-    color: black;
-    position: absolute;
-    right: 3.3rem;
-    top: 3.6rem;
-  }
-  p {
-    font-weight: 600;
-    line-height: 1.8;
-    margin: 1em;
-    text-align: left;
-  }
-}
+$main: 14px;
+$LG: $main * 90; // max
+$MD: $main * 68; // max
+$SM: $main * 36; // max
+$navH: $main * 2.8;
+$maxW: $main * 75;
+$hpad: 1.8rem;
+$vpad: 1.2rem;

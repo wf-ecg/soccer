@@ -1,7 +1,3 @@
 # INDENT
 
 *.js    filter=tabspace
-
-# BINARY
-
-*.psd   filter=fat -crlf
