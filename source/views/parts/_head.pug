@@ -1,25 +1,31 @@
 head
   title World Cup
+  //
   meta(charset='utf-8')
   meta(http-equiv='x-ua-compatible' content='ie=edge')
   meta(name='viewport' content='width=device-width')
 
-  // about
-  meta(name='author' content='Wells Fargo')
+  //- test for https://developers.google.com/+/web/snippet/
+  //- link(rel='shortcut icon'        href='favicon.ico' type='image/x-icon')
+  //- meta(name='robots'              content='noindex, nofollow')
+  meta(http-equiv='Cache-Control' content='no-cache, no-store, must-revalidate')
+  meta(http-equiv='Pragma'        content='no-cache')
+  meta(http-equiv='Expires'       content='0')
 
-  // static
-  link(rel='canonical'
-    href='http://ecg.hosting.wellsfargo.com/x/index.html')
-  meta(property='og:title'
-    content='Wells Fargo / Soccer')
-  meta(property='og:description'
-    content='x.')
-  meta(property='og:url'
-    content='http://ecg.hosting.wellsfargo.com/x/index.html')
-  meta(property='og:image'
-    content='http://ecg.hosting.wellsfargo.com/x/images/icons/x.svg')
-  meta(property='og:type'
-    content='website')
+  //- about
+  meta(name='author' content='Wells Fargo')
+  meta(name='description'
+    content='')
+  meta(name='keywords'
+    content='')
+  link(rel='canonical' href='https://www.wellsfargomedia.com/.../')
+
+  //- open
+  meta(property='og:title'       content='')
+  meta(property='og:description' content='')
+  meta(property='og:image'       content='.../images/share/og-landing.jpg')
+  meta(property='og:type'        content='website')
+  meta(property='og:url'         content='https://www.wellsfargomedia.com/.../')
 
   // css
   link(rel='stylesheet' href='./fonts/archer.ssm.css' )
@@ -30,6 +36,6 @@ head
     (function(l,i,s,t){s=l.pathname;t=s.toLowerCase().replace(/index/,i||'index');t=t.match
       (/\w+\.\w+$/)?t:t.replace(/\/*$/,'/index.html');if(t!==s)l.pathname=t;}(location));
   //script(src='./scripts/libs/globs.js')
-  script(src='./vendors/require.js/require.min.js' data-main='./config')
+  script(src='./vendors/require.js/require.min.js' data-main=`./config.js?${BUST}`)
 
   //

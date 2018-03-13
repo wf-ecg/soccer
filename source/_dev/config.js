@@ -1,12 +1,10 @@
 /*global require, window */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  revised 2017-11-22
-
+  CHANGED 2018-02-23
   NOTE: config and bootstrap
   - extend jquery
   - identify Msie
   - initialize dbug and main
-
   TODO: keep simple
 
  */
@@ -34,9 +32,10 @@ require.config({
   },
   shim: {
     _main: {
-      deps: ['bondo'],
+      // deps: ['bondo'],
     },
   },
+  urlArgs: '0', // cache BUST
   waitSeconds: 33,
 });
 
@@ -67,8 +66,8 @@ require(['jquery', 'lib/dbug'], function ($, Dbug) {
   if (W._dbug > 1 || W.location.hostname === 'localhost') {
     $('html').addClass('debug');
   } else if (W._dbug === 1) {
-    W._dbug.mute(); // stop applying to console
-  } else {
+    // W._dbug.mute(); // stop applying to console
+  } else if (W._dbug < 1) {
     W._dbug.silent(); // stop most of console
   }
 
@@ -80,7 +79,7 @@ require(['jquery', 'lib/dbug'], function ($, Dbug) {
     Model.readFrom('data/index.html', Main.init);
 
     // expose for debug
-    if (W._dbug > -1) W.Main = Main;
+    if (W._dbug > 0) W.Main = Main;
   });
 
 });
