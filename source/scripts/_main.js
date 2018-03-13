@@ -31,6 +31,7 @@ define(['jqxtn', 'util_x', 'model', 'accuracy', 'possession', 'rankings', 'shots
     factpic: '.the-portrait',
     main: 'main',
     menu: '#GameNum',
+    page: 'html',
     player: '.the-player',
     score: '.the-top .score',
     shot: '.the-photo',
@@ -148,8 +149,14 @@ define(['jqxtn', 'util_x', 'model', 'accuracy', 'possession', 'rankings', 'shots
   // - - - - - - - - - - - - - - - - - -
   // PAGE LOADED
 
-  function init() {
+  function bind() {
     $.reify(EL);
+    EL.page.finishLoading();
+  }
+
+  function init() {
+    bind(); // get the page viewable first
+
     var game = Number(W.localStorage.game || 1);
     renderGame(game);
 

@@ -1,0 +1,39 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * custom/misc.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+form {
+  background-color: rgba(204, 204, 204, 0.8);
+  border: 1px inset white;
+  border-radius: 0 0 3pt 0;
+  cursor: help;
+  left: -1pt;
+  font-family: sans-serif;
+  font-size: 9pt;
+  padding: 3pt 9pt;
+  position: fixed;
+  text-align: center;
+  top: -1pt;
+  z-index: 1;
+}
+[title] {
+  cursor: help;
+}
+[title=Enlarge] {
+  cursor: zoom-in;
+}
+
+.flag {
+  &.small {
+    height: 16px;
+    margin: 1px;
+    width: 31px;
+  }
+  &.mid {
+    height: 33px;
+    width: 63px;
+  }
+}
+.major h3 {
+  font-weight: 900;
+}

@@ -1,0 +1,57 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * core/modal/closer.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+// scss-lint:disable MergeableSelector
+.modal > div {
+  a.closer {
+    color: gray;
+    font-size: 2rem;
+    height: 0.9em;
+    line-height: 0.5;
+    overflow: hidden;
+    position: absolute;
+    right: 0.05em;
+    text-align: center;
+    text-decoration: none;
+    top: 0.05em;
+    width: 0.9em;
+    z-index: 9999;
+
+    &:focus, &:hover {
+      color: $a-d-red;
+    }
+    &::after {
+      content: '\d7';
+      text-shadow: $white 0 0 1px, $white 0 0 1px, $white 0 0 1px;
+      user-select: none;
+      vertical-align: middle;
+    }
+  }
+}
+
+/// circular button style closer
+.modal > div.classic {
+  a.closer {
+    background-color: #333;
+    border: 2px solid #eee;
+    border-radius: 2rem;
+    color: #eee;
+    height: 2rem;
+    right: -1rem;
+    top: -1.25rem;
+    width: 2rem;
+
+    &:focus, &:hover {
+      background-color: #ae1e23;
+    }
+    &::after {
+      font-size: 1.4rem;
+      font-weight: 800;
+      left: 0.5rem;
+      line-height: 0;
+      position: absolute;
+      top: 0.75rem;
+    }
+  }
+}

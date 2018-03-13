@@ -1,5 +1,6 @@
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-/* _shotsfaced.scss */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * custom/shotsfaced.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 .the-shots {
   /*    cursor: no-drop;*/
@@ -15,6 +16,7 @@
     }
     img {
       left: -5px;
+      max-width: none;
       position: relative;
       top: -5px;
     }

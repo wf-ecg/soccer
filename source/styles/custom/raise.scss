@@ -1,5 +1,6 @@
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-/* _raise.scss */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * custom/raise.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 .raise {
 
@@ -14,6 +15,8 @@
   img.fill {
     bottom: 0;
     cursor: zoom-in;
+    min-height: 100%;
+    min-width: 100%;
     position: absolute;
     right: 0;
   }
@@ -22,6 +25,7 @@
     box-shadow: 3px 11px 33px rgba(66, 33, 33, 0.5);
     cursor: zoom-out;
     display: none;
+    max-width: none;
     position: absolute;
     z-index: 1;
   }
