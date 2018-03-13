@@ -11,9 +11,7 @@ define(['jqxtn', 'util_x', 'model', 'accuracy', 'possession', 'rankings', 'shots
   'use strict';
 
   var API, EL;
-  var NOM = 'Main';
-  var C = console;
-  var W = window;
+  var [NOM, C, W] = ['Main', console, window];
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -

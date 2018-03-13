@@ -11,9 +11,7 @@ define(['jqxtn', 'util',
   'use strict';
 
   var API, EL;
-  var NOM = 'Accuracy';
-  var C = console;
-  var W = window;
+  var [NOM, C, W] = ['Accuracy', console, window];
   C.debug(NOM, 'loaded');
 
   EL = Object.create({

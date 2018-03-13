@@ -11,9 +11,7 @@ define(['jqxtn', 'util_d',
   'use strict';
 
   var API, EL;
-  var NOM = 'Shotsfaced';
-  var C = console;
-  var W = window;
+  var [NOM, C, W] = ['Shotsfaced', console, window];
   C.debug(NOM, 'loaded');
 
   EL = Object.create({

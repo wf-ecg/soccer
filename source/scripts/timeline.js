@@ -11,9 +11,7 @@ define(['jqxtn', 'util_d',
   'use strict';
 
   var API, EL, HASH;
-  var NOM = 'Timeline';
-  var C = console;
-  var W = window;
+  var [NOM, C, W] = ['Timeline', console, window];
   C.debug(NOM, 'loaded');
 
   EL = Object.create({

@@ -11,9 +11,7 @@ define(['jqxtn', 'util', 'libs/dial',
   'use strict';
 
   var API, EL;
-  var NOM = 'Possession';
-  var C = console;
-  var W = window;
+  var [NOM, C, W] = ['Possession', console, window];
   C.debug(NOM, 'loaded');
 
   EL = Object.create({

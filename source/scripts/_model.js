@@ -11,9 +11,7 @@ define(['jquery',
   'use strict';
 
   var API;
-  var NOM = 'Model';
-  var C = console;
-  var W = window;
+  var [NOM, C, W] = ['Model', console, window];
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
