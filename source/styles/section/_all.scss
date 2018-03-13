@@ -4,3 +4,75 @@
 @import 'shotsfaced';
 @import 'timeline';
 @import 'top';
+@import 'tweet';
+
+.cells {
+  > div {
+    display: table-row;
+  }
+  > div > div {
+    @extend %h3;
+    display: table-cell;
+    float: left;
+    padding: 1.333rem 1rem;
+    position: relative;
+  }
+  .bottom {
+    bottom: 0;
+    left: 0;
+    padding: 0.8rem;
+    position: absolute;
+    right: 0;
+  }
+  .the-top {
+    @extend %black;
+    @extend %h4;
+    @extend %w3;
+    padding: 2rem 4rem;
+  }
+  .the-rankings {
+    @extend %h1;
+    @extend %w3;
+  }
+  .the-possession {
+    @extend %black;
+    @extend %w1;
+  }
+  .the-shots {
+    @extend %red;
+    @extend %w2;
+    @extend %shiv;
+  }
+  .the-player {
+    @extend %cyan;
+    @extend %w1;
+  }
+  .the-photo {
+    @extend %w2;
+    @extend %shiv;
+  }
+  .the-accuracy {
+    @extend %black;
+    @extend %h2;
+    @extend %w1;
+  }
+  .the-tweet {
+    @extend %h2;
+    @extend %w2;
+    @extend %yellow;
+    @extend %shiv;
+  }
+  .the-timeline {
+    @extend %cyan;
+    @extend %h1;
+    @extend %w3;
+  }
+  .the-fact {
+    @extend %w2;
+    @extend %yellow;
+  }
+  .the-portrait {
+    @extend %w1;
+    @extend %shiv;
+  }
+}

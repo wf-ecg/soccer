@@ -25,11 +25,47 @@ p {
 }
 main {
   background-color: white;
+  border: 1px solid gray;
+  display: table;
+  font-family: 'Archer SSm A', 'Archer SSm B', Archer, Georgia, serif;
+  font-weight: 400;
+  margin: auto;
+  max-width: 642px;
   opacity: 0.1;
   position: relative;
+  width: 642px;
+
   * {
     margin: 0;
     transform: initial;
+  }
+
+  h1 {
+    font-size: 40px;
+    color: black;
+    margin: 0;
+    position: absolute;
+    right: 3.3rem;
+    top: 3.6rem;
+  }
+  h1,
+  h4,
+  h6 {
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  h4 {
+    margin-bottom: 1rem;
+  }
+  img {
+    display: block;
+    margin: auto;
+  }
+  p {
+    font-weight: 600;
+    line-height: 1.8;
+    margin: 1em;
+    text-align: left;
   }
 }
 small {
