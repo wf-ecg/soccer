@@ -11,9 +11,7 @@ define(['jquery',
   'use strict';
 
   var API;
-  var NOM = 'Model';
-  var C = console;
-  var W = window;
+  var [NOM, C, W] = ['Model', console, window];
   C.debug(NOM, 'loaded');
 
   // - - - - - - - - - - - - - - - - - -
@@ -106,7 +104,7 @@ define(['jquery',
     Australia     : { colors: getRandoHexColorPair(), grouping: 'B', flag: 'australia.png'     },
     Belgium       : { colors: getRandoHexColorPair(), grouping: 'H', flag: 'belgium.png'       },
     Bosnia        : { colors: getRandoHexColorPair(), grouping: 'F', flag: 'bosnia.png'        },
-    Brazil        : { colors: getRandoHexColorPair(), grouping: 'A', flag: 'brazil.png'        },
+    Brazil        : { colors: ['#289900', '#176844'], grouping: 'A', flag: 'brazil.png'        },
     Cameroon      : { colors: getRandoHexColorPair(), grouping: 'A', flag: 'cameroon.png'      },
     Chile         : { colors: getRandoHexColorPair(), grouping: 'B', flag: 'chile.png'         },
     Colombia      : { colors: getRandoHexColorPair(), grouping: 'C', flag: 'colombia.png'      },

@@ -111,6 +111,7 @@ define(['jquery',
     },
     setTip: function (str) {
       this.svg.find('title').text(str);
+      this.input.attr('title', str);
       return this;
     },
     setInput: function (num, max, min) {

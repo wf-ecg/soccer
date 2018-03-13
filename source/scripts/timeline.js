@@ -10,10 +10,8 @@ define(['jqxtn', 'util_d',
 ], function ($, U) {
   'use strict';
 
-  var API, EL;
-  var NOM = 'Timeline';
-  var C = console;
-  var W = window;
+  var API, EL, HASH;
+  var [NOM, C, W] = ['Timeline', console, window];
   C.debug(NOM, 'loaded');
 
   EL = Object.create({
@@ -21,6 +19,12 @@ define(['jqxtn', 'util_d',
     evts: '.the-timeline .events',
     wrap: '.the-timeline .linewrap',
   });
+
+  HASH = {
+    error: 'Expulsion',
+    warning: 'Caution',
+    goal: 'Score',
+  };
 
   // - - - - - - - - - - - - - - - - - -
 
@@ -52,15 +56,16 @@ define(['jqxtn', 'util_d',
   function Trivent(time, side, icon) {
     var mid = API.h / 2;
     var vrt = (side === 'top' ? -mid : mid);
-    var idiv, pdiv;
+    var idiv, pdiv, text;
 
     time = (time || 55) % 91;
     side = side || 'top';
     icon = icon || 'goal';
+    text = `${HASH[icon]} ${time}'`;
 
     // add first for z-index
     pdiv = makeTdiv(1.2 * vrt + mid, 'point');
-    idiv = makeTdiv(2 * vrt + mid, icon);
+    idiv = makeTdiv(2 * vrt + mid, icon).attr('title', text);
 
     this.time = timePercent(time);
     this.eles = idiv.add(pdiv);

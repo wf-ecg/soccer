@@ -11,9 +11,7 @@ define(['jqxtn',
   'use strict';
 
   var API, EL;
-  var NOM = 'Rankings';
-  var C = console;
-  var W = window;
+  var [NOM, C, W] = ['Rankings', console, window];
   C.debug(NOM, 'loaded');
 
   EL = Object.create({

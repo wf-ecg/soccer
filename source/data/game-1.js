@@ -1,18 +1,18 @@
 /*global define */
 define({
   match: {
-    accuracy: 80,
+    accuracy: 75,
     possession: 58,
     events: [
       /* time, side, type */
-      [13, 'top', 'error'],
-      [30, 'not', 'error'],
+      // [13, 'top', 'error'],
+      // [30, 'not', 'error'],
       [57, 'top', 'warning'],
-      [62, 'top', 'goal'],
-      [80, 'not', 'warning'],
+      [61, 'top', 'goal'],
+      [77, 'not', 'warning'],
     ],
     teams: ['Mexico', 'Cameroon'],
-    ticket: ['June 13', 'Arena da Dunas', 'Natal'],
+    ticket: ['June 13', 'Estadio das Dunas', 'Natal'],
     score: [1, 0],
     shots: [
       9,
