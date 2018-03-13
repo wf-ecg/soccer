@@ -1,0 +1,48 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * core/basis/debug.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+html.debug {
+  *:hover {
+    outline-color: transparentize(orange, 0.7);
+    outline-offset: 0.5px;
+    outline-style: solid;
+    outline-width: 1px;
+  }
+  article {
+    border: 1px dotted red;
+
+    header, section, footer {
+      border: 1px dotted lightgray;
+    }
+    header {
+      border-right: 3px dotted lightgreen;
+    }
+    section {
+      border-right: 3px dotted peachpuff;
+    }
+    footer {
+      border-right: 3px dotted lightblue;
+    }
+  }
+
+  // DOUBLE!
+  .debug {
+    bottom: 0;
+    font-family: monospace;
+    font-weight: bold;
+    opacity: 0.5;
+    position: absolute;
+    right: 0;
+    z-index: 0;
+    a {
+      color: cyan;
+      font-size: 3rem;
+      padding: 0;
+    }
+  }
+}
+
+html:not(.debug) .debug {
+  display: none;
+}

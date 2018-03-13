@@ -1,0 +1,68 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * core/modal/dialog.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+// Offsite Interstitial Dialog
+// scss-lint:disable MergeableSelector
+.modal .wells {
+  line-height: 1.2;
+  max-height: 80%;
+  max-width: 80%;
+  padding: 1rem;
+  text-align: left;
+  width: 32em;
+
+  div * {
+    font-family: $sans;
+    font-size: 1.2em;
+  }
+  .content {
+    h2 {
+      color: #444;
+      font-size: 1.25em;
+      font-weight: bold;
+      margin: 0 0 1em;
+    }
+  }
+  .footer {
+    font-weight: 600;
+    text-align: right;
+    a {
+      display: inline-block;
+      margin-left: 1.5em;
+    }
+  }
+  .header {
+    margin: 0 0 1.5em;
+    text-align: left;
+    .logo {
+      height: 3em;
+      min-height: 50px;
+      min-width: 50px;
+      width: 3em;
+    }
+  }
+  .utilitybtn {
+    @include btngrad;
+    border: 0;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    display: inline;
+    margin-right: 0.5em;
+    padding: 0.3em 0.6em;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: none;
+    white-space: nowrap;
+    z-index: 1;
+  }
+
+  @include only (sm) {
+    font-size: 0.666rem;
+  }
+
+  @include and-above (md) {
+    font-size: 0.9rem;
+  }
+}

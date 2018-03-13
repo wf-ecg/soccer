@@ -1,0 +1,19 @@
+@function gM($num: 1) {
+  @return $rem * $num;
+}
+// pos only
+@function setTrans($color, $amount: 0.1) {
+  @return change-color($color, $alpha: $amount);
+}
+// pos or neg linear
+@function adjTrans($color, $amount: 0.1) {
+  @return adjust-color($color, $alpha: $amount);
+}
+// pos or neg percent
+@function scaTrans($color, $amount: 0.1) {
+  $amount: percentage($amount);
+  @return scale-color($color, $alpha: $amount);
+}
+@function simAlpha($color) {
+  @return lighten(setTrans($color, 1), percentage(1 - alpha($color)) / 2);
+}

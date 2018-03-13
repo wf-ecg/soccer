@@ -1,0 +1,44 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * core/basis/ada.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+ // scss-lint:disable ImportantRule
+
+.ada {
+  display: initial !important;
+  height: 1px;
+  left: -5000px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  visibility: visible !important;
+  width: 1px;
+}
+
+::selection,
+.selection {
+  background-color: rgba(255, 255, 0, 0.2);
+  text-shadow: 1px 2px 3px #ccc;
+}
+
+[aria-hidden='true'] {
+  visibility: hidden;
+}
+
+body {
+  // from Apple.com
+  :focus {
+    outline: 3px solid rgba(131, 192, 253, 0.5) !important;
+    outline-offset: 1px !important;
+  }
+  &.mouse :focus,
+  :focus[data-focus-method='mouse']:not(input):not(textarea):not(select),
+  :focus[data-focus-method='touch']:not(input):not(textarea):not(select) {
+    outline: none !important;
+  }
+  ::-moz-focus-inner {
+    border: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+// scss-lint:enable ImportantRule

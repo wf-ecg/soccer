@@ -1,0 +1,28 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * core/basis/loading.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.loading:not(.debug) {
+  > * {
+    opacity: 0.5;
+  }
+  &:before {
+    align-items: center;
+    background: url('../images/stock/loader.gif') 50% 45% gray no-repeat;
+    background-size: 222px;
+    content: ' ';
+    cursor: wait;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    opacity: 0.5;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+  }
+}
+.loaded {
+  &, > * {
+    transition: opacity 1s ease-out;
+  }
+}

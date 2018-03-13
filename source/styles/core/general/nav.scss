@@ -1,0 +1,48 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
+ * core/general/nav.scss *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+nav {
+  $line: 1px;
+
+  background-color: $white;
+  box-shadow: 0 0 3px $a-d-coolgray;
+  font-size: $navH / 3;
+  text-align: left;
+  top: 0;
+  z-index: 9;
+
+  .redBar {
+    background-color: $wf-red;
+
+    .flex {
+      height: 3em;
+      top: 0;
+    }
+    .cell {
+      align-self: center;
+      flex-grow: 0.9;
+      line-height: 0;
+      padding: 0;
+    }
+    .home {
+      margin: 1rem;
+    }
+    .logo {
+      height: 0.95rem;
+    }
+  }
+  .shareBar {
+    padding: 0;
+    position: absolute;
+    right: 1rem;
+    top: 0;
+  }
+
+  @include only (sm) {
+    text-align: center;
+    .shareBar {
+      right: 0;
+    }
+  }
+}
