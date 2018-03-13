@@ -37,7 +37,7 @@ main {
 
   * {
     margin: 0;
-    transform: initial;
+    transform: none; // msie does not transform: initial;
   }
 
   h1 {
