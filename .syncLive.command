@@ -1,2 +1,2 @@
 # server          dist     directory
-  vdoMFAL  "$0"  "build"  "soccer"
+  vdo MFAL  "$0"  "build"  "soccer"

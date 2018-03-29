@@ -1,2 +1,2 @@
 # server          dist     directory
-  vdoQLA2  "$0"  "build"  "wf-ecg/soccer/0"
+  vdo DEVS  "$0"  "build"  "soccer/0"
