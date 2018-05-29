@@ -25,7 +25,7 @@ var jshintConf /* */ = require('../gulp_tasks/conf/js-lint.json');
 // Task
 gulp.task('scripts', function () {
 
-  return gulp.src('./source/scripts/**/*.js')
+  return gulp.src(['./source/scripts/**/*.js', './source/scripts/**/*.es'])
     .pipe(changed('./build/scripts'))
 
   // Include JS
@@ -40,7 +40,7 @@ gulp.task('scripts', function () {
   // Lint JS
     .pipe(jshint(jshintConf))
     .pipe(pkg.stage < 2 ? jshint.reporter(stylish) : babel({
-      presets: ['es2015'],
+      presets: ['env'],
     }))
 
   // Add banner

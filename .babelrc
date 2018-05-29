@@ -1,12 +1,9 @@
 {
   only: [
-    "*.es6",
-    "*.jsx",
-    "*.js",
+    "*.es",
   ],
   presets: [
-    "es2015",
-    "react",
+    "env",
   ],
   retainLines: true,
 }

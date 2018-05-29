@@ -21,7 +21,8 @@
     "url": "https://github.com/wf-ecg/soccer.git"
   },
   "devDependencies": {
-    "babel-preset-es2015": "*",
+    "babel-core": "*",
+    "babel-preset-env": "*",
     "babel-preset-react": "*",
     "browser-sync": "*",
     "del": "*",
@@ -51,6 +52,7 @@
   "scripts": {
     "all": "gulp clean && gulp build && gulp serve",
     "build": "gulp build && gulp serve",
-    "clean": "gulp clean && gulp build"
+    "clean": "gulp clean && gulp build",
+    "dist": "r.js -o ./dist.js"
   }
 }
